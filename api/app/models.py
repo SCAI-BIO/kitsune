@@ -10,7 +10,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 WEAVIATE_URL = os.getenv("WEAVIATE_URL", "http://localhost:8080")
-MODEL_NAME = os.getenv("MODEL_NAME", "sentence-transformers/all-MiniLM")
+MODEL_NAME = os.getenv("MODEL_NAME", "sentence-transformers/all-MiniLM-L6-v2")
 HUGGING_FACE_API_KEY = os.getenv("HF_KEY", None)
 OLLAMA_URL = os.getenv("OLLAMA_URL", "http://localhost:11434")
 logger = logging.getLogger("uvicorn.info")

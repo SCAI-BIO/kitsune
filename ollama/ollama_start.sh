@@ -8,5 +8,5 @@ until curl -s http://localhost:11434/v1/models; do
 done
 
 # pull model and keep open
-ollama ollama pull bge-m3
+ollama pull nomic-embed-text
 wait

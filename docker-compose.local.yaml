@@ -1,4 +1,4 @@
-version: "3.12"
+version: "3.9"
 
 services:
   frontend:
@@ -23,6 +23,8 @@ services:
       - ollama
     environment:
       WEAVIATE_URL: "http://weaviate:8080"
+      OLLAMA_URL: http://host.docker.internal:11434
+      MODEL_NAME: "nomic-embed-text"
 
   weaviate:
     image: cr.weaviate.io/semitechnologies/weaviate:1.30.0
@@ -34,11 +36,11 @@ services:
     restart: on-failure:0
     environment:
       QUERY_DEFAULTS_LIMIT: 25
-      AUTHENTICATION_ANONYMOUS_ACCESS_ENABLED: 'true'
-      PERSISTENCE_DATA_PATH: 'var/lib/weaviate'
-      ENABLE_API_BASED_MODULES: 'true'
-      ENABLE_MODULES: 'text2vec-ollama'
-      CLUSTER_HOSTNAME: 'node1'
+      AUTHENTICATION_ANONYMOUS_ACCESS_ENABLED: "true"
+      PERSISTENCE_DATA_PATH: "var/lib/weaviate"
+      ENABLE_API_BASED_MODULES: "true"
+      ENABLE_MODULES: "text2vec-ollama"
+      CLUSTER_HOSTNAME: "node1"
 
   ollama:
     image: ollama
@@ -63,7 +65,7 @@ services:
           sleep 2;
         done;
         echo 'Trigger OLS import...';
-        curl -X PUT 'http://backend:80/imports/terminology?terminology_id=doid'
+        curl -X PUT 'http://backend:80/imports/terminology?terminology_id=doid&model=nomic-embed-text'
       "
     restart: "no"
 
