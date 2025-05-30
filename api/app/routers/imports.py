@@ -1,3 +1,6 @@
+from fastapi import APIRouter, Depends, HTTPException, UploadFile
+from starlette.background import BackgroundTasks
+
 from app.dependencies import get_client
 from app.models import ObjectSchema
 from app.tasks.import_tasks import (
@@ -5,8 +8,6 @@ from app.tasks.import_tasks import (
     import_ols_terminology_task,
     import_snomed_ct_task,
 )
-from fastapi import APIRouter, Depends, HTTPException, UploadFile
-from starlette.background import BackgroundTasks
 
 router = APIRouter(prefix="/imports", tags=["imports"], dependencies=[Depends(get_client)])
 
@@ -18,7 +19,7 @@ async def import_terminology(
     model: str = "sentence-transformers/all-mpnet-base-v2",
 ):
     background_tasks.add_task(import_ols_terminology_task, terminology_id, model)
-    return {"message": "SNOMED CT import started in the background"}
+    return {"message": f"{terminology_id} import started in the background"}
 
 
 @router.put("/terminology/snomed", description="Import whole SNOMED CT from OLS.")
