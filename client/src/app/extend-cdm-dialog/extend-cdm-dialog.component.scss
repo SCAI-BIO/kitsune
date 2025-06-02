@@ -8,58 +8,9 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 20px 24px;
-  padding: 16px 0;
-}
-
-.field-wrapper {
-  display: flex;
-  flex-direction: column;
 }
 
 .full-width {
   width: 100%;
   grid-column: span 2;
-}
-
-mat-form-field {
-  border-radius: 8px;
-  padding: 4px 8px;
-}
-
-mat-form-field.mat-form-field {
-  font-size: 14px;
-}
-
-mat-label {
-  font-weight: 500;
-  color: #333;
-}
-
-.spinner {
-  margin-top: 8px;
-  align-self: flex-start;
-}
-
-.accordion-fields {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  padding: 8px 0 0 0;
-}
-
-mat-expansion-panel {
-  background: #f9f9f9;
-  border-radius: 6px;
-  box-shadow: none;
-  border: 1px solid #ddd;
-}
-
-mat-panel-title {
-  font-weight: 600;
-}
-
-mat-dialog-actions {
-  margin-top: 16px;
-  padding-top: 8px;
-  border-top: 1px solid #eee;
 }
