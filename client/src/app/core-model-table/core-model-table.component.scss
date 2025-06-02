@@ -15,6 +15,15 @@ $study2-color: #fffde7;
   display: flex;
   flex-direction: column;
   padding: 20px;
+  max-width: 100%;
+}
+
+// Import and Extend Container Styles
+.import-extend-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 20px;
 }
 
 // Filter and Pagination Container Styles
@@ -25,12 +34,8 @@ $study2-color: #fffde7;
   border-bottom: 3px solid #e0e0e0;
 }
 
-// Filter and Pagination Container Styles
-.import-extend-container {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  align-items: center;
-  gap: 20px;
+.table-container {
+  max-width: 95%;
 }
 
 // Filter Container Styles
