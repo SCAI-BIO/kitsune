@@ -25,6 +25,14 @@ $study2-color: #fffde7;
   border-bottom: 3px solid #e0e0e0;
 }
 
+// Filter and Pagination Container Styles
+.import-extend-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 20px;
+}
+
 // Filter Container Styles
 .filter-container {
   mat-form-field {

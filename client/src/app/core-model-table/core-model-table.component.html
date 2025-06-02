@@ -53,6 +53,40 @@
 
   <!-- Shared Wrapper -->
   <div class="table-wrapper mat-elevation-z8">
+    <!-- Import/Extend Container -->
+    <div class="import-extend-container">
+      <!-- Extend Container -->
+      <div class="extend-button-cotainer">
+        <button
+          mat-flat-button
+          color="primary"
+          class="button-style"
+          (click)="openExtendCdmDialog()"
+        >
+          Extend CDM
+        </button>
+      </div>
+
+      <!-- CSV Import Button -->
+      <div class="import-button-container" style="margin: 16px 0">
+        <button
+          mat-raised-button
+          color="primary"
+          class="button-style"
+          (click)="fileInput.click()"
+        >
+          Import CSV
+        </button>
+        <input
+          #fileInput
+          type="file"
+          accept=".csv"
+          (change)="onCsvUpload($event)"
+          style="display: none"
+        />
+      </div>
+    </div>
+
     <!-- Filter and Pagination Container -->
     <div class="filter-pagination-container">
       <!-- Filter Container -->

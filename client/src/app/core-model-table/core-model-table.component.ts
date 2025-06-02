@@ -14,10 +14,12 @@ import { RouterModule } from '@angular/router';
 import { Subscription } from 'rxjs';
 
 import { InfoKeys } from '../enums/info-keys';
+import { ExtendCdmDialogComponent } from '../extend-cdm-dialog/extend-cdm-dialog.component';
 import { InfoDialogComponent } from '../info-dialog/info-dialog.component';
 import { ApiError } from '../interfaces/api-error';
 import { CoreModel } from '../interfaces/core-model';
 import { ExternalLinkService } from '../services/external-link.service';
+import { FileService } from '../services/file.service';
 
 @Component({
   selector: 'app-core-model-table',
@@ -62,6 +64,7 @@ export class CoreModelTableComponent implements OnInit, OnDestroy {
   constructor(
     private dialog: MatDialog,
     private externalLinkService: ExternalLinkService,
+    private fileService: FileService,
     private http: HttpClient
   ) {}
 
@@ -105,7 +108,7 @@ export class CoreModelTableComponent implements OnInit, OnDestroy {
           value = item.studies?.[0]?.variable;
           break;
         case 'study1Description':
-          value = item.studies?.[0]?.definition;
+          value = item.studies?.[0]?.description;
           break;
         case 'study2Variable':
           value = item.studies?.[1]?.variable;
@@ -161,7 +164,7 @@ export class CoreModelTableComponent implements OnInit, OnDestroy {
         data.ohdsi.label,
         data.ohdsi.domain,
         data.studies[0].variable,
-        data.studies[0].definition,
+        data.studies[0].description,
         data.studies[1].variable,
       ]
         .filter((v): v is string => !!v)
@@ -221,6 +224,10 @@ export class CoreModelTableComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    const saved = localStorage.getItem('coreModel');
+    if (saved) {
+      this.initializeDataSource(JSON.parse(saved));
+    }
     this.loadCoreModelData();
   }
 
@@ -228,10 +235,76 @@ export class CoreModelTableComponent implements OnInit, OnDestroy {
     this.subscriptions.forEach((sub) => sub.unsubscribe());
   }
 
+  onCsvUpload(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    if (!input.files?.length) return;
+
+    const file = input.files[0];
+    const reader = new FileReader();
+
+    this.loading = true;
+    reader.onload = () => {
+      try {
+        const csvText = reader.result as string;
+        const parsedData = this.fileService.transformCsvToJson(csvText);
+        this.initializeDataSource(parsedData);
+        console.log(parsedData);
+      } catch (err) {
+        this.loading = false;
+        alert('Error parsing CSV file.');
+        console.error(err);
+      } finally {
+        this.loading = false;
+      }
+    };
+
+    reader.readAsText(file);
+  }
+
   openInfo(key: InfoKeys): void {
     this.dialog.open(InfoDialogComponent, {
       data: { key },
       width: '500px',
+    });
+  }
+
+  openExtendCdmDialog(): void {
+    const dialogRef = this.dialog.open(ExtendCdmDialogComponent, {
+      width: '1800px',
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        const newCoreModel: CoreModel = {
+          id: result.id,
+          label: result.label,
+          description: result.description,
+          ols: {
+            id: result.olsId,
+            label: result.olsLabel,
+            description: result.olsDescription,
+          },
+          ohdsi: {
+            id: result.ohdsiId,
+            label: result.ohdsiLabel,
+            domain: result.ohdsiDomain,
+          },
+          studies: [
+            {
+              name: 'Study1',
+              variable: result.study1Variable,
+              description: result.study2Description,
+            },
+            {
+              name: 'Study2',
+              variable: result.study2Variable,
+              description: result.study2Description,
+            },
+          ],
+        };
+
+        this.initializeDataSource([...this.dataSource.data, newCoreModel]);
+      }
     });
   }
 }

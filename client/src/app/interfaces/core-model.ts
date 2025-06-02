@@ -1,10 +1,10 @@
-export interface OLS {
+export interface Ols {
   id: string;
   label: string;
   description?: string;
 }
 
-export interface OHDSI {
+export interface Ohdsi {
   id: string;
   label: string;
   domain: string;
@@ -13,14 +13,14 @@ export interface OHDSI {
 export interface Study {
   name: string;
   variable: string;
-  definition?: string;
+  description?: string;
 }
 
 export interface CoreModel {
   id: string;
   label: string;
   description: string;
-  ols: OLS;
-  ohdsi: OHDSI;
+  ols: Ols;
+  ohdsi: Ohdsi;
   studies: Study[];
 }
