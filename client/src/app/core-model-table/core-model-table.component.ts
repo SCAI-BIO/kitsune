@@ -269,9 +269,14 @@ export class CoreModelTableComponent implements OnInit, OnDestroy {
   }
 
   openExtendCdmDialog(): void {
+    const existingLabels = this.dataSource.data.map((row) => row.label);
+
     const dialogRef = this.dialog.open(ExtendCdmDialogComponent, {
       width: '1800px',
+      data: { existingLabels },
     });
+
+    dialogRef.componentInstance.existingLabels = existingLabels;
 
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
@@ -293,12 +298,11 @@ export class CoreModelTableComponent implements OnInit, OnDestroy {
             {
               name: 'Study1',
               variable: result.study1Variable,
-              description: result.study2Description,
+              description: result.study1Description,
             },
             {
               name: 'Study2',
               variable: result.study2Variable,
-              description: result.study2Description,
             },
           ],
         };

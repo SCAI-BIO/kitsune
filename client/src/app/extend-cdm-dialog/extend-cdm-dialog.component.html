@@ -1,133 +1,148 @@
-<h1 mat-dialog-title>Add Variable</h1>
-
-<div mat-dialog-content [formGroup]="form" class="dialog-grid">
-  <ng-container *ngFor="let field of form.controls | keyvalue">
-    <ng-container
-      *ngIf="
-        ![
-          'ohdsiLabel',
-          'ohdsiDomain',
-          'olsLabel',
-          'olsDescription',
-          'id'
-        ].includes(field.key)
-      "
+<div class="dialog-container">
+  <h1 mat-dialog-title>
+    Extend CDM<span *ngIf="form.get('id')?.value">
+      - {{ form.get("id")?.value }}</span
     >
-      <div class="field-wrapper" [ngClass]="field.key">
-        <mat-form-field appearance="fill" class="full-width">
-          <mat-label>{{
-            fieldLabels[field.key] || (field.key | titlecase)
-          }}</mat-label>
+  </h1>
 
-          <!-- OHDSI ID input -->
-          <ng-container *ngIf="field.key === 'ohdsiId'; else olsOrDefault">
-            <input
-              matInput
-              [formControlName]="field.key"
-              (blur)="fetchOhdsiData()"
-              placeholder="Enter OHDSI ID (e.g., 123456)"
-            />
-            <mat-progress-spinner
-              *ngIf="ohdsiLoading"
-              diameter="20"
-              mode="indeterminate"
-              class="spinner"
-            ></mat-progress-spinner>
-            <mat-error *ngIf="ohdsiError">{{ ohdsiError }}</mat-error>
-          </ng-container>
+  <div mat-dialog-content [formGroup]="form" class="dialog-grid">
+    <ng-container *ngFor="let field of form.controls | keyvalue">
+      <ng-container
+        *ngIf="
+          ![
+            'ohdsiLabel',
+            'ohdsiDomain',
+            'olsLabel',
+            'olsDescription',
+            'id'
+          ].includes(field.key)
+        "
+      >
+        <div class="field-wrapper" [ngClass]="field.key">
+          <mat-form-field appearance="fill" class="full-width">
+            <mat-label>{{
+              fieldLabels[field.key] || (field.key | titlecase)
+            }}</mat-label>
 
-          <!-- OLS ID input or fallback -->
-          <ng-template #olsOrDefault>
-            <ng-container *ngIf="field.key === 'olsId'; else defaultInput">
+            <!-- OHDSI ID input -->
+            <ng-container *ngIf="field.key === 'ohdsiId'; else olsOrDefault">
               <input
                 matInput
                 [formControlName]="field.key"
-                (blur)="fetchOlsData()"
-                placeholder="Enter OLS ID (e.g., EFO:0000311)"
+                (blur)="fetchOhdsiData()"
+                placeholder="Enter OHDSI ID (e.g., 123456)"
               />
               <mat-progress-spinner
-                *ngIf="olsLoading"
+                *ngIf="ohdsiLoading"
                 diameter="20"
                 mode="indeterminate"
                 class="spinner"
               ></mat-progress-spinner>
-              <mat-error *ngIf="olsError">{{ olsError }}</mat-error>
+              <mat-error *ngIf="ohdsiError">{{ ohdsiError }}</mat-error>
             </ng-container>
-          </ng-template>
 
-          <!-- Default input -->
-          <ng-template #defaultInput>
-            <input matInput [formControlName]="field.key" />
-          </ng-template>
-        </mat-form-field>
-      </div>
+            <!-- OLS ID input or fallback -->
+            <ng-template #olsOrDefault>
+              <ng-container *ngIf="field.key === 'olsId'; else defaultInput">
+                <input
+                  matInput
+                  [formControlName]="field.key"
+                  (blur)="fetchOlsData()"
+                  placeholder="Enter OLS ID (e.g., EFO:0000311)"
+                />
+                <mat-progress-spinner
+                  *ngIf="olsLoading"
+                  diameter="20"
+                  mode="indeterminate"
+                  class="spinner"
+                ></mat-progress-spinner>
+                <mat-error *ngIf="olsError">{{ olsError }}</mat-error>
+              </ng-container>
+            </ng-template>
+
+            <!-- Default input -->
+            <ng-template #defaultInput>
+              <input matInput [formControlName]="field.key" />
+              <mat-error *ngIf="hasRequiredError(field.key)">
+                {{ fieldLabels[field.key] || field.key }} is required.
+              </mat-error>
+              <mat-error *ngIf="form.get(field.key)?.hasError('labelExists')">
+                A variable with this label already exists.
+              </mat-error>
+            </ng-template>
+          </mat-form-field>
+
+          <!-- OHDSI Accordion right after OHDSI ID -->
+          <mat-accordion
+            *ngIf="field.key === 'ohdsiId' && form.get('ohdsiLabel')?.value"
+          >
+            <mat-expansion-panel>
+              <mat-expansion-panel-header>
+                <mat-panel-title>Auto-filled OHDSI Information</mat-panel-title>
+              </mat-expansion-panel-header>
+              <div class="accordion-fields">
+                <mat-form-field appearance="fill" class="full-width">
+                  <mat-label>OHDSI Label</mat-label>
+                  <input
+                    matInput
+                    [formControl]="getControl('ohdsiLabel')"
+                    readonly
+                  />
+                </mat-form-field>
+                <mat-form-field appearance="fill" class="full-width">
+                  <mat-label>OHDSI Domain</mat-label>
+                  <input
+                    matInput
+                    [formControl]="getControl('ohdsiDomain')"
+                    readonly
+                  />
+                </mat-form-field>
+              </div>
+            </mat-expansion-panel>
+          </mat-accordion>
+
+          <!-- OLS Accordion right after OLS ID -->
+          <mat-accordion
+            *ngIf="field.key === 'olsId' && form.get('olsLabel')?.value"
+          >
+            <mat-expansion-panel>
+              <mat-expansion-panel-header>
+                <mat-panel-title>Auto-filled OLS Information</mat-panel-title>
+              </mat-expansion-panel-header>
+              <div class="accordion-fields">
+                <mat-form-field appearance="fill" class="full-width">
+                  <mat-label>OLS Label</mat-label>
+                  <input
+                    matInput
+                    [formControl]="getControl('olsLabel')"
+                    readonly
+                  />
+                </mat-form-field>
+                <mat-form-field appearance="fill" class="full-width">
+                  <mat-label>OLS Description</mat-label>
+                  <textarea
+                    matInput
+                    [formControl]="getControl('olsDescription')"
+                    readonly
+                  ></textarea>
+                </mat-form-field>
+              </div>
+            </mat-expansion-panel>
+          </mat-accordion>
+        </div>
+      </ng-container>
     </ng-container>
-  </ng-container>
+  </div>
 
-  <!-- OHDSI Accordion -->
-  <mat-accordion *ngIf="form.get('ohdsiLabel')?.value">
-    <mat-expansion-panel expanded>
-      <mat-expansion-panel-header>
-        <mat-panel-title>Auto-filled OHDSI Information</mat-panel-title>
-      </mat-expansion-panel-header>
-      <div class="accordion-fields">
-        <mat-form-field appearance="fill" class="full-width">
-          <mat-label>OHDSI Label</mat-label>
-          <input matInput [formControl]="getControl('ohdsiLabel')" readonly />
-        </mat-form-field>
-        <mat-form-field appearance="fill" class="full-width">
-          <mat-label>OHDSI Domain</mat-label>
-          <input matInput [formControl]="getControl('ohdsiDomain')" readonly />
-        </mat-form-field>
-      </div>
-    </mat-expansion-panel>
-  </mat-accordion>
-
-  <!-- OLS Accordion -->
-  <mat-accordion *ngIf="form.get('olsLabel')?.value">
-    <mat-expansion-panel expanded>
-      <mat-expansion-panel-header>
-        <mat-panel-title>Auto-filled OLS Information</mat-panel-title>
-      </mat-expansion-panel-header>
-      <div class="accordion-fields">
-        <mat-form-field appearance="fill" class="full-width">
-          <mat-label>OLS Label</mat-label>
-          <input matInput [formControl]="getControl('olsLabel')" readonly />
-        </mat-form-field>
-        <mat-form-field appearance="fill" class="full-width">
-          <mat-label>OLS Description</mat-label>
-          <textarea
-            matInput
-            [formControl]="getControl('olsDescription')"
-            readonly
-          ></textarea>
-        </mat-form-field>
-      </div>
-    </mat-expansion-panel>
-  </mat-accordion>
-
-  <!-- CDM ID Accordion -->
-  <mat-accordion *ngIf="form.get('id')?.value">
-    <mat-expansion-panel expanded>
-      <mat-expansion-panel-header>
-        <mat-panel-title>Generated CDM ID</mat-panel-title>
-      </mat-expansion-panel-header>
-      <mat-form-field appearance="fill" class="full-width">
-        <mat-label>CDM ID</mat-label>
-        <input matInput [formControl]="getControl('id')" readonly />
-      </mat-form-field>
-    </mat-expansion-panel>
-  </mat-accordion>
-</div>
-
-<div mat-dialog-actions align="end">
-  <button mat-button (click)="cancel()">Cancel</button>
-  <button
-    mat-button
-    color="primary"
-    [disabled]="form.invalid"
-    (click)="submit()"
-  >
-    Add
-  </button>
+  <div mat-dialog-actions align="end">
+    <button mat-button (click)="cancel()">Cancel</button>
+    <button
+      mat-button
+      color="primary"
+      [disabled]="form.invalid || ohdsiError || olsError"
+      (click)="submit()"
+    >
+      Add
+    </button>
+  </div>
 </div>

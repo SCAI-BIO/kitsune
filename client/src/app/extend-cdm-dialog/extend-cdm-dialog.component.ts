@@ -1,10 +1,13 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import {
+  AbstractControl,
   FormBuilder,
   FormControl,
   FormGroup,
   ReactiveFormsModule,
+  ValidationErrors,
+  ValidatorFn,
   Validators,
 } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -35,6 +38,7 @@ import { OntologyApiService } from '../services/ontology-api.service';
   styleUrl: './extend-cdm-dialog.component.scss',
 })
 export class ExtendCdmDialogComponent {
+  @Input() existingLabels: string[] = [];
   form: FormGroup;
   ohdsiData: Ohdsi | null;
   ohdsiError: string | null;
@@ -56,7 +60,6 @@ export class ExtendCdmDialogComponent {
     study1Variable: 'Study1 Variable',
     study1Description: 'Study1 Description',
     study2Variable: 'Study2 Variable',
-    study2Description: 'Study2 Description',
   };
 
   constructor(
@@ -73,7 +76,7 @@ export class ExtendCdmDialogComponent {
 
     this.form = this.fb.group({
       id: [''],
-      label: ['', Validators.required],
+      label: ['', [Validators.required, this.labelUniquenessValidator()]],
       description: ['', Validators.required],
       olsId: [''],
       olsLabel: [''],
@@ -84,7 +87,6 @@ export class ExtendCdmDialogComponent {
       study1Variable: [''],
       study1Description: [''],
       study2Variable: [''],
-      study2Description: [''],
     });
 
     this.form
@@ -95,6 +97,14 @@ export class ExtendCdmDialogComponent {
       .get('description')!
       .valueChanges.pipe(debounceTime(300))
       .subscribe(() => this.updateCdmId());
+
+    this.form.get('ohdsiId')!.valueChanges.subscribe(() => {
+      this.ohdsiError = null;
+    });
+
+    this.form.get('olsId')!.valueChanges.subscribe(() => {
+      this.olsError = null;
+    });
   }
 
   cancel(): void {
@@ -110,14 +120,23 @@ export class ExtendCdmDialogComponent {
 
     this.ontologyApiService.getOhdsiConceptById(id).subscribe({
       next: (data) => {
-        if (data) {
-          this.form.patchValue({
-            ohdsiLabel: data.label,
-            ohdsiDomain: data.domain,
-          });
-        } else {
+        if (
+          !data ||
+          data.label.toLowerCase() === 'no matching concept' ||
+          !data.label.trim()
+        ) {
           this.ohdsiError = 'Concept not found';
+          this.form.patchValue({
+            ohdsiLabel: '',
+            ohdsiDomain: '',
+          });
+          return;
         }
+
+        this.form.patchValue({
+          ohdsiLabel: data.label,
+          ohdsiDomain: data.domain,
+        });
       },
       error: () => {
         this.ohdsiLoading = false;
@@ -157,6 +176,31 @@ export class ExtendCdmDialogComponent {
     return this.form.get(key) as FormControl;
   }
 
+  hasRequiredError(fieldKey: string): boolean {
+    const control = this.form.get(fieldKey);
+    return (
+      !!control?.hasError('required') && (control.dirty || control.touched)
+    );
+  }
+
+  submit(): void {
+    if (this.form.invalid || this.ohdsiError || this.olsError) return;
+    this.dialogRef.close(this.form.value);
+  }
+
+  private labelUniquenessValidator(): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
+      const label = control.value?.trim().toLowerCase();
+      if (
+        label &&
+        this.existingLabels.some((l) => l.trim().toLowerCase() === label)
+      ) {
+        return { labelExists: true };
+      }
+      return null;
+    };
+  }
+
   private updateCdmId(): void {
     const label = this.form.get('label')?.value;
     const description = this.form.get('description')?.value;
@@ -165,9 +209,5 @@ export class ExtendCdmDialogComponent {
       const uuid = uuidv5(`${label}-${description}`, uuidv5.URL);
       this.form.patchValue({ id: `SCAI-${uuid}` }, { emitEvent: false });
     }
-  }
-
-  submit(): void {
-    this.dialogRef.close(this.form.value);
   }
 }
