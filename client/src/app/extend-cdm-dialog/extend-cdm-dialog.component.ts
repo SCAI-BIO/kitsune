@@ -1,44 +1,45 @@
+import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { MatDialogRef } from '@angular/material/dialog';
 import {
   FormBuilder,
-  FormGroup,
-  Validators,
-  ReactiveFormsModule,
   FormControl,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
 } from '@angular/forms';
-import { v5 as uuidv5 } from 'uuid';
+import { MatButtonModule } from '@angular/material/button';
+import { MatDialogRef } from '@angular/material/dialog';
+import { MatExpansionModule } from '@angular/material/expansion';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { MatButtonModule } from '@angular/material/button';
-import { CommonModule } from '@angular/common';
-import { OntologyApiService } from '../services/ontology-api.service';
-import { Ohdsi } from '../interfaces/core-model';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { MatExpansionModule } from '@angular/material/expansion';
+
 import { debounceTime } from 'rxjs';
+import { v5 as uuidv5 } from 'uuid';
+
+import { Ohdsi } from '../interfaces/core-model';
+import { OntologyApiService } from '../services/ontology-api.service';
 
 @Component({
-  standalone: true,
   selector: 'app-extend-cdm-dialog',
   imports: [
     CommonModule,
-    ReactiveFormsModule,
+    MatButtonModule,
+    MatExpansionModule,
     MatFormFieldModule,
     MatInputModule,
-    MatButtonModule,
     MatProgressSpinnerModule,
-    MatExpansionModule,
+    ReactiveFormsModule,
   ],
   templateUrl: './extend-cdm-dialog.component.html',
   styleUrl: './extend-cdm-dialog.component.scss',
 })
 export class ExtendCdmDialogComponent {
   form: FormGroup;
+  ohdsiData: Ohdsi | null;
+  ohdsiError: string | null;
   ohdsiId: string;
   ohdsiLoading: boolean;
-  ohdsiError: string | null;
-  ohdsiData: Ohdsi | null;
   olsError: string | null;
   olsLoading: boolean;
 
@@ -59,14 +60,14 @@ export class ExtendCdmDialogComponent {
   };
 
   constructor(
-    private fb: FormBuilder,
     private dialogRef: MatDialogRef<ExtendCdmDialogComponent>,
+    private fb: FormBuilder,
     private ontologyApiService: OntologyApiService
   ) {
+    this.ohdsiData = null;
+    this.ohdsiError = null;
     this.ohdsiId = '';
     this.ohdsiLoading = false;
-    this.ohdsiError = null;
-    this.ohdsiData = null;
     this.olsError = null;
     this.olsLoading = false;
 
@@ -94,10 +95,6 @@ export class ExtendCdmDialogComponent {
       .get('description')!
       .valueChanges.pipe(debounceTime(300))
       .subscribe(() => this.updateCdmId());
-  }
-
-  submit(): void {
-    this.dialogRef.close(this.form.value);
   }
 
   cancel(): void {
@@ -168,5 +165,9 @@ export class ExtendCdmDialogComponent {
       const uuid = uuidv5(`${label}-${description}`, uuidv5.URL);
       this.form.patchValue({ id: `SCAI-${uuid}` }, { emitEvent: false });
     }
+  }
+
+  submit(): void {
+    this.dialogRef.close(this.form.value);
   }
 }

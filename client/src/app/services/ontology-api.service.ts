@@ -1,7 +1,8 @@
-import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, of } from 'rxjs';
-import { catchError, map } from 'rxjs';
+import { Injectable } from '@angular/core';
+
+import { catchError, map, Observable, of } from 'rxjs';
+
 import { Ohdsi, Ols } from '../interfaces/core-model';
 import {
   OhdsiApiResponse,
@@ -13,6 +14,7 @@ import {
 })
 export class OntologyApiService {
   olsApiBaseLink: string;
+
   constructor(private http: HttpClient) {
     this.olsApiBaseLink = 'https://www.ebi.ac.uk/ols4/api/ontologies';
   }
