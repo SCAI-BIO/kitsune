@@ -104,10 +104,17 @@ export class HarmonizeComponent implements OnDestroy, OnInit {
     this.fetchEmbeddingModelsAndTerminologies();
   }
 
-  downloadTableAsCSV(): void {
-    this.fileService.downloadCSV(
+  downloadTableAsCsv(): void {
+    this.fileService.downloadCsv(
       this.closestMappings,
-      'kitsune-harmonization.csv'
+      'kitsune-harmonization.csv',
+      (item) => ({
+        similarity: item.mappings[0]?.similarity ?? 0,
+        variable: item.variable,
+        description: item.description,
+        conceptId: item.mappings[0]?.concept.id ?? '',
+        conceptName: item.mappings[0]?.concept.name ?? '',
+      })
     );
   }
 
