@@ -51,6 +51,16 @@ $study2-color: #fffde7;
   justify-self: end;
 }
 
+.actions-buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.button-style.first {
+  margin-bottom: 8px;
+}
+
 // Cell Colors
 .cell-bg-core-model {
   background-color: $core-model-color;

@@ -47,7 +47,7 @@ export class CoreModelTableComponent implements OnInit, OnDestroy {
   subscriptions: Subscription[] = [];
 
   displayedColumns = [
-    'edit',
+    'actions',
     'id',
     'label',
     'description',
@@ -72,6 +72,15 @@ export class CoreModelTableComponent implements OnInit, OnDestroy {
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+
+  confirmDeleteRow(row: CoreModel): void {
+    const confirmed = confirm(
+      `Are you sure you want to delete "${row.label}"?`
+    );
+    if (confirmed) {
+      this.deleteRow(row);
+    }
   }
 
   downloadTableAsCsv(): void {
@@ -398,5 +407,13 @@ export class CoreModelTableComponent implements OnInit, OnDestroy {
         this.initializeDataSource([...this.dataSource.data, newCoreModel]);
       }
     });
+  }
+
+  private deleteRow(row: CoreModel): void {
+    const index = this.dataSource.data.findIndex((r) => r.id === row.id);
+    if (index > -1) {
+      this.dataSource.data.splice(index, 1);
+      this.dataSource._updateChangeSubscription();
+    }
   }
 }
