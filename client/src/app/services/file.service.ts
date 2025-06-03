@@ -31,11 +31,28 @@ export class FileService {
     return [headers.join(','), ...rows].join('\n');
   }
 
-  async downloadCSV(
-    data: Response[],
-    suggestedFileName: string
+  async downloadCsv<T>(
+    data: T[],
+    suggestedFileName: string,
+    transformFn?: (item: T) => Record<string, string | number | undefined>
   ): Promise<void> {
-    const csvData = this.convertToCSV(data);
+    if (!data.length) return;
+
+    const items: Record<string, string | number | undefined>[] = transformFn
+      ? data.map(transformFn)
+      : (data as unknown as Record<string, string | number | undefined>[]);
+
+    if (!items.length) return;
+
+    const headers = Object.keys(items[0]);
+    const escapeCsv = (value: string | number) =>
+      `"${String(value).replace(/"/g, '""')}"`;
+
+    const rows = items.map((item) =>
+      headers.map((header) => escapeCsv(item[header] ?? '')).join(',')
+    );
+
+    const csvData = [headers.join(','), ...rows].join('\n');
     const blob = new Blob([csvData], { type: 'text/csv' });
 
     // Extend TypeScript to recognize showSaveFilePicker
