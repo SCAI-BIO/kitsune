@@ -19,9 +19,9 @@ $study2-color: #fffde7;
 }
 
 // Import and Extend Container Styles
-.import-extend-container {
+.import-extend-download-container {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
   align-items: center;
   gap: 20px;
 }

@@ -73,6 +73,27 @@ export class CoreModelTableComponent implements OnInit, OnDestroy {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
+  downloadTableAsCsv(): void {
+    this.fileService.downloadCsv(
+      this.dataSource.data,
+      'core-model.csv',
+      (model) => ({
+        id: model.id,
+        label: model.label,
+        description: model.description,
+        olsId: model.ols?.id ?? '',
+        olsLabel: model.ols?.label ?? '',
+        olsDescription: model.ols?.description ?? '',
+        ohdsiId: model.ohdsi?.id ?? '',
+        ohdsiLabel: model.ohdsi?.label ?? '',
+        ohdsiDomain: model.ohdsi?.domain ?? '',
+        study1Variable: model.studies?.[0]?.variable ?? '',
+        study1Description: model.studies?.[0]?.description ?? '',
+        study2Variable: model.studies?.[1]?.variable ?? '',
+      })
+    );
+  }
+
   getAthenaLink(termId: string): string {
     return this.externalLinkService.getAthenaLink(termId);
   }

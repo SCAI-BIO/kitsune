@@ -54,7 +54,7 @@
   <!-- Shared Wrapper -->
   <div class="table-wrapper mat-elevation-z8">
     <!-- Import/Extend Container -->
-    <div class="import-extend-container">
+    <div class="import-extend-download-container">
       <!-- Extend Container -->
       <div class="extend-button-cotainer">
         <button
@@ -84,6 +84,19 @@
           (change)="onCsvUpload($event)"
           style="display: none"
         />
+      </div>
+
+      <!-- Download Button Container -->
+      <div class="download-button-container">
+        <!-- Download Button -->
+        <button
+          mat-raised-button
+          class="button-style"
+          color="primary"
+          (click)="downloadTableAsCsv()"
+        >
+          Download
+        </button>
       </div>
     </div>
 
