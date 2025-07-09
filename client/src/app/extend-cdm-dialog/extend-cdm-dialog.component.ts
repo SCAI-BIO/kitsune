@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import { KeyValuePipe, TitleCasePipe } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import {
   AbstractControl,
@@ -26,13 +26,14 @@ import { OntologyApiService } from '../services/ontology-api.service';
 @Component({
   selector: 'app-extend-cdm-dialog',
   imports: [
-    CommonModule,
+    KeyValuePipe,
     MatButtonModule,
     MatExpansionModule,
     MatFormFieldModule,
     MatInputModule,
     MatProgressSpinnerModule,
     ReactiveFormsModule,
+    TitleCasePipe,
   ],
   templateUrl: './extend-cdm-dialog.component.html',
   styleUrl: './extend-cdm-dialog.component.scss',

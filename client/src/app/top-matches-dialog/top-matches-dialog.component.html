@@ -16,8 +16,8 @@
     <ng-container matColumnDef="id">
       <th mat-header-cell *matHeaderCellDef>Concept ID</th>
       <td mat-cell *matCellDef="let element">
+        @if (element.concept.id) {
         <a
-          *ngIf="element.concept.id"
           [href]="getExternalLink(element.concept.id)"
           target="_blank"
           rel="noopener"
@@ -26,6 +26,7 @@
           <span class="external-link-text">{{ element.concept.id }}</span>
           <mat-icon inline class="external-link-icon">open_in_new</mat-icon>
         </a>
+        }
       </td>
     </ng-container>
     <ng-container matColumnDef="action">

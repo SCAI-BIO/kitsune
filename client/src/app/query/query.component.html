@@ -27,9 +27,9 @@
         <mat-form-field>
           <mat-label>Query</mat-label>
           <input matInput formControlName="text" required />
-          <mat-error *ngIf="queryForm.get('text')?.hasError('required')">
-            Query is <strong>required</strong>
-          </mat-error>
+          @if (queryForm.get('text')?.hasError('required')) {
+          <mat-error> Query is <strong>required</strong> </mat-error>
+          }
         </mat-form-field>
       </div>
       <div class="parameters-form">
@@ -39,18 +39,16 @@
           <mat-form-field>
             <mat-label>Language Model</mat-label>
             <mat-select formControlName="selectedEmbeddingModel">
-              <mat-option
-                *ngFor="let model of embeddingModels"
-                [value]="model"
-                >{{ model }}</mat-option
-              >
+              @for (model of embeddingModels; track model) {
+              <mat-option [value]="model">{{ model }}</mat-option>
+              }
             </mat-select>
+            @if (queryForm.get('selectedEmbeddingModel')?.hasError('required'))
+            {
             <mat-error
-              *ngIf="
-                queryForm.get('selectedEmbeddingModel')?.hasError('required')
-              "
               >Please <strong>select</strong> a language model</mat-error
             >
+            }
           </mat-form-field>
         </div>
         <div class="terminology-form">
@@ -58,16 +56,13 @@
           <mat-form-field>
             <mat-label>Terminology</mat-label>
             <mat-select formControlName="selectedTerminology">
-              <mat-option
-                *ngFor="let terminology of terminologies"
-                [value]="terminology"
-                >{{ terminology }}</mat-option
-              >
+              @for (terminology of terminologies; track terminology) {
+              <mat-option [value]="terminology">{{ terminology }}</mat-option>
+              }
             </mat-select>
-            <mat-error
-              *ngIf="queryForm.get('selectedTerminology')?.hasError('required')"
-              >Please <strong>select</strong> a terminology</mat-error
-            >
+            @if (queryForm.get('selectedTerminology')?.hasError('required')) {
+            <mat-error>Please <strong>select</strong> a terminology</mat-error>
+            }
           </mat-form-field>
         </div>
       </div>
@@ -92,15 +87,15 @@
   </div>
 
   <!-- Loading Spinner -->
-  <div *ngIf="loading" class="loading-spinner">
+  @if (loading) {
+  <div class="loading-spinner">
     <mat-spinner diameter="40"></mat-spinner>
   </div>
+  }
 
   <!-- Table Container (Displayed After Data is Retrieved) -->
-  <div
-    *ngIf="closestMappings.length > 0"
-    class="mat-elevation-z8 table-container"
-  >
+  @if (closestMappings.length > 0) {
+  <div class="mat-elevation-z8 table-container">
     <!-- Pagination Controls -->
     <mat-paginator
       [pageSizeOptions]="[10, 25, 50, 100]"
@@ -119,8 +114,8 @@
       <ng-container matColumnDef="conceptID">
         <th mat-header-cell *matHeaderCellDef>Concept ID</th>
         <td mat-cell *matCellDef="let element">
+          @if (element.concept.id) {
           <a
-            *ngIf="element.concept.id"
             [href]="getExternalLink(element.concept.id)"
             target="_blank"
             rel="noopener"
@@ -129,6 +124,7 @@
             <span class="external-link-text">{{ element.concept.id }}</span>
             <mat-icon inline class="external-link-icon">open_in_new</mat-icon>
           </a>
+          }
         </td>
       </ng-container>
 
@@ -157,4 +153,5 @@
       <tr mat-footer-row *matFooterRowDef="['footer']; sticky: true"></tr>
     </table>
   </div>
+  }
 </main>

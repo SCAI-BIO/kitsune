@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import {
@@ -15,7 +14,7 @@ import { ApiService } from '../services/api.service';
 
 @Component({
   selector: 'app-tsne',
-  imports: [CommonModule, MatProgressSpinnerModule, RouterModule],
+  imports: [MatProgressSpinnerModule, RouterModule],
   templateUrl: './tsne.component.html',
   styleUrl: './tsne.component.scss',
 })

@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import { DecimalPipe } from '@angular/common';
 import { Component, Inject } from '@angular/core';
 import {
   MatDialogModule,
@@ -15,7 +15,7 @@ import { ExternalLinkService } from '../services/external-link.service';
 @Component({
   selector: 'app-top-matches-dialog',
   imports: [
-    CommonModule,
+    DecimalPipe,
     MatButtonModule,
     MatDialogModule,
     MatIconModule,

@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
@@ -11,7 +10,7 @@ import { ChordDiagramService } from '../services/chord-diagram.service';
 
 @Component({
   selector: 'app-mappings',
-  imports: [CommonModule, MatProgressSpinnerModule],
+  imports: [MatProgressSpinnerModule],
   templateUrl: './chord-diagram.component.html',
   styleUrl: './chord-diagram.component.scss',
 })

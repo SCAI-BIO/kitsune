@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
@@ -25,7 +24,6 @@ import { FileService } from '../services/file.service';
   selector: 'app-core-model-table',
   standalone: true,
   imports: [
-    CommonModule,
     MatFormFieldModule,
     MatIconModule,
     MatInputModule,
