@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import {
   FormBuilder,
@@ -45,23 +45,21 @@ export class QueryComponent implements OnDestroy, OnInit {
   displayedColumns = ['similarity', 'conceptName', 'conceptID'];
   embeddingModels: string[] = [];
   formData = new FormData();
-  loading: boolean;
+  loading = false;
   queryForm: FormGroup;
   terminologies: string[] = [];
+  private apiService = inject(ApiService);
+  private externalLinkService = inject(ExternalLinkService);
+  private fb = inject(FormBuilder);
   private subscriptions: Subscription[] = [];
 
-  constructor(
-    private apiService: ApiService,
-    private externalLinkService: ExternalLinkService,
-    private fb: FormBuilder
-  ) {
+  constructor() {
     this.queryForm = this.fb.group({
       text: ['', Validators.required],
       selectedTerminology: ['', Validators.required],
       selectedEmbeddingModel: ['', Validators.required],
       limit: [100],
     });
-    this.loading = false;
   }
 
   clearCache(): void {

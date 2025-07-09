@@ -1,5 +1,5 @@
 import { KeyValuePipe, TitleCasePipe } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component, Input, inject } from '@angular/core';
 import {
   AbstractControl,
   FormBuilder,
@@ -40,14 +40,6 @@ import { OntologyApiService } from '../services/ontology-api.service';
 })
 export class ExtendCdmDialogComponent {
   @Input() existingLabels: string[] = [];
-  form: FormGroup;
-  ohdsiData: Ohdsi | null;
-  ohdsiError: string | null;
-  ohdsiId: string;
-  ohdsiLoading: boolean;
-  olsError: string | null;
-  olsLoading: boolean;
-
   fieldLabels: Record<string, string> = {
     id: 'CDM ID',
     label: 'CDM Label',
@@ -62,19 +54,18 @@ export class ExtendCdmDialogComponent {
     study1Description: 'Study1 Description',
     study2Variable: 'Study2 Variable',
   };
+  form: FormGroup;
+  ohdsiData: Ohdsi | null = null;
+  ohdsiError: string | null = null;
+  ohdsiId = '';
+  ohdsiLoading = false;
+  olsError: string | null = null;
+  olsLoading = false;
+  private ontologyApiService = inject(OntologyApiService);
+  private dialogRef = inject(MatDialogRef<ExtendCdmDialogComponent>);
+  private fb = inject(FormBuilder);
 
-  constructor(
-    private dialogRef: MatDialogRef<ExtendCdmDialogComponent>,
-    private fb: FormBuilder,
-    private ontologyApiService: OntologyApiService
-  ) {
-    this.ohdsiData = null;
-    this.ohdsiError = null;
-    this.ohdsiId = '';
-    this.ohdsiLoading = false;
-    this.olsError = null;
-    this.olsLoading = false;
-
+  constructor() {
     this.form = this.fb.group({
       id: [''],
       label: ['', [Validators.required, this.labelUniquenessValidator()]],

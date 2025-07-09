@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, inject } from '@angular/core';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 import { Subscription } from 'rxjs';
@@ -15,18 +15,12 @@ import { ChordDiagramService } from '../services/chord-diagram.service';
   styleUrl: './chord-diagram.component.scss',
 })
 export class ChordDiagramComponent implements OnInit, OnDestroy {
-  currentIndex: number;
+  currentIndex = 0;
   dataChunks: ChordData[] = [];
-  loading: boolean;
+  loading = false;
+  private chordService = inject(ChordDiagramService);
+  private http = inject(HttpClient);
   private subscriptions: Subscription[] = [];
-
-  constructor(
-    private chordService: ChordDiagramService,
-    private http: HttpClient
-  ) {
-    this.loading = false;
-    this.currentIndex = 0;
-  }
 
   ngOnInit(): void {
     this.fetchData();

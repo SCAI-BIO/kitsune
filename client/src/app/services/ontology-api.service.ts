@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 
 import { catchError, map, Observable, of } from 'rxjs';
 
@@ -13,11 +13,8 @@ import {
   providedIn: 'root',
 })
 export class OntologyApiService {
-  olsApiBaseLink: string;
-
-  constructor(private http: HttpClient) {
-    this.olsApiBaseLink = 'https://www.ebi.ac.uk/ols4/api/ontologies';
-  }
+  olsApiBaseLink = 'https://www.ebi.ac.uk/ols4/api/ontologies';
+  private http = inject(HttpClient);
 
   getOhdsiConceptById(id: string): Observable<Ohdsi | null> {
     if (!id || !id.trim()) return of(null);

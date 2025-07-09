@@ -5,6 +5,7 @@ import {
   OnInit,
   ViewChild,
   ChangeDetectorRef,
+  inject,
 } from '@angular/core';
 import {
   FormBuilder,
@@ -62,26 +63,26 @@ export class HarmonizeComponent implements OnDestroy, OnInit {
     'actions',
   ];
   embeddingModels: string[] = [];
-  expectedTotal: number;
-  fileName: string;
+  expectedTotal = 0;
+  fileName = '';
   fileToUpload: File | null = null;
   harmonizeFormData = new FormData();
   harmonizeForm: FormGroup;
-  loading: boolean;
-  processedCount: number;
-  progressPercent: number;
-  requiredFileType: string;
+  loading = false;
+  processedCount = 0;
+  progressPercent = 0;
+  requiredFileType =
+    '.csv, application/vnd.ms-excel, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet';
   terminologies: string[] = [];
+  private apiService = inject(ApiService);
+  private cdr = inject(ChangeDetectorRef);
+  private dialog = inject(MatDialog);
+  private externalLinkService = inject(ExternalLinkService);
+  private fileService = inject(FileService);
+  private fb = inject(FormBuilder);
   private subscriptions: Subscription[] = [];
 
-  constructor(
-    private apiService: ApiService,
-    private cdr: ChangeDetectorRef,
-    private externalLinkService: ExternalLinkService,
-    private fileService: FileService,
-    private fb: FormBuilder,
-    private dialog: MatDialog
-  ) {
+  constructor() {
     this.harmonizeForm = this.fb.group({
       selectedTerminology: ['', Validators.required],
       selectedEmbeddingModel: ['', Validators.required],
@@ -89,13 +90,6 @@ export class HarmonizeComponent implements OnDestroy, OnInit {
       descriptionField: ['', Validators.required],
       limit: [1],
     });
-    this.expectedTotal = 0;
-    this.fileName = '';
-    this.loading = false;
-    this.processedCount = 0;
-    this.progressPercent = 0;
-    this.requiredFileType =
-      '.csv, application/vnd.ms-excel, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet';
   }
 
   clearCache(): void {

@@ -1,4 +1,4 @@
-import { Component, Inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
@@ -13,10 +13,11 @@ import { InfoKeys } from '../enums/info-keys';
 export class InfoDialogComponent {
   content: string;
   title: string;
+  private readonly data = inject<{ key: InfoKeys }>(MAT_DIALOG_DATA);
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: { key: InfoKeys }) {
-    this.content = this.getContent(data.key);
-    this.title = this.getTitle(data.key);
+  constructor() {
+    this.content = this.getContent(this.data.key);
+    this.title = this.getTitle(this.data.key);
   }
 
   private getTitle(key: string): string {

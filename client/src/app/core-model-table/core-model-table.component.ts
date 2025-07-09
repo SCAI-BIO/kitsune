@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
@@ -37,13 +37,7 @@ import { FileService } from '../services/file.service';
   styleUrl: './core-model-table.component.scss',
 })
 export class CoreModelTableComponent implements OnInit, OnDestroy {
-  @ViewChild(MatPaginator) paginator!: MatPaginator;
-  @ViewChild(MatSort) sort!: MatSort;
   dataSource = new MatTableDataSource<CoreModel>([]);
-  readonly InfoKey = InfoKeys;
-  loading = false;
-  subscriptions: Subscription[] = [];
-
   displayedColumns = [
     'actions',
     'id',
@@ -59,13 +53,15 @@ export class CoreModelTableComponent implements OnInit, OnDestroy {
     'study1Description',
     'study2Variable',
   ];
-
-  constructor(
-    private dialog: MatDialog,
-    private externalLinkService: ExternalLinkService,
-    private fileService: FileService,
-    private http: HttpClient
-  ) {}
+  readonly InfoKey = InfoKeys;
+  loading = false;
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
+  subscriptions: Subscription[] = [];
+  private dialog = inject(MatDialog);
+  private externalLinkService = inject(ExternalLinkService);
+  private fileService = inject(FileService);
+  private http = inject(HttpClient);
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;

@@ -1,5 +1,5 @@
 import { DecimalPipe } from '@angular/common';
-import { Component, Inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import {
   MatDialogModule,
   MatDialogRef,
@@ -25,20 +25,17 @@ import { ExternalLinkService } from '../services/external-link.service';
   styleUrl: './top-matches-dialog.component.scss',
 })
 export class TopMatchesDialogComponent {
-  matches: Mapping[];
-  terminology: string;
-  variable: string;
+  private dialogRef = inject(MatDialogRef<TopMatchesDialogComponent>);
+  private data = inject<{
+    matches: Mapping[];
+    terminology: string;
+    variable: string;
+  }>(MAT_DIALOG_DATA);
+  private externalLinkService = inject(ExternalLinkService);
 
-  constructor(
-    public dialogRef: MatDialogRef<TopMatchesDialogComponent>,
-    @Inject(MAT_DIALOG_DATA)
-    public data: { matches: Mapping[]; terminology: string; variable: string },
-    private externalLinkService: ExternalLinkService
-  ) {
-    this.matches = data.matches;
-    this.terminology = data.terminology;
-    this.variable = data.variable;
-  }
+  matches: Mapping[] = this.data.matches;
+  terminology: string = this.data.terminology;
+  variable: string = this.data.variable;
 
   selectMapping(mapping: Mapping): void {
     this.dialogRef.close(mapping);

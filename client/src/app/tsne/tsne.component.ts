@@ -3,6 +3,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import {
   Component,
   ElementRef,
+  inject,
   OnDestroy,
   OnInit,
   ViewChild,
@@ -19,14 +20,10 @@ import { ApiService } from '../services/api.service';
   styleUrl: './tsne.component.scss',
 })
 export class TsneComponent implements OnDestroy, OnInit {
-  loading: boolean;
-  private subscriptions: Subscription[] = [];
-
+  loading = false;
   @ViewChild('tsneHost', { static: true }) tsneHost!: ElementRef;
-
-  constructor(private apiService: ApiService) {
-    this.loading = false;
-  }
+  private apiService = inject(ApiService);
+  private subscriptions: Subscription[] = [];
 
   fetchTsneData(): void {
     this.loading = true;
