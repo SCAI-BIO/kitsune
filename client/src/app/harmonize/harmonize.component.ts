@@ -5,6 +5,7 @@ import {
   OnInit,
   ViewChild,
   ChangeDetectorRef,
+  inject,
 } from '@angular/core';
 import {
   FormBuilder,
@@ -29,6 +30,7 @@ import { Mapping, Response, StreamingResponse } from '../interfaces/mapping';
 import { ApiService } from '../services/api.service';
 import { FileService } from '../services/file.service';
 import { TopMatchesDialogComponent } from '../top-matches-dialog/top-matches-dialog.component';
+import { ExternalLinkService } from '../services/external-link.service';
 
 @Component({
   selector: 'app-harmonize',
@@ -61,25 +63,26 @@ export class HarmonizeComponent implements OnDestroy, OnInit {
     'actions',
   ];
   embeddingModels: string[] = [];
-  expectedTotal: number;
-  fileName: string;
+  expectedTotal = 0;
+  fileName = '';
   fileToUpload: File | null = null;
   harmonizeFormData = new FormData();
   harmonizeForm: FormGroup;
-  loading: boolean;
-  processedCount: number;
-  progressPercent: number;
-  requiredFileType: string;
+  loading = false;
+  processedCount = 0;
+  progressPercent = 0;
+  requiredFileType =
+    '.csv, application/vnd.ms-excel, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet';
   terminologies: string[] = [];
+  private apiService = inject(ApiService);
+  private cdr = inject(ChangeDetectorRef);
+  private dialog = inject(MatDialog);
+  private externalLinkService = inject(ExternalLinkService);
+  private fileService = inject(FileService);
+  private fb = inject(FormBuilder);
   private subscriptions: Subscription[] = [];
 
-  constructor(
-    private apiService: ApiService,
-    private cdr: ChangeDetectorRef,
-    private fileService: FileService,
-    private fb: FormBuilder,
-    private dialog: MatDialog
-  ) {
+  constructor() {
     this.harmonizeForm = this.fb.group({
       selectedTerminology: ['', Validators.required],
       selectedEmbeddingModel: ['', Validators.required],
@@ -87,13 +90,6 @@ export class HarmonizeComponent implements OnDestroy, OnInit {
       descriptionField: ['', Validators.required],
       limit: [1],
     });
-    this.expectedTotal = 0;
-    this.fileName = '';
-    this.loading = false;
-    this.processedCount = 0;
-    this.progressPercent = 0;
-    this.requiredFileType =
-      '.csv, application/vnd.ms-excel, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet';
   }
 
   clearCache(): void {
@@ -102,11 +98,28 @@ export class HarmonizeComponent implements OnDestroy, OnInit {
     this.fetchEmbeddingModelsAndTerminologies();
   }
 
-  downloadTableAsCSV(): void {
-    this.fileService.downloadCSV(
+  downloadTableAsCsv(): void {
+    this.fileService.downloadCsv(
       this.closestMappings,
-      'kitsune-harmonization.csv'
+      'kitsune-harmonization.csv',
+      (item) => ({
+        similarity: item.mappings[0]?.similarity ?? 0,
+        variable: item.variable,
+        description: item.description,
+        conceptId: item.mappings[0]?.concept.id ?? '',
+        conceptName: item.mappings[0]?.concept.name ?? '',
+      })
     );
+  }
+
+  getExternalLink(termId: string): string {
+    const { selectedTerminology } = this.harmonizeForm.value;
+    switch (selectedTerminology) {
+      case 'OHDSI':
+        return this.externalLinkService.getAthenaLink(termId);
+      default:
+        return this.externalLinkService.getOlsLink(termId);
+    }
   }
 
   streamClosestMappings(): void {
@@ -238,9 +251,14 @@ export class HarmonizeComponent implements OnDestroy, OnInit {
       .fetchClosestMappingsQuery(queryFormData)
       .subscribe({
         next: (mappings) => {
+          const { selectedTerminology } = this.harmonizeForm.value;
           const dialogRef = this.dialog.open(TopMatchesDialogComponent, {
             width: '1000px',
-            data: { matches: mappings, variable: row.variable },
+            data: {
+              matches: mappings,
+              terminology: selectedTerminology,
+              variable: row.variable,
+            },
           });
 
           dialogRef.afterClosed().subscribe((selectedMapping: Mapping) => {

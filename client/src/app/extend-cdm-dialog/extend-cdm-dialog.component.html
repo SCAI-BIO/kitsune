@@ -1,0 +1,137 @@
+<div class="dialog-container">
+  <h1 mat-dialog-title>
+    Extend CDM @if (form.get('id')?.value) {
+    <span> - {{ form.get("id")?.value }}</span>
+    }
+  </h1>
+
+  <div mat-dialog-content [formGroup]="form" class="dialog-grid">
+    @for (field of form.controls | keyvalue; track field.key) { @if ( ![
+    'ohdsiLabel', 'ohdsiDomain', 'olsLabel', 'olsDescription', 'id'
+    ].includes(field.key)) {
+    <ng-container>
+      <div class="field-wrapper" [class]="field.key">
+        <mat-form-field appearance="fill" class="full-width">
+          <mat-label>{{
+            fieldLabels[field.key] || (field.key | titlecase)
+          }}</mat-label>
+
+          <!-- Input rendering -->
+          @if (field.key === 'ohdsiId') {
+          <!-- OHDSI ID input -->
+          <input
+            matInput
+            [formControlName]="field.key"
+            (blur)="fetchOhdsiData()"
+            placeholder="Enter OHDSI ID (e.g., 123456)"
+          />
+          @if (ohdsiLoading) {
+          <mat-progress-spinner
+            diameter="20"
+            mode="indeterminate"
+            class="spinner"
+          ></mat-progress-spinner>
+          } @if (ohdsiError) {
+          <mat-error>{{ ohdsiError }}</mat-error>
+          } } @else if (field.key === 'olsId') {
+          <!-- OLS ID input -->
+          <input
+            matInput
+            [formControlName]="field.key"
+            (blur)="fetchOlsData()"
+            placeholder="Enter OLS ID (e.g., EFO:0000311)"
+          />
+          @if (olsLoading) {
+          <mat-progress-spinner
+            diameter="20"
+            mode="indeterminate"
+            class="spinner"
+          ></mat-progress-spinner>
+          } @if (olsError) {
+          <mat-error>{{ olsError }}</mat-error>
+          } } @else {
+          <!-- Default input -->
+          <input matInput [formControlName]="field.key" />
+          @if (hasRequiredError(field.key)) {
+          <mat-error>
+            {{ fieldLabels[field.key] || field.key }} is required.
+          </mat-error>
+          } @if (form.get(field.key)?.hasError('labelExists')) {
+          <mat-error>A variable with this label already exists.</mat-error>
+          } }
+        </mat-form-field>
+
+        <!-- OHDSI Accordion right after OHDSI ID -->
+        @if (field.key === 'ohdsiId' && form.get('ohdsiLabel')?.value) {
+        <mat-accordion>
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title>Auto-filled OHDSI Information</mat-panel-title>
+            </mat-expansion-panel-header>
+            <div class="accordion-fields">
+              <mat-form-field appearance="fill" class="full-width">
+                <mat-label>OHDSI Label</mat-label>
+                <input
+                  matInput
+                  [formControl]="getControl('ohdsiLabel')"
+                  readonly
+                />
+              </mat-form-field>
+              <mat-form-field appearance="fill" class="full-width">
+                <mat-label>OHDSI Domain</mat-label>
+                <input
+                  matInput
+                  [formControl]="getControl('ohdsiDomain')"
+                  readonly
+                />
+              </mat-form-field>
+            </div>
+          </mat-expansion-panel>
+        </mat-accordion>
+        }
+
+        <!-- OLS Accordion right after OLS ID -->
+        @if (field.key === 'olsId' && form.get('olsLabel')?.value) {
+        <mat-accordion>
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title>Auto-filled OLS Information</mat-panel-title>
+            </mat-expansion-panel-header>
+            <div class="accordion-fields">
+              <mat-form-field appearance="fill" class="full-width">
+                <mat-label>OLS Label</mat-label>
+                <input
+                  matInput
+                  [formControl]="getControl('olsLabel')"
+                  readonly
+                />
+              </mat-form-field>
+              <mat-form-field appearance="fill" class="full-width">
+                <mat-label>OLS Description</mat-label>
+                <textarea
+                  matInput
+                  [formControl]="getControl('olsDescription')"
+                  readonly
+                ></textarea>
+              </mat-form-field>
+            </div>
+          </mat-expansion-panel>
+        </mat-accordion>
+        }
+      </div>
+    </ng-container>
+    } }
+  </div>
+
+  <div mat-dialog-actions align="end">
+    <button mat-button (click)="cancel()">Cancel</button>
+    <button
+      mat-button
+      color="primary"
+      [disabled]="form.invalid || ohdsiError || olsError"
+      (click)="submit()"
+    >
+      Add
+    </button>
+  </div>
+</div>

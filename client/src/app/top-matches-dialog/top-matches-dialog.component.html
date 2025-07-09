@@ -2,7 +2,7 @@
   Top Matches for <strong>{{ variable }}</strong>
 </h1>
 <mat-dialog-content>
-  <table mat-table [dataSource]="data.matches" class="mat-table">
+  <table mat-table [dataSource]="matches" class="mat-table">
     <ng-container matColumnDef="similarity">
       <th mat-header-cell *matHeaderCellDef>Similarity</th>
       <td mat-cell *matCellDef="let element">
@@ -15,25 +15,33 @@
     </ng-container>
     <ng-container matColumnDef="id">
       <th mat-header-cell *matHeaderCellDef>Concept ID</th>
-      <td mat-cell *matCellDef="let element">{{ element.concept.id }}</td>
+      <td mat-cell *matCellDef="let element">
+        @if (element.concept.id) {
+        <a
+          [href]="getExternalLink(element.concept.id)"
+          target="_blank"
+          rel="noopener"
+          class="external-link"
+        >
+          <span class="external-link-text">{{ element.concept.id }}</span>
+          <mat-icon inline class="external-link-icon">open_in_new</mat-icon>
+        </a>
+        }
+      </td>
     </ng-container>
     <ng-container matColumnDef="action">
       <th mat-header-cell *matHeaderCellDef>Action</th>
       <td mat-cell *matCellDef="let element">
-        <button
-          mat-raised-button
-          class="button-style"
-          color="primary"
-          (click)="selectMapping(element)"
-        >
+        <button class="button-style" (click)="selectMapping(element)">
           Select
+          <mat-icon class="button-icon">check_circle</mat-icon>
         </button>
       </td>
     </ng-container>
 
     <tr
       mat-header-row
-      *matHeaderRowDef="['similarity', 'name', 'id', 'action']"
+      *matHeaderRowDef="['similarity', 'name', 'id', 'action']; sticky: true"
     ></tr>
     <tr
       mat-row

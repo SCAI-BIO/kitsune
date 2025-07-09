@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import {
   FormBuilder,
@@ -19,6 +19,7 @@ import { forkJoin, Subscription } from 'rxjs';
 
 import { Mapping } from '../interfaces/mapping';
 import { ApiService } from '../services/api.service';
+import { ExternalLinkService } from '../services/external-link.service';
 
 @Component({
   selector: 'app-query',
@@ -41,22 +42,24 @@ export class QueryComponent implements OnDestroy, OnInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   closestMappings: Mapping[] = [];
   dataSource = new MatTableDataSource<Mapping>([]);
-  displayedColumns = ['similarity', 'conceptName', 'conceptID', 'terminology'];
+  displayedColumns = ['similarity', 'conceptName', 'conceptID'];
   embeddingModels: string[] = [];
   formData = new FormData();
-  loading: boolean;
+  loading = false;
   queryForm: FormGroup;
   terminologies: string[] = [];
+  private apiService = inject(ApiService);
+  private externalLinkService = inject(ExternalLinkService);
+  private fb = inject(FormBuilder);
   private subscriptions: Subscription[] = [];
 
-  constructor(private apiService: ApiService, private fb: FormBuilder) {
+  constructor() {
     this.queryForm = this.fb.group({
       text: ['', Validators.required],
       selectedTerminology: ['', Validators.required],
       selectedEmbeddingModel: ['', Validators.required],
       limit: [100],
     });
-    this.loading = false;
   }
 
   clearCache(): void {
@@ -119,6 +122,16 @@ export class QueryComponent implements OnDestroy, OnInit {
       complete: () => (this.loading = false),
     });
     this.subscriptions.push(sub);
+  }
+
+  getExternalLink(termId: string): string {
+    const { selectedTerminology } = this.queryForm.value;
+    switch (selectedTerminology) {
+      case 'OHDSI':
+        return this.externalLinkService.getAthenaLink(termId);
+      default:
+        return this.externalLinkService.getOlsLink(termId);
+    }
   }
 
   ngOnDestroy(): void {

@@ -1,0 +1,2862 @@
+[
+  {
+    "id": "SCAI-a2616366-b074-3d80-fee8-dd0bee4d0645",
+    "label": "Body Weight",
+    "description": "The mass or quantity of heaviness of an individual. It is expressed by units of pounds or kilograms.",
+    "ols": {
+      "id": "EFO:0004338",
+      "label": "body weight",
+      "description": "The mass or quantity of heaviness of an individual. It is expressed by units of pounds or kilograms."
+    },
+    "ohdsi": {
+      "id": "37111521",
+      "label": "Weight",
+      "domain": "Observation"
+    },
+    "studies": [
+      {
+        "name": "Study1",
+        "variable": "Weight",
+        "description": "Body weight in kg"
+      },
+      {
+        "name": "Study2",
+        "variable": "Weight (kgs)"
+      }
+    ]
+  },
+  {
+    "id": "SCAI-38fa5a4f-8388-3eb8-1e69-d48b7c0d36c9",
+    "label": "Skeletal Muscle Mass",
+    "description": "A measurement of the mass of all skeletal muscle in the body.",
+    "ols": {
+      "id": "NCIT:C178017",
+      "label": "Skeletal Muscle Mass",
+      "description": "A measurement of the mass of all skeletal muscle in the body."
+    },
+    "ohdsi": {
+      "id": "37547354",
+      "label": "Skeletal Muscle Mass",
+      "domain": "Measurement"
+    },
+    "studies": [
+      {
+        "name": "Study1",
+        "variable": "Skeletal Muscle Mass",
+        "description": "Skeletal muscle mass in kg"
+      },
+      {
+        "name": "Study2",
+        "variable": "Skeletal muscle mass (kg)"
+      }
+    ]
+  },
+  {
+    "id": "SCAI-c8d5d1a7-2480-3598-202f-b31a102bfb18",
+    "label": "Body Fat Percentage",
+    "description": "The amount of an individual's total body mass that is fat, expressed as a percent.",
+    "ols": {
+      "id": "NCIT:C139218",
+      "label": "Body Fat Percentage",
+      "description": "The amount of an individual's total body mass that is fat, expressed as a percent."
+    },
+    "ohdsi": {
+      "id": "35811770",
+      "label": "Body fat percentage",
+      "domain": "Measurement"
+    },
+    "studies": [
+      {
+        "name": "Study1",
+        "variable": "Body Fat Percentage",
+        "description": "Body fat percentage"
+      },
+      {
+        "name": "Study2",
+        "variable": "Percent body fat (%)"
+      }
+    ]
+  },
+  {
+    "id": "SCAI-49de9c4b-11ce-31ff-fd9b-af8dc68dc382",
+    "label": "Body Mass Index",
+    "description": "An individual's weight in kilograms divided by the square of the height in meters.",
+    "ols": {
+      "id": "NCIT:C16358",
+      "label": "Body Mass Index",
+      "description": "An individual's weight in kilograms divided by the square of the height in meters."
+    },
+    "ohdsi": {
+      "id": "4245997",
+      "label": "Body mass index",
+      "domain": "Measurement"
+    },
+    "studies": [
+      {
+        "name": "Study1",
+        "variable": "Body Mass Index",
+        "description": "BMI calculated from height and weight"
+      },
+      {
+        "name": "Study2",
+        "variable": "BMI (kg/m2)"
+      }
+    ]
+  },
+  {
+    "id": "SCAI-6f805e36-d63c-30e8-2fe6-e93e406e88c9",
+    "label": "Basal Metabolic Rate",
+    "description": "A patient's energy expenditure at rest.",
+    "ols": {
+      "id": "NCIT:C126083",
+      "label": "Basal Metabolic Rate",
+      "description": "A patient's energy expenditure at rest."
+    },
+    "ohdsi": {
+      "id": "4065423",
+      "label": "Basal metabolic rate",
+      "domain": "Measurement"
+    },
+    "studies": [
+      {
+        "name": "Study1",
+        "variable": "Basal Metabolic Rate",
+        "description": "Calories burned at rest"
+      },
+      {
+        "name": "Study2",
+        "variable": "Basal Metabolic Rate (kcals)"
+      }
+    ]
+  },
+  {
+    "id": "SCAI-e89c5a4f-c84b-312c-8248-1ba6ddab0b41",
+    "label": "Total Body Water",
+    "description": "A measurement of the quantity of water within the body, including both the intracellular and extracellular compartments.",
+    "ols": {
+      "id": "NCIT:C104622",
+      "label": "Total Body Water Measurement",
+      "description": "A measurement of the quantity of water within the body, including both the intracellular and extracellular compartments."
+    },
+    "ohdsi": {
+      "id": "4092497",
+      "label": "Total body water",
+      "domain": "Measurement"
+    },
+    "studies": [
+      {
+        "name": "Study1",
+        "variable": "Total Body Water",
+        "description": "Total body water in liters"
+      },
+      {
+        "name": "Study2",
+        "variable": "Total body water (L)"
+      }
+    ]
+  },
+  {
+    "id": "SCAI-bcc47fef-20d5-34d0-75ff-19d581584a12",
+    "label": "Extracellular Water",
+    "description": "A measurement of the quantity of water in the extracellular compartments within the body.",
+    "ols": {
+      "id": "NCIT:C191364",
+      "label": "Extracellular Water Measurement",
+      "description": "A measurement of the quantity of water in the extracellular compartments within the body."
+    },
+    "ohdsi": {
+      "id": "37545218",
+      "label": "Extracellular Water",
+      "domain": "Measurement"
+    },
+    "studies": [
+      {
+        "name": "Study1",
+        "variable": "Extracellular Water",
+        "description": "Extracellular water in liters"
+      },
+      {
+        "name": "Study2",
+        "variable": "Extracellular water (L)"
+      }
+    ]
+  },
+  {
+    "id": "SCAI-493a4b16-8eca-3bd2-a56e-da717aab91de",
+    "label": "Intracellular Water",
+    "description": "Intracellular water is found inside the cell. It contains dissolved substances and proteins which are necessary for all the vital cellular processes to take place. It is rich in the electrolyte potassium and low in the electrolyte sodium.",
+    "ols": {
+      "id": "",
+      "label": "",
+      "description": ""
+    },
+    "ohdsi": {
+      "id": "",
+      "label": "",
+      "domain": ""
+    },
+    "studies": [
+      {
+        "name": "Study1",
+        "variable": "Intracellular Water",
+        "description": "Intracellular water in liters"
+      },
+      {
+        "name": "Study2",
+        "variable": "Intracellular water (L)"
+      }
+    ]
+  },
+  {
+    "id": "SCAI-6db3d0db-ff88-3295-e3f0-e1750a5abc36",
+    "label": "Visceral Fat Level",
+    "description": "The amount of a visceral fat.",
+    "ols": {
+      "id": "OBA:2045224",
+      "label": "visceral adipose tissue quantity",
+      "description": "The amount of a visceral fat."
+    },
+    "ohdsi": {
+      "id": "",
+      "label": "",
+      "domain": ""
+    },
+    "studies": [
+      {
+        "name": "Study1",
+        "variable": "Visceral Fat Level",
+        "description": "Level of visceral fat"
+      },
+      {
+        "name": "Study2",
+        "variable": ""
+      }
+    ]
+  },
+  {
+    "id": "SCAI-cd277d8d-af67-32aa-e14c-be5fddd243d0",
+    "label": "Blood Protein Amount",
+    "description": "The amount of a protein when measured in blood.",
+    "ols": {
+      "id": "OBA:VT0005416",
+      "label": "blood protein amount",
+      "description": "The amount of a protein when measured in blood."
+    },
+    "ohdsi": {
+      "id": "37394434",
+      "label": "Protein level",
+      "domain": "Measurement"
+    },
+    "studies": [
+      {
+        "name": "Study1",
+        "variable": "Protein",
+        "description": "Protein content in kg"
+      },
+      {
+        "name": "Study2",
+        "variable": ""
+      }
+    ]
+  },
+  {
+    "id": "SCAI-e27d1e57-521a-3371-acc8-3bcebbfd525f",
+    "label": "Blood Mineral Amount",
+    "description": "The amount of a mineral when measured in blood.",
+    "ols": {
+      "id": "OBA:VT0000068",
+      "label": "blood mineral amount",
+      "description": "The amount of a mineral when measured in blood."
+    },
+    "ohdsi": {
+      "id": "",
+      "label": "",
+      "domain": ""
+    },
+    "studies": [
+      {
+        "name": "Study1",
+        "variable": "Mineral",
+        "description": "Total body minerals in kg"
+      },
+      {
+        "name": "Study2",
+        "variable": ""
+      }
+    ]
+  },
+  {
+    "id": "SCAI-54a28fc0-3b92-39e1-b164-55f524b82709",
+    "label": "Body Fat Mass",
+    "description": "The amount of matter in the body of an organism that is fat or adipose tissue.",
+    "ols": {
+      "id": "VT:0010482",
+      "label": "body fat mass",
+      "description": "The amount of matter in the body of an organism that is fat or adipose tissue."
+    },
+    "ohdsi": {
+      "id": "1012193",
+      "label": "Body fat mass",
+      "domain": "Observation"
+    },
+    "studies": [
+      {
+        "name": "Study1",
+        "variable": "Body Fat Mass",
+        "description": "Total body fat in kg"
+      },
+      {
+        "name": "Study2",
+        "variable": "Body fat mass (kg)"
+      }
+    ]
+  },
+  {
+    "id": "SCAI-a7dc862b-1728-3f46-86a6-d72340231a7a",
+    "label": "Lean Mass in Right Arm",
+    "description": "Fat-free mass in right arm.",
+    "ols": {
+      "id": "",
+      "label": "",
+      "description": ""
+    },
+    "ohdsi": {
+      "id": "",
+      "label": "",
+      "domain": ""
+    },
+    "studies": [
+      {
+        "name": "Study1",
+        "variable": "Segmental Lean Analysis (Right Arm)",
+        "description": "Lean mass in right arm"
+      },
+      {
+        "name": "Study2",
+        "variable": ""
+      }
+    ]
+  },
+  {
+    "id": "SCAI-58449798-7742-393b-10e3-c77da87c0512",
+    "label": "Lean Mass in Left Arm",
+    "description": "Fat-free mass in left arm.",
+    "ols": {
+      "id": "",
+      "label": "",
+      "description": ""
+    },
+    "ohdsi": {
+      "id": "",
+      "label": "",
+      "domain": ""
+    },
+    "studies": [
+      {
+        "name": "Study1",
+        "variable": "Segmental Lean Analysis (Left Arm)",
+        "description": "Lean mass in left arm"
+      },
+      {
+        "name": "Study2",
+        "variable": ""
+      }
+    ]
+  },
+  {
+    "id": "SCAI-5ba21bc9-7c37-3511-9b54-ea367a5400e0",
+    "label": "Lean Mass in Trunk",
+    "description": "Fat-free mass in the trunk region.",
+    "ols": {
+      "id": "",
+      "label": "",
+      "description": ""
+    },
+    "ohdsi": {
+      "id": "",
+      "label": "",
+      "domain": ""
+    },
+    "studies": [
+      {
+        "name": "Study1",
+        "variable": "Segmental Lean Analysis (Trunk)",
+        "description": "Lean mass in trunk"
+      },
+      {
+        "name": "Study2",
+        "variable": ""
+      }
+    ]
+  },
+  {
+    "id": "SCAI-759fbf15-86d3-34d0-ff46-5460e5687d4f",
+    "label": "Lean Mass in Right Leg",
+    "description": "Fat-free mass in right leg.",
+    "ols": {
+      "id": "",
+      "label": "",
+      "description": ""
+    },
+    "ohdsi": {
+      "id": "",
+      "label": "",
+      "domain": " "
+    },
+    "studies": [
+      {
+        "name": "Study1",
+        "variable": "Segmental Lean Analysis (Right Leg)",
+        "description": "Lean mass in right leg"
+      },
+      {
+        "name": "Study2",
+        "variable": ""
+      }
+    ]
+  },
+  {
+    "id": "SCAI-bcbbb0df-8c35-3e4f-c421-1daa0f0511b3",
+    "label": "Lean Mass in Left Leg",
+    "description": "Fat-free mass in left leg.",
+    "ols": {
+      "id": "",
+      "label": "",
+      "description": ""
+    },
+    "ohdsi": {
+      "id": "",
+      "label": "",
+      "domain": ""
+    },
+    "studies": [
+      {
+        "name": "Study1",
+        "variable": "Segmental Lean Analysis (Left Leg)",
+        "description": "Lean mass in left leg"
+      },
+      {
+        "name": "Study2",
+        "variable": ""
+      }
+    ]
+  },
+  {
+    "id": "SCAI-ebce5831-cf8a-3954-0dd4-9a911cff7bb3",
+    "label": "Phase Angle",
+    "description": "The phase angle (PhA), measured via bioelectrical impedance analysis, is considered an indicator of cellular health, where higher values reflect higher cellularity, cell membrane integrity, and better cell function.",
+    "ols": {
+      "id": "",
+      "label": "",
+      "description": ""
+    },
+    "ohdsi": {
+      "id": "",
+      "label": "",
+      "domain": ""
+    },
+    "studies": [
+      {
+        "name": "Study1",
+        "variable": "Phase Angle",
+        "description": "Cell membrane integrity assessment"
+      },
+      {
+        "name": "Study2",
+        "variable": ""
+      }
+    ]
+  },
+  {
+    "id": "SCAI-df33b123-3ccf-302e-2d3e-0d33ec85b967",
+    "label": "Extracellular Water to Total Body Water Ratio Measurement",
+    "description": "The determination of the ratio of extracellular water to total body water present in a sample. The measurement may be expressed as a ratio or percentage.",
+    "ols": {
+      "id": "NCIT:C191363",
+      "label": "Extracellular Water to Total Body Water Ratio Measurement",
+      "description": "The determination of the ratio of extracellular water to total body water present in a sample. The measurement may be expressed as a ratio or percentage."
+    },
+    "ohdsi": {
+      "id": "37525628",
+      "label": "Extracellular Water/Total Body Water",
+      "domain": "Procedure"
+    },
+    "studies": [
+      {
+        "name": "Study1",
+        "variable": "ECW/TBW Ratio",
+        "description": "Extracellular water to total body water ratio"
+      },
+      {
+        "name": "Study2",
+        "variable": "ECW/TBW (<1)"
+      }
+    ]
+  },
+  {
+    "id": "",
+    "label": "",
+    "description": "",
+    "ols": {
+      "id": "",
+      "label": "",
+      "description": ""
+    },
+    "ohdsi": {
+      "id": "",
+      "label": "",
+      "domain": ""
+    },
+    "studies": [
+      {
+        "name": "Study1",
+        "variable": "",
+        "description": "We would like a description of this abbreviation."
+      },
+      {
+        "name": "Study2",
+        "variable": "MRN"
+      }
+    ]
+  },
+  {
+    "id": "SCAI-da4f9df1-f313-3f50-9073-c99e624bbdac",
+    "label": "Subject Identifier",
+    "description": "A sequence of characters used to identify, name, or characterize a trial or study subject.",
+    "ols": {
+      "id": "NCIT:C83083",
+      "label": "Subject Identifier",
+      "description": "A sequence of characters used to identify, name, or characterize a trial or study subject."
+    },
+    "ohdsi": {
+      "id": "42528934",
+      "label": "Participant identifier",
+      "domain": "Observation"
+    },
+    "studies": [
+      {
+        "name": "Study1",
+        "variable": "",
+        "description": ""
+      },
+      {
+        "name": "Study2",
+        "variable": "Subject ID"
+      }
+    ]
+  },
+  {
+    "id": "SCAI-c9d0ff9b-9750-36a5-8701-3647e8d55ed5",
+    "label": "Age",
+    "description": "How long something has existed; elapsed time since birth.",
+    "ols": {
+      "id": "NCIT:C25150",
+      "label": "Age",
+      "description": "How long something has existed; elapsed time since birth."
+    },
+    "ohdsi": {
+      "id": "4265453",
+      "label": "Age",
+      "domain": "Meas Value"
+    },
+    "studies": [
+      {
+        "name": "Study1",
+        "variable": "",
+        "description": ""
+      },
+      {
+        "name": "Study2",
+        "variable": "Age (years)"
+      }
+    ]
+  },
+  {
+    "id": "SCAI-f3e00feb-d7a6-3762-1ed4-b491f4c55534",
+    "label": "Gender",
+    "description": "Characteristics of people that are socially constructed, including norms, behaviors, and roles based on sex. As a social construct, gender varies from society to society and can change over time. (Adapted from WHO.)",
+    "ols": {
+      "id": "NCIT:C17357",
+      "label": "Gender",
+      "description": "Characteristics of people that are socially constructed, including norms, behaviors, and roles based on sex. As a social construct, gender varies from society to society and can change over time. (Adapted from WHO.)"
+    },
+    "ohdsi": {
+      "id": "4135376",
+      "label": "Gender",
+      "domain": "Observation"
+    },
+    "studies": [
+      {
+        "name": "Study1",
+        "variable": "",
+        "description": ""
+      },
+      {
+        "name": "Study2",
+        "variable": "Gender"
+      }
+    ]
+  },
+  {
+    "id": "SCAI-bb38a520-34f7-33d0-758e-b44b5eb52406",
+    "label": "Nationality",
+    "description": "The status of belonging to a particular nation.",
+    "ols": {
+      "id": "SNOMED:186034007",
+      "label": "Ethnicity / related nationality data (observable entity)",
+      "description": ""
+    },
+    "ohdsi": {
+      "id": "1093769",
+      "label": "Nationality",
+      "domain": "Observation"
+    },
+    "studies": [
+      {
+        "name": "Study1",
+        "variable": "",
+        "description": ""
+      },
+      {
+        "name": "Study2",
+        "variable": "Nationality"
+      }
+    ]
+  },
+  {
+    "id": "SCAI-281d081b-69b5-30b5-bd0b-33bb09d4834a",
+    "label": "Occupation",
+    "description": "The principal activity that a person does to earn money.",
+    "ols": {
+      "id": "NCIT:C25193",
+      "label": "Occupation",
+      "description": "The principal activity that a person does to earn money."
+    },
+    "ohdsi": {
+      "id": "4033543",
+      "label": "Occupation",
+      "domain": "Observation"
+    },
+    "studies": [
+      {
+        "name": "Study1",
+        "variable": "",
+        "description": ""
+      },
+      {
+        "name": "Study2",
+        "variable": "Occupation"
+      }
+    ]
+  },
+  {
+    "id": "SCAI-fcf68672-ce91-3479-42b9-9ba52bbb459d",
+    "label": "Education Level",
+    "description": "An indication of the years of schooling completed in graded public, private, or parochial schools, and in colleges, universities, or professional schools.",
+    "ols": {
+      "id": "NCIT:C17953",
+      "label": "Education Level",
+      "description": "An indication of the years of schooling completed in graded public, private, or parochial schools, and in colleges, universities, or professional schools."
+    },
+    "ohdsi": {
+      "id": "45947839",
+      "label": "HIGHEST EDUCATION LEVEL",
+      "domain": "Observation"
+    },
+    "studies": [
+      {
+        "name": "Study1",
+        "variable": "",
+        "description": ""
+      },
+      {
+        "name": "Study2",
+        "variable": "Education Level"
+      }
+    ]
+  },
+  {
+    "id": "SCAI-7747b990-7969-331b-9c95-9175dfd83399",
+    "label": "Blood Pressure Finding",
+    "description": "A test result that reports the diastolic and systolic pressure of blood.",
+    "ols": {
+      "id": "NCIT:C54707",
+      "label": "Blood Pressure Finding",
+      "description": "A test result that reports the diastolic and systolic pressure of blood."
+    },
+    "ohdsi": {
+      "id": "4326744",
+      "label": "Blood pressure",
+      "domain": "Measurement"
+    },
+    "studies": [
+      {
+        "name": "Study1",
+        "variable": "",
+        "description": ""
+      },
+      {
+        "name": "Study2",
+        "variable": "BP S/D (mm Hg)"
+      }
+    ]
+  },
+  {
+    "id": "SCAI-2c6eb4c0-823d-3852-218c-366d32c6a550",
+    "label": "Heart Rate",
+    "description": "The number of heartbeats per unit of time, usually expressed as beats per minute.",
+    "ols": {
+      "id": "NCIT:C49677",
+      "label": "Heart Rate",
+      "description": "The number of heartbeats per unit of time, usually expressed as beats per minute."
+    },
+    "ohdsi": {
+      "id": "3027018",
+      "label": "Heart rate",
+      "domain": "Measurement"
+    },
+    "studies": [
+      {
+        "name": "Study1",
+        "variable": "",
+        "description": ""
+      },
+      {
+        "name": "Study2",
+        "variable": "HR (beats/min)"
+      }
+    ]
+  },
+  {
+    "id": "SCAI-dc8f7d2a-84fb-3063-da2e-fbe734167aa2",
+    "label": "Respiratory Rate",
+    "description": "The rate of breathing (inhalation and exhalation) measured within in a unit time, usually expressed as breaths per minute.",
+    "ols": {
+      "id": "NCIT:C49678",
+      "label": "Respiratory Rate",
+      "description": "The rate of breathing (inhalation and exhalation) measured within in a unit time, usually expressed as breaths per minute."
+    },
+    "ohdsi": {
+      "id": "4313591",
+      "label": "Respiratory rate",
+      "domain": "Measurement"
+    },
+    "studies": [
+      {
+        "name": "Study1",
+        "variable": "",
+        "description": ""
+      },
+      {
+        "name": "Study2",
+        "variable": "RR (breaths/mins)"
+      }
+    ]
+  },
+  {
+    "id": "SCAI-d54b309a-c6da-3375-6fe0-23f0b0509c91",
+    "label": "Oxygen Saturation Measurement",
+    "description": "The measurement of the ratio of oxygenated hemoglobin to total hemoglobin in blood.",
+    "ols": {
+      "id": "NCIT:C60832",
+      "label": "Oxygen Saturation Measurement",
+      "description": "The measurement of the ratio of oxygenated hemoglobin to total hemoglobin in blood."
+    },
+    "ohdsi": {
+      "id": "4020553",
+      "label": "Oxygen saturation measurement",
+      "domain": "Measurement"
+    },
+    "studies": [
+      {
+        "name": "Study1",
+        "variable": "",
+        "description": ""
+      },
+      {
+        "name": "Study2",
+        "variable": "O2 (%)"
+      }
+    ]
+  },
+  {
+    "id": "SCAI-c129f963-c45f-35f4-3b4b-cabfc1df9ca3",
+    "label": "Body Temperature",
+    "description": "A measurement of the temperature of the body.",
+    "ols": {
+      "id": "NCIT:C174446",
+      "label": "Body Temperature",
+      "description": "A measurement of the temperature of the body."
+    },
+    "ohdsi": {
+      "id": "4302666",
+      "label": "Body temperature",
+      "domain": "Measurement"
+    },
+    "studies": [
+      {
+        "name": "Study1",
+        "variable": "",
+        "description": ""
+      },
+      {
+        "name": "Study2",
+        "variable": "Temp (oC)"
+      }
+    ]
+  },
+  {
+    "id": "SCAI-bcd9850f-1a15-36e2-3676-5a570d9653ca",
+    "label": "InBody Score",
+    "description": "The InBody Score is a reflection of the overall evaluation of your body composition. The more muscle mass the body has the higher the score will be and can possibly score over 100 points. Note that very low-fat mass (below healthy ranges) will cause your score to drop.",
+    "ols": {
+      "id": "",
+      "label": "",
+      "description": ""
+    },
+    "ohdsi": {
+      "id": "",
+      "label": "",
+      "domain": ""
+    },
+    "studies": [
+      {
+        "name": "Study1",
+        "variable": "",
+        "description": ""
+      },
+      {
+        "name": "Study2",
+        "variable": "InBody score (x/100)"
+      }
+    ]
+  },
+  {
+    "id": "SCAI-16c16a5a-9ab1-3595-c28d-a4eca6f342c5",
+    "label": "Visceral Fat Area",
+    "description": "Area of visceral fat, belly fat found deep within your abdominal cavity, that surrounds important organs, including your stomach, liver and intestines.",
+    "ols": {
+      "id": "",
+      "label": "",
+      "description": ""
+    },
+    "ohdsi": {
+      "id": "43533732",
+      "label": "Visceral fat [Area] Measured",
+      "domain": "Measurement"
+    },
+    "studies": [
+      {
+        "name": "Study1",
+        "variable": "",
+        "description": ""
+      },
+      {
+        "name": "Study2",
+        "variable": "Visceral Fat Area (cm2)"
+      }
+    ]
+  },
+  {
+    "id": "SCAI-260fb7e7-0ce0-3b14-820c-13dab5612758",
+    "label": "Waist-Hip Ratio",
+    "description": "An average person who is reasonably balanced will generally score between 70-79 points. Higher is considered to be highly active and fit, lower indicates a lack of muscle or may be extremely underweight/overweight.",
+    "ols": {
+      "id": "NCIT:C17651",
+      "label": "Waist-Hip Ratio",
+      "description": "The ratio of the abdominal circumference at the navel to maximum hip and buttocks circumference; looks at the proportion of fat stored on the body around the waist and hip. Carrying extra weight around the waist is a greater health risk than carrying extra weight around the hips or thighs"
+    },
+    "ohdsi": {
+      "id": "37537105",
+      "label": "Waist to Hip Ratio",
+      "domain": "Observation"
+    },
+    "studies": [
+      {
+        "name": "Study1",
+        "variable": "",
+        "description": ""
+      },
+      {
+        "name": "Study2",
+        "variable": "Waist to Hip ratio (Number) Inbody"
+      }
+    ]
+  },
+  {
+    "id": "SCAI-0e6ac88b-c3bf-3a0e-da2b-0e3b5fdec424",
+    "label": "Target Body Weight",
+    "description": "A predetermined body weight goal based on health, fitness, or medical criteria, often used to guide weight management or treatment plans.",
+    "ols": {
+      "id": "SNOMED:390734006",
+      "label": "Target weight (observable entity)",
+      "description": ""
+    },
+    "ohdsi": {
+      "id": "602657",
+      "label": "Target body weight",
+      "domain": "Observation"
+    },
+    "studies": [
+      {
+        "name": "Study1",
+        "variable": "",
+        "description": ""
+      },
+      {
+        "name": "Study2",
+        "variable": "Target weight (kgs)"
+      }
+    ]
+  },
+  {
+    "id": "SCAI-8c1c6153-64dc-35ab-f5bb-98c6be29bc38",
+    "label": "Weight Control",
+    "description": "The suggested amount of weight to gain or lose to reach the ideal body composition, typically based on lean mass and body fat targets rather than just total weight.",
+    "ols": {
+      "id": "",
+      "label": "",
+      "description": ""
+    },
+    "ohdsi": {
+      "id": "",
+      "label": "",
+      "domain": ""
+    },
+    "studies": [
+      {
+        "name": "Study1",
+        "variable": "",
+        "description": ""
+      },
+      {
+        "name": "Study2",
+        "variable": "Weight control (kgs)"
+      }
+    ]
+  },
+  {
+    "id": "SCAI-844878db-ce39-3b8a-e0d3-f91de60a7cb4",
+    "label": "Fat Control",
+    "description": "The recommended amount of body fat to lose or gain to reach an optimal body fat percentage based on the individual's current body composition.",
+    "ols": {
+      "id": "",
+      "label": "",
+      "description": ""
+    },
+    "ohdsi": {
+      "id": "",
+      "label": "",
+      "domain": ""
+    },
+    "studies": [
+      {
+        "name": "Study1",
+        "variable": "",
+        "description": ""
+      },
+      {
+        "name": "Study2",
+        "variable": "Fat control (kgs)"
+      }
+    ]
+  },
+  {
+    "id": "SCAI-231ee9c9-192f-32bc-efb5-a005c871ac56",
+    "label": "Muscle Control",
+    "description": "The recommended amount of muscle mass to gain or lose to achieve a balanced and healthy body composition.",
+    "ols": {
+      "id": "",
+      "label": "",
+      "description": ""
+    },
+    "ohdsi": {
+      "id": "",
+      "label": "",
+      "domain": ""
+    },
+    "studies": [
+      {
+        "name": "Study1",
+        "variable": "",
+        "description": ""
+      },
+      {
+        "name": "Study2",
+        "variable": "Muscle control (kgs)"
+      }
+    ]
+  },
+  {
+    "id": "",
+    "label": "",
+    "description": "",
+    "ols": {
+      "id": "",
+      "label": "",
+      "description": ""
+    },
+    "ohdsi": {
+      "id": "",
+      "label": "",
+      "domain": ""
+    },
+    "studies": [
+      {
+        "name": "Study1",
+        "variable": "",
+        "description": "It is unclear whether this refers to a specific test or a general retinal scan. If a particular software or specialized tool is used for this assessment, it would be helpful to define a variable name and provide a clear description within the core model to avoid confusion with similar tests."
+      },
+      {
+        "name": "Study2",
+        "variable": "Retina scan-BioAge Results"
+      }
+    ]
+  },
+  {
+    "id": "SCAI-888ce9a9-aefc-3614-390f-9d83987db40c",
+    "label": "Visual Acuity - Left Eye",
+    "description": "A measure of the sharpness of vision in the left eye, assessed using a Snellen chart at a standardized distance, typically expressed as a fraction (e.g., 20/20), indicating the ability to discern letters or symbols of a specific size.",
+    "ols": {
+      "id": "NCIT:C87149",
+      "label": "Visual Acuity",
+      "description": "Sharpness of vision, the ability to discern fine detail."
+    },
+    "ohdsi": {
+      "id": "4239582",
+      "label": "Visual acuity",
+      "domain": "Measurement"
+    },
+    "studies": [
+      {
+        "name": "Study1",
+        "variable": "",
+        "description": ""
+      },
+      {
+        "name": "Study2",
+        "variable": "Visual acquity (20/20) Snellen chart LEFT"
+      }
+    ]
+  },
+  {
+    "id": "SCAI-5b6b2f80-8427-3b55-7b77-3620837e96be",
+    "label": "Visual Acuity - Right Eye",
+    "description": "A measure of the sharpness of vision in the right eye, assessed using a Snellen chart at a standardized distance, typically expressed as a fraction (e.g., 20/20), indicating the ability to discern letters or symbols of a specific size.",
+    "ols": {
+      "id": "NCIT:C87149",
+      "label": "Visual Acuity",
+      "description": "Sharpness of vision, the ability to discern fine detail."
+    },
+    "ohdsi": {
+      "id": "4239582",
+      "label": "Visual acuity",
+      "domain": "Measurement"
+    },
+    "studies": [
+      {
+        "name": "Study1",
+        "variable": "",
+        "description": ""
+      },
+      {
+        "name": "Study2",
+        "variable": "Visual acquity (20/20) Snellen chart RIGHT"
+      }
+    ]
+  },
+  {
+    "id": "SCAI-442aa593-0df0-37db-e738-62da9e5c5f8c",
+    "label": "Shoebox Auditory Test - Left Ear",
+    "description": "A tablet-based hearing assessment of the left ear using calibrated headphones and the Shoebox Audiometry system to determine hearing thresholds across various frequencies, typically for screening or diagnostic purposes.",
+    "ols": {
+      "id": "",
+      "label": "",
+      "description": ""
+    },
+    "ohdsi": {
+      "id": "",
+      "label": "",
+      "domain": ""
+    },
+    "studies": [
+      {
+        "name": "Study1",
+        "variable": "",
+        "description": ""
+      },
+      {
+        "name": "Study2",
+        "variable": "Shoebox Hearing Test LEFT Ear"
+      }
+    ]
+  },
+  {
+    "id": "SCAI-166ecefc-941a-3108-8ec3-6b0e2b7fac9f",
+    "label": "Shoebox Auditory Test - Right Ear",
+    "description": "A tablet-based hearing assessment of the right ear using calibrated headphones and the Shoebox Audiometry system to determine hearing thresholds across various frequencies, typically for screening or diagnostic purposes.",
+    "ols": {
+      "id": "",
+      "label": "",
+      "description": ""
+    },
+    "ohdsi": {
+      "id": "",
+      "label": "",
+      "domain": ""
+    },
+    "studies": [
+      {
+        "name": "Study1",
+        "variable": "",
+        "description": ""
+      },
+      {
+        "name": "Study2",
+        "variable": "Shoebox Hearing Test RIGHT Ear"
+      }
+    ]
+  },
+  {
+    "id": "SCAI-ff76cb61-8625-34ed-7d8b-8e7d9f152617",
+    "label": "Allergies",
+    "description": "A documented list of substances (e.g., medications, foods, environmental agents) to which the individual has a known allergic reaction, based on clinical history or diagnostic testing.",
+    "ols": {
+      "id": "SNOMED:161614004",
+      "label": "History of multiple allergies (situation)",
+      "description": ""
+    },
+    "ohdsi": {
+      "id": "3043005",
+      "label": "Allergies",
+      "domain": "Observation"
+    },
+    "studies": [
+      {
+        "name": "Study1",
+        "variable": "",
+        "description": ""
+      },
+      {
+        "name": "Study2",
+        "variable": "Allergies"
+      }
+    ]
+  },
+  {
+    "id": "SCAI-4f0198d8-627f-3c01-0e56-eabbd548243f",
+    "label": "Medical History",
+    "description": "A medical history is a record of the events of a recipient of medical care.",
+    "ols": {
+      "id": "SIO:010673",
+      "label": "medical history",
+      "description": "A medical history is a record of the events of a recipient of medical care."
+    },
+    "ohdsi": {
+      "id": "43529712",
+      "label": "Personal Medical History",
+      "domain": "Observation"
+    },
+    "studies": [
+      {
+        "name": "Study1",
+        "variable": "",
+        "description": ""
+      },
+      {
+        "name": "Study2",
+        "variable": "Medical History"
+      }
+    ]
+  },
+  {
+    "id": "SCAI-9a2e562c-90f6-3e49-96da-475c963ce7d3",
+    "label": "Surgical History",
+    "description": "A clinical history that is about surgical operations performed on an individual",
+    "ols": {
+      "id": "GECKO:0000092",
+      "label": "surgical history",
+      "description": "A clinical history that is about surgical operations performed on an individual"
+    },
+    "ohdsi": {
+      "id": "4058419",
+      "label": "History of surgery",
+      "domain": "Observation"
+    },
+    "studies": [
+      {
+        "name": "Study1",
+        "variable": "",
+        "description": ""
+      },
+      {
+        "name": "Study2",
+        "variable": "Surgical History"
+      }
+    ]
+  },
+  {
+    "id": "SCAI-4d1eb543-e6a3-354e-4e96-1260fa1a7d25",
+    "label": "Family History",
+    "description": "Family history is a form of clinicaly history specifically about relevant aspects of genetic preconditions or family member's clinical history.",
+    "ols": {
+      "id": "EFO:0000493",
+      "label": "family history",
+      "description": "Family history is a form of clinicaly history specifically about relevant aspects of genetic preconditions or family member's clinical history."
+    },
+    "ohdsi": {
+      "id": "43528698",
+      "label": "Family History",
+      "domain": "Observation"
+    },
+    "studies": [
+      {
+        "name": "Study1",
+        "variable": "",
+        "description": ""
+      },
+      {
+        "name": "Study2",
+        "variable": "Family History"
+      }
+    ]
+  },
+  {
+    "id": "SCAI-b4c24596-b408-3d07-bb2e-fd420d2dd903",
+    "label": "Falls Assessment",
+    "description": "A clinical evaluation to identify a person's risk of falling, typically involving a review of medical history, mobility, balance, medication use, and environmental factors.",
+    "ols": {
+      "id": "SNOMED:408589008",
+      "label": "Falls assessment (procedure)",
+      "description": ""
+    },
+    "ohdsi": {
+      "id": "4248675",
+      "label": "Falls assessment",
+      "domain": "Procedure"
+    },
+    "studies": [
+      {
+        "name": "Study1",
+        "variable": "",
+        "description": ""
+      },
+      {
+        "name": "Study2",
+        "variable": "Falls Assessment"
+      }
+    ]
+  },
+  {
+    "id": "SCAI-98f8d309-db74-3cf2-6f1e-bc401e67fa5e",
+    "label": "Pain Assessment",
+    "description": "The evaluation of pain complaints. Measurements should be objective on the part of the practitioner, based on subjective information from the patient. Measurements may also be indirect, by such assessments as respiratory rate and effort, withdrawal, guarding, or other appropriate assessment techniques.",
+    "ols": {
+      "id": "NCIT:C20992",
+      "label": "Pain Assessment",
+      "description": "The evaluation of pain complaints. Measurements should be objective on the part of the practitioner, based on subjective information from the patient. Measurements may also be indirect, by such assessments as respiratory rate and effort, withdrawal, guarding, or other appropriate assessment techniques."
+    },
+    "ohdsi": {
+      "id": "4021323",
+      "label": "Pain assessment",
+      "domain": "Procedure"
+    },
+    "studies": [
+      {
+        "name": "Study1",
+        "variable": "",
+        "description": ""
+      },
+      {
+        "name": "Study2",
+        "variable": "Pain Assessment"
+      }
+    ]
+  },
+  {
+    "id": "SCAI-544c5a3a-29cb-3352-8701-48d7c816f130",
+    "label": "Montreal Cognitive Assessment",
+    "description": "An alternate version of MOCA v8 that can be administered to decrease any potential test re-test interactions",
+    "ols": {
+      "id": "NCIT:C163984",
+      "label": "Montreal Cognitive Assessment, Version 8.3",
+      "description": "An alternate version of MOCA v8 that can be administered to decrease any potential test re-test interactions"
+    },
+    "ohdsi": {
+      "id": "44808666",
+      "label": "Montreal cognitive assessment",
+      "domain": "Measurement"
+    },
+    "studies": [
+      {
+        "name": "Study1",
+        "variable": "",
+        "description": "Please specify which version of the MoCA test will be used in the study."
+      },
+      {
+        "name": "Study2",
+        "variable": "MOCA (55-85 years) Normal \u2265 26/30 (x/30)"
+      }
+    ]
+  },
+  {
+    "id": "",
+    "label": "",
+    "description": "",
+    "ols": {
+      "id": "",
+      "label": "",
+      "description": ""
+    },
+    "ohdsi": {
+      "id": "",
+      "label": "",
+      "domain": ""
+    },
+    "studies": [
+      {
+        "name": "Study1",
+        "variable": "",
+        "description": "We would appreciate a description of this abbreviation."
+      },
+      {
+        "name": "Study2",
+        "variable": "ACLM long form"
+      }
+    ]
+  },
+  {
+    "id": "SCAI-01b9289e-bcf9-3bdb-2b21-d79dd2ff5502",
+    "label": "Diagnosis",
+    "description": "The investigation, analysis and recognition of the presence and nature of disease, condition, or injury from expressed signs and symptoms; also, the scientific determination of any kind; the concise results of such an investigation.",
+    "ols": {
+      "id": "NCIT:C15220",
+      "label": "Diagnosis",
+      "description": "The investigation, analysis and recognition of the presence and nature of disease, condition, or injury from expressed signs and symptoms; also, the scientific determination of any kind; the concise results of such an investigation."
+    },
+    "ohdsi": {
+      "id": "44810321",
+      "label": "Diagnoses",
+      "domain": "Type Concept"
+    },
+    "studies": [
+      {
+        "name": "Study1",
+        "variable": "",
+        "description": ""
+      },
+      {
+        "name": "Study2",
+        "variable": "Diagnoses"
+      }
+    ]
+  },
+  {
+    "id": "SCAI-b248eeb6-911a-3877-e585-fff8bc16856b",
+    "label": "ICD Code",
+    "description": "The alphanumeric code assigned to an entity in the International Classification of Diseases (ICD).",
+    "ols": {
+      "id": "NCIT:C192551",
+      "label": "ICD Code",
+      "description": "The alphanumeric code assigned to an entity in the International Classification of Diseases (ICD)."
+    },
+    "ohdsi": {
+      "id": "1032215",
+      "label": "Diagnosis ICD code",
+      "domain": "Observation"
+    },
+    "studies": [
+      {
+        "name": "Study1",
+        "variable": "",
+        "description": ""
+      },
+      {
+        "name": "Study2",
+        "variable": "Diagnoses ICD Codes"
+      }
+    ]
+  },
+  {
+    "id": "SCAI-02ebc8dd-822f-3ee9-1a3c-0fa8da384ff0",
+    "label": "Diabetes Mellitus",
+    "description": "A metabolic disorder characterized by abnormally high blood sugar levels due to diminished production of insulin or insulin resistance/desensitization.",
+    "ols": {
+      "id": "NCIT:C2985",
+      "label": "Diabetes Mellitus",
+      "description": "A metabolic disorder characterized by abnormally high blood sugar levels due to diminished production of insulin or insulin resistance/desensitization."
+    },
+    "ohdsi": {
+      "id": "201820",
+      "label": "Diabetes mellitus",
+      "domain": "Condition"
+    },
+    "studies": [
+      {
+        "name": "Study1",
+        "variable": "",
+        "description": ""
+      },
+      {
+        "name": "Study2",
+        "variable": "Diabetes Mellitus"
+      }
+    ]
+  },
+  {
+    "id": "SCAI-b2b2966b-5e5b-3485-df56-bc82edb4f1ce",
+    "label": "Hypertension",
+    "description": "Blood pressure that is abnormally high.",
+    "ols": {
+      "id": "NCIT:C3117",
+      "label": "Hypertension",
+      "description": "Blood pressure that is abnormally high."
+    },
+    "ohdsi": {
+      "id": "45876622",
+      "label": "Hypertension",
+      "domain": "Meas Value"
+    },
+    "studies": [
+      {
+        "name": "Study1",
+        "variable": "",
+        "description": ""
+      },
+      {
+        "name": "Study2",
+        "variable": "Hypertension"
+      }
+    ]
+  },
+  {
+    "id": "SCAI-fc9aa260-96a4-36b7-70df-3c72f8d7a73a",
+    "label": "Cardiovascular Disorder",
+    "description": "A non-neoplastic or neoplastic disorder affecting the heart or the vessels (arteries, veins and lymph vessels). Representative examples of non-neoplastic cardiovascular disorders are endocarditis and hypertension. Representative examples of neoplastic cardiovascular disorders are endocardial myxoma and angiosarcoma.",
+    "ols": {
+      "id": "NCIT:C2931",
+      "label": "Cardiovascular Disorder",
+      "description": "A non-neoplastic or neoplastic disorder affecting the heart or the vessels (arteries, veins and lymph vessels). Representative examples of non-neoplastic cardiovascular disorders are endocarditis and hypertension. Representative examples of neoplastic cardiovascular disorders are endocardial myxoma and angiosarcoma."
+    },
+    "ohdsi": {
+      "id": "1989960",
+      "label": "Cardiovascular disease",
+      "domain": "Meas Value"
+    },
+    "studies": [
+      {
+        "name": "Study1",
+        "variable": "",
+        "description": "Please indicate the data type that will be used to record this (e.g., boolean, list, etc.)."
+      },
+      {
+        "name": "Study2",
+        "variable": "Cardiovascular disease"
+      }
+    ]
+  },
+  {
+    "id": "SCAI-b6ba0dd2-905a-343e-b783-b87cf76b676b",
+    "label": "Dyslipidemia",
+    "description": "A lipoprotein metabolism disorder characterized by decreased levels of high-density lipoproteins, or elevated levels of plasma cholesterol, low-density lipoproteins and/or triglycerides.",
+    "ols": {
+      "id": "NCIT:C80385",
+      "label": "Dyslipidemia",
+      "description": "A lipoprotein metabolism disorder characterized by decreased levels of high-density lipoproteins, or elevated levels of plasma cholesterol, low-density lipoproteins and/or triglycerides."
+    },
+    "ohdsi": {
+      "id": "4159131",
+      "label": "Dyslipidemia",
+      "domain": "Condition"
+    },
+    "studies": [
+      {
+        "name": "Study1",
+        "variable": "",
+        "description": ""
+      },
+      {
+        "name": "Study2",
+        "variable": "Dyslipidemia"
+      }
+    ]
+  },
+  {
+    "id": "SCAI-183bf9bd-cb93-33c2-2f01-7af82e149341",
+    "label": "Obesity",
+    "description": "Having a high amount of body fat (body mass index [BMI] of 30 or more).",
+    "ols": {
+      "id": "NCIT:C3283",
+      "label": "Obesity",
+      "description": "Having a high amount of body fat (body mass index [BMI] of 30 or more)."
+    },
+    "ohdsi": {
+      "id": "433736",
+      "label": "Obesity",
+      "domain": "Condition"
+    },
+    "studies": [
+      {
+        "name": "Study1",
+        "variable": "",
+        "description": ""
+      },
+      {
+        "name": "Study2",
+        "variable": "Obesity"
+      }
+    ]
+  },
+  {
+    "id": "SCAI-149c09c8-c306-36bd-73e7-f180a4fae5d7",
+    "label": "Chronic Kidney Disease",
+    "description": "Impairment of the renal function secondary to chronic kidney damage persisting for three or more months.",
+    "ols": {
+      "id": "NCIT:C80078",
+      "label": "Chronic Kidney Disease",
+      "description": "Impairment of the renal function secondary to chronic kidney damage persisting for three or more months."
+    },
+    "ohdsi": {
+      "id": "46271022",
+      "label": "Chronic kidney disease",
+      "domain": "Condition"
+    },
+    "studies": [
+      {
+        "name": "Study1",
+        "variable": "",
+        "description": ""
+      },
+      {
+        "name": "Study2",
+        "variable": "Chronic Kidney Disease"
+      }
+    ]
+  },
+  {
+    "id": "SCAI-a00c7945-235d-3774-c491-0931d3c2f673",
+    "label": "Cardiopulmonary Exercise Testing",
+    "description": "A clinical tool to evaluate exercise capacity and to assess cardiac function under stress.",
+    "ols": {
+      "id": "NCIT:C116517",
+      "label": "Cardiopulmonary Exercise Testing",
+      "description": "A clinical tool to evaluate exercise capacity and to assess cardiac function under stress."
+    },
+    "ohdsi": {
+      "id": "40492338",
+      "label": "Cardiopulmonary exercise test",
+      "domain": "Measurement"
+    },
+    "studies": [
+      {
+        "name": "Study1",
+        "variable": "",
+        "description": ""
+      },
+      {
+        "name": "Study2",
+        "variable": "CPET Status"
+      }
+    ]
+  },
+  {
+    "id": "SCAI-157a8bf9-27bd-372f-83f2-2a1f5278cd2f",
+    "label": "CPET - Absolute VO2 max",
+    "description": "Maximum volume of oxygen consumed per minute during peak exercise, measured in liters per minute using cardiopulmonary exercise testing",
+    "ols": {
+      "id": "",
+      "label": "",
+      "description": ""
+    },
+    "ohdsi": {
+      "id": "",
+      "label": "",
+      "domain": ""
+    },
+    "studies": [
+      {
+        "name": "Study1",
+        "variable": "",
+        "description": ""
+      },
+      {
+        "name": "Study2",
+        "variable": "CPET Absolute VO\u2082 max (L/min)"
+      }
+    ]
+  },
+  {
+    "id": "SCAI-89ec4706-f57b-3cb2-c894-05a015206396",
+    "label": "CPET - Relative VO2 max",
+    "description": "Maximum volume of oxygen consumed per minute during peak exercise, normalized to body weight and expressed in milliliters per kilogram per minute, as measured by cardiopulmonary exercise testing.",
+    "ols": {
+      "id": "",
+      "label": "",
+      "description": ""
+    },
+    "ohdsi": {
+      "id": "",
+      "label": "",
+      "domain": ""
+    },
+    "studies": [
+      {
+        "name": "Study1",
+        "variable": "",
+        "description": ""
+      },
+      {
+        "name": "Study2",
+        "variable": "CPET Relative VO\u2082 max (mL/kg/min)"
+      }
+    ]
+  },
+  {
+    "id": "",
+    "label": "",
+    "description": "",
+    "ols": {
+      "id": "",
+      "label": "",
+      "description": ""
+    },
+    "ohdsi": {
+      "id": "",
+      "label": "",
+      "domain": ""
+    },
+    "studies": [
+      {
+        "name": "Study1",
+        "variable": "",
+        "description": "We would like to know if this is a part of standard test and, if so, the specific test name. If not, we would appreciate details on the procedure used to obtain this score, as well as an explanation of what the score represents."
+      },
+      {
+        "name": "Study2",
+        "variable": "Hand Grip Score"
+      }
+    ]
+  },
+  {
+    "id": "",
+    "label": "",
+    "description": "",
+    "ols": {
+      "id": "",
+      "label": "",
+      "description": ""
+    },
+    "ohdsi": {
+      "id": "",
+      "label": "",
+      "domain": ""
+    },
+    "studies": [
+      {
+        "name": "Study1",
+        "variable": "",
+        "description": "We would like to know if this is a part of standard test and, if so, the specific test name. If not, we would appreciate information on how this measurement is conducted to define the variable clearly."
+      },
+      {
+        "name": "Study2",
+        "variable": "Kinemo"
+      }
+    ]
+  },
+  {
+    "id": "SCAI-54fb7871-0c5b-346d-17f7-33da4382688c",
+    "label": "Electrocardiogram",
+    "description": "A record of the electrical activity of the heart.",
+    "ols": {
+      "id": "NCIT:C168186",
+      "label": "Electrocardiogram",
+      "description": "A record of the electrical activity of the heart."
+    },
+    "ohdsi": {
+      "id": "36308175",
+      "label": "Electrocardiogram",
+      "domain": "Meas Value"
+    },
+    "studies": [
+      {
+        "name": "Study1",
+        "variable": "",
+        "description": ""
+      },
+      {
+        "name": "Study2",
+        "variable": "ECG"
+      }
+    ]
+  },
+  {
+    "id": "SCAI-bc0bcd9a-9c54-3c0e-b1fe-c4c5765a537f",
+    "label": "Magnetic Resonance Imaging",
+    "description": "Imaging that uses radiofrequency waves and a strong magnetic field rather than x-rays to provide detailed pictures of internal organs and tissues. The technique is valuable for the diagnosis of many pathologic conditions, including cancer, heart and vascular disease, stroke, and joint and musculoskeletal disorders.",
+    "ols": {
+      "id": "NCIT:C16809",
+      "label": "Magnetic Resonance Imaging",
+      "description": "Imaging that uses radiofrequency waves and a strong magnetic field rather than x-rays to provide detailed pictures of internal organs and tissues. The technique is valuable for the diagnosis of many pathologic conditions, including cancer, heart and vascular disease, stroke, and joint and musculoskeletal disorders."
+    },
+    "ohdsi": {
+      "id": "4013636",
+      "label": "Magtenic resonance imaging",
+      "domain": "Procedure"
+    },
+    "studies": [
+      {
+        "name": "Study1",
+        "variable": "",
+        "description": ""
+      },
+      {
+        "name": "Study2",
+        "variable": "MRI"
+      }
+    ]
+  },
+  {
+    "id": "SCAI-e37d7b0d-3cea-3972-3376-069ff8cda94b",
+    "label": "Bone Mineral Content",
+    "description": "An assessment of the quantity of minerals within a specific bone.",
+    "ols": {
+      "id": "NCIT:C147472",
+      "label": "Bone Mineral Content",
+      "description": "An assessment of the quantity of minerals within a specific bone."
+    },
+    "ohdsi": {
+      "id": "37532301",
+      "label": "Bone Mineral Content",
+      "domain": "Observation"
+    },
+    "studies": [
+      {
+        "name": "Study1",
+        "variable": "",
+        "description": ""
+      },
+      {
+        "name": "Study2",
+        "variable": "Bone Mineral Content (BMC) (gms)"
+      }
+    ]
+  },
+  {
+    "id": "SCAI-31856a2d-fec8-324d-92e3-cd90041d416b",
+    "label": "Bone Mineral Density",
+    "description": "A measure of the amount of minerals (mostly calcium and phosphorous) contained in a certain volume of bone. Bone mass measurements are used to diagnose osteoporosis (a condition marked by decreased bone mass), to see how well osteoporosis treatments are working, and to predict how likely the bones are to break. Low bone mass can occur in patients treated for cancer.",
+    "ols": {
+      "id": "NCIT:C96950",
+      "label": "Bone Mineral Density",
+      "description": ""
+    },
+    "ohdsi": {
+      "id": "37547505",
+      "label": "Bone Mineral Density",
+      "domain": "Measurement"
+    },
+    "studies": [
+      {
+        "name": "Study1",
+        "variable": "",
+        "description": ""
+      },
+      {
+        "name": "Study2",
+        "variable": "Bone Mineral Density (BMD)( (g/cm2)"
+      }
+    ]
+  },
+  {
+    "id": "SCAI-62d6f755-958a-31fc-df9a-96165edfedbd",
+    "label": "Bone Mineral Density T-Score",
+    "description": "The standard deviation of the subject's bone mineral density score in comparison to the expected normal bone mineral density of a healthy 30-year old adult.",
+    "ols": {
+      "id": "NCIT:C147473",
+      "label": "Bone Mineral Density T-Score",
+      "description": "The standard deviation of the subject's bone mineral density score in comparison to the expected normal bone mineral density of a healthy 30-year old adult."
+    },
+    "ohdsi": {
+      "id": "37525765",
+      "label": "Bone Mineral Density T-Score",
+      "domain": "Observation"
+    },
+    "studies": [
+      {
+        "name": "Study1",
+        "variable": "",
+        "description": ""
+      },
+      {
+        "name": "Study2",
+        "variable": "T-score"
+      }
+    ]
+  },
+  {
+    "id": "SCAI-d3b4d891-a5fd-3d1b-39c7-6460d568f082",
+    "label": "Bone Mineral Density Z-Score",
+    "description": "A statistical score representing the number of standard deviations above or below what is expected for an individual's bone density based on his age, sex, weight, and race. Z-scores are most useful in evaluating low bone density in children, premenopausal women, and men younger than age fifty.",
+    "ols": {
+      "id": "NCIT:C139217",
+      "label": "Bone Mineral Density Z-Score",
+      "description": "A statistical score representing the number of standard deviations above or below what is expected for an individual's bone density based on his age, sex, weight, and race. Z-scores are most useful in evaluating low bone density in children, premenopausal women, and men younger than age fifty."
+    },
+    "ohdsi": {
+      "id": "37531524",
+      "label": "Bone Mineral Density Z-Score",
+      "domain": "Observation"
+    },
+    "studies": [
+      {
+        "name": "Study1",
+        "variable": "",
+        "description": ""
+      },
+      {
+        "name": "Study2",
+        "variable": "Z-score"
+      }
+    ]
+  },
+  {
+    "id": "SCAI-51061d39-6dad-31e3-7724-abceb2fbfa89",
+    "label": "Fat Mass",
+    "description": "The weight of the body fat associated with either a particular body part or the whole body.",
+    "ols": {
+      "id": "NCIT:C158256",
+      "label": "Fat Mass",
+      "description": "The weight of the body fat associated with either a particular body part or the whole body."
+    },
+    "ohdsi": {
+      "id": "37547538",
+      "label": "Fat Mass",
+      "domain": "Measurement"
+    },
+    "studies": [
+      {
+        "name": "Study1",
+        "variable": "",
+        "description": ""
+      },
+      {
+        "name": "Study2",
+        "variable": "Fat mass (gms)"
+      }
+    ]
+  },
+  {
+    "id": "SCAI-853298d1-afde-3cc1-637e-d4eba62cb833",
+    "label": "Fat-free Mass",
+    "description": "The total mass of all body components excluding fat, including lean soft tissue (muscle, organs, body water) and bone mineral content (BMC).",
+    "ols": {
+      "id": "SNOMED:248363008",
+      "label": "Fat-free mass (observable entity)",
+      "description": ""
+    },
+    "ohdsi": {
+      "id": "4087499",
+      "label": "Fat-free mass",
+      "domain": "Measurement"
+    },
+    "studies": [
+      {
+        "name": "Study1",
+        "variable": "",
+        "description": ""
+      },
+      {
+        "name": "Study2",
+        "variable": "Lean mass + BMC (gms)"
+      }
+    ]
+  },
+  {
+    "id": "SCAI-c8d5d1a7-2480-3598-202f-b31a102bfb18",
+    "label": "Body Fat Percentage",
+    "description": "The amount of an individual's total body mass that is fat, expressed as a percent.",
+    "ols": {
+      "id": "NCIT:C139218",
+      "label": "Body Fat Percentage",
+      "description": "The amount of an individual's total body mass that is fat, expressed as a percent."
+    },
+    "ohdsi": {
+      "id": "35811770",
+      "label": "Body fat percentage",
+      "domain": "Measurement"
+    },
+    "studies": [
+      {
+        "name": "Study1",
+        "variable": "",
+        "description": ""
+      },
+      {
+        "name": "Study2",
+        "variable": "Total body fat %"
+      }
+    ]
+  },
+  {
+    "id": "SCAI-e21d50b7-e8e7-3da5-08f5-8aa5c6b7635d",
+    "label": "Heart Rate Variability",
+    "description": "Heart rate variability (HRV) is the psychological phenomenon of variation in the time interval between heartbeats. It is measured by the variation in the beat-to-beat interval",
+    "ols": {
+      "id": "CMO:0002812",
+      "label": "heart rate variability",
+      "description": "Heart rate variability (HRV) is the psychological phenomenon of variation in the time interval between heartbeats. It is measured by the variation in the beat-to-beat interval"
+    },
+    "ohdsi": {
+      "id": "",
+      "label": "",
+      "domain": ""
+    },
+    "studies": [
+      {
+        "name": "Study1",
+        "variable": "",
+        "description": ""
+      },
+      {
+        "name": "Study2",
+        "variable": "HRV (ms)"
+      }
+    ]
+  },
+  {
+    "id": "SCAI-dc8f7d2a-84fb-3063-da2e-fbe734167aa2",
+    "label": "Respiratory Rate",
+    "description": "The rate of breathing (inhalation and exhalation) measured within in a unit time, usually expressed as breaths per minute.",
+    "ols": {
+      "id": "NCIT:C49678",
+      "label": "Respiratory Rate",
+      "description": "The rate of breathing (inhalation and exhalation) measured within in a unit time, usually expressed as breaths per minute."
+    },
+    "ohdsi": {
+      "id": "4313591",
+      "label": "Respiratory rate",
+      "domain": "Measurement"
+    },
+    "studies": [
+      {
+        "name": "Study1",
+        "variable": "",
+        "description": ""
+      },
+      {
+        "name": "Study2",
+        "variable": "Resiratory rate (rpm)"
+      }
+    ]
+  },
+  {
+    "id": "SCAI-542d0a75-8500-367c-0704-3a1613d52a1c",
+    "label": "Resting Heart Rate",
+    "description": "The number of heartbeats per minute while the body is at complete rest, typically measured after waking and before physical activity.",
+    "ols": {
+      "id": "SNOMED:444981005",
+      "label": "Resting heart rate (observable entity)",
+      "description": ""
+    },
+    "ohdsi": {
+      "id": "40481601",
+      "label": "Resting heart rate",
+      "domain": "Measurement"
+    },
+    "studies": [
+      {
+        "name": "Study1",
+        "variable": "",
+        "description": ""
+      },
+      {
+        "name": "Study2",
+        "variable": "Resting heart rate (bpm)"
+      }
+    ]
+  },
+  {
+    "id": "SCAI-dca06a92-7d64-388d-ca30-101a79a9836d",
+    "label": "Sleep Consistency",
+    "description": "A measure of how regularly a person goes to sleep and wakes up at the same times each day, expressed as a percentage indicating the stability of their sleep schedule over time.",
+    "ols": {
+      "id": "",
+      "label": "",
+      "description": ""
+    },
+    "ohdsi": {
+      "id": "",
+      "label": "",
+      "domain": ""
+    },
+    "studies": [
+      {
+        "name": "Study1",
+        "variable": "",
+        "description": ""
+      },
+      {
+        "name": "Study2",
+        "variable": "Sleep consistency (%)"
+      }
+    ]
+  },
+  {
+    "id": "SCAI-2871bffa-ee24-315e-6cc1-2573c32c0fac",
+    "label": "Total Sleep Time",
+    "description": "The total amount of sleep time from sleep onset to sleep offset, determined by summing the N1 sleep, N2 sleep, N3 sleep, and REM sleep durations.",
+    "ols": {
+      "id": "NCIT:C156552",
+      "label": "Total Sleep Time",
+      "description": "The total amount of sleep time from sleep onset to sleep offset, determined by summing the N1 sleep, N2 sleep, N3 sleep, and REM sleep durations."
+    },
+    "ohdsi": {
+      "id": "1002368",
+      "label": "Sleep duration",
+      "domain": "Observation"
+    },
+    "studies": [
+      {
+        "name": "Study1",
+        "variable": "",
+        "description": ""
+      },
+      {
+        "name": "Study2",
+        "variable": "Sleep duration (hrs and mins)"
+      }
+    ]
+  },
+  {
+    "id": "SCAI-02e6a0b8-3f96-30da-8df3-23ff3bf25c0a",
+    "label": "Restorative Sleep",
+    "description": "The portion of sleep that effectively supports physical recovery, mental rejuvenation, and overall well-being, typically characterized by adequate amounts of deep (slow-wave) and REM sleep.",
+    "ols": {
+      "id": "",
+      "label": "",
+      "description": ""
+    },
+    "ohdsi": {
+      "id": "",
+      "label": "",
+      "domain": ""
+    },
+    "studies": [
+      {
+        "name": "Study1",
+        "variable": "",
+        "description": ""
+      },
+      {
+        "name": "Study2",
+        "variable": "Restorative sleep (hrs and mins)"
+      }
+    ]
+  },
+  {
+    "id": "SCAI-14d4d2dd-dade-3b56-c3b8-a67fd6979e4e",
+    "label": "Recovery",
+    "description": "A healing process and/or an outcome implying relative health. The term is typically used in the context of direct and indirect effects of sickness or injury.",
+    "ols": {
+      "id": "NCIT:C25746",
+      "label": "Recovery",
+      "description": "A healing process and/or an outcome implying relative health. The term is typically used in the context of direct and indirect effects of sickness or injury."
+    },
+    "ohdsi": {
+      "id": "",
+      "label": "",
+      "domain": ""
+    },
+    "studies": [
+      {
+        "name": "Study1",
+        "variable": "",
+        "description": ""
+      },
+      {
+        "name": "Study2",
+        "variable": "Recovery (%)"
+      }
+    ]
+  },
+  {
+    "id": "",
+    "label": "",
+    "description": "",
+    "ols": {
+      "id": "",
+      "label": "",
+      "description": ""
+    },
+    "ohdsi": {
+      "id": "",
+      "label": "",
+      "domain": ""
+    },
+    "studies": [
+      {
+        "name": "Study1",
+        "variable": "",
+        "description": "As we understand it, this data comes from a wearable device manufactured by WHOOP. We would like to know what qualifies as a high stress zone and what parameters are used to determine it."
+      },
+      {
+        "name": "Study2",
+        "variable": "High stress zone (hrs and mins)"
+      }
+    ]
+  },
+  {
+    "id": "SCAI-a7584594-3ca3-30c4-4094-8bd06e22d054",
+    "label": "Daily Aerobic Activity",
+    "description": "The total number of minutes per day spent performing moderate to vigorous aerobic exercise, such as walking, running, or cycling, that elevates heart rate and breathing.",
+    "ols": {
+      "id": "",
+      "label": "",
+      "description": ""
+    },
+    "ohdsi": {
+      "id": "",
+      "label": "",
+      "domain": ""
+    },
+    "studies": [
+      {
+        "name": "Study1",
+        "variable": "",
+        "description": ""
+      },
+      {
+        "name": "Study2",
+        "variable": "Daily aerobic activity (mins)"
+      }
+    ]
+  },
+  {
+    "id": "SCAI-0138605a-eab0-3333-d963-6357d494bc1a",
+    "label": "WHOOP Strain Score",
+    "description": "A proprietary, personalized exertion metric generated by the WHOOP wearable system, reflecting total cardiovascular and muscular effort during a day or activity. The strain score is a non-linear value from 0 to 21, calculated using heart rate dynamics and other physiological signals. It is designed to help users track intensity, optimize recovery, and balance training loads to enhance performance and prevent overtraining.",
+    "ols": {
+      "id": "",
+      "label": "",
+      "description": ""
+    },
+    "ohdsi": {
+      "id": "",
+      "label": "",
+      "domain": ""
+    },
+    "studies": [
+      {
+        "name": "Study1",
+        "variable": "",
+        "description": ""
+      },
+      {
+        "name": "Study2",
+        "variable": "Strain Score"
+      }
+    ]
+  },
+  {
+    "id": "SCAI-69fad1bf-e877-3c86-a0c7-9a78618918e2",
+    "label": "Multidimensional Health Locus of Control - Question 1",
+    "description": "MHLC Question 1 - If I get sick, it is my own behavior which determines how soon I get well again.",
+    "ols": {
+      "id": "",
+      "label": "",
+      "description": ""
+    },
+    "ohdsi": {
+      "id": "",
+      "label": "",
+      "domain": ""
+    },
+    "studies": [
+      {
+        "name": "Study1",
+        "variable": "",
+        "description": ""
+      },
+      {
+        "name": "Study2",
+        "variable": "Health Locus of Control 1"
+      }
+    ]
+  },
+  {
+    "id": "SCAI-3aec1899-f162-3131-13d1-627970b133ac",
+    "label": "Multidimensional Health Locus of Control - Question 2",
+    "description": "MHLC Question 2 - I am in control of my health.",
+    "ols": {
+      "id": "",
+      "label": "",
+      "description": ""
+    },
+    "ohdsi": {
+      "id": "",
+      "label": "",
+      "domain": ""
+    },
+    "studies": [
+      {
+        "name": "Study1",
+        "variable": "",
+        "description": ""
+      },
+      {
+        "name": "Study2",
+        "variable": "Health Locus of Control 2"
+      }
+    ]
+  },
+  {
+    "id": "SCAI-f10c2987-1009-3da7-f488-c7edce3b67bf",
+    "label": "Multidimensional Health Locus of Control - Question 3",
+    "description": "MHLC Question 3 - When I get sick, I am to blame.",
+    "ols": {
+      "id": "",
+      "label": "",
+      "description": ""
+    },
+    "ohdsi": {
+      "id": "",
+      "label": "",
+      "domain": ""
+    },
+    "studies": [
+      {
+        "name": "Study1",
+        "variable": "",
+        "description": ""
+      },
+      {
+        "name": "Study2",
+        "variable": "Health Locus of Control 3"
+      }
+    ]
+  },
+  {
+    "id": "SCAI-e8b2c669-9d22-3862-0283-2c83d12141bf",
+    "label": "Multidimensional Health Locus of Control - Question 4",
+    "description": "MHLC Question 4 - The main thing which affects my health is what I myself do.",
+    "ols": {
+      "id": "",
+      "label": "",
+      "description": ""
+    },
+    "ohdsi": {
+      "id": "",
+      "label": "",
+      "domain": ""
+    },
+    "studies": [
+      {
+        "name": "Study1",
+        "variable": "",
+        "description": ""
+      },
+      {
+        "name": "Study2",
+        "variable": "Health Locus of Control 4"
+      }
+    ]
+  },
+  {
+    "id": "SCAI-c75e7b04-db50-3501-c493-63a410316250",
+    "label": "Multidimensional Health Locus of Control - Question 5",
+    "description": "MHLC Question 5 - If I take care of myself, I can avoid illness.",
+    "ols": {
+      "id": "",
+      "label": "",
+      "description": ""
+    },
+    "ohdsi": {
+      "id": "",
+      "label": "",
+      "domain": ""
+    },
+    "studies": [
+      {
+        "name": "Study1",
+        "variable": "",
+        "description": ""
+      },
+      {
+        "name": "Study2",
+        "variable": "Health Locus of Control 5"
+      }
+    ]
+  },
+  {
+    "id": "SCAI-5aae1840-6bc8-3495-992d-903d852e2dca",
+    "label": "Multidimensional Health Locus of Control - Question 6",
+    "description": "MHLC Question 6 - If I take the right actions, I can stay healthy.",
+    "ols": {
+      "id": "",
+      "label": "",
+      "description": ""
+    },
+    "ohdsi": {
+      "id": "",
+      "label": "",
+      "domain": ""
+    },
+    "studies": [
+      {
+        "name": "Study1",
+        "variable": "",
+        "description": ""
+      },
+      {
+        "name": "Study2",
+        "variable": "Health Locus of Control 6"
+      }
+    ]
+  },
+  {
+    "id": "SCAI-6d79de9f-067f-39d6-ac46-ff69863d50f6",
+    "label": "Multidimensional Health Locus of Control - Question 7",
+    "description": "MHLC Question 7 - No matter what I do, if I am going to get sick, I will get sick.",
+    "ols": {
+      "id": "",
+      "label": "",
+      "description": ""
+    },
+    "ohdsi": {
+      "id": "",
+      "label": "",
+      "domain": ""
+    },
+    "studies": [
+      {
+        "name": "Study1",
+        "variable": "",
+        "description": ""
+      },
+      {
+        "name": "Study2",
+        "variable": "Health Locus of Control 7"
+      }
+    ]
+  },
+  {
+    "id": "SCAI-4bba70f6-30f0-3a5c-bbf2-f0899efac9a1",
+    "label": "Multidimensional Health Locus of Control - Question 8",
+    "description": "MHLC Question 8 - Most things that affect my health happen to me by accident.",
+    "ols": {
+      "id": "",
+      "label": "",
+      "description": ""
+    },
+    "ohdsi": {
+      "id": "",
+      "label": "",
+      "domain": ""
+    },
+    "studies": [
+      {
+        "name": "Study1",
+        "variable": "",
+        "description": ""
+      },
+      {
+        "name": "Study2",
+        "variable": "Health Locus of Control 8"
+      }
+    ]
+  },
+  {
+    "id": "SCAI-034f3e99-df11-3837-f4bf-e87aeee757b4",
+    "label": "Multidimensional Health Locus of Control - Question 9",
+    "description": "MHLC Question 9 - Luck pays a big part in determining how soon I will recover from an illness.",
+    "ols": {
+      "id": "",
+      "label": "",
+      "description": ""
+    },
+    "ohdsi": {
+      "id": "",
+      "label": "",
+      "domain": ""
+    },
+    "studies": [
+      {
+        "name": "Study1",
+        "variable": "",
+        "description": ""
+      },
+      {
+        "name": "Study2",
+        "variable": "Health Locus of Control 9"
+      }
+    ]
+  },
+  {
+    "id": "SCAI-3cf514df-20fa-3328-eb4e-ff074a5544f2",
+    "label": "Multidimensional Health Locus of Control - Question 10",
+    "description": "MHLC Question 10 - My good health is largely a matter of good fortune.",
+    "ols": {
+      "id": "",
+      "label": "",
+      "description": ""
+    },
+    "ohdsi": {
+      "id": "",
+      "label": "",
+      "domain": ""
+    },
+    "studies": [
+      {
+        "name": "Study1",
+        "variable": "",
+        "description": ""
+      },
+      {
+        "name": "Study2",
+        "variable": "Health Locus of Control 10"
+      }
+    ]
+  },
+  {
+    "id": "SCAI-926031b3-9d5a-3085-3523-72e7baf2fc07",
+    "label": "Multidimensional Health Locus of Control - Question 11",
+    "description": "MHLC Question 11 - No matter what I do, I'm likely to get sick.",
+    "ols": {
+      "id": "",
+      "label": "",
+      "description": ""
+    },
+    "ohdsi": {
+      "id": "",
+      "label": "",
+      "domain": ""
+    },
+    "studies": [
+      {
+        "name": "Study1",
+        "variable": "",
+        "description": ""
+      },
+      {
+        "name": "Study2",
+        "variable": "Health Locus of Control 11"
+      }
+    ]
+  },
+  {
+    "id": "SCAI-9298e089-8b11-39ba-2106-9e2eca7188b2",
+    "label": "Multidimensional Health Locus of Control - Question 12",
+    "description": "MHLC Question 12 - If it's meant to be, I will stay healthy.",
+    "ols": {
+      "id": "",
+      "label": "",
+      "description": ""
+    },
+    "ohdsi": {
+      "id": "",
+      "label": "",
+      "domain": ""
+    },
+    "studies": [
+      {
+        "name": "Study1",
+        "variable": "",
+        "description": ""
+      },
+      {
+        "name": "Study2",
+        "variable": "Health Locus of Control 12"
+      }
+    ]
+  },
+  {
+    "id": "SCAI-17c05625-14ca-3b04-68f1-7ba267420e59",
+    "label": "Multidimensional Health Locus of Control - Question 13",
+    "description": "MHLC Question 13 - Having regular contact with my physician is the best way for me to avoid illness.",
+    "ols": {
+      "id": "",
+      "label": "",
+      "description": ""
+    },
+    "ohdsi": {
+      "id": "",
+      "label": "",
+      "domain": ""
+    },
+    "studies": [
+      {
+        "name": "Study1",
+        "variable": "",
+        "description": ""
+      },
+      {
+        "name": "Study2",
+        "variable": "Health Locus of Control 13"
+      }
+    ]
+  },
+  {
+    "id": "SCAI-685da549-62f3-3aed-8061-369482588e19",
+    "label": "Multidimensional Health Locus of Control - Question 14",
+    "description": "MHLC Question 14 - Whenever I don't feel well, I should consult a medically trained professional.",
+    "ols": {
+      "id": "",
+      "label": "",
+      "description": ""
+    },
+    "ohdsi": {
+      "id": "",
+      "label": "",
+      "domain": ""
+    },
+    "studies": [
+      {
+        "name": "Study1",
+        "variable": "",
+        "description": ""
+      },
+      {
+        "name": "Study2",
+        "variable": "Health Locus of Control 14"
+      }
+    ]
+  },
+  {
+    "id": "SCAI-60f17e7d-ccb9-3d2a-a3c7-ffc560d54d50",
+    "label": "Multidimensional Health Locus of Control - Question 15",
+    "description": "MHLC Question 15 - My family has a lot to do with my becoming sick or staying healthy.",
+    "ols": {
+      "id": "",
+      "label": "",
+      "description": ""
+    },
+    "ohdsi": {
+      "id": "",
+      "label": "",
+      "domain": ""
+    },
+    "studies": [
+      {
+        "name": "Study1",
+        "variable": "",
+        "description": ""
+      },
+      {
+        "name": "Study2",
+        "variable": "Health Locus of Control 15"
+      }
+    ]
+  },
+  {
+    "id": "SCAI-2a56275b-e54d-30aa-8c15-024ed25aa724",
+    "label": "Multidimensional Health Locus of Control - Question 16",
+    "description": "MHLC Question 16 - Health professionals control my health.",
+    "ols": {
+      "id": "",
+      "label": "",
+      "description": ""
+    },
+    "ohdsi": {
+      "id": "",
+      "label": "",
+      "domain": ""
+    },
+    "studies": [
+      {
+        "name": "Study1",
+        "variable": "",
+        "description": ""
+      },
+      {
+        "name": "Study2",
+        "variable": "Health Locus of Control 16"
+      }
+    ]
+  },
+  {
+    "id": "SCAI-3514886b-019c-3715-78fc-2e5e065e917b",
+    "label": "Multidimensional Health Locus of Control - Question 17",
+    "description": "MHLC Question 17 - Whenever I recover from an illness, it's usually because other people (for example, doctors, nurses, family, friends) have been taking good care of me.",
+    "ols": {
+      "id": "",
+      "label": "",
+      "description": ""
+    },
+    "ohdsi": {
+      "id": "",
+      "label": "",
+      "domain": ""
+    },
+    "studies": [
+      {
+        "name": "Study1",
+        "variable": "",
+        "description": ""
+      },
+      {
+        "name": "Study2",
+        "variable": "Health Locus of Control 17"
+      }
+    ]
+  },
+  {
+    "id": "SCAI-b68c4236-a529-3086-491a-73f8680e8795",
+    "label": "Multidimensional Health Locus of Control - Question 18",
+    "description": "MHLC Question 18 - Regarding my health, I can only do what my doctor tells me to do.",
+    "ols": {
+      "id": "",
+      "label": "",
+      "description": ""
+    },
+    "ohdsi": {
+      "id": "",
+      "label": "",
+      "domain": ""
+    },
+    "studies": [
+      {
+        "name": "Study1",
+        "variable": "",
+        "description": ""
+      },
+      {
+        "name": "Study2",
+        "variable": "Health Locus of Control 18"
+      }
+    ]
+  },
+  {
+    "id": "SCAI-6b628eea-3c39-3504-1282-ecd0525775fc",
+    "label": "EuroQol - Mobility",
+    "description": "The EuroQol (European Quality of Life) Five Dimension Five Level Scale (EQ-5D-5L) Check the one box that best describes your health today: Mobility.",
+    "ols": {
+      "id": "NCIT:C102067",
+      "label": "EQ-5D-5L - Mobility",
+      "description": "The EuroQol (European Quality of Life) Five Dimension Five Level Scale (EQ-5D-5L) Check the one box that best describes your health today: Mobility."
+    },
+    "ohdsi": {
+      "id": "44806412",
+      "label": "EuroQol five dimension five level mobility score",
+      "domain": "Staging / Scales"
+    },
+    "studies": [
+      {
+        "name": "Study1",
+        "variable": "",
+        "description": "Which version of the EuroQol Questionnaire will be used in the study"
+      },
+      {
+        "name": "Study2",
+        "variable": "Mobility"
+      }
+    ]
+  },
+  {
+    "id": "SCAI-092f8f61-feac-392e-cf4b-5d42f71a4b61",
+    "label": "EuroQol - Self-Care",
+    "description": "The EuroQol (European Quality of Life) Five Dimension Five Level Scale (EQ-5D-5L) Check the one box that best describes your health today: Self-care.",
+    "ols": {
+      "id": "NCIT:C102068",
+      "label": "EQ-5D-5L - Self-Care",
+      "description": "The EuroQol (European Quality of Life) Five Dimension Five Level Scale (EQ-5D-5L) Check the one box that best describes your health today: Self-care."
+    },
+    "ohdsi": {
+      "id": "44806413",
+      "label": "EuroQol five dimension five level self-care score",
+      "domain": "Staging / Scales"
+    },
+    "studies": [
+      {
+        "name": "Study1",
+        "variable": "",
+        "description": "Which version of the EuroQol Questionnaire will be used in the study"
+      },
+      {
+        "name": "Study2",
+        "variable": "Self-Care"
+      }
+    ]
+  },
+  {
+    "id": "SCAI-cd830bb0-f7f8-3410-f068-a7d3ff66077f",
+    "label": "EuroQol - Usual Activities",
+    "description": "The EuroQol (European Quality of Life) Five Dimension Five Level Scale (EQ-5D-5L) Check the one box that best describes your health today: Usual activities.",
+    "ols": {
+      "id": "NCIT:C102069",
+      "label": "EQ-5D-5L - Usual Activities",
+      "description": "The EuroQol (European Quality of Life) Five Dimension Five Level Scale (EQ-5D-5L) Check the one box that best describes your health today: Usual activities."
+    },
+    "ohdsi": {
+      "id": "44813555",
+      "label": "EuroQol five dimension five level usual activities score",
+      "domain": "Staging / Scales"
+    },
+    "studies": [
+      {
+        "name": "Study1",
+        "variable": "",
+        "description": "Which version of the EuroQol Questionnaire will be used in the study"
+      },
+      {
+        "name": "Study2",
+        "variable": "Usual Activities"
+      }
+    ]
+  },
+  {
+    "id": "SCAI-8c52993e-7d11-38a1-e897-1635198b847f",
+    "label": "EuroQol - Pain or Discomfort",
+    "description": "The EuroQol (European Quality of Life) Five Dimension Five Level Scale (EQ-5D-5L) Check the one box that best describes your health today: Pain or discomfort.",
+    "ols": {
+      "id": "NCIT:C102070",
+      "label": "EQ-5D-5L - Pain or Discomfort",
+      "description": "The EuroQol (European Quality of Life) Five Dimension Five Level Scale (EQ-5D-5L) Check the one box that best describes your health today: Pain or discomfort."
+    },
+    "ohdsi": {
+      "id": "44806414",
+      "label": "EuroQol five dimension five level pain discomfort score",
+      "domain": "Staging / Scales"
+    },
+    "studies": [
+      {
+        "name": "Study1",
+        "variable": "",
+        "description": "Which version of the EuroQol Questionnaire will be used in the study"
+      },
+      {
+        "name": "Study2",
+        "variable": "Pain/Discomfort"
+      }
+    ]
+  },
+  {
+    "id": "SCAI-f0d57e46-7755-37c4-2f6f-932073629538",
+    "label": "EuroQol - Anxiety or Depression",
+    "description": "The EuroQol (European Quality of Life) Five Dimension Five Level Scale (EQ-5D-5L) Check the one box that best describes your health today: Anxiety or depression.",
+    "ols": {
+      "id": "NCIT:C102071",
+      "label": "EQ-5D-5L - Anxiety or Depression",
+      "description": "The EuroQol (European Quality of Life) Five Dimension Five Level Scale (EQ-5D-5L) Check the one box that best describes your health today: Anxiety or depression."
+    },
+    "ohdsi": {
+      "id": "44813556",
+      "label": "EuroQol five dimension five level anxiety depression score",
+      "domain": "Staging / Scales"
+    },
+    "studies": [
+      {
+        "name": "Study1",
+        "variable": "",
+        "description": "Which version of the EuroQol Questionnaire will be used in the study"
+      },
+      {
+        "name": "Study2",
+        "variable": "Anxiety/Depression"
+      }
+    ]
+  },
+  {
+    "id": "SCAI-9d585027-4eae-3a02-f10c-95b61cd8eed4",
+    "label": "EuroQol - Total Score",
+    "description": "The EuroQol (European Quality of Life) Five Dimension Five Level Scale (EQ-5D-5L) Mark an X on the scale to indicate how your health is today and write the number you marked on the scale in the box below.",
+    "ols": {
+      "id": "NCIT:C102072",
+      "label": "EQ-5D-5L - EQ VAS Score",
+      "description": "The EuroQol (European Quality of Life) Five Dimension Five Level Scale (EQ-5D-5L) Mark an X on the scale to indicate how your health is today and write the number you marked on the scale in the box below."
+    },
+    "ohdsi": {
+      "id": "44806410",
+      "label": "EuroQol five dimension five level scale",
+      "domain": "Staging / Scales"
+    },
+    "studies": [
+      {
+        "name": "Study1",
+        "variable": "",
+        "description": "Which version of the EuroQol Questionnaire will be used in the study"
+      },
+      {
+        "name": "Study2",
+        "variable": "Health Today (0-100)"
+      }
+    ]
+  },
+  {
+    "id": "SCAI-31fe3ca9-147c-363d-68ba-e077b556e161",
+    "label": "QRISK Cardiovascular Disease Score",
+    "description": "An estimate of an individual's risk of developing cardiovascular disease over the next 10 years, calculated using factors such as age, sex, blood pressure, cholesterol levels, smoking status, and medical history.",
+    "ols": {
+      "id": "SNOMED:763244005",
+      "label": "QRISK cardiovascular disease 10 year risk calculator score (observable entity)",
+      "description": ""
+    },
+    "ohdsi": {
+      "id": "",
+      "label": "",
+      "domain": ""
+    },
+    "studies": [
+      {
+        "name": "Study1",
+        "variable": "",
+        "description": ""
+      },
+      {
+        "name": "Study2",
+        "variable": "QRISK Score"
+      }
+    ]
+  },
+  {
+    "id": "SCAI-455408be-8417-357d-c224-c5723f608d39",
+    "label": "Test2Prevent - Risk Score",
+    "description": "A composite risk score generated by the Test2Prevent model, designed to quantify an individual's likelihood of developing or progressing toward a specific clinical outcome (e.g., disease onset, adverse event, hospitalization), based on predictive features.",
+    "ols": {
+      "id": "",
+      "label": "",
+      "description": ""
+    },
+    "ohdsi": {
+      "id": "",
+      "label": "",
+      "domain": ""
+    },
+    "studies": [
+      {
+        "name": "Study1",
+        "variable": "",
+        "description": ""
+      },
+      {
+        "name": "Study2",
+        "variable": "Total Risk Score"
+      }
+    ]
+  },
+  {
+    "id": "SCAI-9f199d37-300b-33d7-38b0-3dd76c98ff4b",
+    "label": "Test2Prevent - Risk Category Interpretation",
+    "description": "A categorical interpretation of the Test2Prevent risk score that assigns individuals to predefined risk strata (e.g., low, moderate, high), used for clinical decision-making or intervention targeting.",
+    "ols": {
+      "id": "",
+      "label": "",
+      "description": ""
+    },
+    "ohdsi": {
+      "id": "",
+      "label": "",
+      "domain": ""
+    },
+    "studies": [
+      {
+        "name": "Study1",
+        "variable": "",
+        "description": ""
+      },
+      {
+        "name": "Study2",
+        "variable": "Interpretation (Risk Category)"
+      }
+    ]
+  }
+]

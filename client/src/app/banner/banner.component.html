@@ -7,6 +7,44 @@
   <div class="site-title-box">
     <h1 class="site-title">Kitsune</h1>
   </div>
+  <div class="routing-menu-box">
+    <!-- Dropdown Trigger Button -->
+    <button [matMenuTriggerFor]="harmonizeMenu" class="button-style">
+      Harmonize <mat-icon>arrow_drop_down</mat-icon>
+    </button>
+
+    <button [matMenuTriggerFor]="coreModelMenu" class="button-style">
+      Core Model of Healthy Aging<mat-icon>arrow_drop_down</mat-icon>
+    </button>
+
+    <button [routerLink]="'/t-sne'" class="button-style">
+      Visualize Embeddings
+    </button>
+
+    <!-- Harmonize Dropdown Menu -->
+    <mat-menu #harmonizeMenu="matMenu">
+      <button mat-menu-item [routerLink]="'/query'">
+        <mat-icon>search</mat-icon>
+        <span>Search by Query</span>
+      </button>
+      <button mat-menu-item [routerLink]="'/harmonize'">
+        <mat-icon>upload_file</mat-icon>
+        <span>Upload a Dictionary</span>
+      </button>
+    </mat-menu>
+
+    <!-- Core Model Dropdown Menu -->
+    <mat-menu #coreModelMenu="matMenu">
+      <button mat-menu-item [routerLink]="'/core-model-table'">
+        <mat-icon>table_view</mat-icon>
+        <span>Table View</span>
+      </button>
+      <button mat-menu-item [routerLink]="'/core-model-chord-diagram'">
+        <mat-icon>donut_large</mat-icon>
+        <span>Chord Diagram View</span>
+      </button>
+    </mat-menu>
+  </div>
   <div class="github-logo-box">
     <a href="https://github.com/SCAI-BIO/kitsune" target="_blank">
       <img

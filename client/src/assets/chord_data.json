@@ -1,0 +1,3138 @@
+{
+  "links": [
+    {
+      "source": "Body Weight",
+      "target": "body weight"
+    },
+    {
+      "source": "Body Weight",
+      "target": "Weight"
+    },
+    {
+      "source": "Body Weight",
+      "target": "Weight"
+    },
+    {
+      "source": "Body Weight",
+      "target": "Weight (kgs)"
+    },
+    {
+      "source": "body weight",
+      "target": "Weight"
+    },
+    {
+      "source": "body weight",
+      "target": "Weight"
+    },
+    {
+      "source": "body weight",
+      "target": "Weight (kgs)"
+    },
+    {
+      "source": "Weight",
+      "target": "Weight"
+    },
+    {
+      "source": "Weight",
+      "target": "Weight (kgs)"
+    },
+    {
+      "source": "Weight",
+      "target": "Weight (kgs)"
+    },
+    {
+      "source": "Skeletal Muscle Mass",
+      "target": "Skeletal Muscle Mass"
+    },
+    {
+      "source": "Skeletal Muscle Mass",
+      "target": "Skeletal Muscle Mass"
+    },
+    {
+      "source": "Skeletal Muscle Mass",
+      "target": "Skeletal Muscle Mass"
+    },
+    {
+      "source": "Skeletal Muscle Mass",
+      "target": "Skeletal muscle mass (kg)"
+    },
+    {
+      "source": "Skeletal Muscle Mass",
+      "target": "Skeletal Muscle Mass"
+    },
+    {
+      "source": "Skeletal Muscle Mass",
+      "target": "Skeletal Muscle Mass"
+    },
+    {
+      "source": "Skeletal Muscle Mass",
+      "target": "Skeletal muscle mass (kg)"
+    },
+    {
+      "source": "Skeletal Muscle Mass",
+      "target": "Skeletal Muscle Mass"
+    },
+    {
+      "source": "Skeletal Muscle Mass",
+      "target": "Skeletal muscle mass (kg)"
+    },
+    {
+      "source": "Skeletal Muscle Mass",
+      "target": "Skeletal muscle mass (kg)"
+    },
+    {
+      "source": "Body Fat Percentage",
+      "target": "Body Fat Percentage"
+    },
+    {
+      "source": "Body Fat Percentage",
+      "target": "Body fat percentage"
+    },
+    {
+      "source": "Body Fat Percentage",
+      "target": "Body Fat Percentage"
+    },
+    {
+      "source": "Body Fat Percentage",
+      "target": "Percent body fat (%)"
+    },
+    {
+      "source": "Body Fat Percentage",
+      "target": "Body fat percentage"
+    },
+    {
+      "source": "Body Fat Percentage",
+      "target": "Body Fat Percentage"
+    },
+    {
+      "source": "Body Fat Percentage",
+      "target": "Percent body fat (%)"
+    },
+    {
+      "source": "Body fat percentage",
+      "target": "Body Fat Percentage"
+    },
+    {
+      "source": "Body fat percentage",
+      "target": "Percent body fat (%)"
+    },
+    {
+      "source": "Body Fat Percentage",
+      "target": "Percent body fat (%)"
+    },
+    {
+      "source": "Body Mass Index",
+      "target": "Body Mass Index"
+    },
+    {
+      "source": "Body Mass Index",
+      "target": "Body mass index"
+    },
+    {
+      "source": "Body Mass Index",
+      "target": "Body Mass Index"
+    },
+    {
+      "source": "Body Mass Index",
+      "target": "BMI (kg/m2)"
+    },
+    {
+      "source": "Body Mass Index",
+      "target": "Body mass index"
+    },
+    {
+      "source": "Body Mass Index",
+      "target": "Body Mass Index"
+    },
+    {
+      "source": "Body Mass Index",
+      "target": "BMI (kg/m2)"
+    },
+    {
+      "source": "Body mass index",
+      "target": "Body Mass Index"
+    },
+    {
+      "source": "Body mass index",
+      "target": "BMI (kg/m2)"
+    },
+    {
+      "source": "Body Mass Index",
+      "target": "BMI (kg/m2)"
+    },
+    {
+      "source": "Basal Metabolic Rate",
+      "target": "Basal Metabolic Rate"
+    },
+    {
+      "source": "Basal Metabolic Rate",
+      "target": "Basal metabolic rate"
+    },
+    {
+      "source": "Basal Metabolic Rate",
+      "target": "Basal Metabolic Rate"
+    },
+    {
+      "source": "Basal Metabolic Rate",
+      "target": "Basal Metabolic Rate (kcals)"
+    },
+    {
+      "source": "Basal Metabolic Rate",
+      "target": "Basal metabolic rate"
+    },
+    {
+      "source": "Basal Metabolic Rate",
+      "target": "Basal Metabolic Rate"
+    },
+    {
+      "source": "Basal Metabolic Rate",
+      "target": "Basal Metabolic Rate (kcals)"
+    },
+    {
+      "source": "Basal metabolic rate",
+      "target": "Basal Metabolic Rate"
+    },
+    {
+      "source": "Basal metabolic rate",
+      "target": "Basal Metabolic Rate (kcals)"
+    },
+    {
+      "source": "Basal Metabolic Rate",
+      "target": "Basal Metabolic Rate (kcals)"
+    },
+    {
+      "source": "Total Body Water",
+      "target": "Total Body Water Measurement"
+    },
+    {
+      "source": "Total Body Water",
+      "target": "Total body water"
+    },
+    {
+      "source": "Total Body Water",
+      "target": "Total Body Water"
+    },
+    {
+      "source": "Total Body Water",
+      "target": "Total body water (L)"
+    },
+    {
+      "source": "Total Body Water Measurement",
+      "target": "Total body water"
+    },
+    {
+      "source": "Total Body Water Measurement",
+      "target": "Total Body Water"
+    },
+    {
+      "source": "Total Body Water Measurement",
+      "target": "Total body water (L)"
+    },
+    {
+      "source": "Total body water",
+      "target": "Total Body Water"
+    },
+    {
+      "source": "Total body water",
+      "target": "Total body water (L)"
+    },
+    {
+      "source": "Total Body Water",
+      "target": "Total body water (L)"
+    },
+    {
+      "source": "Extracellular Water",
+      "target": "Extracellular Water Measurement"
+    },
+    {
+      "source": "Extracellular Water",
+      "target": "Extracellular Water"
+    },
+    {
+      "source": "Extracellular Water",
+      "target": "Extracellular Water"
+    },
+    {
+      "source": "Extracellular Water",
+      "target": "Extracellular water (L)"
+    },
+    {
+      "source": "Extracellular Water Measurement",
+      "target": "Extracellular Water"
+    },
+    {
+      "source": "Extracellular Water Measurement",
+      "target": "Extracellular Water"
+    },
+    {
+      "source": "Extracellular Water Measurement",
+      "target": "Extracellular water (L)"
+    },
+    {
+      "source": "Extracellular Water",
+      "target": "Extracellular Water"
+    },
+    {
+      "source": "Extracellular Water",
+      "target": "Extracellular water (L)"
+    },
+    {
+      "source": "Extracellular Water",
+      "target": "Extracellular water (L)"
+    },
+    {
+      "source": "Intracellular Water",
+      "target": "Intracellular Water"
+    },
+    {
+      "source": "Intracellular Water",
+      "target": "Intracellular water (L)"
+    },
+    {
+      "source": "Intracellular Water",
+      "target": "Intracellular water (L)"
+    },
+    {
+      "source": "Visceral Fat Level",
+      "target": "visceral adipose tissue quantity"
+    },
+    {
+      "source": "Visceral Fat Level",
+      "target": "Visceral Fat Level"
+    },
+    {
+      "source": "visceral adipose tissue quantity",
+      "target": "Visceral Fat Level"
+    },
+    {
+      "source": "Blood Protein Amount",
+      "target": "blood protein amount"
+    },
+    {
+      "source": "Blood Protein Amount",
+      "target": "Protein level"
+    },
+    {
+      "source": "Blood Protein Amount",
+      "target": "Protein"
+    },
+    {
+      "source": "blood protein amount",
+      "target": "Protein level"
+    },
+    {
+      "source": "blood protein amount",
+      "target": "Protein"
+    },
+    {
+      "source": "Protein level",
+      "target": "Protein"
+    },
+    {
+      "source": "Blood Mineral Amount",
+      "target": "blood mineral amount"
+    },
+    {
+      "source": "Blood Mineral Amount",
+      "target": "Mineral"
+    },
+    {
+      "source": "blood mineral amount",
+      "target": "Mineral"
+    },
+    {
+      "source": "Body Fat Mass",
+      "target": "body fat mass"
+    },
+    {
+      "source": "Body Fat Mass",
+      "target": "Body fat mass"
+    },
+    {
+      "source": "Body Fat Mass",
+      "target": "Body Fat Mass"
+    },
+    {
+      "source": "Body Fat Mass",
+      "target": "Body fat mass (kg)"
+    },
+    {
+      "source": "body fat mass",
+      "target": "Body fat mass"
+    },
+    {
+      "source": "body fat mass",
+      "target": "Body Fat Mass"
+    },
+    {
+      "source": "body fat mass",
+      "target": "Body fat mass (kg)"
+    },
+    {
+      "source": "Body fat mass",
+      "target": "Body Fat Mass"
+    },
+    {
+      "source": "Body fat mass",
+      "target": "Body fat mass (kg)"
+    },
+    {
+      "source": "Body Fat Mass",
+      "target": "Body fat mass (kg)"
+    },
+    {
+      "source": "Lean Mass in Right Arm",
+      "target": "Segmental Lean Analysis (Right Arm)"
+    },
+    {
+      "source": "Lean Mass in Left Arm",
+      "target": "Segmental Lean Analysis (Left Arm)"
+    },
+    {
+      "source": "Lean Mass in Trunk",
+      "target": "Segmental Lean Analysis (Trunk)"
+    },
+    {
+      "source": "Lean Mass in Right Leg",
+      "target": "Segmental Lean Analysis (Right Leg)"
+    },
+    {
+      "source": "Lean Mass in Left Leg",
+      "target": "Segmental Lean Analysis (Left Leg)"
+    },
+    {
+      "source": "Phase Angle",
+      "target": "Phase Angle"
+    },
+    {
+      "source": "Extracellular Water to Total Body Water Ratio Measurement",
+      "target": "Extracellular Water to Total Body Water Ratio Measurement"
+    },
+    {
+      "source": "Extracellular Water to Total Body Water Ratio Measurement",
+      "target": "Extracellular Water/Total Body Water"
+    },
+    {
+      "source": "Extracellular Water to Total Body Water Ratio Measurement",
+      "target": "ECW/TBW Ratio"
+    },
+    {
+      "source": "Extracellular Water to Total Body Water Ratio Measurement",
+      "target": "ECW/TBW (<1)"
+    },
+    {
+      "source": "Extracellular Water to Total Body Water Ratio Measurement",
+      "target": "Extracellular Water/Total Body Water"
+    },
+    {
+      "source": "Extracellular Water to Total Body Water Ratio Measurement",
+      "target": "ECW/TBW Ratio"
+    },
+    {
+      "source": "Extracellular Water to Total Body Water Ratio Measurement",
+      "target": "ECW/TBW (<1)"
+    },
+    {
+      "source": "Extracellular Water/Total Body Water",
+      "target": "ECW/TBW Ratio"
+    },
+    {
+      "source": "Extracellular Water/Total Body Water",
+      "target": "ECW/TBW (<1)"
+    },
+    {
+      "source": "ECW/TBW Ratio",
+      "target": "ECW/TBW (<1)"
+    },
+    {
+      "source": "Subject Identifier",
+      "target": "Subject Identifier"
+    },
+    {
+      "source": "Subject Identifier",
+      "target": "Participant identifier"
+    },
+    {
+      "source": "Subject Identifier",
+      "target": "Subject ID"
+    },
+    {
+      "source": "Subject Identifier",
+      "target": "Participant identifier"
+    },
+    {
+      "source": "Subject Identifier",
+      "target": "Subject ID"
+    },
+    {
+      "source": "Participant identifier",
+      "target": "Subject ID"
+    },
+    {
+      "source": "Age",
+      "target": "Age"
+    },
+    {
+      "source": "Age",
+      "target": "Age"
+    },
+    {
+      "source": "Age",
+      "target": "Age (years)"
+    },
+    {
+      "source": "Age",
+      "target": "Age"
+    },
+    {
+      "source": "Age",
+      "target": "Age (years)"
+    },
+    {
+      "source": "Age",
+      "target": "Age (years)"
+    },
+    {
+      "source": "Gender",
+      "target": "Gender"
+    },
+    {
+      "source": "Gender",
+      "target": "Gender"
+    },
+    {
+      "source": "Gender",
+      "target": "Gender"
+    },
+    {
+      "source": "Gender",
+      "target": "Gender"
+    },
+    {
+      "source": "Gender",
+      "target": "Gender"
+    },
+    {
+      "source": "Gender",
+      "target": "Gender"
+    },
+    {
+      "source": "Nationality",
+      "target": "Ethnicity / related nationality data (observable entity)"
+    },
+    {
+      "source": "Nationality",
+      "target": "Nationality"
+    },
+    {
+      "source": "Nationality",
+      "target": "Nationality"
+    },
+    {
+      "source": "Ethnicity / related nationality data (observable entity)",
+      "target": "Nationality"
+    },
+    {
+      "source": "Ethnicity / related nationality data (observable entity)",
+      "target": "Nationality"
+    },
+    {
+      "source": "Nationality",
+      "target": "Nationality"
+    },
+    {
+      "source": "Occupation",
+      "target": "Occupation"
+    },
+    {
+      "source": "Occupation",
+      "target": "Occupation"
+    },
+    {
+      "source": "Occupation",
+      "target": "Occupation"
+    },
+    {
+      "source": "Occupation",
+      "target": "Occupation"
+    },
+    {
+      "source": "Occupation",
+      "target": "Occupation"
+    },
+    {
+      "source": "Occupation",
+      "target": "Occupation"
+    },
+    {
+      "source": "Education Level",
+      "target": "Education Level"
+    },
+    {
+      "source": "Education Level",
+      "target": "HIGHEST EDUCATION LEVEL"
+    },
+    {
+      "source": "Education Level",
+      "target": "Education Level"
+    },
+    {
+      "source": "Education Level",
+      "target": "HIGHEST EDUCATION LEVEL"
+    },
+    {
+      "source": "Education Level",
+      "target": "Education Level"
+    },
+    {
+      "source": "HIGHEST EDUCATION LEVEL",
+      "target": "Education Level"
+    },
+    {
+      "source": "Blood Pressure Finding",
+      "target": "Blood Pressure Finding"
+    },
+    {
+      "source": "Blood Pressure Finding",
+      "target": "Blood pressure"
+    },
+    {
+      "source": "Blood Pressure Finding",
+      "target": "BP S/D (mm Hg)"
+    },
+    {
+      "source": "Blood Pressure Finding",
+      "target": "Blood pressure"
+    },
+    {
+      "source": "Blood Pressure Finding",
+      "target": "BP S/D (mm Hg)"
+    },
+    {
+      "source": "Blood pressure",
+      "target": "BP S/D (mm Hg)"
+    },
+    {
+      "source": "Heart Rate",
+      "target": "Heart Rate"
+    },
+    {
+      "source": "Heart Rate",
+      "target": "Heart rate"
+    },
+    {
+      "source": "Heart Rate",
+      "target": "HR (beats/min)"
+    },
+    {
+      "source": "Heart Rate",
+      "target": "Heart rate"
+    },
+    {
+      "source": "Heart Rate",
+      "target": "HR (beats/min)"
+    },
+    {
+      "source": "Heart rate",
+      "target": "HR (beats/min)"
+    },
+    {
+      "source": "Respiratory Rate",
+      "target": "Respiratory Rate"
+    },
+    {
+      "source": "Respiratory Rate",
+      "target": "Respiratory rate"
+    },
+    {
+      "source": "Respiratory Rate",
+      "target": "RR (breaths/mins)"
+    },
+    {
+      "source": "Respiratory Rate",
+      "target": "Respiratory rate"
+    },
+    {
+      "source": "Respiratory Rate",
+      "target": "RR (breaths/mins)"
+    },
+    {
+      "source": "Respiratory rate",
+      "target": "RR (breaths/mins)"
+    },
+    {
+      "source": "Oxygen Saturation Measurement",
+      "target": "Oxygen Saturation Measurement"
+    },
+    {
+      "source": "Oxygen Saturation Measurement",
+      "target": "Oxygen saturation measurement"
+    },
+    {
+      "source": "Oxygen Saturation Measurement",
+      "target": "O2 (%)"
+    },
+    {
+      "source": "Oxygen Saturation Measurement",
+      "target": "Oxygen saturation measurement"
+    },
+    {
+      "source": "Oxygen Saturation Measurement",
+      "target": "O2 (%)"
+    },
+    {
+      "source": "Oxygen saturation measurement",
+      "target": "O2 (%)"
+    },
+    {
+      "source": "Body Temperature",
+      "target": "Body Temperature"
+    },
+    {
+      "source": "Body Temperature",
+      "target": "Body temperature"
+    },
+    {
+      "source": "Body Temperature",
+      "target": "Temp (oC)"
+    },
+    {
+      "source": "Body Temperature",
+      "target": "Body temperature"
+    },
+    {
+      "source": "Body Temperature",
+      "target": "Temp (oC)"
+    },
+    {
+      "source": "Body temperature",
+      "target": "Temp (oC)"
+    },
+    {
+      "source": "InBody Score",
+      "target": "InBody score (x/100)"
+    },
+    {
+      "source": "Visceral Fat Area",
+      "target": "Visceral fat [Area] Measured"
+    },
+    {
+      "source": "Visceral Fat Area",
+      "target": "Visceral Fat Area (cm2)"
+    },
+    {
+      "source": "Visceral fat [Area] Measured",
+      "target": "Visceral Fat Area (cm2)"
+    },
+    {
+      "source": "Waist-Hip Ratio",
+      "target": "Waist-Hip Ratio"
+    },
+    {
+      "source": "Waist-Hip Ratio",
+      "target": "Waist to Hip Ratio"
+    },
+    {
+      "source": "Waist-Hip Ratio",
+      "target": "Waist to Hip ratio (Number) Inbody"
+    },
+    {
+      "source": "Waist-Hip Ratio",
+      "target": "Waist to Hip Ratio"
+    },
+    {
+      "source": "Waist-Hip Ratio",
+      "target": "Waist to Hip ratio (Number) Inbody"
+    },
+    {
+      "source": "Waist to Hip Ratio",
+      "target": "Waist to Hip ratio (Number) Inbody"
+    },
+    {
+      "source": "Target Body Weight",
+      "target": "Target weight (observable entity)"
+    },
+    {
+      "source": "Target Body Weight",
+      "target": "Target body weight"
+    },
+    {
+      "source": "Target Body Weight",
+      "target": "Target weight (kgs)"
+    },
+    {
+      "source": "Target weight (observable entity)",
+      "target": "Target body weight"
+    },
+    {
+      "source": "Target weight (observable entity)",
+      "target": "Target weight (kgs)"
+    },
+    {
+      "source": "Target body weight",
+      "target": "Target weight (kgs)"
+    },
+    {
+      "source": "Weight Control",
+      "target": "Weight control (kgs)"
+    },
+    {
+      "source": "Fat Control",
+      "target": "Fat control (kgs)"
+    },
+    {
+      "source": "Muscle Control",
+      "target": "Muscle control (kgs)"
+    },
+    {
+      "source": "Visual Acuity - Left Eye",
+      "target": "Visual Acuity"
+    },
+    {
+      "source": "Visual Acuity - Left Eye",
+      "target": "Visual acuity"
+    },
+    {
+      "source": "Visual Acuity - Left Eye",
+      "target": "Visual acquity (20/20) Snellen chart LEFT"
+    },
+    {
+      "source": "Visual Acuity",
+      "target": "Visual acuity"
+    },
+    {
+      "source": "Visual Acuity",
+      "target": "Visual acquity (20/20) Snellen chart LEFT"
+    },
+    {
+      "source": "Visual acuity",
+      "target": "Visual acquity (20/20) Snellen chart LEFT"
+    },
+    {
+      "source": "Visual Acuity - Right Eye",
+      "target": "Visual Acuity"
+    },
+    {
+      "source": "Visual Acuity - Right Eye",
+      "target": "Visual acuity"
+    },
+    {
+      "source": "Visual Acuity - Right Eye",
+      "target": "Visual acquity (20/20) Snellen chart RIGHT"
+    },
+    {
+      "source": "Visual Acuity",
+      "target": "Visual acuity"
+    },
+    {
+      "source": "Visual Acuity",
+      "target": "Visual acquity (20/20) Snellen chart RIGHT"
+    },
+    {
+      "source": "Visual acuity",
+      "target": "Visual acquity (20/20) Snellen chart RIGHT"
+    },
+    {
+      "source": "Shoebox Auditory Test - Left Ear",
+      "target": "Shoebox Hearing Test LEFT Ear"
+    },
+    {
+      "source": "Shoebox Auditory Test - Right Ear",
+      "target": "Shoebox Hearing Test RIGHT Ear"
+    },
+    {
+      "source": "Allergies",
+      "target": "History of multiple allergies (situation)"
+    },
+    {
+      "source": "Allergies",
+      "target": "Allergies"
+    },
+    {
+      "source": "Allergies",
+      "target": "Allergies"
+    },
+    {
+      "source": "History of multiple allergies (situation)",
+      "target": "Allergies"
+    },
+    {
+      "source": "History of multiple allergies (situation)",
+      "target": "Allergies"
+    },
+    {
+      "source": "Allergies",
+      "target": "Allergies"
+    },
+    {
+      "source": "Medical History",
+      "target": "medical history"
+    },
+    {
+      "source": "Medical History",
+      "target": "Personal Medical History"
+    },
+    {
+      "source": "Medical History",
+      "target": "Medical History"
+    },
+    {
+      "source": "medical history",
+      "target": "Personal Medical History"
+    },
+    {
+      "source": "medical history",
+      "target": "Medical History"
+    },
+    {
+      "source": "Personal Medical History",
+      "target": "Medical History"
+    },
+    {
+      "source": "Surgical History",
+      "target": "surgical history"
+    },
+    {
+      "source": "Surgical History",
+      "target": "History of surgery"
+    },
+    {
+      "source": "Surgical History",
+      "target": "Surgical History"
+    },
+    {
+      "source": "surgical history",
+      "target": "History of surgery"
+    },
+    {
+      "source": "surgical history",
+      "target": "Surgical History"
+    },
+    {
+      "source": "History of surgery",
+      "target": "Surgical History"
+    },
+    {
+      "source": "Family History",
+      "target": "family history"
+    },
+    {
+      "source": "Family History",
+      "target": "Family History"
+    },
+    {
+      "source": "Family History",
+      "target": "Family History"
+    },
+    {
+      "source": "family history",
+      "target": "Family History"
+    },
+    {
+      "source": "family history",
+      "target": "Family History"
+    },
+    {
+      "source": "Family History",
+      "target": "Family History"
+    },
+    {
+      "source": "Falls Assessment",
+      "target": "Falls assessment (procedure)"
+    },
+    {
+      "source": "Falls Assessment",
+      "target": "Falls assessment"
+    },
+    {
+      "source": "Falls Assessment",
+      "target": "Falls Assessment"
+    },
+    {
+      "source": "Falls assessment (procedure)",
+      "target": "Falls assessment"
+    },
+    {
+      "source": "Falls assessment (procedure)",
+      "target": "Falls Assessment"
+    },
+    {
+      "source": "Falls assessment",
+      "target": "Falls Assessment"
+    },
+    {
+      "source": "Pain Assessment",
+      "target": "Pain Assessment"
+    },
+    {
+      "source": "Pain Assessment",
+      "target": "Pain assessment"
+    },
+    {
+      "source": "Pain Assessment",
+      "target": "Pain Assessment"
+    },
+    {
+      "source": "Pain Assessment",
+      "target": "Pain assessment"
+    },
+    {
+      "source": "Pain Assessment",
+      "target": "Pain Assessment"
+    },
+    {
+      "source": "Pain assessment",
+      "target": "Pain Assessment"
+    },
+    {
+      "source": "Montreal Cognitive Assessment",
+      "target": "Montreal Cognitive Assessment, Version 8.3"
+    },
+    {
+      "source": "Montreal Cognitive Assessment",
+      "target": "Montreal cognitive assessment"
+    },
+    {
+      "source": "Montreal Cognitive Assessment",
+      "target": "MOCA (55-85 years) Normal \u2265 26/30 (x/30)"
+    },
+    {
+      "source": "Montreal Cognitive Assessment, Version 8.3",
+      "target": "Montreal cognitive assessment"
+    },
+    {
+      "source": "Montreal Cognitive Assessment, Version 8.3",
+      "target": "MOCA (55-85 years) Normal \u2265 26/30 (x/30)"
+    },
+    {
+      "source": "Montreal cognitive assessment",
+      "target": "MOCA (55-85 years) Normal \u2265 26/30 (x/30)"
+    },
+    {
+      "source": "Diagnosis",
+      "target": "Diagnosis"
+    },
+    {
+      "source": "Diagnosis",
+      "target": "Diagnoses"
+    },
+    {
+      "source": "Diagnosis",
+      "target": "Diagnoses"
+    },
+    {
+      "source": "Diagnosis",
+      "target": "Diagnoses"
+    },
+    {
+      "source": "Diagnosis",
+      "target": "Diagnoses"
+    },
+    {
+      "source": "Diagnoses",
+      "target": "Diagnoses"
+    },
+    {
+      "source": "ICD Code",
+      "target": "ICD Code"
+    },
+    {
+      "source": "ICD Code",
+      "target": "Diagnosis ICD code"
+    },
+    {
+      "source": "ICD Code",
+      "target": "Diagnoses ICD Codes"
+    },
+    {
+      "source": "ICD Code",
+      "target": "Diagnosis ICD code"
+    },
+    {
+      "source": "ICD Code",
+      "target": "Diagnoses ICD Codes"
+    },
+    {
+      "source": "Diagnosis ICD code",
+      "target": "Diagnoses ICD Codes"
+    },
+    {
+      "source": "Diabetes Mellitus",
+      "target": "Diabetes Mellitus"
+    },
+    {
+      "source": "Diabetes Mellitus",
+      "target": "Diabetes mellitus"
+    },
+    {
+      "source": "Diabetes Mellitus",
+      "target": "Diabetes Mellitus"
+    },
+    {
+      "source": "Diabetes Mellitus",
+      "target": "Diabetes mellitus"
+    },
+    {
+      "source": "Diabetes Mellitus",
+      "target": "Diabetes Mellitus"
+    },
+    {
+      "source": "Diabetes mellitus",
+      "target": "Diabetes Mellitus"
+    },
+    {
+      "source": "Hypertension",
+      "target": "Hypertension"
+    },
+    {
+      "source": "Hypertension",
+      "target": "Hypertension"
+    },
+    {
+      "source": "Hypertension",
+      "target": "Hypertension"
+    },
+    {
+      "source": "Hypertension",
+      "target": "Hypertension"
+    },
+    {
+      "source": "Hypertension",
+      "target": "Hypertension"
+    },
+    {
+      "source": "Hypertension",
+      "target": "Hypertension"
+    },
+    {
+      "source": "Cardiovascular Disorder",
+      "target": "Cardiovascular Disorder"
+    },
+    {
+      "source": "Cardiovascular Disorder",
+      "target": "Cardiovascular disease"
+    },
+    {
+      "source": "Cardiovascular Disorder",
+      "target": "Cardiovascular disease"
+    },
+    {
+      "source": "Cardiovascular Disorder",
+      "target": "Cardiovascular disease"
+    },
+    {
+      "source": "Cardiovascular Disorder",
+      "target": "Cardiovascular disease"
+    },
+    {
+      "source": "Cardiovascular disease",
+      "target": "Cardiovascular disease"
+    },
+    {
+      "source": "Dyslipidemia",
+      "target": "Dyslipidemia"
+    },
+    {
+      "source": "Dyslipidemia",
+      "target": "Dyslipidemia"
+    },
+    {
+      "source": "Dyslipidemia",
+      "target": "Dyslipidemia"
+    },
+    {
+      "source": "Dyslipidemia",
+      "target": "Dyslipidemia"
+    },
+    {
+      "source": "Dyslipidemia",
+      "target": "Dyslipidemia"
+    },
+    {
+      "source": "Dyslipidemia",
+      "target": "Dyslipidemia"
+    },
+    {
+      "source": "Obesity",
+      "target": "Obesity"
+    },
+    {
+      "source": "Obesity",
+      "target": "Obesity"
+    },
+    {
+      "source": "Obesity",
+      "target": "Obesity"
+    },
+    {
+      "source": "Obesity",
+      "target": "Obesity"
+    },
+    {
+      "source": "Obesity",
+      "target": "Obesity"
+    },
+    {
+      "source": "Obesity",
+      "target": "Obesity"
+    },
+    {
+      "source": "Chronic Kidney Disease",
+      "target": "Chronic Kidney Disease"
+    },
+    {
+      "source": "Chronic Kidney Disease",
+      "target": "Chronic kidney disease"
+    },
+    {
+      "source": "Chronic Kidney Disease",
+      "target": "Chronic Kidney Disease"
+    },
+    {
+      "source": "Chronic Kidney Disease",
+      "target": "Chronic kidney disease"
+    },
+    {
+      "source": "Chronic Kidney Disease",
+      "target": "Chronic Kidney Disease"
+    },
+    {
+      "source": "Chronic kidney disease",
+      "target": "Chronic Kidney Disease"
+    },
+    {
+      "source": "Cardiopulmonary Exercise Testing",
+      "target": "Cardiopulmonary Exercise Testing"
+    },
+    {
+      "source": "Cardiopulmonary Exercise Testing",
+      "target": "Cardiopulmonary exercise test"
+    },
+    {
+      "source": "Cardiopulmonary Exercise Testing",
+      "target": "CPET Status"
+    },
+    {
+      "source": "Cardiopulmonary Exercise Testing",
+      "target": "Cardiopulmonary exercise test"
+    },
+    {
+      "source": "Cardiopulmonary Exercise Testing",
+      "target": "CPET Status"
+    },
+    {
+      "source": "Cardiopulmonary exercise test",
+      "target": "CPET Status"
+    },
+    {
+      "source": "CPET - Absolute VO2 max",
+      "target": "CPET Absolute VO\u2082 max (L/min)"
+    },
+    {
+      "source": "CPET - Relative VO2 max",
+      "target": "CPET Relative VO\u2082 max (mL/kg/min)"
+    },
+    {
+      "source": "Electrocardiogram",
+      "target": "Electrocardiogram"
+    },
+    {
+      "source": "Electrocardiogram",
+      "target": "Electrocardiogram"
+    },
+    {
+      "source": "Electrocardiogram",
+      "target": "ECG"
+    },
+    {
+      "source": "Electrocardiogram",
+      "target": "Electrocardiogram"
+    },
+    {
+      "source": "Electrocardiogram",
+      "target": "ECG"
+    },
+    {
+      "source": "Electrocardiogram",
+      "target": "ECG"
+    },
+    {
+      "source": "Magnetic Resonance Imaging",
+      "target": "Magnetic Resonance Imaging"
+    },
+    {
+      "source": "Magnetic Resonance Imaging",
+      "target": "Magtenic resonance imaging"
+    },
+    {
+      "source": "Magnetic Resonance Imaging",
+      "target": "MRI"
+    },
+    {
+      "source": "Magnetic Resonance Imaging",
+      "target": "Magtenic resonance imaging"
+    },
+    {
+      "source": "Magnetic Resonance Imaging",
+      "target": "MRI"
+    },
+    {
+      "source": "Magtenic resonance imaging",
+      "target": "MRI"
+    },
+    {
+      "source": "Bone Mineral Content",
+      "target": "Bone Mineral Content"
+    },
+    {
+      "source": "Bone Mineral Content",
+      "target": "Bone Mineral Content"
+    },
+    {
+      "source": "Bone Mineral Content",
+      "target": "Bone Mineral Content (BMC) (gms)"
+    },
+    {
+      "source": "Bone Mineral Content",
+      "target": "Bone Mineral Content"
+    },
+    {
+      "source": "Bone Mineral Content",
+      "target": "Bone Mineral Content (BMC) (gms)"
+    },
+    {
+      "source": "Bone Mineral Content",
+      "target": "Bone Mineral Content (BMC) (gms)"
+    },
+    {
+      "source": "Bone Mineral Density",
+      "target": "Bone Mineral Density"
+    },
+    {
+      "source": "Bone Mineral Density",
+      "target": "Bone Mineral Density"
+    },
+    {
+      "source": "Bone Mineral Density",
+      "target": "Bone Mineral Density (BMD)( (g/cm2)"
+    },
+    {
+      "source": "Bone Mineral Density",
+      "target": "Bone Mineral Density"
+    },
+    {
+      "source": "Bone Mineral Density",
+      "target": "Bone Mineral Density (BMD)( (g/cm2)"
+    },
+    {
+      "source": "Bone Mineral Density",
+      "target": "Bone Mineral Density (BMD)( (g/cm2)"
+    },
+    {
+      "source": "Bone Mineral Density T-Score",
+      "target": "Bone Mineral Density T-Score"
+    },
+    {
+      "source": "Bone Mineral Density T-Score",
+      "target": "Bone Mineral Density T-Score"
+    },
+    {
+      "source": "Bone Mineral Density T-Score",
+      "target": "T-score"
+    },
+    {
+      "source": "Bone Mineral Density T-Score",
+      "target": "Bone Mineral Density T-Score"
+    },
+    {
+      "source": "Bone Mineral Density T-Score",
+      "target": "T-score"
+    },
+    {
+      "source": "Bone Mineral Density T-Score",
+      "target": "T-score"
+    },
+    {
+      "source": "Bone Mineral Density Z-Score",
+      "target": "Bone Mineral Density Z-Score"
+    },
+    {
+      "source": "Bone Mineral Density Z-Score",
+      "target": "Bone Mineral Density Z-Score"
+    },
+    {
+      "source": "Bone Mineral Density Z-Score",
+      "target": "Z-score"
+    },
+    {
+      "source": "Bone Mineral Density Z-Score",
+      "target": "Bone Mineral Density Z-Score"
+    },
+    {
+      "source": "Bone Mineral Density Z-Score",
+      "target": "Z-score"
+    },
+    {
+      "source": "Bone Mineral Density Z-Score",
+      "target": "Z-score"
+    },
+    {
+      "source": "Fat Mass",
+      "target": "Fat Mass"
+    },
+    {
+      "source": "Fat Mass",
+      "target": "Fat Mass"
+    },
+    {
+      "source": "Fat Mass",
+      "target": "Fat mass (gms)"
+    },
+    {
+      "source": "Fat Mass",
+      "target": "Fat Mass"
+    },
+    {
+      "source": "Fat Mass",
+      "target": "Fat mass (gms)"
+    },
+    {
+      "source": "Fat Mass",
+      "target": "Fat mass (gms)"
+    },
+    {
+      "source": "Fat-free Mass",
+      "target": "Fat-free mass (observable entity)"
+    },
+    {
+      "source": "Fat-free Mass",
+      "target": "Fat-free mass"
+    },
+    {
+      "source": "Fat-free Mass",
+      "target": "Lean mass + BMC (gms)"
+    },
+    {
+      "source": "Fat-free mass (observable entity)",
+      "target": "Fat-free mass"
+    },
+    {
+      "source": "Fat-free mass (observable entity)",
+      "target": "Lean mass + BMC (gms)"
+    },
+    {
+      "source": "Fat-free mass",
+      "target": "Lean mass + BMC (gms)"
+    },
+    {
+      "source": "Body Fat Percentage",
+      "target": "Body Fat Percentage"
+    },
+    {
+      "source": "Body Fat Percentage",
+      "target": "Body fat percentage"
+    },
+    {
+      "source": "Body Fat Percentage",
+      "target": "Total body fat %"
+    },
+    {
+      "source": "Body Fat Percentage",
+      "target": "Body fat percentage"
+    },
+    {
+      "source": "Body Fat Percentage",
+      "target": "Total body fat %"
+    },
+    {
+      "source": "Body fat percentage",
+      "target": "Total body fat %"
+    },
+    {
+      "source": "Heart Rate Variability",
+      "target": "heart rate variability"
+    },
+    {
+      "source": "Heart Rate Variability",
+      "target": "HRV (ms)"
+    },
+    {
+      "source": "heart rate variability",
+      "target": "HRV (ms)"
+    },
+    {
+      "source": "Respiratory Rate",
+      "target": "Respiratory Rate"
+    },
+    {
+      "source": "Respiratory Rate",
+      "target": "Respiratory rate"
+    },
+    {
+      "source": "Respiratory Rate",
+      "target": "Resiratory rate (rpm)"
+    },
+    {
+      "source": "Respiratory Rate",
+      "target": "Respiratory rate"
+    },
+    {
+      "source": "Respiratory Rate",
+      "target": "Resiratory rate (rpm)"
+    },
+    {
+      "source": "Respiratory rate",
+      "target": "Resiratory rate (rpm)"
+    },
+    {
+      "source": "Resting Heart Rate",
+      "target": "Resting heart rate (observable entity)"
+    },
+    {
+      "source": "Resting Heart Rate",
+      "target": "Resting heart rate"
+    },
+    {
+      "source": "Resting Heart Rate",
+      "target": "Resting heart rate (bpm)"
+    },
+    {
+      "source": "Resting heart rate (observable entity)",
+      "target": "Resting heart rate"
+    },
+    {
+      "source": "Resting heart rate (observable entity)",
+      "target": "Resting heart rate (bpm)"
+    },
+    {
+      "source": "Resting heart rate",
+      "target": "Resting heart rate (bpm)"
+    },
+    {
+      "source": "Sleep Consistency",
+      "target": "Sleep consistency (%)"
+    },
+    {
+      "source": "Total Sleep Time",
+      "target": "Total Sleep Time"
+    },
+    {
+      "source": "Total Sleep Time",
+      "target": "Sleep duration"
+    },
+    {
+      "source": "Total Sleep Time",
+      "target": "Sleep duration (hrs and mins)"
+    },
+    {
+      "source": "Total Sleep Time",
+      "target": "Sleep duration"
+    },
+    {
+      "source": "Total Sleep Time",
+      "target": "Sleep duration (hrs and mins)"
+    },
+    {
+      "source": "Sleep duration",
+      "target": "Sleep duration (hrs and mins)"
+    },
+    {
+      "source": "Restorative Sleep",
+      "target": "Restorative sleep (hrs and mins)"
+    },
+    {
+      "source": "Recovery",
+      "target": "Recovery"
+    },
+    {
+      "source": "Recovery",
+      "target": "Recovery (%)"
+    },
+    {
+      "source": "Recovery",
+      "target": "Recovery (%)"
+    },
+    {
+      "source": "Daily Aerobic Activity",
+      "target": "Daily aerobic activity (mins)"
+    },
+    {
+      "source": "WHOOP Strain Score",
+      "target": "Strain Score"
+    },
+    {
+      "source": "Multidimensional Health Locus of Control - Question 1",
+      "target": "Health Locus of Control 1"
+    },
+    {
+      "source": "Multidimensional Health Locus of Control - Question 2",
+      "target": "Health Locus of Control 2"
+    },
+    {
+      "source": "Multidimensional Health Locus of Control - Question 3",
+      "target": "Health Locus of Control 3"
+    },
+    {
+      "source": "Multidimensional Health Locus of Control - Question 4",
+      "target": "Health Locus of Control 4"
+    },
+    {
+      "source": "Multidimensional Health Locus of Control - Question 5",
+      "target": "Health Locus of Control 5"
+    },
+    {
+      "source": "Multidimensional Health Locus of Control - Question 6",
+      "target": "Health Locus of Control 6"
+    },
+    {
+      "source": "Multidimensional Health Locus of Control - Question 7",
+      "target": "Health Locus of Control 7"
+    },
+    {
+      "source": "Multidimensional Health Locus of Control - Question 8",
+      "target": "Health Locus of Control 8"
+    },
+    {
+      "source": "Multidimensional Health Locus of Control - Question 9",
+      "target": "Health Locus of Control 9"
+    },
+    {
+      "source": "Multidimensional Health Locus of Control - Question 10",
+      "target": "Health Locus of Control 10"
+    },
+    {
+      "source": "Multidimensional Health Locus of Control - Question 11",
+      "target": "Health Locus of Control 11"
+    },
+    {
+      "source": "Multidimensional Health Locus of Control - Question 12",
+      "target": "Health Locus of Control 12"
+    },
+    {
+      "source": "Multidimensional Health Locus of Control - Question 13",
+      "target": "Health Locus of Control 13"
+    },
+    {
+      "source": "Multidimensional Health Locus of Control - Question 14",
+      "target": "Health Locus of Control 14"
+    },
+    {
+      "source": "Multidimensional Health Locus of Control - Question 15",
+      "target": "Health Locus of Control 15"
+    },
+    {
+      "source": "Multidimensional Health Locus of Control - Question 16",
+      "target": "Health Locus of Control 16"
+    },
+    {
+      "source": "Multidimensional Health Locus of Control - Question 17",
+      "target": "Health Locus of Control 17"
+    },
+    {
+      "source": "Multidimensional Health Locus of Control - Question 18",
+      "target": "Health Locus of Control 18"
+    },
+    {
+      "source": "EuroQol - Mobility",
+      "target": "EQ-5D-5L - Mobility"
+    },
+    {
+      "source": "EuroQol - Mobility",
+      "target": "EuroQol five dimension five level mobility score"
+    },
+    {
+      "source": "EuroQol - Mobility",
+      "target": "Mobility"
+    },
+    {
+      "source": "EQ-5D-5L - Mobility",
+      "target": "EuroQol five dimension five level mobility score"
+    },
+    {
+      "source": "EQ-5D-5L - Mobility",
+      "target": "Mobility"
+    },
+    {
+      "source": "EuroQol five dimension five level mobility score",
+      "target": "Mobility"
+    },
+    {
+      "source": "EuroQol - Self-Care",
+      "target": "EQ-5D-5L - Self-Care"
+    },
+    {
+      "source": "EuroQol - Self-Care",
+      "target": "EuroQol five dimension five level self-care score"
+    },
+    {
+      "source": "EuroQol - Self-Care",
+      "target": "Self-Care"
+    },
+    {
+      "source": "EQ-5D-5L - Self-Care",
+      "target": "EuroQol five dimension five level self-care score"
+    },
+    {
+      "source": "EQ-5D-5L - Self-Care",
+      "target": "Self-Care"
+    },
+    {
+      "source": "EuroQol five dimension five level self-care score",
+      "target": "Self-Care"
+    },
+    {
+      "source": "EuroQol - Usual Activities",
+      "target": "EQ-5D-5L - Usual Activities"
+    },
+    {
+      "source": "EuroQol - Usual Activities",
+      "target": "EuroQol five dimension five level usual activities score"
+    },
+    {
+      "source": "EuroQol - Usual Activities",
+      "target": "Usual Activities"
+    },
+    {
+      "source": "EQ-5D-5L - Usual Activities",
+      "target": "EuroQol five dimension five level usual activities score"
+    },
+    {
+      "source": "EQ-5D-5L - Usual Activities",
+      "target": "Usual Activities"
+    },
+    {
+      "source": "EuroQol five dimension five level usual activities score",
+      "target": "Usual Activities"
+    },
+    {
+      "source": "EuroQol - Pain or Discomfort",
+      "target": "EQ-5D-5L - Pain or Discomfort"
+    },
+    {
+      "source": "EuroQol - Pain or Discomfort",
+      "target": "EuroQol five dimension five level pain discomfort score"
+    },
+    {
+      "source": "EuroQol - Pain or Discomfort",
+      "target": "Pain/Discomfort"
+    },
+    {
+      "source": "EQ-5D-5L - Pain or Discomfort",
+      "target": "EuroQol five dimension five level pain discomfort score"
+    },
+    {
+      "source": "EQ-5D-5L - Pain or Discomfort",
+      "target": "Pain/Discomfort"
+    },
+    {
+      "source": "EuroQol five dimension five level pain discomfort score",
+      "target": "Pain/Discomfort"
+    },
+    {
+      "source": "EuroQol - Anxiety or Depression",
+      "target": "EQ-5D-5L - Anxiety or Depression"
+    },
+    {
+      "source": "EuroQol - Anxiety or Depression",
+      "target": "EuroQol five dimension five level anxiety depression score"
+    },
+    {
+      "source": "EuroQol - Anxiety or Depression",
+      "target": "Anxiety/Depression"
+    },
+    {
+      "source": "EQ-5D-5L - Anxiety or Depression",
+      "target": "EuroQol five dimension five level anxiety depression score"
+    },
+    {
+      "source": "EQ-5D-5L - Anxiety or Depression",
+      "target": "Anxiety/Depression"
+    },
+    {
+      "source": "EuroQol five dimension five level anxiety depression score",
+      "target": "Anxiety/Depression"
+    },
+    {
+      "source": "EuroQol - Total Score",
+      "target": "EQ-5D-5L - EQ VAS Score"
+    },
+    {
+      "source": "EuroQol - Total Score",
+      "target": "EuroQol five dimension five level scale"
+    },
+    {
+      "source": "EuroQol - Total Score",
+      "target": "Health Today (0-100)"
+    },
+    {
+      "source": "EQ-5D-5L - EQ VAS Score",
+      "target": "EuroQol five dimension five level scale"
+    },
+    {
+      "source": "EQ-5D-5L - EQ VAS Score",
+      "target": "Health Today (0-100)"
+    },
+    {
+      "source": "EuroQol five dimension five level scale",
+      "target": "Health Today (0-100)"
+    },
+    {
+      "source": "QRISK Cardiovascular Disease Score",
+      "target": "QRISK cardiovascular disease 10 year risk calculator score (observable entity)"
+    },
+    {
+      "source": "QRISK Cardiovascular Disease Score",
+      "target": "QRISK Score"
+    },
+    {
+      "source": "QRISK cardiovascular disease 10 year risk calculator score (observable entity)",
+      "target": "QRISK Score"
+    },
+    {
+      "source": "Test2Prevent - Risk Score",
+      "target": "Total Risk Score"
+    },
+    {
+      "source": "Test2Prevent - Risk Category Interpretation",
+      "target": "Interpretation (Risk Category)"
+    }
+  ],
+  "nodes": [
+    {
+      "name": "Body Weight",
+      "group": "CDM"
+    },
+    {
+      "name": "body weight",
+      "group": "OLS"
+    },
+    {
+      "name": "Weight",
+      "group": "OHDSI"
+    },
+    {
+      "name": "Weight",
+      "group": "Study1"
+    },
+    {
+      "name": "Weight (kgs)",
+      "group": "Study2"
+    },
+    {
+      "name": "Skeletal Muscle Mass",
+      "group": "CDM"
+    },
+    {
+      "name": "Skeletal Muscle Mass",
+      "group": "OLS"
+    },
+    {
+      "name": "Skeletal Muscle Mass",
+      "group": "OHDSI"
+    },
+    {
+      "name": "Skeletal Muscle Mass",
+      "group": "Study1"
+    },
+    {
+      "name": "Skeletal muscle mass (kg)",
+      "group": "Study2"
+    },
+    {
+      "name": "Body Fat Percentage",
+      "group": "CDM"
+    },
+    {
+      "name": "Body Fat Percentage",
+      "group": "OLS"
+    },
+    {
+      "name": "Body fat percentage",
+      "group": "OHDSI"
+    },
+    {
+      "name": "Body Fat Percentage",
+      "group": "Study1"
+    },
+    {
+      "name": "Percent body fat (%)",
+      "group": "Study2"
+    },
+    {
+      "name": "Body Mass Index",
+      "group": "CDM"
+    },
+    {
+      "name": "Body Mass Index",
+      "group": "OLS"
+    },
+    {
+      "name": "Body mass index",
+      "group": "OHDSI"
+    },
+    {
+      "name": "Body Mass Index",
+      "group": "Study1"
+    },
+    {
+      "name": "BMI (kg/m2)",
+      "group": "Study2"
+    },
+    {
+      "name": "Basal Metabolic Rate",
+      "group": "CDM"
+    },
+    {
+      "name": "Basal Metabolic Rate",
+      "group": "OLS"
+    },
+    {
+      "name": "Basal metabolic rate",
+      "group": "OHDSI"
+    },
+    {
+      "name": "Basal Metabolic Rate",
+      "group": "Study1"
+    },
+    {
+      "name": "Basal Metabolic Rate (kcals)",
+      "group": "Study2"
+    },
+    {
+      "name": "Total Body Water",
+      "group": "CDM"
+    },
+    {
+      "name": "Total Body Water Measurement",
+      "group": "OLS"
+    },
+    {
+      "name": "Total body water",
+      "group": "OHDSI"
+    },
+    {
+      "name": "Total Body Water",
+      "group": "Study1"
+    },
+    {
+      "name": "Total body water (L)",
+      "group": "Study2"
+    },
+    {
+      "name": "Extracellular Water",
+      "group": "CDM"
+    },
+    {
+      "name": "Extracellular Water Measurement",
+      "group": "OLS"
+    },
+    {
+      "name": "Extracellular Water",
+      "group": "OHDSI"
+    },
+    {
+      "name": "Extracellular Water",
+      "group": "Study1"
+    },
+    {
+      "name": "Extracellular water (L)",
+      "group": "Study2"
+    },
+    {
+      "name": "Intracellular Water",
+      "group": "CDM"
+    },
+    {
+      "name": "Intracellular Water",
+      "group": "Study1"
+    },
+    {
+      "name": "Intracellular water (L)",
+      "group": "Study2"
+    },
+    {
+      "name": "Visceral Fat Level",
+      "group": "CDM"
+    },
+    {
+      "name": "visceral adipose tissue quantity",
+      "group": "OLS"
+    },
+    {
+      "name": "Visceral Fat Level",
+      "group": "Study1"
+    },
+    {
+      "name": "Blood Protein Amount",
+      "group": "CDM"
+    },
+    {
+      "name": "blood protein amount",
+      "group": "OLS"
+    },
+    {
+      "name": "Protein level",
+      "group": "OHDSI"
+    },
+    {
+      "name": "Protein",
+      "group": "Study1"
+    },
+    {
+      "name": "Blood Mineral Amount",
+      "group": "CDM"
+    },
+    {
+      "name": "blood mineral amount",
+      "group": "OLS"
+    },
+    {
+      "name": "Mineral",
+      "group": "Study1"
+    },
+    {
+      "name": "Body Fat Mass",
+      "group": "CDM"
+    },
+    {
+      "name": "body fat mass",
+      "group": "OLS"
+    },
+    {
+      "name": "Body fat mass",
+      "group": "OHDSI"
+    },
+    {
+      "name": "Body Fat Mass",
+      "group": "Study1"
+    },
+    {
+      "name": "Body fat mass (kg)",
+      "group": "Study2"
+    },
+    {
+      "name": "Lean Mass in Right Arm",
+      "group": "CDM"
+    },
+    {
+      "name": "Segmental Lean Analysis (Right Arm)",
+      "group": "Study1"
+    },
+    {
+      "name": "Lean Mass in Left Arm",
+      "group": "CDM"
+    },
+    {
+      "name": "Segmental Lean Analysis (Left Arm)",
+      "group": "Study1"
+    },
+    {
+      "name": "Lean Mass in Trunk",
+      "group": "CDM"
+    },
+    {
+      "name": "Segmental Lean Analysis (Trunk)",
+      "group": "Study1"
+    },
+    {
+      "name": "Lean Mass in Right Leg",
+      "group": "CDM"
+    },
+    {
+      "name": "Segmental Lean Analysis (Right Leg)",
+      "group": "Study1"
+    },
+    {
+      "name": "Lean Mass in Left Leg",
+      "group": "CDM"
+    },
+    {
+      "name": "Segmental Lean Analysis (Left Leg)",
+      "group": "Study1"
+    },
+    {
+      "name": "Phase Angle",
+      "group": "CDM"
+    },
+    {
+      "name": "Phase Angle",
+      "group": "Study1"
+    },
+    {
+      "name": "Extracellular Water to Total Body Water Ratio Measurement",
+      "group": "CDM"
+    },
+    {
+      "name": "Extracellular Water to Total Body Water Ratio Measurement",
+      "group": "OLS"
+    },
+    {
+      "name": "Extracellular Water/Total Body Water",
+      "group": "OHDSI"
+    },
+    {
+      "name": "ECW/TBW Ratio",
+      "group": "Study1"
+    },
+    {
+      "name": "ECW/TBW (<1)",
+      "group": "Study2"
+    },
+    {
+      "name": "Subject Identifier",
+      "group": "CDM"
+    },
+    {
+      "name": "Subject Identifier",
+      "group": "OLS"
+    },
+    {
+      "name": "Participant identifier",
+      "group": "OHDSI"
+    },
+    {
+      "name": "Subject ID",
+      "group": "Study2"
+    },
+    {
+      "name": "Age",
+      "group": "CDM"
+    },
+    {
+      "name": "Age",
+      "group": "OLS"
+    },
+    {
+      "name": "Age",
+      "group": "OHDSI"
+    },
+    {
+      "name": "Age (years)",
+      "group": "Study2"
+    },
+    {
+      "name": "Gender",
+      "group": "CDM"
+    },
+    {
+      "name": "Gender",
+      "group": "OLS"
+    },
+    {
+      "name": "Gender",
+      "group": "OHDSI"
+    },
+    {
+      "name": "Gender",
+      "group": "Study2"
+    },
+    {
+      "name": "Nationality",
+      "group": "CDM"
+    },
+    {
+      "name": "Ethnicity / related nationality data (observable entity)",
+      "group": "OLS"
+    },
+    {
+      "name": "Nationality",
+      "group": "OHDSI"
+    },
+    {
+      "name": "Nationality",
+      "group": "Study2"
+    },
+    {
+      "name": "Occupation",
+      "group": "CDM"
+    },
+    {
+      "name": "Occupation",
+      "group": "OLS"
+    },
+    {
+      "name": "Occupation",
+      "group": "OHDSI"
+    },
+    {
+      "name": "Occupation",
+      "group": "Study2"
+    },
+    {
+      "name": "Education Level",
+      "group": "CDM"
+    },
+    {
+      "name": "Education Level",
+      "group": "OLS"
+    },
+    {
+      "name": "HIGHEST EDUCATION LEVEL",
+      "group": "OHDSI"
+    },
+    {
+      "name": "Education Level",
+      "group": "Study2"
+    },
+    {
+      "name": "Blood Pressure Finding",
+      "group": "CDM"
+    },
+    {
+      "name": "Blood Pressure Finding",
+      "group": "OLS"
+    },
+    {
+      "name": "Blood pressure",
+      "group": "OHDSI"
+    },
+    {
+      "name": "BP S/D (mm Hg)",
+      "group": "Study2"
+    },
+    {
+      "name": "Heart Rate",
+      "group": "CDM"
+    },
+    {
+      "name": "Heart Rate",
+      "group": "OLS"
+    },
+    {
+      "name": "Heart rate",
+      "group": "OHDSI"
+    },
+    {
+      "name": "HR (beats/min)",
+      "group": "Study2"
+    },
+    {
+      "name": "Respiratory Rate",
+      "group": "CDM"
+    },
+    {
+      "name": "Respiratory Rate",
+      "group": "OLS"
+    },
+    {
+      "name": "Respiratory rate",
+      "group": "OHDSI"
+    },
+    {
+      "name": "RR (breaths/mins)",
+      "group": "Study2"
+    },
+    {
+      "name": "Oxygen Saturation Measurement",
+      "group": "CDM"
+    },
+    {
+      "name": "Oxygen Saturation Measurement",
+      "group": "OLS"
+    },
+    {
+      "name": "Oxygen saturation measurement",
+      "group": "OHDSI"
+    },
+    {
+      "name": "O2 (%)",
+      "group": "Study2"
+    },
+    {
+      "name": "Body Temperature",
+      "group": "CDM"
+    },
+    {
+      "name": "Body Temperature",
+      "group": "OLS"
+    },
+    {
+      "name": "Body temperature",
+      "group": "OHDSI"
+    },
+    {
+      "name": "Temp (oC)",
+      "group": "Study2"
+    },
+    {
+      "name": "InBody Score",
+      "group": "CDM"
+    },
+    {
+      "name": "InBody score (x/100)",
+      "group": "Study2"
+    },
+    {
+      "name": "Visceral Fat Area",
+      "group": "CDM"
+    },
+    {
+      "name": "Visceral fat [Area] Measured",
+      "group": "OHDSI"
+    },
+    {
+      "name": "Visceral Fat Area (cm2)",
+      "group": "Study2"
+    },
+    {
+      "name": "Waist-Hip Ratio",
+      "group": "CDM"
+    },
+    {
+      "name": "Waist-Hip Ratio",
+      "group": "OLS"
+    },
+    {
+      "name": "Waist to Hip Ratio",
+      "group": "OHDSI"
+    },
+    {
+      "name": "Waist to Hip ratio (Number) Inbody",
+      "group": "Study2"
+    },
+    {
+      "name": "Target Body Weight",
+      "group": "CDM"
+    },
+    {
+      "name": "Target weight (observable entity)",
+      "group": "OLS"
+    },
+    {
+      "name": "Target body weight",
+      "group": "OHDSI"
+    },
+    {
+      "name": "Target weight (kgs)",
+      "group": "Study2"
+    },
+    {
+      "name": "Weight Control",
+      "group": "CDM"
+    },
+    {
+      "name": "Weight control (kgs)",
+      "group": "Study2"
+    },
+    {
+      "name": "Fat Control",
+      "group": "CDM"
+    },
+    {
+      "name": "Fat control (kgs)",
+      "group": "Study2"
+    },
+    {
+      "name": "Muscle Control",
+      "group": "CDM"
+    },
+    {
+      "name": "Muscle control (kgs)",
+      "group": "Study2"
+    },
+    {
+      "name": "Visual Acuity - Left Eye",
+      "group": "CDM"
+    },
+    {
+      "name": "Visual Acuity",
+      "group": "OLS"
+    },
+    {
+      "name": "Visual acuity",
+      "group": "OHDSI"
+    },
+    {
+      "name": "Visual acquity (20/20) Snellen chart LEFT",
+      "group": "Study2"
+    },
+    {
+      "name": "Visual Acuity - Right Eye",
+      "group": "CDM"
+    },
+    {
+      "name": "Visual acquity (20/20) Snellen chart RIGHT",
+      "group": "Study2"
+    },
+    {
+      "name": "Shoebox Auditory Test - Left Ear",
+      "group": "CDM"
+    },
+    {
+      "name": "Shoebox Hearing Test LEFT Ear",
+      "group": "Study2"
+    },
+    {
+      "name": "Shoebox Auditory Test - Right Ear",
+      "group": "CDM"
+    },
+    {
+      "name": "Shoebox Hearing Test RIGHT Ear",
+      "group": "Study2"
+    },
+    {
+      "name": "Allergies",
+      "group": "CDM"
+    },
+    {
+      "name": "History of multiple allergies (situation)",
+      "group": "OLS"
+    },
+    {
+      "name": "Allergies",
+      "group": "OHDSI"
+    },
+    {
+      "name": "Allergies",
+      "group": "Study2"
+    },
+    {
+      "name": "Medical History",
+      "group": "CDM"
+    },
+    {
+      "name": "medical history",
+      "group": "OLS"
+    },
+    {
+      "name": "Personal Medical History",
+      "group": "OHDSI"
+    },
+    {
+      "name": "Medical History",
+      "group": "Study2"
+    },
+    {
+      "name": "Surgical History",
+      "group": "CDM"
+    },
+    {
+      "name": "surgical history",
+      "group": "OLS"
+    },
+    {
+      "name": "History of surgery",
+      "group": "OHDSI"
+    },
+    {
+      "name": "Surgical History",
+      "group": "Study2"
+    },
+    {
+      "name": "Family History",
+      "group": "CDM"
+    },
+    {
+      "name": "family history",
+      "group": "OLS"
+    },
+    {
+      "name": "Family History",
+      "group": "OHDSI"
+    },
+    {
+      "name": "Family History",
+      "group": "Study2"
+    },
+    {
+      "name": "Falls Assessment",
+      "group": "CDM"
+    },
+    {
+      "name": "Falls assessment (procedure)",
+      "group": "OLS"
+    },
+    {
+      "name": "Falls assessment",
+      "group": "OHDSI"
+    },
+    {
+      "name": "Falls Assessment",
+      "group": "Study2"
+    },
+    {
+      "name": "Pain Assessment",
+      "group": "CDM"
+    },
+    {
+      "name": "Pain Assessment",
+      "group": "OLS"
+    },
+    {
+      "name": "Pain assessment",
+      "group": "OHDSI"
+    },
+    {
+      "name": "Pain Assessment",
+      "group": "Study2"
+    },
+    {
+      "name": "Montreal Cognitive Assessment",
+      "group": "CDM"
+    },
+    {
+      "name": "Montreal Cognitive Assessment, Version 8.3",
+      "group": "OLS"
+    },
+    {
+      "name": "Montreal cognitive assessment",
+      "group": "OHDSI"
+    },
+    {
+      "name": "MOCA (55-85 years) Normal \u2265 26/30 (x/30)",
+      "group": "Study2"
+    },
+    {
+      "name": "Diagnosis",
+      "group": "CDM"
+    },
+    {
+      "name": "Diagnosis",
+      "group": "OLS"
+    },
+    {
+      "name": "Diagnoses",
+      "group": "OHDSI"
+    },
+    {
+      "name": "Diagnoses",
+      "group": "Study2"
+    },
+    {
+      "name": "ICD Code",
+      "group": "CDM"
+    },
+    {
+      "name": "ICD Code",
+      "group": "OLS"
+    },
+    {
+      "name": "Diagnosis ICD code",
+      "group": "OHDSI"
+    },
+    {
+      "name": "Diagnoses ICD Codes",
+      "group": "Study2"
+    },
+    {
+      "name": "Diabetes Mellitus",
+      "group": "CDM"
+    },
+    {
+      "name": "Diabetes Mellitus",
+      "group": "OLS"
+    },
+    {
+      "name": "Diabetes mellitus",
+      "group": "OHDSI"
+    },
+    {
+      "name": "Diabetes Mellitus",
+      "group": "Study2"
+    },
+    {
+      "name": "Hypertension",
+      "group": "CDM"
+    },
+    {
+      "name": "Hypertension",
+      "group": "OLS"
+    },
+    {
+      "name": "Hypertension",
+      "group": "OHDSI"
+    },
+    {
+      "name": "Hypertension",
+      "group": "Study2"
+    },
+    {
+      "name": "Cardiovascular Disorder",
+      "group": "CDM"
+    },
+    {
+      "name": "Cardiovascular Disorder",
+      "group": "OLS"
+    },
+    {
+      "name": "Cardiovascular disease",
+      "group": "OHDSI"
+    },
+    {
+      "name": "Cardiovascular disease",
+      "group": "Study2"
+    },
+    {
+      "name": "Dyslipidemia",
+      "group": "CDM"
+    },
+    {
+      "name": "Dyslipidemia",
+      "group": "OLS"
+    },
+    {
+      "name": "Dyslipidemia",
+      "group": "OHDSI"
+    },
+    {
+      "name": "Dyslipidemia",
+      "group": "Study2"
+    },
+    {
+      "name": "Obesity",
+      "group": "CDM"
+    },
+    {
+      "name": "Obesity",
+      "group": "OLS"
+    },
+    {
+      "name": "Obesity",
+      "group": "OHDSI"
+    },
+    {
+      "name": "Obesity",
+      "group": "Study2"
+    },
+    {
+      "name": "Chronic Kidney Disease",
+      "group": "CDM"
+    },
+    {
+      "name": "Chronic Kidney Disease",
+      "group": "OLS"
+    },
+    {
+      "name": "Chronic kidney disease",
+      "group": "OHDSI"
+    },
+    {
+      "name": "Chronic Kidney Disease",
+      "group": "Study2"
+    },
+    {
+      "name": "Cardiopulmonary Exercise Testing",
+      "group": "CDM"
+    },
+    {
+      "name": "Cardiopulmonary Exercise Testing",
+      "group": "OLS"
+    },
+    {
+      "name": "Cardiopulmonary exercise test",
+      "group": "OHDSI"
+    },
+    {
+      "name": "CPET Status",
+      "group": "Study2"
+    },
+    {
+      "name": "CPET - Absolute VO2 max",
+      "group": "CDM"
+    },
+    {
+      "name": "CPET Absolute VO\u2082 max (L/min)",
+      "group": "Study2"
+    },
+    {
+      "name": "CPET - Relative VO2 max",
+      "group": "CDM"
+    },
+    {
+      "name": "CPET Relative VO\u2082 max (mL/kg/min)",
+      "group": "Study2"
+    },
+    {
+      "name": "Electrocardiogram",
+      "group": "CDM"
+    },
+    {
+      "name": "Electrocardiogram",
+      "group": "OLS"
+    },
+    {
+      "name": "Electrocardiogram",
+      "group": "OHDSI"
+    },
+    {
+      "name": "ECG",
+      "group": "Study2"
+    },
+    {
+      "name": "Magnetic Resonance Imaging",
+      "group": "CDM"
+    },
+    {
+      "name": "Magnetic Resonance Imaging",
+      "group": "OLS"
+    },
+    {
+      "name": "Magtenic resonance imaging",
+      "group": "OHDSI"
+    },
+    {
+      "name": "MRI",
+      "group": "Study2"
+    },
+    {
+      "name": "Bone Mineral Content",
+      "group": "CDM"
+    },
+    {
+      "name": "Bone Mineral Content",
+      "group": "OLS"
+    },
+    {
+      "name": "Bone Mineral Content",
+      "group": "OHDSI"
+    },
+    {
+      "name": "Bone Mineral Content (BMC) (gms)",
+      "group": "Study2"
+    },
+    {
+      "name": "Bone Mineral Density",
+      "group": "CDM"
+    },
+    {
+      "name": "Bone Mineral Density",
+      "group": "OLS"
+    },
+    {
+      "name": "Bone Mineral Density",
+      "group": "OHDSI"
+    },
+    {
+      "name": "Bone Mineral Density (BMD)( (g/cm2)",
+      "group": "Study2"
+    },
+    {
+      "name": "Bone Mineral Density T-Score",
+      "group": "CDM"
+    },
+    {
+      "name": "Bone Mineral Density T-Score",
+      "group": "OLS"
+    },
+    {
+      "name": "Bone Mineral Density T-Score",
+      "group": "OHDSI"
+    },
+    {
+      "name": "T-score",
+      "group": "Study2"
+    },
+    {
+      "name": "Bone Mineral Density Z-Score",
+      "group": "CDM"
+    },
+    {
+      "name": "Bone Mineral Density Z-Score",
+      "group": "OLS"
+    },
+    {
+      "name": "Bone Mineral Density Z-Score",
+      "group": "OHDSI"
+    },
+    {
+      "name": "Z-score",
+      "group": "Study2"
+    },
+    {
+      "name": "Fat Mass",
+      "group": "CDM"
+    },
+    {
+      "name": "Fat Mass",
+      "group": "OLS"
+    },
+    {
+      "name": "Fat Mass",
+      "group": "OHDSI"
+    },
+    {
+      "name": "Fat mass (gms)",
+      "group": "Study2"
+    },
+    {
+      "name": "Fat-free Mass",
+      "group": "CDM"
+    },
+    {
+      "name": "Fat-free mass (observable entity)",
+      "group": "OLS"
+    },
+    {
+      "name": "Fat-free mass",
+      "group": "OHDSI"
+    },
+    {
+      "name": "Lean mass + BMC (gms)",
+      "group": "Study2"
+    },
+    {
+      "name": "Total body fat %",
+      "group": "Study2"
+    },
+    {
+      "name": "Heart Rate Variability",
+      "group": "CDM"
+    },
+    {
+      "name": "heart rate variability",
+      "group": "OLS"
+    },
+    {
+      "name": "HRV (ms)",
+      "group": "Study2"
+    },
+    {
+      "name": "Resiratory rate (rpm)",
+      "group": "Study2"
+    },
+    {
+      "name": "Resting Heart Rate",
+      "group": "CDM"
+    },
+    {
+      "name": "Resting heart rate (observable entity)",
+      "group": "OLS"
+    },
+    {
+      "name": "Resting heart rate",
+      "group": "OHDSI"
+    },
+    {
+      "name": "Resting heart rate (bpm)",
+      "group": "Study2"
+    },
+    {
+      "name": "Sleep Consistency",
+      "group": "CDM"
+    },
+    {
+      "name": "Sleep consistency (%)",
+      "group": "Study2"
+    },
+    {
+      "name": "Total Sleep Time",
+      "group": "CDM"
+    },
+    {
+      "name": "Total Sleep Time",
+      "group": "OLS"
+    },
+    {
+      "name": "Sleep duration",
+      "group": "OHDSI"
+    },
+    {
+      "name": "Sleep duration (hrs and mins)",
+      "group": "Study2"
+    },
+    {
+      "name": "Restorative Sleep",
+      "group": "CDM"
+    },
+    {
+      "name": "Restorative sleep (hrs and mins)",
+      "group": "Study2"
+    },
+    {
+      "name": "Recovery",
+      "group": "CDM"
+    },
+    {
+      "name": "Recovery",
+      "group": "OLS"
+    },
+    {
+      "name": "Recovery (%)",
+      "group": "Study2"
+    },
+    {
+      "name": "Daily Aerobic Activity",
+      "group": "CDM"
+    },
+    {
+      "name": "Daily aerobic activity (mins)",
+      "group": "Study2"
+    },
+    {
+      "name": "WHOOP Strain Score",
+      "group": "CDM"
+    },
+    {
+      "name": "Strain Score",
+      "group": "Study2"
+    },
+    {
+      "name": "Multidimensional Health Locus of Control - Question 1",
+      "group": "CDM"
+    },
+    {
+      "name": "Health Locus of Control 1",
+      "group": "Study2"
+    },
+    {
+      "name": "Multidimensional Health Locus of Control - Question 2",
+      "group": "CDM"
+    },
+    {
+      "name": "Health Locus of Control 2",
+      "group": "Study2"
+    },
+    {
+      "name": "Multidimensional Health Locus of Control - Question 3",
+      "group": "CDM"
+    },
+    {
+      "name": "Health Locus of Control 3",
+      "group": "Study2"
+    },
+    {
+      "name": "Multidimensional Health Locus of Control - Question 4",
+      "group": "CDM"
+    },
+    {
+      "name": "Health Locus of Control 4",
+      "group": "Study2"
+    },
+    {
+      "name": "Multidimensional Health Locus of Control - Question 5",
+      "group": "CDM"
+    },
+    {
+      "name": "Health Locus of Control 5",
+      "group": "Study2"
+    },
+    {
+      "name": "Multidimensional Health Locus of Control - Question 6",
+      "group": "CDM"
+    },
+    {
+      "name": "Health Locus of Control 6",
+      "group": "Study2"
+    },
+    {
+      "name": "Multidimensional Health Locus of Control - Question 7",
+      "group": "CDM"
+    },
+    {
+      "name": "Health Locus of Control 7",
+      "group": "Study2"
+    },
+    {
+      "name": "Multidimensional Health Locus of Control - Question 8",
+      "group": "CDM"
+    },
+    {
+      "name": "Health Locus of Control 8",
+      "group": "Study2"
+    },
+    {
+      "name": "Multidimensional Health Locus of Control - Question 9",
+      "group": "CDM"
+    },
+    {
+      "name": "Health Locus of Control 9",
+      "group": "Study2"
+    },
+    {
+      "name": "Multidimensional Health Locus of Control - Question 10",
+      "group": "CDM"
+    },
+    {
+      "name": "Health Locus of Control 10",
+      "group": "Study2"
+    },
+    {
+      "name": "Multidimensional Health Locus of Control - Question 11",
+      "group": "CDM"
+    },
+    {
+      "name": "Health Locus of Control 11",
+      "group": "Study2"
+    },
+    {
+      "name": "Multidimensional Health Locus of Control - Question 12",
+      "group": "CDM"
+    },
+    {
+      "name": "Health Locus of Control 12",
+      "group": "Study2"
+    },
+    {
+      "name": "Multidimensional Health Locus of Control - Question 13",
+      "group": "CDM"
+    },
+    {
+      "name": "Health Locus of Control 13",
+      "group": "Study2"
+    },
+    {
+      "name": "Multidimensional Health Locus of Control - Question 14",
+      "group": "CDM"
+    },
+    {
+      "name": "Health Locus of Control 14",
+      "group": "Study2"
+    },
+    {
+      "name": "Multidimensional Health Locus of Control - Question 15",
+      "group": "CDM"
+    },
+    {
+      "name": "Health Locus of Control 15",
+      "group": "Study2"
+    },
+    {
+      "name": "Multidimensional Health Locus of Control - Question 16",
+      "group": "CDM"
+    },
+    {
+      "name": "Health Locus of Control 16",
+      "group": "Study2"
+    },
+    {
+      "name": "Multidimensional Health Locus of Control - Question 17",
+      "group": "CDM"
+    },
+    {
+      "name": "Health Locus of Control 17",
+      "group": "Study2"
+    },
+    {
+      "name": "Multidimensional Health Locus of Control - Question 18",
+      "group": "CDM"
+    },
+    {
+      "name": "Health Locus of Control 18",
+      "group": "Study2"
+    },
+    {
+      "name": "EuroQol - Mobility",
+      "group": "CDM"
+    },
+    {
+      "name": "EQ-5D-5L - Mobility",
+      "group": "OLS"
+    },
+    {
+      "name": "EuroQol five dimension five level mobility score",
+      "group": "OHDSI"
+    },
+    {
+      "name": "Mobility",
+      "group": "Study2"
+    },
+    {
+      "name": "EuroQol - Self-Care",
+      "group": "CDM"
+    },
+    {
+      "name": "EQ-5D-5L - Self-Care",
+      "group": "OLS"
+    },
+    {
+      "name": "EuroQol five dimension five level self-care score",
+      "group": "OHDSI"
+    },
+    {
+      "name": "Self-Care",
+      "group": "Study2"
+    },
+    {
+      "name": "EuroQol - Usual Activities",
+      "group": "CDM"
+    },
+    {
+      "name": "EQ-5D-5L - Usual Activities",
+      "group": "OLS"
+    },
+    {
+      "name": "EuroQol five dimension five level usual activities score",
+      "group": "OHDSI"
+    },
+    {
+      "name": "Usual Activities",
+      "group": "Study2"
+    },
+    {
+      "name": "EuroQol - Pain or Discomfort",
+      "group": "CDM"
+    },
+    {
+      "name": "EQ-5D-5L - Pain or Discomfort",
+      "group": "OLS"
+    },
+    {
+      "name": "EuroQol five dimension five level pain discomfort score",
+      "group": "OHDSI"
+    },
+    {
+      "name": "Pain/Discomfort",
+      "group": "Study2"
+    },
+    {
+      "name": "EuroQol - Anxiety or Depression",
+      "group": "CDM"
+    },
+    {
+      "name": "EQ-5D-5L - Anxiety or Depression",
+      "group": "OLS"
+    },
+    {
+      "name": "EuroQol five dimension five level anxiety depression score",
+      "group": "OHDSI"
+    },
+    {
+      "name": "Anxiety/Depression",
+      "group": "Study2"
+    },
+    {
+      "name": "EuroQol - Total Score",
+      "group": "CDM"
+    },
+    {
+      "name": "EQ-5D-5L - EQ VAS Score",
+      "group": "OLS"
+    },
+    {
+      "name": "EuroQol five dimension five level scale",
+      "group": "OHDSI"
+    },
+    {
+      "name": "Health Today (0-100)",
+      "group": "Study2"
+    },
+    {
+      "name": "QRISK Cardiovascular Disease Score",
+      "group": "CDM"
+    },
+    {
+      "name": "QRISK cardiovascular disease 10 year risk calculator score (observable entity)",
+      "group": "OLS"
+    },
+    {
+      "name": "QRISK Score",
+      "group": "Study2"
+    },
+    {
+      "name": "Test2Prevent - Risk Score",
+      "group": "CDM"
+    },
+    {
+      "name": "Total Risk Score",
+      "group": "Study2"
+    },
+    {
+      "name": "Test2Prevent - Risk Category Interpretation",
+      "group": "CDM"
+    },
+    {
+      "name": "Interpretation (Risk Category)",
+      "group": "Study2"
+    }
+  ]
+}

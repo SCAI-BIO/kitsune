@@ -1,5 +1,5 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 
 import { Observable, shareReplay } from 'rxjs';
 
@@ -16,12 +16,11 @@ import { environment } from '../../environments/environment';
 })
 export class ApiService {
   private readonly API_URL = environment.openApiUrl;
-  private embeddingModels$: Observable<string[]> | null = null;
-  private terminologies$: Observable<Terminology[]> | null = null;
-  private lastFetched = 0;
   private CACHE_TTL = 24 * 60 * 60 * 1000; // 24 hours in ms
-
-  constructor(private http: HttpClient) {}
+  private embeddingModels$: Observable<string[]> | null = null;
+  private http = inject(HttpClient);
+  private lastFetched = 0;
+  private terminologies$: Observable<Terminology[]> | null = null;
 
   clearCache(): void {
     this.embeddingModels$ = null;

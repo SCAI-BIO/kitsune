@@ -1,0 +1,66 @@
+<main class="main-container harmonize-component">
+  <!-- Description Section -->
+  <div class="description-box">
+    <section class="description">
+      <p>
+        This chord diagram visualizes semantic equivalence across study-specific
+        variables by mapping connections between similar concepts from different
+        datasets.
+      </p>
+      <p>
+        Each node in the diagram represents a variable from one of the studies
+        included in the harmonization effort. Nodes are grouped and color-coded
+        by their study of origin, providing a clear visual structure to
+        distinguish data sources.
+      </p>
+      <p>
+        Ribbons connecting the nodes indicate semantic equivalence relationships
+        between variables — for instance, where different studies collected the
+        same type of information (e.g., blood pressure, age, or smoking status)
+        but labeled or structured it differently.
+      </p>
+      <p>
+        This visualization allows viewers to quickly identify how variables from
+        various studies align with each other, supporting both cross-study
+        analyses and validation of the harmonization process.
+      </p>
+      <p>
+        Use the navigation buttons below the diagram to explore different
+        segments of the full dataset, especially when the number of variables
+        exceeds the optimal display capacity of a single view.
+      </p>
+    </section>
+  </div>
+
+  <!-- Loading Spinner -->
+  @if (loading) {
+  <div class="loading-spinner">
+    <mat-spinner diameter="40"></mat-spinner>
+  </div>
+  }
+
+  <div class="navigation-buttons">
+    <button
+      (click)="previous()"
+      [disabled]="currentIndex === 0"
+      class="button-style"
+    >
+      Previous
+    </button>
+    <span>{{ currentIndex + 1 }} / {{ dataChunks.length }}</span>
+    <button
+      (click)="next()"
+      [disabled]="currentIndex === dataChunks.length - 1"
+      class="button-style"
+    >
+      Next
+    </button>
+  </div>
+
+  <!-- Render one diagram per chunk -->
+  <div class="chord-diagram-container">
+    <div class="chord-diagram">
+      <svg></svg>
+    </div>
+  </div>
+</main>
