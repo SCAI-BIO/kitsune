@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component, inject, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
@@ -24,6 +25,7 @@ import { FileService } from '../services/file.service';
   selector: 'app-core-model-table',
   standalone: true,
   imports: [
+    CommonModule,
     MatFormFieldModule,
     MatIconModule,
     MatInputModule,
@@ -49,15 +51,13 @@ export class CoreModelAdminComponent implements OnInit, OnDestroy {
     'ohdsiId',
     'ohdsiLabel',
     'ohdsiDomain',
-    'study1Variable',
-    'study1Description',
-    'study2Variable',
   ];
   readonly InfoKey = InfoKeys;
   loading = false;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
   subscriptions: Subscription[] = [];
+  studyColumnNames: string[] = [];
   private dialog = inject(MatDialog);
   private externalLinkService = inject(ExternalLinkService);
   private fileService = inject(FileService);
@@ -174,52 +174,35 @@ export class CoreModelAdminComponent implements OnInit, OnDestroy {
 
   getSortingDataAccessor(): (item: CoreModel, property: string) => string {
     return (item: CoreModel, property: string): string => {
-      let value: string | undefined;
+      // Handle static properties first
+      const staticProps: Record<string, string | undefined> = {
+        olsId: item.ols?.id,
+        olsLabel: item.ols?.label,
+        olsDescription: item.ols?.description,
+        ohdsiId: item.ohdsi?.id,
+        ohdsiLabel: item.ohdsi?.label,
+        ohdsiDomain: item.ohdsi?.domain,
+        id: item.id,
+        label: item.label,
+        description: item.description,
+      };
 
-      switch (property) {
-        case 'olsId':
-          value = item.ols?.id;
-          break;
-        case 'olsLabel':
-          value = item.ols?.label;
-          break;
-        case 'olsDescription':
-          value = item.ols?.description;
-          break;
-        case 'ohdsiId':
-          value = item.ohdsi?.id;
-          break;
-        case 'ohdsiLabel':
-          value = item.ohdsi?.label;
-          break;
-        case 'ohdsiDomain':
-          value = item.ohdsi?.domain;
-          break;
-        case 'study1Variable':
-          value = item.studies?.[0]?.variable;
-          break;
-        case 'study1Description':
-          value = item.studies?.[0]?.description;
-          break;
-        case 'study2Variable':
-          value = item.studies?.[1]?.variable;
-          break;
-        case 'id':
-          value = item.id;
-          break;
-        case 'label':
-          value = item.label;
-          break;
-        case 'description':
-          value = item.description;
-          break;
-        default:
-          value = '';
+      if (property in staticProps) {
+        return staticProps[property] || 'ÿ';
       }
 
-      return value === null || value === undefined || value.trim() === ''
-        ? 'ÿ' // blank values sort last
-        : value.toLowerCase();
+      // Handle dynamic study columns
+      const match = property.match(/^([a-zA-Z0-9]+)(Variable|Description)$/);
+      if (match) {
+        const studyName = match[1];
+        const field = match[2].toLowerCase(); // variable | description
+        const study = item.studies?.find(
+          (s) => this.toCamelCase(s.name) === studyName
+        );
+        return study?.[field as 'variable' | 'description'] || 'ÿ';
+      }
+
+      return 'ÿ';
     };
   }
 
@@ -240,29 +223,72 @@ export class CoreModelAdminComponent implements OnInit, OnDestroy {
   initializeDataSource(data: CoreModel[]): void {
     this.dataSource.data = data;
 
+    // Collect all unique study names
+    const uniqueStudies = new Set<string>();
+    data.forEach((model) => {
+      model.studies?.forEach((study) => {
+        if (study.name) {
+          uniqueStudies.add(study.name);
+        }
+      });
+    });
+
+    this.studyColumnNames = Array.from(uniqueStudies);
+
+    // Convert study names to camelCase column identifiers
+    this.displayedColumns = [
+      'actions',
+      'id',
+      'label',
+      'description',
+      'olsId',
+      'olsLabel',
+      'olsDescription',
+      'ohdsiId',
+      'ohdsiLabel',
+      'ohdsiDomain',
+      ...this.studyColumnNames.flatMap((name) => {
+        const formattedName = this.toCamelCase(name);
+        return [`${formattedName}Variable`, `${formattedName}Description`];
+      }),
+    ];
+
     this.dataSource.filterPredicate = (
       data: CoreModel,
       filter: string
     ): boolean => {
-      const text = [
-        data.id,
-        data.label,
-        data.description,
-        data.ols.id,
-        data.ols.label,
-        data.ols.description,
-        data.ohdsi.id,
-        data.ohdsi.label,
-        data.ohdsi.domain,
-        data.studies[0].variable,
-        data.studies[0].description,
-        data.studies[1].variable,
-      ]
-        .filter((v): v is string => !!v)
-        .join('')
-        .toLowerCase();
+      const values: string[] = [];
 
-      return text.includes(filter);
+      values.push(data.id ?? '', data.label ?? '', data.description ?? '');
+
+      if (data.ols) {
+        values.push(
+          data.ols.id ?? '',
+          data.ols.label ?? '',
+          data.ols.description ?? ''
+        );
+      }
+
+      if (data.ohdsi) {
+        values.push(
+          data.ohdsi.id ?? '',
+          data.ohdsi.label ?? '',
+          data.ohdsi.domain ?? ''
+        );
+      }
+
+      if (data.studies?.length) {
+        for (const study of data.studies) {
+          values.push(
+            study.name ?? '',
+            study.variable ?? '',
+            study.description ?? ''
+          );
+        }
+      }
+
+      const text = values.join(' ').toLowerCase();
+      return text.includes(filter.trim().toLowerCase());
     };
 
     this.dataSource.sortingDataAccessor = this.getSortingDataAccessor();
@@ -409,5 +435,26 @@ export class CoreModelAdminComponent implements OnInit, OnDestroy {
       this.dataSource.data.splice(index, 1);
       this.dataSource._updateChangeSubscription();
     }
+  }
+
+  toCamelCase(name: string): string {
+    return name
+      .toLowerCase()
+      .replace(/[^a-zA-Z0-9]+(.)/g, (_, chr) => chr.toUpperCase());
+  }
+
+  getStudyField(
+    row: CoreModel,
+    studyName: string,
+    field: 'variable' | 'description'
+  ): string {
+    const study = row.studies?.find(
+      (s) => this.toCamelCase(s.name) === studyName
+    );
+    return study?.[field] ?? '';
+  }
+
+  getStudyClass(studyName: string): string {
+    return `cell-bg-${this.toCamelCase(studyName)}`;
   }
 }

@@ -275,35 +275,34 @@
           </td>
         </ng-container>
 
-        <!-- Study1 Variable -->
-        <ng-container matColumnDef="study1Variable">
+        <!-- Dynamic Study Columns -->
+        @for (studyName of studyColumnNames; track studyName) {
+        <ng-container [matColumnDef]="toCamelCase(studyName) + 'Variable'">
           <th mat-header-cell *matHeaderCellDef mat-sort-header>
-            Study1 Variable
+            {{ studyName }} Variable
           </th>
-          <td mat-cell *matCellDef="let element" class="cell-bg-study1">
-            {{ element.studies[0].variable }}
+          <td
+            mat-cell
+            *matCellDef="let element"
+            [ngClass]="getStudyClass(studyName)"
+          >
+            {{ getStudyField(element, toCamelCase(studyName), "variable") }}
           </td>
         </ng-container>
-
-        <!-- Study1 Description -->
-        <ng-container matColumnDef="study1Description">
+        } @for (studyName of studyColumnNames; track studyName) {
+        <ng-container [matColumnDef]="toCamelCase(studyName) + 'Description'">
           <th mat-header-cell *matHeaderCellDef mat-sort-header>
-            Study1 Description
+            {{ studyName }} Description
           </th>
-          <td mat-cell *matCellDef="let element" class="cell-bg-study1">
-            {{ element.studies[0].description }}
+          <td
+            mat-cell
+            *matCellDef="let element"
+            [ngClass]="getStudyClass(studyName)"
+          >
+            {{ getStudyField(element, toCamelCase(studyName), "description") }}
           </td>
         </ng-container>
-
-        <!-- Study2 Variable -->
-        <ng-container matColumnDef="study2Variable">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header>
-            Study2 Variable
-          </th>
-          <td mat-cell *matCellDef="let element" class="cell-bg-study2">
-            {{ element.studies[1].variable }}
-          </td>
-        </ng-container>
+        }
 
         <tr
           mat-header-row
