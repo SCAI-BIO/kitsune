@@ -5,10 +5,10 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import {
   KEYCLOAK_EVENT_SIGNAL,
-  Keycloak,
   KeycloakEventType,
   typeEventArgs,
   ReadyArgs,
+  KeycloakService,
 } from 'keycloak-angular';
 
 @Component({
@@ -20,7 +20,7 @@ import {
 export class BannerComponent {
   authenticated = false;
 
-  private readonly keycloak = inject(Keycloak);
+  private keycloakService: KeycloakService;
   private readonly keycloakSignal = inject(KEYCLOAK_EVENT_SIGNAL);
 
   constructor() {
