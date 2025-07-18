@@ -1,0 +1,262 @@
+<main class="main-container harmonize-component">
+  <!-- Description Section -->
+  <div class="description-box">
+    <section class="description">
+      <p>
+        This table presents an overview of the semantic mappings established
+        between the Common Data Model (CDM) and external standardized
+        vocabularies, including the Ontology Lookup Service (OLS) and the
+        Observational Health Data Sciences and Informatics (OHDSI) vocabulary.
+      </p>
+      <p>
+        Each row in the table corresponds to a concept or variable from the CDM
+        and shows how it has been semantically linked to equivalent terms from
+        OLS and OHDSI. These mappings enhance the interoperability and
+        reusability of study data by aligning heterogenous study-specific
+        variables with widely recognized ontologies.
+      </p>
+      <p>
+        The table also includes mappings to original variables from different
+        studies, higlighting how diverse source data has been unified under a
+        harmonized structure. This ensures that comparable concepts across
+        studies can be analyzed in a consistent and meaningful way.
+      </p>
+      <p>Features of this component include:</p>
+      <ul>
+        <li>
+          <strong>Filtering:</strong> Quickly locate mappings by entering
+          relevant keywords (e.g., "age").
+        </li>
+        <li>
+          <strong>Sorting:</strong> Columns can be sorted to assist with
+          navigation and exploration.
+        </li>
+        <li>
+          <strong>External Links:</strong> OLS and OHDSI IDs link directly to
+          the respective online repositories for further reference.
+        </li>
+        <li>
+          <strong>Tooltips:</strong> Info buttons provide additional
+          explanations for ontologies.
+        </li>
+      </ul>
+      <p>
+        Use this table to explore how key study variables have been semantically
+        standardized to support downstream analysis and cross-study comparisons.
+      </p>
+    </section>
+  </div>
+  <!-- Loading Spinner -->
+  @if (loading) {
+  <div class="loading-spinner">
+    <mat-spinner diameter="40"></mat-spinner>
+  </div>
+  }
+
+  <!-- Shared Wrapper -->
+  <div class="table-wrapper mat-elevation-z8">
+    <!-- Download Button Container -->
+    <div class="download-button-container">
+      <!-- Download Button -->
+      <button
+        mat-raised-button
+        class="button-style"
+        color="primary"
+        (click)="downloadTableAsCsv()"
+      >
+        Download
+      </button>
+    </div>
+
+    <!-- Filter and Pagination Container -->
+    <div class="filter-pagination-container">
+      <!-- Filter Container -->
+      <div class="filter-container">
+        <mat-form-field>
+          <mat-label>Filter</mat-label>
+          <input
+            matInput
+            (keyup)="applyFilter($event)"
+            placeholder="Ex. age"
+            #input
+          />
+        </mat-form-field>
+      </div>
+      <!-- Pagination Container -->
+      <div class="pagination-container">
+        <mat-paginator
+          [pageSizeOptions]="[10, 25, 50, 100]"
+          showFirstLastButtons
+        ></mat-paginator>
+      </div>
+    </div>
+
+    <!-- Table Container -->
+    <div class="table-container">
+      <table mat-table [dataSource]="dataSource" matSort class="mat-table">
+        <!-- Core Model ID Column -->
+        <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>CDM ID</th>
+          <td mat-cell *matCellDef="let element" class="cell-bg-core-model">
+            {{ element.id }}
+          </td>
+        </ng-container>
+
+        <!-- Core Model Label -->
+        <ng-container matColumnDef="label">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>CDM Label</th>
+          <td mat-cell *matCellDef="let element" class="cell-bg-core-model">
+            {{ element.label }}
+          </td>
+        </ng-container>
+
+        <!-- Core Model Description -->
+        <ng-container matColumnDef="description">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>
+            CDM Description
+          </th>
+          <td mat-cell *matCellDef="let element" class="cell-bg-core-model">
+            {{ element.description }}
+          </td>
+        </ng-container>
+
+        <!-- OLS ID -->
+        <ng-container matColumnDef="olsId">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>
+            OLS ID
+            <button
+              mat-icon-button
+              (click)="openInfo(InfoKey.OLS); $event.stopPropagation()"
+              matTooltip="What is an OLS ID?"
+              aria-label="What is an OLS ID?"
+              class="info-button"
+            >
+              <mat-icon class="info-icon">info_outline</mat-icon>
+            </button>
+          </th>
+          <td mat-cell *matCellDef="let element" class="cell-bg-ols">
+            @if (element.ols?.id) {
+            <a
+              [href]="getOlsLink(element.ols.id)"
+              target="_blank"
+              rel="noopener"
+              class="external-link"
+            >
+              <span class="external-link-text">{{ element.ols.id }}</span>
+              <mat-icon inline class="external-link-icon">open_in_new</mat-icon>
+            </a>
+            }
+          </td>
+        </ng-container>
+
+        <!-- OLS Label -->
+        <ng-container matColumnDef="olsLabel">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>OLS Label</th>
+          <td mat-cell *matCellDef="let element" class="cell-bg-ols">
+            {{ element.ols.label }}
+          </td>
+        </ng-container>
+
+        <!-- OLS Description -->
+        <ng-container matColumnDef="olsDescription">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>
+            OLS Description
+          </th>
+          <td mat-cell *matCellDef="let element" class="cell-bg-ols">
+            {{ element.ols.description }}
+          </td>
+        </ng-container>
+
+        <!-- OHDSI ID -->
+        <ng-container matColumnDef="ohdsiId">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>
+            OHDSI ID
+            <button
+              mat-icon-button
+              (click)="openInfo(InfoKey.OHDSI); $event.stopPropagation()"
+              matTooltip="What is an OHDSI ID?"
+              aria-label="What is an OHDSI ID?"
+              class="info-button"
+            >
+              <mat-icon class="info-icon">info_outline</mat-icon>
+            </button>
+          </th>
+          <td mat-cell *matCellDef="let element" class="cell-bg-ohdsi">
+            @if (element.ohdsi?.id) {
+            <a
+              [href]="getAthenaLink(element.ohdsi.id)"
+              target="_blank"
+              rel="noopener"
+              class="external-link"
+            >
+              <span class="external-link-text">{{ element.ohdsi.id }}</span>
+              <mat-icon inline class="external-link-icon">open_in_new</mat-icon>
+            </a>
+            }
+          </td>
+        </ng-container>
+
+        <!-- OHDSI Label -->
+        <ng-container matColumnDef="ohdsiLabel">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>OHDSI Label</th>
+          <td mat-cell *matCellDef="let element" class="cell-bg-ohdsi">
+            {{ element.ohdsi.label }}
+          </td>
+        </ng-container>
+
+        <!-- OHDSI Domain -->
+        <ng-container matColumnDef="ohdsiDomain">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>
+            OHDSI Domain
+          </th>
+          <td mat-cell *matCellDef="let element" class="cell-bg-ohdsi">
+            {{ element.ohdsi.domain }}
+          </td>
+        </ng-container>
+
+        <!-- Study1 Variable -->
+        <ng-container matColumnDef="study1Variable">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>
+            Study1 Variable
+          </th>
+          <td mat-cell *matCellDef="let element" class="cell-bg-study1">
+            {{ element.studies[0].variable }}
+          </td>
+        </ng-container>
+
+        <!-- Study1 Description -->
+        <ng-container matColumnDef="study1Description">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>
+            Study1 Description
+          </th>
+          <td mat-cell *matCellDef="let element" class="cell-bg-study1">
+            {{ element.studies[0].description }}
+          </td>
+        </ng-container>
+
+        <!-- Study2 Variable -->
+        <ng-container matColumnDef="study2Variable">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>
+            Study2 Variable
+          </th>
+          <td mat-cell *matCellDef="let element" class="cell-bg-study2">
+            {{ element.studies[1].variable }}
+          </td>
+        </ng-container>
+
+        <tr
+          mat-header-row
+          *matHeaderRowDef="displayedColumns; sticky: true"
+        ></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+
+        <!-- Row shown when there is no matching data -->
+        <tr class="mat-row" *matNoDataRow>
+          <td class="mat-cell" colspan="12">
+            No data mathcing the filter "{{ input.value }}"
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</main>
