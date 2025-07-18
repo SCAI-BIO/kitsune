@@ -277,29 +277,47 @@
 
         <!-- Dynamic Study Columns -->
         @for (studyName of studyColumnNames; track studyName) {
-        <ng-container [matColumnDef]="toCamelCase(studyName) + 'Variable'">
+        <ng-container
+          [matColumnDef]="this.tableService.toCamelCase(studyName) + 'Variable'"
+        >
           <th mat-header-cell *matHeaderCellDef mat-sort-header>
             {{ studyName }} Variable
           </th>
           <td
             mat-cell
             *matCellDef="let element"
-            [ngClass]="getStudyClass(studyName)"
+            [class]="this.tableService.getStudyClass(studyName)"
           >
-            {{ getStudyField(element, toCamelCase(studyName), "variable") }}
+            {{
+              this.tableService.getStudyField(
+                element,
+                this.tableService.toCamelCase(studyName),
+                "variable"
+              )
+            }}
           </td>
         </ng-container>
         } @for (studyName of studyColumnNames; track studyName) {
-        <ng-container [matColumnDef]="toCamelCase(studyName) + 'Description'">
+        <ng-container
+          [matColumnDef]="
+            this.tableService.toCamelCase(studyName) + 'Description'
+          "
+        >
           <th mat-header-cell *matHeaderCellDef mat-sort-header>
             {{ studyName }} Description
           </th>
           <td
             mat-cell
             *matCellDef="let element"
-            [ngClass]="getStudyClass(studyName)"
+            [class]="this.tableService.getStudyClass(studyName)"
           >
-            {{ getStudyField(element, toCamelCase(studyName), "description") }}
+            {{
+              this.tableService.getStudyField(
+                element,
+                this.tableService.toCamelCase(studyName),
+                "description"
+              )
+            }}
           </td>
         </ng-container>
         }
