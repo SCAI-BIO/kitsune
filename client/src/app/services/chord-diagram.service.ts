@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import * as d3 from 'd3';
 
-import { STUDY_COLORS } from '../constants/chord-colors';
 import {
   ChordData,
   ChordLink,
@@ -12,21 +11,30 @@ import {
 @Injectable({ providedIn: 'root' })
 export class ChordDiagramService {
   dataChunks: ChordData[] = [];
+  private readonly colorPalette: string[] = [
+    '#d62728',
+    '#1f77b4',
+    '#ff7f0e',
+    '#2ca02c',
+    '#9467bd',
+    '#8c564b',
+    '#e377c2',
+    '#7f7f7f',
+    '#aec7e8',
+    '#ffbb78',
+    '#98df8a',
+    '#ff9896',
+    '#c5b0d5',
+    '#c49c94',
+    '#f7b6d2',
+    '#c7c7c7',
+    '#bcbd22',
+    '#dbdb8d',
+    '#9edae5',
+    '#e0d9e2',
+  ];
+
   private colorScale: d3.ScaleOrdinal<string, string> = d3.scaleOrdinal();
-
-  constructor() {
-    this.setColors();
-  }
-
-  /**
-   * Initializes the color scale using predefined study colors.
-   */
-  private setColors(): void {
-    this.colorScale = d3
-      .scaleOrdinal<string, string>()
-      .domain(Object.keys(STUDY_COLORS))
-      .range(Object.values(STUDY_COLORS));
-  }
 
   /**
    * Returns the D3 color scale used for group coloring.
@@ -36,14 +44,17 @@ export class ChordDiagramService {
   }
 
   /**
-   * Reinitializes the color scale domain based on the provided data.
-   * @param data - The chord data containing nodes ith group identifiers.
+   * Initializes the color scale with a given list of group names (e.g., study names).
+   * @param groupNames - List of unique group identifiers (e.g., ['ADNI', 'EPAD', ...]).
    */
   initializeColorScale(data: ChordData): void {
-    const allGroups = Array.from(
-      new Set(data.nodes.map((node: ChordNode) => node.group))
-    );
-    this.colorScale.domain(allGroups);
+    const allGroups = Array.from(new Set(data.nodes.map((node) => node.group)));
+
+    // If you have more groups than colors, D3 will cycle through
+    this.colorScale = d3
+      .scaleOrdinal<string, string>()
+      .domain(allGroups)
+      .range(this.colorPalette);
   }
 
   /**
@@ -184,6 +195,8 @@ export class ChordDiagramService {
    * @param data - The ChordData for the diagram.
    */
   private createChordDiagram(data: ChordData): void {
+    this.initializeColorScale(data);
+
     const svgElement = d3.selectAll('.chord-diagram').node();
     const svg = d3.select(svgElement).select<SVGSVGElement>('svg');
     svg.selectAll('*').remove();
