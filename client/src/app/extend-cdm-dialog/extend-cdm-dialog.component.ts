@@ -1,5 +1,5 @@
-import { KeyValuePipe, TitleCasePipe } from '@angular/common';
-import { Component, Input, inject } from '@angular/core';
+import { TitleCasePipe, UpperCasePipe } from '@angular/common';
+import { Component, inject } from '@angular/core';
 import {
   AbstractControl,
   FormBuilder,
@@ -11,7 +11,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -20,13 +20,12 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { debounceTime } from 'rxjs';
 import { v5 as uuidv5 } from 'uuid';
 
-import { Ohdsi } from '../interfaces/core-model';
 import { OntologyApiService } from '../services/ontology-api.service';
+import { CoreModelTableService } from '../core-model/core-model-table.service';
 
 @Component({
   selector: 'app-extend-cdm-dialog',
   imports: [
-    KeyValuePipe,
     MatButtonModule,
     MatExpansionModule,
     MatFormFieldModule,
@@ -34,38 +33,55 @@ import { OntologyApiService } from '../services/ontology-api.service';
     MatProgressSpinnerModule,
     ReactiveFormsModule,
     TitleCasePipe,
+    UpperCasePipe,
   ],
   templateUrl: './extend-cdm-dialog.component.html',
   styleUrl: './extend-cdm-dialog.component.scss',
 })
 export class ExtendCdmDialogComponent {
-  @Input() existingLabels: string[] = [];
-  fieldLabels: Record<string, string> = {
-    id: 'CDM ID',
-    label: 'CDM Label',
-    description: 'CDM Description',
-    olsId: 'OLS ID',
-    olsLabel: 'OLS Label',
-    olsDescription: 'OLS Description',
-    ohdsiId: 'OHDSI ID',
-    ohdsiLabel: 'OHDSI Label',
-    ohdsiDomain: 'OHDSI Domain',
-    study1Variable: 'Study1 Variable',
-    study1Description: 'Study1 Description',
-    study2Variable: 'Study2 Variable',
-  };
+  existingLabels: string[] = [];
+  fieldLabels: Record<string, string> = {};
   form: FormGroup;
-  ohdsiData: Ohdsi | null = null;
   ohdsiError: string | null = null;
-  ohdsiId = '';
   ohdsiLoading = false;
   olsError: string | null = null;
   olsLoading = false;
-  private ontologyApiService = inject(OntologyApiService);
+  protected data = inject(MAT_DIALOG_DATA) as {
+    existingLabels: string[];
+    studyColumnNames?: string[];
+  };
+  protected tableService = inject(CoreModelTableService);
   private dialogRef = inject(MatDialogRef<ExtendCdmDialogComponent>);
   private fb = inject(FormBuilder);
+  private ontologyApiService = inject(OntologyApiService);
 
   constructor() {
+    this.existingLabels = this.data.existingLabels;
+    const studyFields: Record<string, FormControl> = {};
+    const labels: Record<string, string> = {};
+
+    for (const name of this.data.studyColumnNames ?? []) {
+      const camel = this.tableService.toCamelCase(name);
+      studyFields[`${camel}Label`] = new FormControl('');
+      studyFields[`${camel}Description`] = new FormControl('');
+      labels[`${camel}Label`] = `${name.toUpperCase()} Label`;
+      labels[`${camel}Description`] = `${name.toUpperCase()} Description`;
+    }
+
+    // Store field labels for template
+    this.fieldLabels = {
+      id: 'CDM ID',
+      label: 'CDM Label',
+      description: 'CDM Description',
+      olsId: 'OLS ID',
+      olsLabel: 'OLS Label',
+      olsDescription: 'OLS Description',
+      ohdsiId: 'OHDSI ID',
+      ohdsiLabel: 'OHDSI Label',
+      ohdsiDomain: 'OHDSI Domain',
+      ...labels,
+    };
+
     this.form = this.fb.group({
       id: [''],
       label: ['', [Validators.required, this.labelUniquenessValidator()]],
@@ -76,11 +92,10 @@ export class ExtendCdmDialogComponent {
       ohdsiId: [''],
       ohdsiLabel: [''],
       ohdsiDomain: [''],
-      study1Variable: [''],
-      study1Description: [''],
-      study2Variable: [''],
+      ...studyFields,
     });
 
+    // Subscribe to updates
     this.form
       .get('label')!
       .valueChanges.pipe(debounceTime(300))
@@ -89,14 +104,12 @@ export class ExtendCdmDialogComponent {
       .get('description')!
       .valueChanges.pipe(debounceTime(300))
       .subscribe(() => this.updateCdmId());
-
-    this.form.get('ohdsiId')!.valueChanges.subscribe(() => {
-      this.ohdsiError = null;
-    });
-
-    this.form.get('olsId')!.valueChanges.subscribe(() => {
-      this.olsError = null;
-    });
+    this.form
+      .get('ohdsiId')!
+      .valueChanges.subscribe(() => (this.ohdsiError = null));
+    this.form
+      .get('olsId')!
+      .valueChanges.subscribe(() => (this.olsError = null));
   }
 
   cancel(): void {
@@ -177,7 +190,7 @@ export class ExtendCdmDialogComponent {
 
   submit(): void {
     if (this.form.invalid || this.ohdsiError || this.olsError) return;
-    this.dialogRef.close(this.form.value);
+    this.dialogRef.close(this.form.getRawValue());
   }
 
   private labelUniquenessValidator(): ValidatorFn {
