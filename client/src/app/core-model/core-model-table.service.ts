@@ -34,7 +34,7 @@ export class CoreModelTableService {
       ];
 
       model.studies?.forEach((s) => {
-        values.push(s.name ?? '', s.variable ?? '', s.description ?? '');
+        values.push(s.name ?? '', s.label ?? '', s.description ?? '');
       });
 
       return values
@@ -89,7 +89,7 @@ export class CoreModelTableService {
         return staticProps[property] || this.BLANK_SORT_VALUE;
       }
 
-      const match = property.match(/^([a-zA-Z0-9]+)(Variable|Description)$/);
+      const match = property.match(/^([a-zA-Z0-9]+)(Label|Description)$/);
       if (match) {
         const camelName = match[1];
         const field = match[2];
@@ -97,7 +97,7 @@ export class CoreModelTableService {
           (s) => this.toCamelCase(s.name) === camelName
         );
         return (
-          study?.[field.toLowerCase() as 'variable' | 'description'] ||
+          study?.[field.toLowerCase() as 'label' | 'description'] ||
           this.BLANK_SORT_VALUE
         );
       }
@@ -119,7 +119,7 @@ export class CoreModelTableService {
       'ohdsiDomain',
       ...studyNames.flatMap((name) => {
         const camel = this.toCamelCase(name);
-        return [`${camel}Variable`, `${camel}Description`];
+        return [`${camel}Label`, `${camel}Description`];
       }),
     ];
 
@@ -137,7 +137,7 @@ export class CoreModelTableService {
   getStudyField(
     row: CoreModel,
     studyName: string,
-    field: 'variable' | 'description'
+    field: 'label' | 'description'
   ): string {
     const study = row.studies?.find(
       (s) => this.toCamelCase(s.name) === studyName

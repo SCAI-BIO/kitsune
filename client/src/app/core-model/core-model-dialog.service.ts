@@ -29,9 +29,9 @@ export class CoreModelDialogService {
         ohdsiId: initialData.ohdsi?.id ?? '',
         ohdsiLabel: initialData.ohdsi?.label ?? '',
         ohdsiDomain: initialData.ohdsi?.domain ?? '',
-        study1Variable: initialData.studies?.[0]?.variable ?? '',
+        study1Variable: initialData.studies?.[0]?.label ?? '',
         study1Description: initialData.studies?.[0]?.description ?? '',
-        study2Variable: initialData.studies?.[1]?.variable ?? '',
+        study2Variable: initialData.studies?.[1]?.label ?? '',
       });
     }
 

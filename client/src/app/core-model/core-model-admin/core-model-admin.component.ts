@@ -68,12 +68,12 @@ export class CoreModelAdminComponent
           studies: [
             {
               name: 'Study1',
-              variable: result.study1Variable,
+              label: result.study1Variable,
               description: result.study1Description,
             },
             {
               name: 'Study2',
-              variable: result.study2Variable,
+              label: result.study2Variable,
             },
           ],
         };
@@ -146,12 +146,12 @@ export class CoreModelAdminComponent
           studies: [
             {
               name: 'Study1',
-              variable: result.study1Variable,
+              label: result.study1Variable,
               description: result.study1Description,
             },
             {
               name: 'Study2',
-              variable: result.study2Variable,
+              label: result.study2Variable,
             },
           ],
         };

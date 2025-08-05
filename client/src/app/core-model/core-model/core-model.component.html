@@ -217,10 +217,10 @@
         <!-- Dynamic Study Columns -->
         @for (studyName of studyColumnNames; track studyName) {
         <ng-container
-          [matColumnDef]="this.tableService.toCamelCase(studyName) + 'Variable'"
+          [matColumnDef]="this.tableService.toCamelCase(studyName) + 'Label'"
         >
           <th mat-header-cell *matHeaderCellDef mat-sort-header>
-            {{ studyName }} Variable
+            {{ studyName }} Label
           </th>
           <td
             mat-cell
@@ -231,7 +231,7 @@
               this.tableService.getStudyField(
                 element,
                 this.tableService.toCamelCase(studyName),
-                "variable"
+                "label"
               )
             }}
           </td>
