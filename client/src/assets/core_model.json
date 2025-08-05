@@ -16,12 +16,12 @@
     "studies": [
       {
         "name": "Study1",
-        "variable": "Weight",
+        "label": "Weight",
         "description": "Body weight in kg"
       },
       {
         "name": "Study2",
-        "variable": "Weight (kgs)"
+        "label": "Weight (kgs)"
       }
     ]
   },
@@ -42,12 +42,12 @@
     "studies": [
       {
         "name": "Study1",
-        "variable": "Skeletal Muscle Mass",
+        "label": "Skeletal Muscle Mass",
         "description": "Skeletal muscle mass in kg"
       },
       {
         "name": "Study2",
-        "variable": "Skeletal muscle mass (kg)"
+        "label": "Skeletal muscle mass (kg)"
       }
     ]
   },
@@ -68,12 +68,12 @@
     "studies": [
       {
         "name": "Study1",
-        "variable": "Body Fat Percentage",
+        "label": "Body Fat Percentage",
         "description": "Body fat percentage"
       },
       {
         "name": "Study2",
-        "variable": "Percent body fat (%)"
+        "label": "Percent body fat (%)"
       }
     ]
   },
@@ -94,12 +94,12 @@
     "studies": [
       {
         "name": "Study1",
-        "variable": "Body Mass Index",
+        "label": "Body Mass Index",
         "description": "BMI calculated from height and weight"
       },
       {
         "name": "Study2",
-        "variable": "BMI (kg/m2)"
+        "label": "BMI (kg/m2)"
       }
     ]
   },
@@ -120,12 +120,12 @@
     "studies": [
       {
         "name": "Study1",
-        "variable": "Basal Metabolic Rate",
+        "label": "Basal Metabolic Rate",
         "description": "Calories burned at rest"
       },
       {
         "name": "Study2",
-        "variable": "Basal Metabolic Rate (kcals)"
+        "label": "Basal Metabolic Rate (kcals)"
       }
     ]
   },
@@ -146,12 +146,12 @@
     "studies": [
       {
         "name": "Study1",
-        "variable": "Total Body Water",
+        "label": "Total Body Water",
         "description": "Total body water in liters"
       },
       {
         "name": "Study2",
-        "variable": "Total body water (L)"
+        "label": "Total body water (L)"
       }
     ]
   },
@@ -172,12 +172,12 @@
     "studies": [
       {
         "name": "Study1",
-        "variable": "Extracellular Water",
+        "label": "Extracellular Water",
         "description": "Extracellular water in liters"
       },
       {
         "name": "Study2",
-        "variable": "Extracellular water (L)"
+        "label": "Extracellular water (L)"
       }
     ]
   },
@@ -198,12 +198,12 @@
     "studies": [
       {
         "name": "Study1",
-        "variable": "Intracellular Water",
+        "label": "Intracellular Water",
         "description": "Intracellular water in liters"
       },
       {
         "name": "Study2",
-        "variable": "Intracellular water (L)"
+        "label": "Intracellular water (L)"
       }
     ]
   },
@@ -224,12 +224,12 @@
     "studies": [
       {
         "name": "Study1",
-        "variable": "Visceral Fat Level",
+        "label": "Visceral Fat Level",
         "description": "Level of visceral fat"
       },
       {
         "name": "Study2",
-        "variable": ""
+        "label": ""
       }
     ]
   },
@@ -250,12 +250,12 @@
     "studies": [
       {
         "name": "Study1",
-        "variable": "Protein",
+        "label": "Protein",
         "description": "Protein content in kg"
       },
       {
         "name": "Study2",
-        "variable": ""
+        "label": ""
       }
     ]
   },
@@ -276,12 +276,12 @@
     "studies": [
       {
         "name": "Study1",
-        "variable": "Mineral",
+        "label": "Mineral",
         "description": "Total body minerals in kg"
       },
       {
         "name": "Study2",
-        "variable": ""
+        "label": ""
       }
     ]
   },
@@ -302,12 +302,12 @@
     "studies": [
       {
         "name": "Study1",
-        "variable": "Body Fat Mass",
+        "label": "Body Fat Mass",
         "description": "Total body fat in kg"
       },
       {
         "name": "Study2",
-        "variable": "Body fat mass (kg)"
+        "label": "Body fat mass (kg)"
       }
     ]
   },
@@ -328,12 +328,12 @@
     "studies": [
       {
         "name": "Study1",
-        "variable": "Segmental Lean Analysis (Right Arm)",
+        "label": "Segmental Lean Analysis (Right Arm)",
         "description": "Lean mass in right arm"
       },
       {
         "name": "Study2",
-        "variable": ""
+        "label": ""
       }
     ]
   },
@@ -354,12 +354,12 @@
     "studies": [
       {
         "name": "Study1",
-        "variable": "Segmental Lean Analysis (Left Arm)",
+        "label": "Segmental Lean Analysis (Left Arm)",
         "description": "Lean mass in left arm"
       },
       {
         "name": "Study2",
-        "variable": ""
+        "label": ""
       }
     ]
   },
@@ -380,12 +380,12 @@
     "studies": [
       {
         "name": "Study1",
-        "variable": "Segmental Lean Analysis (Trunk)",
+        "label": "Segmental Lean Analysis (Trunk)",
         "description": "Lean mass in trunk"
       },
       {
         "name": "Study2",
-        "variable": ""
+        "label": ""
       }
     ]
   },
@@ -406,12 +406,12 @@
     "studies": [
       {
         "name": "Study1",
-        "variable": "Segmental Lean Analysis (Right Leg)",
+        "label": "Segmental Lean Analysis (Right Leg)",
         "description": "Lean mass in right leg"
       },
       {
         "name": "Study2",
-        "variable": ""
+        "label": ""
       }
     ]
   },
@@ -432,12 +432,12 @@
     "studies": [
       {
         "name": "Study1",
-        "variable": "Segmental Lean Analysis (Left Leg)",
+        "label": "Segmental Lean Analysis (Left Leg)",
         "description": "Lean mass in left leg"
       },
       {
         "name": "Study2",
-        "variable": ""
+        "label": ""
       }
     ]
   },
@@ -458,12 +458,12 @@
     "studies": [
       {
         "name": "Study1",
-        "variable": "Phase Angle",
+        "label": "Phase Angle",
         "description": "Cell membrane integrity assessment"
       },
       {
         "name": "Study2",
-        "variable": ""
+        "label": ""
       }
     ]
   },
@@ -484,12 +484,12 @@
     "studies": [
       {
         "name": "Study1",
-        "variable": "ECW/TBW Ratio",
+        "label": "ECW/TBW Ratio",
         "description": "Extracellular water to total body water ratio"
       },
       {
         "name": "Study2",
-        "variable": "ECW/TBW (<1)"
+        "label": "ECW/TBW (<1)"
       }
     ]
   },
@@ -510,12 +510,12 @@
     "studies": [
       {
         "name": "Study1",
-        "variable": "",
+        "label": "",
         "description": "We would like a description of this abbreviation."
       },
       {
         "name": "Study2",
-        "variable": "MRN"
+        "label": "MRN"
       }
     ]
   },
@@ -536,12 +536,12 @@
     "studies": [
       {
         "name": "Study1",
-        "variable": "",
+        "label": "",
         "description": ""
       },
       {
         "name": "Study2",
-        "variable": "Subject ID"
+        "label": "Subject ID"
       }
     ]
   },
@@ -562,12 +562,12 @@
     "studies": [
       {
         "name": "Study1",
-        "variable": "",
+        "label": "",
         "description": ""
       },
       {
         "name": "Study2",
-        "variable": "Age (years)"
+        "label": "Age (years)"
       }
     ]
   },
@@ -588,12 +588,12 @@
     "studies": [
       {
         "name": "Study1",
-        "variable": "",
+        "label": "",
         "description": ""
       },
       {
         "name": "Study2",
-        "variable": "Gender"
+        "label": "Gender"
       }
     ]
   },
@@ -614,12 +614,12 @@
     "studies": [
       {
         "name": "Study1",
-        "variable": "",
+        "label": "",
         "description": ""
       },
       {
         "name": "Study2",
-        "variable": "Nationality"
+        "label": "Nationality"
       }
     ]
   },
@@ -640,12 +640,12 @@
     "studies": [
       {
         "name": "Study1",
-        "variable": "",
+        "label": "",
         "description": ""
       },
       {
         "name": "Study2",
-        "variable": "Occupation"
+        "label": "Occupation"
       }
     ]
   },
@@ -666,12 +666,12 @@
     "studies": [
       {
         "name": "Study1",
-        "variable": "",
+        "label": "",
         "description": ""
       },
       {
         "name": "Study2",
-        "variable": "Education Level"
+        "label": "Education Level"
       }
     ]
   },
@@ -692,12 +692,12 @@
     "studies": [
       {
         "name": "Study1",
-        "variable": "",
+        "label": "",
         "description": ""
       },
       {
         "name": "Study2",
-        "variable": "BP S/D (mm Hg)"
+        "label": "BP S/D (mm Hg)"
       }
     ]
   },
@@ -718,12 +718,12 @@
     "studies": [
       {
         "name": "Study1",
-        "variable": "",
+        "label": "",
         "description": ""
       },
       {
         "name": "Study2",
-        "variable": "HR (beats/min)"
+        "label": "HR (beats/min)"
       }
     ]
   },
@@ -744,12 +744,12 @@
     "studies": [
       {
         "name": "Study1",
-        "variable": "",
+        "label": "",
         "description": ""
       },
       {
         "name": "Study2",
-        "variable": "RR (breaths/mins)"
+        "label": "RR (breaths/mins)"
       }
     ]
   },
@@ -770,12 +770,12 @@
     "studies": [
       {
         "name": "Study1",
-        "variable": "",
+        "label": "",
         "description": ""
       },
       {
         "name": "Study2",
-        "variable": "O2 (%)"
+        "label": "O2 (%)"
       }
     ]
   },
@@ -796,12 +796,12 @@
     "studies": [
       {
         "name": "Study1",
-        "variable": "",
+        "label": "",
         "description": ""
       },
       {
         "name": "Study2",
-        "variable": "Temp (oC)"
+        "label": "Temp (oC)"
       }
     ]
   },
@@ -822,12 +822,12 @@
     "studies": [
       {
         "name": "Study1",
-        "variable": "",
+        "label": "",
         "description": ""
       },
       {
         "name": "Study2",
-        "variable": "InBody score (x/100)"
+        "label": "InBody score (x/100)"
       }
     ]
   },
@@ -848,12 +848,12 @@
     "studies": [
       {
         "name": "Study1",
-        "variable": "",
+        "label": "",
         "description": ""
       },
       {
         "name": "Study2",
-        "variable": "Visceral Fat Area (cm2)"
+        "label": "Visceral Fat Area (cm2)"
       }
     ]
   },
@@ -874,12 +874,12 @@
     "studies": [
       {
         "name": "Study1",
-        "variable": "",
+        "label": "",
         "description": ""
       },
       {
         "name": "Study2",
-        "variable": "Waist to Hip ratio (Number) Inbody"
+        "label": "Waist to Hip ratio (Number) Inbody"
       }
     ]
   },
@@ -900,12 +900,12 @@
     "studies": [
       {
         "name": "Study1",
-        "variable": "",
+        "label": "",
         "description": ""
       },
       {
         "name": "Study2",
-        "variable": "Target weight (kgs)"
+        "label": "Target weight (kgs)"
       }
     ]
   },
@@ -926,12 +926,12 @@
     "studies": [
       {
         "name": "Study1",
-        "variable": "",
+        "label": "",
         "description": ""
       },
       {
         "name": "Study2",
-        "variable": "Weight control (kgs)"
+        "label": "Weight control (kgs)"
       }
     ]
   },
@@ -952,12 +952,12 @@
     "studies": [
       {
         "name": "Study1",
-        "variable": "",
+        "label": "",
         "description": ""
       },
       {
         "name": "Study2",
-        "variable": "Fat control (kgs)"
+        "label": "Fat control (kgs)"
       }
     ]
   },
@@ -978,12 +978,12 @@
     "studies": [
       {
         "name": "Study1",
-        "variable": "",
+        "label": "",
         "description": ""
       },
       {
         "name": "Study2",
-        "variable": "Muscle control (kgs)"
+        "label": "Muscle control (kgs)"
       }
     ]
   },
@@ -1004,12 +1004,12 @@
     "studies": [
       {
         "name": "Study1",
-        "variable": "",
-        "description": "It is unclear whether this refers to a specific test or a general retinal scan. If a particular software or specialized tool is used for this assessment, it would be helpful to define a variable name and provide a clear description within the core model to avoid confusion with similar tests."
+        "label": "",
+        "description": "It is unclear whether this refers to a specific test or a general retinal scan. If a particular software or specialized tool is used for this assessment, it would be helpful to define a label name and provide a clear description within the core model to avoid confusion with similar tests."
       },
       {
         "name": "Study2",
-        "variable": "Retina scan-BioAge Results"
+        "label": "Retina scan-BioAge Results"
       }
     ]
   },
@@ -1030,12 +1030,12 @@
     "studies": [
       {
         "name": "Study1",
-        "variable": "",
+        "label": "",
         "description": ""
       },
       {
         "name": "Study2",
-        "variable": "Visual acquity (20/20) Snellen chart LEFT"
+        "label": "Visual acquity (20/20) Snellen chart LEFT"
       }
     ]
   },
@@ -1056,12 +1056,12 @@
     "studies": [
       {
         "name": "Study1",
-        "variable": "",
+        "label": "",
         "description": ""
       },
       {
         "name": "Study2",
-        "variable": "Visual acquity (20/20) Snellen chart RIGHT"
+        "label": "Visual acquity (20/20) Snellen chart RIGHT"
       }
     ]
   },
@@ -1082,12 +1082,12 @@
     "studies": [
       {
         "name": "Study1",
-        "variable": "",
+        "label": "",
         "description": ""
       },
       {
         "name": "Study2",
-        "variable": "Shoebox Hearing Test LEFT Ear"
+        "label": "Shoebox Hearing Test LEFT Ear"
       }
     ]
   },
@@ -1108,12 +1108,12 @@
     "studies": [
       {
         "name": "Study1",
-        "variable": "",
+        "label": "",
         "description": ""
       },
       {
         "name": "Study2",
-        "variable": "Shoebox Hearing Test RIGHT Ear"
+        "label": "Shoebox Hearing Test RIGHT Ear"
       }
     ]
   },
@@ -1134,12 +1134,12 @@
     "studies": [
       {
         "name": "Study1",
-        "variable": "",
+        "label": "",
         "description": ""
       },
       {
         "name": "Study2",
-        "variable": "Allergies"
+        "label": "Allergies"
       }
     ]
   },
@@ -1160,12 +1160,12 @@
     "studies": [
       {
         "name": "Study1",
-        "variable": "",
+        "label": "",
         "description": ""
       },
       {
         "name": "Study2",
-        "variable": "Medical History"
+        "label": "Medical History"
       }
     ]
   },
@@ -1186,12 +1186,12 @@
     "studies": [
       {
         "name": "Study1",
-        "variable": "",
+        "label": "",
         "description": ""
       },
       {
         "name": "Study2",
-        "variable": "Surgical History"
+        "label": "Surgical History"
       }
     ]
   },
@@ -1212,12 +1212,12 @@
     "studies": [
       {
         "name": "Study1",
-        "variable": "",
+        "label": "",
         "description": ""
       },
       {
         "name": "Study2",
-        "variable": "Family History"
+        "label": "Family History"
       }
     ]
   },
@@ -1238,12 +1238,12 @@
     "studies": [
       {
         "name": "Study1",
-        "variable": "",
+        "label": "",
         "description": ""
       },
       {
         "name": "Study2",
-        "variable": "Falls Assessment"
+        "label": "Falls Assessment"
       }
     ]
   },
@@ -1264,12 +1264,12 @@
     "studies": [
       {
         "name": "Study1",
-        "variable": "",
+        "label": "",
         "description": ""
       },
       {
         "name": "Study2",
-        "variable": "Pain Assessment"
+        "label": "Pain Assessment"
       }
     ]
   },
@@ -1290,12 +1290,12 @@
     "studies": [
       {
         "name": "Study1",
-        "variable": "",
+        "label": "",
         "description": "Please specify which version of the MoCA test will be used in the study."
       },
       {
         "name": "Study2",
-        "variable": "MOCA (55-85 years) Normal \u2265 26/30 (x/30)"
+        "label": "MOCA (55-85 years) Normal \u2265 26/30 (x/30)"
       }
     ]
   },
@@ -1316,12 +1316,12 @@
     "studies": [
       {
         "name": "Study1",
-        "variable": "",
+        "label": "",
         "description": "We would appreciate a description of this abbreviation."
       },
       {
         "name": "Study2",
-        "variable": "ACLM long form"
+        "label": "ACLM long form"
       }
     ]
   },
@@ -1342,12 +1342,12 @@
     "studies": [
       {
         "name": "Study1",
-        "variable": "",
+        "label": "",
         "description": ""
       },
       {
         "name": "Study2",
-        "variable": "Diagnoses"
+        "label": "Diagnoses"
       }
     ]
   },
@@ -1368,12 +1368,12 @@
     "studies": [
       {
         "name": "Study1",
-        "variable": "",
+        "label": "",
         "description": ""
       },
       {
         "name": "Study2",
-        "variable": "Diagnoses ICD Codes"
+        "label": "Diagnoses ICD Codes"
       }
     ]
   },
@@ -1394,12 +1394,12 @@
     "studies": [
       {
         "name": "Study1",
-        "variable": "",
+        "label": "",
         "description": ""
       },
       {
         "name": "Study2",
-        "variable": "Diabetes Mellitus"
+        "label": "Diabetes Mellitus"
       }
     ]
   },
@@ -1420,12 +1420,12 @@
     "studies": [
       {
         "name": "Study1",
-        "variable": "",
+        "label": "",
         "description": ""
       },
       {
         "name": "Study2",
-        "variable": "Hypertension"
+        "label": "Hypertension"
       }
     ]
   },
@@ -1446,12 +1446,12 @@
     "studies": [
       {
         "name": "Study1",
-        "variable": "",
+        "label": "",
         "description": "Please indicate the data type that will be used to record this (e.g., boolean, list, etc.)."
       },
       {
         "name": "Study2",
-        "variable": "Cardiovascular disease"
+        "label": "Cardiovascular disease"
       }
     ]
   },
@@ -1472,12 +1472,12 @@
     "studies": [
       {
         "name": "Study1",
-        "variable": "",
+        "label": "",
         "description": ""
       },
       {
         "name": "Study2",
-        "variable": "Dyslipidemia"
+        "label": "Dyslipidemia"
       }
     ]
   },
@@ -1498,12 +1498,12 @@
     "studies": [
       {
         "name": "Study1",
-        "variable": "",
+        "label": "",
         "description": ""
       },
       {
         "name": "Study2",
-        "variable": "Obesity"
+        "label": "Obesity"
       }
     ]
   },
@@ -1524,12 +1524,12 @@
     "studies": [
       {
         "name": "Study1",
-        "variable": "",
+        "label": "",
         "description": ""
       },
       {
         "name": "Study2",
-        "variable": "Chronic Kidney Disease"
+        "label": "Chronic Kidney Disease"
       }
     ]
   },
@@ -1550,12 +1550,12 @@
     "studies": [
       {
         "name": "Study1",
-        "variable": "",
+        "label": "",
         "description": ""
       },
       {
         "name": "Study2",
-        "variable": "CPET Status"
+        "label": "CPET Status"
       }
     ]
   },
@@ -1576,12 +1576,12 @@
     "studies": [
       {
         "name": "Study1",
-        "variable": "",
+        "label": "",
         "description": ""
       },
       {
         "name": "Study2",
-        "variable": "CPET Absolute VO\u2082 max (L/min)"
+        "label": "CPET Absolute VO\u2082 max (L/min)"
       }
     ]
   },
@@ -1602,12 +1602,12 @@
     "studies": [
       {
         "name": "Study1",
-        "variable": "",
+        "label": "",
         "description": ""
       },
       {
         "name": "Study2",
-        "variable": "CPET Relative VO\u2082 max (mL/kg/min)"
+        "label": "CPET Relative VO\u2082 max (mL/kg/min)"
       }
     ]
   },
@@ -1628,12 +1628,12 @@
     "studies": [
       {
         "name": "Study1",
-        "variable": "",
+        "label": "",
         "description": "We would like to know if this is a part of standard test and, if so, the specific test name. If not, we would appreciate details on the procedure used to obtain this score, as well as an explanation of what the score represents."
       },
       {
         "name": "Study2",
-        "variable": "Hand Grip Score"
+        "label": "Hand Grip Score"
       }
     ]
   },
@@ -1654,12 +1654,12 @@
     "studies": [
       {
         "name": "Study1",
-        "variable": "",
-        "description": "We would like to know if this is a part of standard test and, if so, the specific test name. If not, we would appreciate information on how this measurement is conducted to define the variable clearly."
+        "label": "",
+        "description": "We would like to know if this is a part of standard test and, if so, the specific test name. If not, we would appreciate information on how this measurement is conducted to define the label clearly."
       },
       {
         "name": "Study2",
-        "variable": "Kinemo"
+        "label": "Kinemo"
       }
     ]
   },
@@ -1680,12 +1680,12 @@
     "studies": [
       {
         "name": "Study1",
-        "variable": "",
+        "label": "",
         "description": ""
       },
       {
         "name": "Study2",
-        "variable": "ECG"
+        "label": "ECG"
       }
     ]
   },
@@ -1706,12 +1706,12 @@
     "studies": [
       {
         "name": "Study1",
-        "variable": "",
+        "label": "",
         "description": ""
       },
       {
         "name": "Study2",
-        "variable": "MRI"
+        "label": "MRI"
       }
     ]
   },
@@ -1732,12 +1732,12 @@
     "studies": [
       {
         "name": "Study1",
-        "variable": "",
+        "label": "",
         "description": ""
       },
       {
         "name": "Study2",
-        "variable": "Bone Mineral Content (BMC) (gms)"
+        "label": "Bone Mineral Content (BMC) (gms)"
       }
     ]
   },
@@ -1758,12 +1758,12 @@
     "studies": [
       {
         "name": "Study1",
-        "variable": "",
+        "label": "",
         "description": ""
       },
       {
         "name": "Study2",
-        "variable": "Bone Mineral Density (BMD)( (g/cm2)"
+        "label": "Bone Mineral Density (BMD)( (g/cm2)"
       }
     ]
   },
@@ -1784,12 +1784,12 @@
     "studies": [
       {
         "name": "Study1",
-        "variable": "",
+        "label": "",
         "description": ""
       },
       {
         "name": "Study2",
-        "variable": "T-score"
+        "label": "T-score"
       }
     ]
   },
@@ -1810,12 +1810,12 @@
     "studies": [
       {
         "name": "Study1",
-        "variable": "",
+        "label": "",
         "description": ""
       },
       {
         "name": "Study2",
-        "variable": "Z-score"
+        "label": "Z-score"
       }
     ]
   },
@@ -1836,12 +1836,12 @@
     "studies": [
       {
         "name": "Study1",
-        "variable": "",
+        "label": "",
         "description": ""
       },
       {
         "name": "Study2",
-        "variable": "Fat mass (gms)"
+        "label": "Fat mass (gms)"
       }
     ]
   },
@@ -1862,12 +1862,12 @@
     "studies": [
       {
         "name": "Study1",
-        "variable": "",
+        "label": "",
         "description": ""
       },
       {
         "name": "Study2",
-        "variable": "Lean mass + BMC (gms)"
+        "label": "Lean mass + BMC (gms)"
       }
     ]
   },
@@ -1888,12 +1888,12 @@
     "studies": [
       {
         "name": "Study1",
-        "variable": "",
+        "label": "",
         "description": ""
       },
       {
         "name": "Study2",
-        "variable": "Total body fat %"
+        "label": "Total body fat %"
       }
     ]
   },
@@ -1914,12 +1914,12 @@
     "studies": [
       {
         "name": "Study1",
-        "variable": "",
+        "label": "",
         "description": ""
       },
       {
         "name": "Study2",
-        "variable": "HRV (ms)"
+        "label": "HRV (ms)"
       }
     ]
   },
@@ -1940,12 +1940,12 @@
     "studies": [
       {
         "name": "Study1",
-        "variable": "",
+        "label": "",
         "description": ""
       },
       {
         "name": "Study2",
-        "variable": "Resiratory rate (rpm)"
+        "label": "Resiratory rate (rpm)"
       }
     ]
   },
@@ -1966,12 +1966,12 @@
     "studies": [
       {
         "name": "Study1",
-        "variable": "",
+        "label": "",
         "description": ""
       },
       {
         "name": "Study2",
-        "variable": "Resting heart rate (bpm)"
+        "label": "Resting heart rate (bpm)"
       }
     ]
   },
@@ -1992,12 +1992,12 @@
     "studies": [
       {
         "name": "Study1",
-        "variable": "",
+        "label": "",
         "description": ""
       },
       {
         "name": "Study2",
-        "variable": "Sleep consistency (%)"
+        "label": "Sleep consistency (%)"
       }
     ]
   },
@@ -2018,12 +2018,12 @@
     "studies": [
       {
         "name": "Study1",
-        "variable": "",
+        "label": "",
         "description": ""
       },
       {
         "name": "Study2",
-        "variable": "Sleep duration (hrs and mins)"
+        "label": "Sleep duration (hrs and mins)"
       }
     ]
   },
@@ -2044,12 +2044,12 @@
     "studies": [
       {
         "name": "Study1",
-        "variable": "",
+        "label": "",
         "description": ""
       },
       {
         "name": "Study2",
-        "variable": "Restorative sleep (hrs and mins)"
+        "label": "Restorative sleep (hrs and mins)"
       }
     ]
   },
@@ -2070,12 +2070,12 @@
     "studies": [
       {
         "name": "Study1",
-        "variable": "",
+        "label": "",
         "description": ""
       },
       {
         "name": "Study2",
-        "variable": "Recovery (%)"
+        "label": "Recovery (%)"
       }
     ]
   },
@@ -2096,12 +2096,12 @@
     "studies": [
       {
         "name": "Study1",
-        "variable": "",
+        "label": "",
         "description": "As we understand it, this data comes from a wearable device manufactured by WHOOP. We would like to know what qualifies as a high stress zone and what parameters are used to determine it."
       },
       {
         "name": "Study2",
-        "variable": "High stress zone (hrs and mins)"
+        "label": "High stress zone (hrs and mins)"
       }
     ]
   },
@@ -2122,12 +2122,12 @@
     "studies": [
       {
         "name": "Study1",
-        "variable": "",
+        "label": "",
         "description": ""
       },
       {
         "name": "Study2",
-        "variable": "Daily aerobic activity (mins)"
+        "label": "Daily aerobic activity (mins)"
       }
     ]
   },
@@ -2148,12 +2148,12 @@
     "studies": [
       {
         "name": "Study1",
-        "variable": "",
+        "label": "",
         "description": ""
       },
       {
         "name": "Study2",
-        "variable": "Strain Score"
+        "label": "Strain Score"
       }
     ]
   },
@@ -2174,12 +2174,12 @@
     "studies": [
       {
         "name": "Study1",
-        "variable": "",
+        "label": "",
         "description": ""
       },
       {
         "name": "Study2",
-        "variable": "Health Locus of Control 1"
+        "label": "Health Locus of Control 1"
       }
     ]
   },
@@ -2200,12 +2200,12 @@
     "studies": [
       {
         "name": "Study1",
-        "variable": "",
+        "label": "",
         "description": ""
       },
       {
         "name": "Study2",
-        "variable": "Health Locus of Control 2"
+        "label": "Health Locus of Control 2"
       }
     ]
   },
@@ -2226,12 +2226,12 @@
     "studies": [
       {
         "name": "Study1",
-        "variable": "",
+        "label": "",
         "description": ""
       },
       {
         "name": "Study2",
-        "variable": "Health Locus of Control 3"
+        "label": "Health Locus of Control 3"
       }
     ]
   },
@@ -2252,12 +2252,12 @@
     "studies": [
       {
         "name": "Study1",
-        "variable": "",
+        "label": "",
         "description": ""
       },
       {
         "name": "Study2",
-        "variable": "Health Locus of Control 4"
+        "label": "Health Locus of Control 4"
       }
     ]
   },
@@ -2278,12 +2278,12 @@
     "studies": [
       {
         "name": "Study1",
-        "variable": "",
+        "label": "",
         "description": ""
       },
       {
         "name": "Study2",
-        "variable": "Health Locus of Control 5"
+        "label": "Health Locus of Control 5"
       }
     ]
   },
@@ -2304,12 +2304,12 @@
     "studies": [
       {
         "name": "Study1",
-        "variable": "",
+        "label": "",
         "description": ""
       },
       {
         "name": "Study2",
-        "variable": "Health Locus of Control 6"
+        "label": "Health Locus of Control 6"
       }
     ]
   },
@@ -2330,12 +2330,12 @@
     "studies": [
       {
         "name": "Study1",
-        "variable": "",
+        "label": "",
         "description": ""
       },
       {
         "name": "Study2",
-        "variable": "Health Locus of Control 7"
+        "label": "Health Locus of Control 7"
       }
     ]
   },
@@ -2356,12 +2356,12 @@
     "studies": [
       {
         "name": "Study1",
-        "variable": "",
+        "label": "",
         "description": ""
       },
       {
         "name": "Study2",
-        "variable": "Health Locus of Control 8"
+        "label": "Health Locus of Control 8"
       }
     ]
   },
@@ -2382,12 +2382,12 @@
     "studies": [
       {
         "name": "Study1",
-        "variable": "",
+        "label": "",
         "description": ""
       },
       {
         "name": "Study2",
-        "variable": "Health Locus of Control 9"
+        "label": "Health Locus of Control 9"
       }
     ]
   },
@@ -2408,12 +2408,12 @@
     "studies": [
       {
         "name": "Study1",
-        "variable": "",
+        "label": "",
         "description": ""
       },
       {
         "name": "Study2",
-        "variable": "Health Locus of Control 10"
+        "label": "Health Locus of Control 10"
       }
     ]
   },
@@ -2434,12 +2434,12 @@
     "studies": [
       {
         "name": "Study1",
-        "variable": "",
+        "label": "",
         "description": ""
       },
       {
         "name": "Study2",
-        "variable": "Health Locus of Control 11"
+        "label": "Health Locus of Control 11"
       }
     ]
   },
@@ -2460,12 +2460,12 @@
     "studies": [
       {
         "name": "Study1",
-        "variable": "",
+        "label": "",
         "description": ""
       },
       {
         "name": "Study2",
-        "variable": "Health Locus of Control 12"
+        "label": "Health Locus of Control 12"
       }
     ]
   },
@@ -2486,12 +2486,12 @@
     "studies": [
       {
         "name": "Study1",
-        "variable": "",
+        "label": "",
         "description": ""
       },
       {
         "name": "Study2",
-        "variable": "Health Locus of Control 13"
+        "label": "Health Locus of Control 13"
       }
     ]
   },
@@ -2512,12 +2512,12 @@
     "studies": [
       {
         "name": "Study1",
-        "variable": "",
+        "label": "",
         "description": ""
       },
       {
         "name": "Study2",
-        "variable": "Health Locus of Control 14"
+        "label": "Health Locus of Control 14"
       }
     ]
   },
@@ -2538,12 +2538,12 @@
     "studies": [
       {
         "name": "Study1",
-        "variable": "",
+        "label": "",
         "description": ""
       },
       {
         "name": "Study2",
-        "variable": "Health Locus of Control 15"
+        "label": "Health Locus of Control 15"
       }
     ]
   },
@@ -2564,12 +2564,12 @@
     "studies": [
       {
         "name": "Study1",
-        "variable": "",
+        "label": "",
         "description": ""
       },
       {
         "name": "Study2",
-        "variable": "Health Locus of Control 16"
+        "label": "Health Locus of Control 16"
       }
     ]
   },
@@ -2590,12 +2590,12 @@
     "studies": [
       {
         "name": "Study1",
-        "variable": "",
+        "label": "",
         "description": ""
       },
       {
         "name": "Study2",
-        "variable": "Health Locus of Control 17"
+        "label": "Health Locus of Control 17"
       }
     ]
   },
@@ -2616,12 +2616,12 @@
     "studies": [
       {
         "name": "Study1",
-        "variable": "",
+        "label": "",
         "description": ""
       },
       {
         "name": "Study2",
-        "variable": "Health Locus of Control 18"
+        "label": "Health Locus of Control 18"
       }
     ]
   },
@@ -2642,12 +2642,12 @@
     "studies": [
       {
         "name": "Study1",
-        "variable": "",
+        "label": "",
         "description": "Which version of the EuroQol Questionnaire will be used in the study"
       },
       {
         "name": "Study2",
-        "variable": "Mobility"
+        "label": "Mobility"
       }
     ]
   },
@@ -2668,12 +2668,12 @@
     "studies": [
       {
         "name": "Study1",
-        "variable": "",
+        "label": "",
         "description": "Which version of the EuroQol Questionnaire will be used in the study"
       },
       {
         "name": "Study2",
-        "variable": "Self-Care"
+        "label": "Self-Care"
       }
     ]
   },
@@ -2694,12 +2694,12 @@
     "studies": [
       {
         "name": "Study1",
-        "variable": "",
+        "label": "",
         "description": "Which version of the EuroQol Questionnaire will be used in the study"
       },
       {
         "name": "Study2",
-        "variable": "Usual Activities"
+        "label": "Usual Activities"
       }
     ]
   },
@@ -2720,12 +2720,12 @@
     "studies": [
       {
         "name": "Study1",
-        "variable": "",
+        "label": "",
         "description": "Which version of the EuroQol Questionnaire will be used in the study"
       },
       {
         "name": "Study2",
-        "variable": "Pain/Discomfort"
+        "label": "Pain/Discomfort"
       }
     ]
   },
@@ -2746,12 +2746,12 @@
     "studies": [
       {
         "name": "Study1",
-        "variable": "",
+        "label": "",
         "description": "Which version of the EuroQol Questionnaire will be used in the study"
       },
       {
         "name": "Study2",
-        "variable": "Anxiety/Depression"
+        "label": "Anxiety/Depression"
       }
     ]
   },
@@ -2772,12 +2772,12 @@
     "studies": [
       {
         "name": "Study1",
-        "variable": "",
+        "label": "",
         "description": "Which version of the EuroQol Questionnaire will be used in the study"
       },
       {
         "name": "Study2",
-        "variable": "Health Today (0-100)"
+        "label": "Health Today (0-100)"
       }
     ]
   },
@@ -2798,12 +2798,12 @@
     "studies": [
       {
         "name": "Study1",
-        "variable": "",
+        "label": "",
         "description": ""
       },
       {
         "name": "Study2",
-        "variable": "QRISK Score"
+        "label": "QRISK Score"
       }
     ]
   },
@@ -2824,12 +2824,12 @@
     "studies": [
       {
         "name": "Study1",
-        "variable": "",
+        "label": "",
         "description": ""
       },
       {
         "name": "Study2",
-        "variable": "Total Risk Score"
+        "label": "Total Risk Score"
       }
     ]
   },
@@ -2850,12 +2850,12 @@
     "studies": [
       {
         "name": "Study1",
-        "variable": "",
+        "label": "",
         "description": ""
       },
       {
         "name": "Study2",
-        "variable": "Interpretation (Risk Category)"
+        "label": "Interpretation (Risk Category)"
       }
     ]
   }

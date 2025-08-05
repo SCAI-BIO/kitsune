@@ -1,25 +1,28 @@
 import { inject, Injectable } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 
+import { CoreModelTableService } from './core-model-table.service';
 import { ExtendCdmDialogComponent } from '../extend-cdm-dialog/extend-cdm-dialog.component';
 import { CoreModel } from '../interfaces/core-model';
 
 @Injectable({ providedIn: 'root' })
 export class CoreModelDialogService {
   private dialog = inject(MatDialog);
+  private tableService = inject(CoreModelTableService);
 
   openExtendDialog(
     existingLabels: string[],
-    initialData?: CoreModel
+    initialData?: CoreModel,
+    studyColumnNames: string[] = []
   ): MatDialogRef<ExtendCdmDialogComponent> {
     const ref = this.dialog.open(ExtendCdmDialogComponent, {
       width: '1800px',
-      data: { existingLabels },
+      data: { existingLabels, studyColumnNames },
     });
 
     if (initialData) {
-      ref.componentInstance.existingLabels = existingLabels;
-      ref.componentInstance.form.patchValue({
+      // Base patch values
+      const patchData: Record<string, string> = {
         id: initialData.id,
         label: initialData.label,
         description: initialData.description,
@@ -29,10 +32,18 @@ export class CoreModelDialogService {
         ohdsiId: initialData.ohdsi?.id ?? '',
         ohdsiLabel: initialData.ohdsi?.label ?? '',
         ohdsiDomain: initialData.ohdsi?.domain ?? '',
-        study1Variable: initialData.studies?.[0]?.variable ?? '',
-        study1Description: initialData.studies?.[0]?.description ?? '',
-        study2Variable: initialData.studies?.[1]?.variable ?? '',
-      });
+      };
+
+      for (const study of studyColumnNames) {
+        const camel = this.tableService.toCamelCase(study);
+        patchData[`${camel}Label`] =
+          initialData.studies?.find((s) => s.name === study)?.label ?? '';
+        patchData[`${camel}Description`] =
+          initialData.studies?.find((s) => s.name === study)?.description ?? '';
+      }
+
+      ref.componentInstance.existingLabels = existingLabels;
+      ref.componentInstance.form.patchValue(patchData);
     }
 
     return ref;

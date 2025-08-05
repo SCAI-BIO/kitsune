@@ -114,11 +114,11 @@ export class FileService {
       for (const [key, value] of Object.entries(row)) {
         if (fixedKeys.has(key)) continue;
 
-        // Match camelCase pattern like studyVariable or studyDescription
-        const match = key.match(/^([a-zA-Z0-9]+)(Variable|Description)$/);
+        // Match camelCase pattern like studyLabel or studyDescription
+        const match = key.match(/^([a-zA-Z0-9]+)(Label|Description)$/);
         if (match) {
           const studyName = match[1];
-          const field = match[2].toLowerCase() as 'variable' | 'description';
+          const field = match[2].toLowerCase() as 'label' | 'description';
 
           if (!studiesMap[studyName]) {
             studiesMap[studyName] = { name: studyName };

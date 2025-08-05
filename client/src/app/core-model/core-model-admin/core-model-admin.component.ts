@@ -1,3 +1,4 @@
+import { UpperCasePipe } from '@angular/common';
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
@@ -21,6 +22,7 @@ import { CoreModel } from '../../interfaces/core-model';
     MatProgressSpinnerModule,
     MatSortModule,
     MatTableModule,
+    UpperCasePipe,
   ],
   templateUrl: './core-model-admin.component.html',
   styleUrl: './core-model-admin.component.scss',
@@ -47,7 +49,11 @@ export class CoreModelAdminComponent
       .filter((r) => r.id !== row.id)
       .map((r) => r.label);
 
-    const dialogRef = this.dialogService.openExtendDialog(existingLabels, row);
+    const dialogRef = this.dialogService.openExtendDialog(
+      existingLabels,
+      row,
+      this.studyColumnNames
+    );
 
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
@@ -65,17 +71,14 @@ export class CoreModelAdminComponent
             label: result.ohdsiLabel,
             domain: result.ohdsiDomain,
           },
-          studies: [
-            {
-              name: 'Study1',
-              variable: result.study1Variable,
-              description: result.study1Description,
-            },
-            {
-              name: 'Study2',
-              variable: result.study2Variable,
-            },
-          ],
+          studies: this.studyColumnNames.map((studyName) => {
+            const camel = this.tableService.toCamelCase(studyName);
+            return {
+              name: studyName,
+              label: result[`${camel}Label`] ?? '',
+              description: result[`${camel}Description`] ?? '',
+            };
+          }),
         };
 
         // Replace the existing row
@@ -125,7 +128,11 @@ export class CoreModelAdminComponent
 
   openExtendCdmDialog(): void {
     const existingLabels = this.dataSource.data.map((row) => row.label);
-    const dialogRef = this.dialogService.openExtendDialog(existingLabels);
+    const dialogRef = this.dialogService.openExtendDialog(
+      existingLabels,
+      undefined,
+      this.studyColumnNames
+    );
 
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
@@ -143,17 +150,14 @@ export class CoreModelAdminComponent
             label: result.ohdsiLabel,
             domain: result.ohdsiDomain,
           },
-          studies: [
-            {
-              name: 'Study1',
-              variable: result.study1Variable,
-              description: result.study1Description,
-            },
-            {
-              name: 'Study2',
-              variable: result.study2Variable,
-            },
-          ],
+          studies: this.studyColumnNames.map((studyName) => {
+            const camel = this.tableService.toCamelCase(studyName);
+            return {
+              name: studyName,
+              label: result[`${camel}Label`] ?? '',
+              description: result[`${camel}Description`] ?? '',
+            };
+          }),
         };
 
         this.initializeDataSource(

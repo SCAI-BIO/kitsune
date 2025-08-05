@@ -44,20 +44,28 @@ export class CoreModelBase {
     this.fileService.downloadCsv(
       this.dataSource.data,
       'core-model.csv',
-      (model) => ({
-        id: model.id,
-        label: model.label,
-        description: model.description,
-        olsId: model.ols?.id ?? '',
-        olsLabel: model.ols?.label ?? '',
-        olsDescription: model.ols?.description ?? '',
-        ohdsiId: model.ohdsi?.id ?? '',
-        ohdsiLabel: model.ohdsi?.label ?? '',
-        ohdsiDomain: model.ohdsi?.domain ?? '',
-        study1Variable: model.studies?.[0]?.variable ?? '',
-        study1Description: model.studies?.[0]?.description ?? '',
-        study2Variable: model.studies?.[1]?.variable ?? '',
-      })
+      (model) => {
+        const base = {
+          id: model.id,
+          label: model.label,
+          description: model.description,
+          olsId: model.ols?.id ?? '',
+          olsLabel: model.ols?.label ?? '',
+          olsDescription: model.ols?.description ?? '',
+          ohdsiId: model.ohdsi?.id ?? '',
+          ohdsiLabel: model.ohdsi?.label ?? '',
+          ohdsiDomain: model.ohdsi?.domain ?? '',
+        };
+
+        const studies = (model.studies ?? []).reduce((acc, study) => {
+          if (!study.name) return acc;
+          acc[`${study.name}Label`] = study.label ?? '';
+          acc[`${study.name}Description`] = study.description ?? '';
+          return acc;
+        }, {} as Record<string, string>);
+
+        return { ...base, ...studies };
+      }
     );
   }
 

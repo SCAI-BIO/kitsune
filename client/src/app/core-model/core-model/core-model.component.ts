@@ -1,3 +1,4 @@
+import { UpperCasePipe } from '@angular/common';
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
@@ -13,6 +14,7 @@ import { CoreModelBase } from '../base/core-model-base';
   selector: 'app-core-model-table',
   standalone: true,
   imports: [
+    UpperCasePipe,
     MatFormFieldModule,
     MatIconModule,
     MatInputModule,

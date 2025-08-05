@@ -12,7 +12,7 @@ export interface Ohdsi {
 
 export interface Study {
   name: string;
-  variable: string;
+  label: string;
   description?: string;
 }
 
