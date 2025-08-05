@@ -10,6 +10,7 @@ import { MatTableModule } from '@angular/material/table';
 
 import { CoreModelBase } from '../base/core-model-base';
 import { CoreModel } from '../../interfaces/core-model';
+import { MatSelectModule } from '@angular/material/select';
 
 @Component({
   selector: 'app-core-model-table',
@@ -20,6 +21,7 @@ import { CoreModel } from '../../interfaces/core-model';
     MatInputModule,
     MatPaginatorModule,
     MatProgressSpinnerModule,
+    MatSelectModule,
     MatSortModule,
     MatTableModule,
     UpperCasePipe,
@@ -97,7 +99,7 @@ export class CoreModelAdminComponent
 
   ngOnInit(): void {
     setTimeout(() => {
-      this.init(this.sort, this.paginator);
+      this.init();
     });
   }
 
