@@ -220,7 +220,7 @@
           [matColumnDef]="this.tableService.toCamelCase(studyName) + 'Label'"
         >
           <th mat-header-cell *matHeaderCellDef mat-sort-header>
-            {{ studyName }} Label
+            {{ studyName | uppercase }} Label
           </th>
           <td
             mat-cell
@@ -243,7 +243,7 @@
           "
         >
           <th mat-header-cell *matHeaderCellDef mat-sort-header>
-            {{ studyName }} Description
+            {{ studyName | uppercase }} Description
           </th>
           <td
             mat-cell
