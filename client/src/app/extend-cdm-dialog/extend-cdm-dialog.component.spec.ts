@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
 import { of } from 'rxjs';
 
@@ -14,6 +14,13 @@ describe('ExtendCdmDialogComponent', () => {
     await TestBed.configureTestingModule({
       imports: [ExtendCdmDialogComponent],
       providers: [
+        {
+          provide: MAT_DIALOG_DATA,
+          useValue: {
+            existingLabels: [],
+            studyColumnNames: [],
+          },
+        },
         { provide: MatDialogRef, useValue: { close: jasmine.createSpy() } },
         {
           provide: OntologyApiService,
