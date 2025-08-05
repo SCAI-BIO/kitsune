@@ -1,25 +1,14 @@
-import { HttpClient } from '@angular/common/http';
-import { Component, inject, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSort, MatSortModule } from '@angular/material/sort';
-import { MatTableDataSource, MatTableModule } from '@angular/material/table';
-import { RouterModule } from '@angular/router';
+import { MatTableModule } from '@angular/material/table';
 
-import { Subscription } from 'rxjs';
-
-import { CoreModelTableService } from './core-model-table.service';
-import { CoreModelDialogService } from './core-model-dialog.service';
-import { InfoKeys } from '../enums/info-keys';
-import { InfoDialogComponent } from '../info-dialog/info-dialog.component';
-import { ApiError } from '../interfaces/api-error';
-import { CoreModel } from '../interfaces/core-model';
-import { ExternalLinkService } from '../services/external-link.service';
-import { FileService } from '../services/file.service';
+import { CoreModelBase } from '../base/core-model-base';
+import { CoreModel } from '../../interfaces/core-model';
 
 @Component({
   selector: 'app-core-model-table',
@@ -32,31 +21,17 @@ import { FileService } from '../services/file.service';
     MatProgressSpinnerModule,
     MatSortModule,
     MatTableModule,
-    RouterModule,
   ],
   templateUrl: './core-model-admin.component.html',
   styleUrl: './core-model-admin.component.scss',
 })
-export class CoreModelAdminComponent implements OnInit, OnDestroy {
-  dataSource = new MatTableDataSource<CoreModel>([]);
-  displayedColumns: string[] = [];
-  readonly InfoKey = InfoKeys;
-  loading = false;
+export class CoreModelAdminComponent
+  extends CoreModelBase
+  implements OnInit, OnDestroy
+{
+  override includeActions = true;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
-  subscriptions: Subscription[] = [];
-  studyColumnNames: string[] = [];
-  protected tableService = inject(CoreModelTableService);
-  private dialog = inject(MatDialog);
-  private dialogService = inject(CoreModelDialogService);
-  private externalLinkService = inject(ExternalLinkService);
-  private fileService = inject(FileService);
-  private http = inject(HttpClient);
-
-  applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-  }
 
   confirmDeleteRow(row: CoreModel): void {
     const confirmed = confirm(
@@ -65,27 +40,6 @@ export class CoreModelAdminComponent implements OnInit, OnDestroy {
     if (confirmed) {
       this.deleteRow(row);
     }
-  }
-
-  downloadTableAsCsv(): void {
-    this.fileService.downloadCsv(
-      this.dataSource.data,
-      'core-model.csv',
-      (model) => ({
-        id: model.id,
-        label: model.label,
-        description: model.description,
-        olsId: model.ols?.id ?? '',
-        olsLabel: model.ols?.label ?? '',
-        olsDescription: model.ols?.description ?? '',
-        ohdsiId: model.ohdsi?.id ?? '',
-        ohdsiLabel: model.ohdsi?.label ?? '',
-        ohdsiDomain: model.ohdsi?.domain ?? '',
-        study1Variable: model.studies?.[0]?.variable ?? '',
-        study1Description: model.studies?.[0]?.description ?? '',
-        study2Variable: model.studies?.[1]?.variable ?? '',
-      })
-    );
   }
 
   editRow(row: CoreModel): void {
@@ -134,63 +88,14 @@ export class CoreModelAdminComponent implements OnInit, OnDestroy {
     });
   }
 
-  getAthenaLink(termId: string): string {
-    return this.externalLinkService.getAthenaLink(termId);
-  }
-
-  getOlsLink(termId: string): string {
-    return this.externalLinkService.getOlsLink(termId);
-  }
-
-  handleError(err: ApiError): void {
-    console.error('Error fetching data:', err);
-    this.loading = false;
-
-    const detail = err.error?.detail;
-    const message = err.error?.message || err.message;
-    const errorMessage =
-      detail && message
-        ? `${message} — ${detail}`
-        : detail || message || 'An unknown error occurred.';
-
-    alert(`An error occurred while fetching data: ${errorMessage}`);
-  }
-
-  initializeDataSource(data: CoreModel[]): void {
-    this.studyColumnNames = this.tableService.getUniqueStudyNames(data);
-    this.displayedColumns = this.tableService.getDisplayedColumns(
-      this.studyColumnNames
-    );
-    this.dataSource = this.tableService.setupDataSource(data);
-
-    setTimeout(() => {
-      this.dataSource.paginator = this.paginator;
-      this.dataSource.sort = this.sort;
-    });
-  }
-
-  loadCoreModelData(): void {
-    this.loading = true;
-
-    const sub = this.http.get<CoreModel[]>('assets/core_model.json').subscribe({
-      next: (data) => this.initializeDataSource(data),
-      error: (err: ApiError) => this.handleError(err),
-      complete: () => (this.loading = false),
-    });
-
-    this.subscriptions.push(sub);
+  ngOnDestroy(): void {
+    this.destroy();
   }
 
   ngOnInit(): void {
-    const saved = localStorage.getItem('coreModel');
-    if (saved) {
-      this.initializeDataSource(JSON.parse(saved));
-    }
-    this.loadCoreModelData();
-  }
-
-  ngOnDestroy(): void {
-    this.subscriptions.forEach((sub) => sub.unsubscribe());
+    setTimeout(() => {
+      this.init(this.sort, this.paginator);
+    });
   }
 
   onCsvUpload(event: Event): void {
@@ -205,7 +110,7 @@ export class CoreModelAdminComponent implements OnInit, OnDestroy {
       try {
         const csvText = reader.result as string;
         const parsedData = this.fileService.transformCsvToJson(csvText);
-        this.initializeDataSource(parsedData);
+        this.initializeDataSource(parsedData, this.sort, this.paginator);
       } catch (err) {
         this.loading = false;
         alert('Error parsing CSV file.');
@@ -216,13 +121,6 @@ export class CoreModelAdminComponent implements OnInit, OnDestroy {
     };
 
     reader.readAsText(file);
-  }
-
-  openInfo(key: InfoKeys): void {
-    this.dialog.open(InfoDialogComponent, {
-      data: { key },
-      width: '500px',
-    });
   }
 
   openExtendCdmDialog(): void {
@@ -258,7 +156,11 @@ export class CoreModelAdminComponent implements OnInit, OnDestroy {
           ],
         };
 
-        this.initializeDataSource([...this.dataSource.data, newCoreModel]);
+        this.initializeDataSource(
+          [...this.dataSource.data, newCoreModel],
+          this.sort,
+          this.paginator
+        );
       }
     });
   }

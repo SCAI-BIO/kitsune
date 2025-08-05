@@ -1,0 +1,8 @@
+@use "../base/core-model-base.scss";
+
+// Import and Extend Container Styles
+.download-button-container {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}

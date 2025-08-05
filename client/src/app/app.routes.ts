@@ -1,8 +1,8 @@
 import { Routes } from '@angular/router';
 
 import { ChordDiagramComponent } from './chord-diagram/chord-diagram.component';
-import { CoreModelComponent } from './core-model/core-model.component';
-import { CoreModelAdminComponent } from './core-model-admin/core-model-admin.component';
+import { CoreModelComponent } from './core-model/core-model/core-model.component';
+import { CoreModelAdminComponent } from './core-model/core-model-admin/core-model-admin.component';
 import { canActivateAuthRole } from './guards/auth-role.guard';
 import { HarmonizeComponent } from './harmonize/harmonize.component';
 import { HomeComponent } from './home/home.component';

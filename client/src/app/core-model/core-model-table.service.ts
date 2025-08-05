@@ -106,9 +106,8 @@ export class CoreModelTableService {
     };
   }
 
-  getDisplayedColumns(studyNames: string[]): string[] {
-    return [
-      'actions',
+  getDisplayedColumns(studyNames: string[], includeActions: boolean): string[] {
+    const columns = [
       'id',
       'label',
       'description',
@@ -123,6 +122,12 @@ export class CoreModelTableService {
         return [`${camel}Variable`, `${camel}Description`];
       }),
     ];
+
+    if (includeActions) {
+      columns.unshift('actions');
+    }
+
+    return columns;
   }
 
   getStudyClass(studyName: string): string {
