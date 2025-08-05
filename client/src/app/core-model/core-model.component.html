@@ -55,51 +55,17 @@
 
   <!-- Shared Wrapper -->
   <div class="table-wrapper mat-elevation-z8">
-    <!-- Import/Extend Container -->
-    <div class="import-extend-download-container">
-      <!-- Extend Container -->
-      <div class="extend-button-cotainer">
-        <button
-          mat-flat-button
-          color="primary"
-          class="button-style"
-          (click)="openExtendCdmDialog()"
-        >
-          Extend CDM
-        </button>
-      </div>
-
-      <!-- CSV Import Button -->
-      <div class="import-button-container" style="margin: 16px 0">
-        <button
-          mat-raised-button
-          color="primary"
-          class="button-style"
-          (click)="fileInput.click()"
-        >
-          Import CSV
-        </button>
-        <input
-          #fileInput
-          type="file"
-          accept=".csv"
-          (change)="onCsvUpload($event)"
-          style="display: none"
-        />
-      </div>
-
-      <!-- Download Button Container -->
-      <div class="download-button-container">
-        <!-- Download Button -->
-        <button
-          mat-raised-button
-          class="button-style"
-          color="primary"
-          (click)="downloadTableAsCsv()"
-        >
-          Download
-        </button>
-      </div>
+    <!-- Download Button Container -->
+    <div class="download-button-container">
+      <!-- Download Button -->
+      <button
+        mat-raised-button
+        class="button-style"
+        color="primary"
+        (click)="downloadTableAsCsv()"
+      >
+        Download
+      </button>
     </div>
 
     <!-- Filter and Pagination Container -->
@@ -128,33 +94,6 @@
     <!-- Table Container -->
     <div class="table-container">
       <table mat-table [dataSource]="dataSource" matSort class="mat-table">
-        <!-- Actions Column: Edit + Delete -->
-        <ng-container matColumnDef="actions">
-          <th mat-header-cell *matHeaderCellDef>Actions</th>
-          <td mat-cell *matCellDef="let row" class="actions-cell">
-            <div class="action-buttons">
-              <button
-                mat-icon-button
-                matToolTip="Edit"
-                class="button-style first"
-                (click)="editRow(row)"
-                aria-label="Edit row"
-              >
-                <mat-icon>edit</mat-icon>
-              </button>
-              <button
-                mat-icon-button
-                matTooltip="Delete"
-                class="button-style"
-                (click)="confirmDeleteRow(row)"
-                aria-label="Delete row"
-              >
-                <mat-icon color="wanr">delete</mat-icon>
-              </button>
-            </div>
-          </td>
-        </ng-container>
-
         <!-- Core Model ID Column -->
         <ng-container matColumnDef="id">
           <th mat-header-cell *matHeaderCellDef mat-sort-header>CDM ID</th>

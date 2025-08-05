@@ -94,15 +94,15 @@ export class FileService {
 
   transformCsvToJson(csvText: string): CoreModel[] {
     const fixedKeys = new Set([
-      'ID',
-      'Label',
-      'Description',
-      'OLS - ID',
-      'OLS - Label',
-      'OLS - Description',
-      'OHDSI - ID',
-      'OHDSI - Label',
-      'OHDSI - Domain',
+      'id',
+      'label',
+      'description',
+      'olsId',
+      'olsLabel',
+      'olsDescription',
+      'ohdsiId',
+      'ohdsiLabel',
+      'ohdsiDomain',
     ]);
 
     const parsed = Papa.parse(csvText, { header: true, skipEmptyLines: true });
@@ -114,32 +114,33 @@ export class FileService {
       for (const [key, value] of Object.entries(row)) {
         if (fixedKeys.has(key)) continue;
 
-        const match = key.match(/(.+?) - (Variable|Description)$/);
+        // Match camelCase pattern like studyVariable or studyDescription
+        const match = key.match(/^([a-zA-Z0-9]+)(Variable|Description)$/);
         if (match) {
-          const studyName = match[1].trim();
-          const rawField = match[2];
-          const field = rawField === 'Description' ? 'description' : 'variable';
+          const studyName = match[1];
+          const field = match[2].toLowerCase() as 'variable' | 'description';
 
           if (!studiesMap[studyName]) {
             studiesMap[studyName] = { name: studyName };
           }
+
           studiesMap[studyName][field] = value;
         }
       }
 
       return {
-        id: row['ID'],
-        label: row['Label'],
-        description: row['Description'],
+        id: row['id'],
+        label: row['label'],
+        description: row['description'],
         ols: {
-          id: row['OLS - ID'],
-          label: row['OLS - Label'],
-          description: row['OLS - Description'],
+          id: row['olsId'],
+          label: row['olsLabel'],
+          description: row['olsDescription'],
         },
         ohdsi: {
-          id: row['OHDSI - ID'],
-          label: row['OHDSI - Label'],
-          domain: row['OHDSI - Domain'],
+          id: row['ohdsiId'],
+          label: row['ohdsiLabel'],
+          domain: row['ohdsiDomain'],
         },
         studies: Object.values(studiesMap) as Study[],
       };

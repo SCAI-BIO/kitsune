@@ -1,19 +1,19 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CoreModelTableComponent } from './core-model-table.component';
+import { CoreModelComponent } from './core-model.component';
 import { provideHttpClient } from '@angular/common/http';
 
 describe('CoreModelTableComponent', () => {
-  let component: CoreModelTableComponent;
-  let fixture: ComponentFixture<CoreModelTableComponent>;
+  let component: CoreModelComponent;
+  let fixture: ComponentFixture<CoreModelComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [CoreModelTableComponent],
+      imports: [CoreModelComponent],
       providers: [provideHttpClient()],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(CoreModelTableComponent);
+    fixture = TestBed.createComponent(CoreModelComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

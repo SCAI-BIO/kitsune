@@ -13,7 +13,6 @@ import { RouterModule } from '@angular/router';
 import { Subscription } from 'rxjs';
 
 import { InfoKeys } from '../enums/info-keys';
-import { ExtendCdmDialogComponent } from '../extend-cdm-dialog/extend-cdm-dialog.component';
 import { InfoDialogComponent } from '../info-dialog/info-dialog.component';
 import { ApiError } from '../interfaces/api-error';
 import { CoreModel } from '../interfaces/core-model';
@@ -33,13 +32,12 @@ import { FileService } from '../services/file.service';
     MatTableModule,
     RouterModule,
   ],
-  templateUrl: './core-model-table.component.html',
-  styleUrl: './core-model-table.component.scss',
+  templateUrl: './core-model.component.html',
+  styleUrl: './core-model.component.scss',
 })
-export class CoreModelTableComponent implements OnInit, OnDestroy {
+export class CoreModelComponent implements OnInit, OnDestroy {
   dataSource = new MatTableDataSource<CoreModel>([]);
   displayedColumns = [
-    'actions',
     'id',
     'label',
     'description',
@@ -68,15 +66,6 @@ export class CoreModelTableComponent implements OnInit, OnDestroy {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
-  confirmDeleteRow(row: CoreModel): void {
-    const confirmed = confirm(
-      `Are you sure you want to delete "${row.label}"?`
-    );
-    if (confirmed) {
-      this.deleteRow(row);
-    }
-  }
-
   downloadTableAsCsv(): void {
     this.fileService.downloadCsv(
       this.dataSource.data,
@@ -96,72 +85,6 @@ export class CoreModelTableComponent implements OnInit, OnDestroy {
         study2Variable: model.studies?.[1]?.variable ?? '',
       })
     );
-  }
-
-  editRow(row: CoreModel): void {
-    const existingLabels = this.dataSource.data
-      .filter((r) => r.id !== row.id)
-      .map((r) => r.label);
-
-    const dialogRef = this.dialog.open(ExtendCdmDialogComponent, {
-      width: '1800px',
-      data: { existingLabels },
-    });
-
-    // Pre-fill form after dialog is created
-    dialogRef.componentInstance.existingLabels = existingLabels;
-    dialogRef.componentInstance.form.patchValue({
-      id: row.id,
-      label: row.label,
-      description: row.description,
-      olsId: row.ols?.id ?? '',
-      olsLabel: row.ols?.label ?? '',
-      olsDescription: row.ols?.description ?? '',
-      ohdsiId: row.ohdsi?.id ?? '',
-      ohdsiLabel: row.ohdsi?.label ?? '',
-      ohdsiDomain: row.ohdsi?.domain ?? '',
-      study1Variable: row.studies?.[0]?.variable ?? '',
-      study1Description: row.studies?.[0]?.description ?? '',
-      study2Variable: row.studies?.[1]?.variable ?? '',
-    });
-
-    dialogRef.afterClosed().subscribe((result) => {
-      if (result) {
-        const updated: CoreModel = {
-          id: result.id,
-          label: result.label,
-          description: result.description,
-          ols: {
-            id: result.olsId,
-            label: result.olsLabel,
-            description: result.olsDescription,
-          },
-          ohdsi: {
-            id: result.ohdsiId,
-            label: result.ohdsiLabel,
-            domain: result.ohdsiDomain,
-          },
-          studies: [
-            {
-              name: 'Study1',
-              variable: result.study1Variable,
-              description: result.study1Description,
-            },
-            {
-              name: 'Study2',
-              variable: result.study2Variable,
-            },
-          ],
-        };
-
-        // Replace the existing row
-        const index = this.dataSource.data.findIndex((r) => r.id === row.id);
-        if (index > -1) {
-          this.dataSource.data[index] = updated;
-          this.dataSource._updateChangeSubscription(); // Refresh the table
-        }
-      }
-    });
   }
 
   getAthenaLink(termId: string): string {
@@ -357,57 +280,5 @@ export class CoreModelTableComponent implements OnInit, OnDestroy {
       data: { key },
       width: '500px',
     });
-  }
-
-  openExtendCdmDialog(): void {
-    const existingLabels = this.dataSource.data.map((row) => row.label);
-
-    const dialogRef = this.dialog.open(ExtendCdmDialogComponent, {
-      width: '1800px',
-      data: { existingLabels },
-    });
-
-    dialogRef.componentInstance.existingLabels = existingLabels;
-
-    dialogRef.afterClosed().subscribe((result) => {
-      if (result) {
-        const newCoreModel: CoreModel = {
-          id: result.id,
-          label: result.label,
-          description: result.description,
-          ols: {
-            id: result.olsId,
-            label: result.olsLabel,
-            description: result.olsDescription,
-          },
-          ohdsi: {
-            id: result.ohdsiId,
-            label: result.ohdsiLabel,
-            domain: result.ohdsiDomain,
-          },
-          studies: [
-            {
-              name: 'Study1',
-              variable: result.study1Variable,
-              description: result.study1Description,
-            },
-            {
-              name: 'Study2',
-              variable: result.study2Variable,
-            },
-          ],
-        };
-
-        this.initializeDataSource([...this.dataSource.data, newCoreModel]);
-      }
-    });
-  }
-
-  private deleteRow(row: CoreModel): void {
-    const index = this.dataSource.data.findIndex((r) => r.id === row.id);
-    if (index > -1) {
-      this.dataSource.data.splice(index, 1);
-      this.dataSource._updateChangeSubscription();
-    }
   }
 }
