@@ -16,7 +16,7 @@ import { ExternalLinkService } from '../../services/external-link.service';
 import { FileService } from '../../services/file.service';
 
 export abstract class CoreModelBase {
-  cdmOptions: { name: string; version: string }[] = [];
+  cdmOptions: { name: string; description: string; version: string }[] = [];
   cdmVersions: string[] = [];
   dataSource = new MatTableDataSource<CoreModel>([]);
   displayedColumns: string[] = [];
@@ -81,6 +81,7 @@ export abstract class CoreModelBase {
       next: (cdms) => {
         this.cdmOptions = cdms.map((cdm) => ({
           name: cdm.name,
+          description: cdm.description,
           version: cdm.version,
         }));
         const uniqueNames = Array.from(
