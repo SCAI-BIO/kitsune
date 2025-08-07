@@ -60,7 +60,9 @@
           <mat-label>Common Data Models</mat-label>
           <mat-select
             [value]="selectedCdm"
-            (selectionChange)="selectedCdm = $event.value"
+            (selectionChange)="
+              selectedCdm = $event.value; getVersionForCdm(selectedCdm)
+            "
           >
             @for (name of uniqueCdmNames; track name) {
             <mat-option [value]="name">{{ name }}</mat-option>
@@ -75,7 +77,7 @@
             [value]="selectedVersion"
             (selectionChange)="selectedVersion = $event.value"
           >
-            @for (version of getVersionForCdm(selectedCdm); track version) {
+            @for (version of cdmVersions; track version) {
             <mat-option [value]="version">{{ version }}</mat-option>
             }
           </mat-select>
@@ -101,16 +103,16 @@
   <!-- Shared Wrapper -->
   <div class="table-wrapper mat-elevation-z8">
     <!-- Import/Extend Container -->
-    <div class="import-extend-download-container">
+    <div class="import-extend-download-save-container">
       <!-- Extend Container -->
       <div class="extend-button-cotainer">
         <button
           mat-flat-button
           color="primary"
-          class="button-style"
+          class="button-style menu"
           (click)="openExtendCdmDialog()"
         >
-          Extend CDM
+          <mat-icon>note_add</mat-icon> Extend CDM
         </button>
       </div>
 
@@ -122,7 +124,7 @@
           class="button-style"
           (click)="fileInput.click()"
         >
-          Import CSV
+          <mat-icon>upload_file</mat-icon> Import CSV
         </button>
         <input
           #fileInput
@@ -142,7 +144,20 @@
           color="primary"
           (click)="downloadTableAsCsv()"
         >
-          Download
+          <mat-icon>download</mat-icon> Download
+        </button>
+      </div>
+
+      <!-- Save Button Container -->
+      <div class="save-button-container">
+        <!-- Save Button -->
+        <button
+          mat-icon-button
+          class="button-style"
+          color="primary"
+          (click)="openSaveCdmDialog()"
+        >
+          <mat-icon>save</mat-icon> Save
         </button>
       </div>
     </div>

@@ -11,6 +11,7 @@ import { MatTableModule } from '@angular/material/table';
 
 import { CoreModelBase } from '../base/core-model-base';
 import { CoreModel } from '../../interfaces/core-model';
+import { SaveCdmDialogComponent } from '../../save-cdm-dialog/save-cdm-dialog.component';
 
 @Component({
   selector: 'app-core-model-table',
@@ -164,6 +165,20 @@ export class CoreModelAdminComponent
 
         this.initializeDataSource([...this.dataSource.data, newCoreModel]);
       }
+    });
+  }
+
+  openSaveCdmDialog(): void {
+    const dialogRef = this.dialog.open(SaveCdmDialogComponent, {
+      data: {
+        cdmName: this.selectedCdm,
+        cdmVersion: this.selectedVersion,
+        existingVersions: this.cdmVersions,
+      },
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log(result);
     });
   }
 
