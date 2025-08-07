@@ -5,12 +5,12 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatSelectModule } from '@angular/material/select';
 import { MatSort, MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 
 import { CoreModelBase } from '../base/core-model-base';
 import { CoreModel } from '../../interfaces/core-model';
-import { MatSelectModule } from '@angular/material/select';
 
 @Component({
   selector: 'app-core-model-table',
@@ -93,6 +93,20 @@ export class CoreModelAdminComponent
     });
   }
 
+  override initializeDataSource(data: CoreModel[]): void {
+    this.studyColumnNames = this.tableService.getUniqueStudyNames(data);
+    this.displayedColumns = this.tableService.getDisplayedColumns(
+      this.studyColumnNames,
+      this.includeActions
+    );
+    this.dataSource = this.tableService.setupDataSource(data);
+
+    setTimeout(() => {
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
+    });
+  }
+
   ngOnDestroy(): void {
     this.destroy();
   }
@@ -115,7 +129,7 @@ export class CoreModelAdminComponent
       try {
         const csvText = reader.result as string;
         const parsedData = this.fileService.transformCsvToJson(csvText);
-        this.initializeDataSource(parsedData, this.sort, this.paginator);
+        this.initializeDataSource(parsedData);
       } catch (err) {
         this.loading = false;
         alert('Error parsing CSV file.');
@@ -162,11 +176,7 @@ export class CoreModelAdminComponent
           }),
         };
 
-        this.initializeDataSource(
-          [...this.dataSource.data, newCoreModel],
-          this.sort,
-          this.paginator
-        );
+        this.initializeDataSource([...this.dataSource.data, newCoreModel]);
       }
     });
   }

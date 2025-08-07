@@ -4,12 +4,13 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
+import { MatSelectModule } from '@angular/material/select';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSort, MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 
 import { CoreModelBase } from '../base/core-model-base';
-import { MatSelectModule } from '@angular/material/select';
+import { CoreModel } from '../../interfaces/core-model';
 
 @Component({
   selector: 'app-core-model-table',
@@ -34,6 +35,20 @@ export class CoreModelComponent
 {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
+
+  override initializeDataSource(data: CoreModel[]): void {
+    this.studyColumnNames = this.tableService.getUniqueStudyNames(data);
+    this.displayedColumns = this.tableService.getDisplayedColumns(
+      this.studyColumnNames,
+      this.includeActions
+    );
+    this.dataSource = this.tableService.setupDataSource(data);
+
+    setTimeout(() => {
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
+    });
+  }
 
   ngOnDestroy(): void {
     this.destroy();

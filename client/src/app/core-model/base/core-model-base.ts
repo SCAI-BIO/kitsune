@@ -1,8 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { inject } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { MatPaginator } from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 
 import { Subscription } from 'rxjs';
@@ -17,7 +15,7 @@ import { ExternalLinkService } from '../../services/external-link.service';
 import { FileService } from '../../services/file.service';
 import { CdmApiService } from '../../services/cdm-api.service';
 
-export class CoreModelBase {
+export abstract class CoreModelBase {
   cdmOptions: { name: string; version: string }[] = [];
   dataSource = new MatTableDataSource<CoreModel>([]);
   displayedColumns: string[] = [];
@@ -96,12 +94,12 @@ export class CoreModelBase {
     this.subscriptions.push(sub);
   }
 
-  fetchCoreModelData(sort: MatSort, paginator: MatPaginator): void {
+  fetchCoreModelData(): void {
     this.loading = true;
     const sub = this.cdmApiService
       .fetchCoreModelData(this.selectedCdm, this.selectedVersion)
       .subscribe({
-        next: (data) => this.initializeDataSource(data, sort, paginator),
+        next: (data) => this.initializeDataSource(data),
         error: (err: ApiError) => this.handleError(err),
         complete: () => (this.loading = false),
       });
@@ -141,26 +139,10 @@ export class CoreModelBase {
     this.fetchCdms();
   }
 
-  initializeDataSource(
-    data: CoreModel[],
-    sort: MatSort,
-    paginator: MatPaginator
-  ): void {
-    this.studyColumnNames = this.tableService.getUniqueStudyNames(data);
-    this.displayedColumns = this.tableService.getDisplayedColumns(
-      this.studyColumnNames,
-      this.includeActions
-    );
-    this.dataSource = this.tableService.setupDataSource(data);
+  abstract initializeDataSource(data: CoreModel[]): void;
 
-    setTimeout(() => {
-      this.dataSource.paginator = paginator;
-      this.dataSource.sort = sort;
-    });
-  }
-
-  onSubmit(sort: MatSort, paginator: MatPaginator): void {
-    this.fetchCoreModelData(sort, paginator);
+  onSubmit(): void {
+    this.fetchCoreModelData();
   }
 
   openInfo(key: InfoKeys): void {
