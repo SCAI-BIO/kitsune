@@ -11,9 +11,9 @@ import { InfoKeys } from '../../enums/info-keys';
 import { InfoDialogComponent } from '../../info-dialog/info-dialog.component';
 import { ApiError } from '../../interfaces/api-error';
 import { CoreModel } from '../../interfaces/core-model';
+import { CdmApiService } from '../../services/cdm-api.service';
 import { ExternalLinkService } from '../../services/external-link.service';
 import { FileService } from '../../services/file.service';
-import { CdmApiService } from '../../services/cdm-api.service';
 
 export abstract class CoreModelBase {
   cdmOptions: { name: string; version: string }[] = [];
