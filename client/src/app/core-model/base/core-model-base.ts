@@ -17,6 +17,7 @@ import { FileService } from '../../services/file.service';
 
 export abstract class CoreModelBase {
   cdmOptions: { name: string; version: string }[] = [];
+  cdmVersions: string[] = [];
   dataSource = new MatTableDataSource<CoreModel>([]);
   displayedColumns: string[] = [];
   includeActions = false;
@@ -115,8 +116,8 @@ export abstract class CoreModelBase {
     return this.externalLinkService.getOlsLink(termId);
   }
 
-  getVersionForCdm(name: string): string[] {
-    return this.cdmOptions
+  getVersionForCdm(name: string): void {
+    this.cdmVersions = this.cdmOptions
       .filter((option) => option.name === name)
       .map((option) => option.version);
   }

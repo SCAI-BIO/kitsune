@@ -59,7 +59,9 @@
           <mat-label>Common Data Models</mat-label>
           <mat-select
             [value]="selectedCdm"
-            (selectionChange)="selectedCdm = $event.value"
+            (selectionChange)="
+              selectedCdm = $event.value; getVersionForCdm(selectedCdm)
+            "
           >
             @for (name of uniqueCdmNames; track name) {
             <mat-option [value]="name">{{ name }}</mat-option>
@@ -74,7 +76,7 @@
             [value]="selectedVersion"
             (selectionChange)="selectedVersion = $event.value"
           >
-            @for (version of getVersionForCdm(selectedCdm); track version) {
+            @for (version of cdmVersions; track version) {
             <mat-option [value]="version">{{ version }}</mat-option>
             }
           </mat-select>
