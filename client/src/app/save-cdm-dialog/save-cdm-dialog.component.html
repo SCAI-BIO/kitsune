@@ -1,0 +1,64 @@
+<div class="dialog-container">
+  <h1 mat-dialog-title>Save CDM</h1>
+
+  <p class="semantic-versioning-info">
+    Please use <strong>semantic versioning</strong> when specifying the version
+    number. This promotes clarity and traceability of changes over time. Use the
+    format <code>vMAJOR.MINOR.PATCH</code> (e.g., <code>v1.2.3</code>), where:
+  </p>
+
+  <ul>
+    <li>
+      <strong>MAJOR</strong> version changes reflect structural changes to the
+      CDM, such as major schema redesigns, breaking changes to variable
+      definitions, or dropping support for older versions.
+    </li>
+    <li>
+      <strong>MINOR</strong> changes introduce new variables, concepts, or
+      mappings that are backward-compatible with the previous version.
+    </li>
+    <li>
+      <strong>PATCH</strong> changes fix mistakes or inconsistencies (e.g.,
+      correcting labels, fixing typos, or updating descriptions) without
+      changing the structure or meaning of existing elements.
+    </li>
+  </ul>
+  Learn more about semantic versioning at
+  <a href="https://semver.org" target="_blank" rel="noopener noreferrer">
+    semver.org </a
+  >.
+
+  <div mat-dialog-content [formGroup]="form" class="dialog-grid">
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>CDM Name</mat-label>
+      @if(form.get('cdmName')?.hasError('required')) {
+      <mat-error>Name is <strong>required</strong>.</mat-error>
+      }
+      <input matInput formControlName="cdmName" />
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Version</mat-label>
+      <input matInput formControlName="cdmVersion" />
+      @if (form.get('cdmVersion')?.hasError('required')) {
+      <mat-error>Version is <strong>required</strong>.</mat-error>
+      } @if (form.get('cdmVersion')?.hasError('invalidSemver')) {
+      <mat-error> Must follow semantic versioning (e.g., v1.2.3). </mat-error>
+      } @if (form.get('cdmVersion')?.hasError('versionExists')) {
+      <mat-error> This version already exists for the selected CDM. </mat-error>
+      }
+    </mat-form-field>
+  </div>
+
+  <div mat-dialog-actions align="end">
+    <button mat-button (click)="cancel()">Cancel</button>
+    <button
+      mat-button
+      color="primary"
+      [disabled]="form.invalid"
+      (click)="save()"
+    >
+      Save
+    </button>
+  </div>
+</div>

@@ -1,0 +1,15 @@
+.dialog-container {
+  padding: 24px;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.dialog-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0 24px;
+}
+
+.full-width {
+  width: 100%;
+}
