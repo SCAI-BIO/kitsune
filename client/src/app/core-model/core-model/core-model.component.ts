@@ -10,7 +10,6 @@ import { MatSort, MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 
 import { CoreModelBase } from '../base/core-model-base';
-import { CoreModel } from '../../interfaces/core-model';
 
 @Component({
   selector: 'app-core-model-table',
@@ -36,20 +35,6 @@ export class CoreModelComponent
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  override initializeDataSource(data: CoreModel[]): void {
-    this.studyColumnNames = this.tableService.getUniqueStudyNames(data);
-    this.displayedColumns = this.tableService.getDisplayedColumns(
-      this.studyColumnNames,
-      this.includeActions
-    );
-    this.dataSource = this.tableService.setupDataSource(data);
-
-    setTimeout(() => {
-      this.dataSource.paginator = this.paginator;
-      this.dataSource.sort = this.sort;
-    });
-  }
-
   ngOnDestroy(): void {
     this.destroy();
   }
@@ -58,5 +43,13 @@ export class CoreModelComponent
     setTimeout(() => {
       this.init();
     });
+  }
+
+  override setPaginator(): void {
+    this.dataSource.paginator = this.paginator;
+  }
+
+  override setSort(): void {
+    this.dataSource.sort = this.sort;
   }
 }

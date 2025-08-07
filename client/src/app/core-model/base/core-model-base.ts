@@ -139,7 +139,19 @@ export abstract class CoreModelBase {
     this.fetchCdms();
   }
 
-  abstract initializeDataSource(data: CoreModel[]): void;
+  initializeDataSource(data: CoreModel[]): void {
+    this.studyColumnNames = this.tableService.getUniqueStudyNames(data);
+    this.displayedColumns = this.tableService.getDisplayedColumns(
+      this.studyColumnNames,
+      this.includeActions
+    );
+    this.dataSource = this.tableService.setupDataSource(data);
+
+    setTimeout(() => {
+      this.setPaginator();
+      this.setSort();
+    });
+  }
 
   onSubmit(): void {
     this.fetchCoreModelData();
@@ -151,4 +163,8 @@ export abstract class CoreModelBase {
       width: '500px',
     });
   }
+
+  abstract setPaginator(): void;
+
+  abstract setSort(): void;
 }
