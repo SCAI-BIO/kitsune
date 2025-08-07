@@ -117,7 +117,7 @@ export abstract class CoreModelBase {
 
   getVersionForCdm(name: string): string[] {
     return this.cdmOptions
-      .filter((option) => option, name === name)
+      .filter((option) => option.name === name)
       .map((option) => option.version);
   }
 
