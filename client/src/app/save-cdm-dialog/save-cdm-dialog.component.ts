@@ -34,7 +34,7 @@ export class SaveCdmDialogComponent {
   protected data = inject(MAT_DIALOG_DATA) as {
     cdmName: string;
     cdmVersion: string;
-    cdmOptions: { name: string; version: string }[];
+    cdmOptions: { name: string; description: string; version: string }[];
   };
   private dialogRef = inject(MatDialogRef<SaveCdmDialogComponent>);
   private fb = inject(FormBuilder);
@@ -43,6 +43,11 @@ export class SaveCdmDialogComponent {
     const bumpedVersion = this.bumpPatchVersion(this.data.cdmVersion);
     this.form = this.fb.group({
       cdmName: [this.data.cdmName || '', Validators.required],
+      cdmDescription: [
+        this.data.cdmOptions.find((cdm) => cdm.name === this.data.cdmName)
+          ?.description || '',
+        Validators.required,
+      ],
       cdmVersion: [
         bumpedVersion || '',
         [

@@ -38,6 +38,14 @@
     </mat-form-field>
 
     <mat-form-field appearance="fill" class="full-width">
+      <mat-label>CDM Description</mat-label>
+      @if(form.get('cdmDescription')?.hasError('required')) {
+      <mat-error>Description is <strong>required</strong>.</mat-error>
+      }
+      <input matInput formControlName="cdmDescription" />
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="full-width">
       <mat-label>Version</mat-label>
       <input matInput formControlName="cdmVersion" />
       @if (form.get('cdmVersion')?.hasError('required')) {
