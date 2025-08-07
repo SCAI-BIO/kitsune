@@ -34,7 +34,7 @@ export class SaveCdmDialogComponent {
   protected data = inject(MAT_DIALOG_DATA) as {
     cdmName: string;
     cdmVersion: string;
-    existingVersions: string[];
+    cdmOptions: { name: string; version: string }[];
   };
   private dialogRef = inject(MatDialogRef<SaveCdmDialogComponent>);
   private fb = inject(FormBuilder);
@@ -48,12 +48,13 @@ export class SaveCdmDialogComponent {
         [
           Validators.required,
           this.semanticVersionValidator,
-          this.uniqueVersionValidator(
-            this.data.cdmName,
-            this.data.existingVersions
-          ),
+          this.uniqueVersionValidator(this.data.cdmOptions),
         ],
       ],
+    });
+
+    this.form.get('cdmName')?.valueChanges.subscribe(() => {
+      this.form.get('cdmVersion')?.updateValueAndValidity();
     });
   }
 
@@ -80,19 +81,20 @@ export class SaveCdmDialogComponent {
   }
 
   uniqueVersionValidator(
-    initialName: string,
-    existingVersions: string[]
+    cdmOptions: { name: string; version: string }[]
   ): ValidatorFn {
-    return (formGroup: AbstractControl): ValidationErrors | null => {
-      const cdmName = formGroup.get('cdmName')?.value;
-      const cdmVersion = formGroup.get('cdmVersion')?.value;
+    return (control: AbstractControl): ValidationErrors | null => {
+      const cdmVersion = control.value?.trim();
+      const parent = control.parent;
+      const cdmName = parent?.get('cdmName')?.value?.trim();
 
       if (!cdmName || !cdmVersion) return null;
 
-      const isSameName = cdmName.trim() === initialName.trim();
-      const versionExists = existingVersions.includes(cdmVersion.trim());
+      const duplicate = cdmOptions.some(
+        (cdm) => cdm.name === cdmName && cdm.version === cdmVersion
+      );
 
-      return isSameName && versionExists ? { versionExists: true } : null;
+      return duplicate ? { versionExists: true } : null;
     };
   }
 

@@ -173,7 +173,7 @@ export class CoreModelAdminComponent
       data: {
         cdmName: this.selectedCdm,
         cdmVersion: this.selectedVersion,
-        existingVersions: this.cdmVersions,
+        cdmOptions: this.cdmOptions,
       },
     });
 
