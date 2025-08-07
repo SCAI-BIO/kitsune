@@ -10,6 +10,7 @@ import { MatSort, MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 
 import { CoreModelBase } from '../base/core-model-base';
+import { ApiError } from '../../interfaces/api-error';
 import { CoreModel } from '../../interfaces/core-model';
 import { SaveCdmDialogComponent } from '../../save-cdm-dialog/save-cdm-dialog.component';
 
@@ -92,6 +93,16 @@ export class CoreModelAdminComponent
         }
       }
     });
+  }
+
+  importCommonDataModel(formData: FormData): void {
+    this.loading = true;
+    const sub = this.cdmApiService.importCommonDataModel(formData).subscribe({
+      error: (err: ApiError) => this.handleError(err),
+      complete: () => (this.loading = false),
+    });
+
+    this.subscriptions.push(sub);
   }
 
   ngOnDestroy(): void {
@@ -178,7 +189,23 @@ export class CoreModelAdminComponent
     });
 
     dialogRef.afterClosed().subscribe((result) => {
-      console.log(result);
+      if (!result) return;
+
+      const { cdmName, cdmDescription, cdmVersion } = result;
+      const csv = this.tableService.convertCoreModelsToCsv(
+        this.dataSource.data
+      );
+
+      const blob = new Blob([csv], { type: 'text/csv' });
+      const formData = new FormData();
+      formData.append('file', blob, `${cdmName}_${cdmVersion}.csv`);
+      formData.append('cdm_name', cdmName);
+      formData.append('cdm_description', cdmDescription);
+      formData.append('cdm_version', cdmVersion);
+
+      this.importCommonDataModel(formData);
+
+      this.loading = true;
     });
   }
 

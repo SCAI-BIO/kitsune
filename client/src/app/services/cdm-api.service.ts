@@ -28,4 +28,11 @@ export class CdmApiService {
       params,
     });
   }
+
+  importCommonDataModel(formData: FormData): Observable<void> {
+    return this.http.post<void>(
+      `${this.API_URL}/imports/variable-dictionary`,
+      formData
+    );
+  }
 }
