@@ -1,49 +1,98 @@
-import { HttpClient } from '@angular/common/http';
-import { Component, OnInit, OnDestroy, inject } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  OnDestroy,
+  inject,
+  ChangeDetectorRef,
+} from '@angular/core';
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatSelectModule } from '@angular/material/select';
 
 import { Subscription } from 'rxjs';
 
-import { ChordData } from '../interfaces/chord-diagram';
 import { ApiError } from '../interfaces/api-error';
+import { ChordData } from '../interfaces/chord-diagram';
+import { CdmApiService } from '../services/cdm-api.service';
 import { ChordDiagramService } from '../services/chord-diagram.service';
 
 @Component({
   selector: 'app-mappings',
-  imports: [MatProgressSpinnerModule],
+  imports: [MatFormFieldModule, MatProgressSpinnerModule, MatSelectModule],
   templateUrl: './chord-diagram.component.html',
   styleUrl: './chord-diagram.component.scss',
 })
 export class ChordDiagramComponent implements OnInit, OnDestroy {
+  cdmOptions: { name: string; version: string }[] = [];
+  cdmVersions: string[] = [];
   currentIndex = 0;
   dataChunks: ChordData[] = [];
   loading = false;
+  selectedCdm = '';
+  selectedVersion = '';
+  uniqueCdmNames: string[] = [];
+  private cdmApiService = inject(CdmApiService);
+  private cdr = inject(ChangeDetectorRef);
   private chordService = inject(ChordDiagramService);
-  private http = inject(HttpClient);
   private subscriptions: Subscription[] = [];
 
   ngOnInit(): void {
-    this.fetchData();
+    this.fetchCdms();
   }
 
   ngOnDestroy(): void {
     this.subscriptions.forEach((sub) => sub.unsubscribe());
   }
 
-  fetchData(): void {
+  fetchCdms(): void {
     this.loading = true;
-    const sub = this.http.get<ChordData>(`assets/chord_data.json`).subscribe({
-      next: (v) => {
-        this.dataChunks = this.chordService.chunkData(v, 40);
-        this.chordService.createChordDiagrams(
-          this.dataChunks,
-          this.currentIndex
+
+    const sub = this.cdmApiService.fetchCommonDataModels().subscribe({
+      next: (cdms) => {
+        this.cdmOptions = cdms.map((cdm) => ({
+          name: cdm.name,
+          version: cdm.version,
+        }));
+        const uniqueNames = Array.from(
+          new Set(this.cdmOptions.map((opt) => opt.name))
         );
+        this.uniqueCdmNames = uniqueNames;
       },
-      error: (err) => this.handleError(err),
+      error: (err: ApiError) => this.handleError(err),
       complete: () => (this.loading = false),
     });
+
     this.subscriptions.push(sub);
+  }
+
+  fetchData(): void {
+    this.loading = true;
+    const sub = this.cdmApiService
+      .fetchChordDiagramData(this.selectedCdm, this.selectedVersion)
+      .subscribe({
+        next: (v) => {
+          this.currentIndex = 0;
+          this.dataChunks = this.chordService.chunkData(v, 40);
+
+          // Let Angular render the SVG first
+          this.cdr.detectChanges();
+          setTimeout(() => {
+            this.chordService.createChordDiagrams(
+              this.dataChunks,
+              this.currentIndex
+            );
+          });
+        },
+        error: (err: ApiError) => this.handleError(err),
+        complete: () => (this.loading = false),
+      });
+    this.subscriptions.push(sub);
+  }
+
+  getVersionForCdm(name: string): void {
+    this.cdmVersions = this.cdmOptions
+      .filter((option) => option.name === name)
+      .map((option) => option.version);
   }
 
   handleError(err: ApiError): void {
@@ -65,6 +114,10 @@ export class ChordDiagramComponent implements OnInit, OnDestroy {
       this.currentIndex++;
       this.chordService.createChordDiagrams(this.dataChunks, this.currentIndex);
     }
+  }
+
+  onSubmit(): void {
+    this.fetchData();
   }
 
   previous(): void {
