@@ -50,7 +50,7 @@ async def create_concept_and_attach_mapping(
     terminology_name: str,
     text: str,
     client: Annotated[WeaviateClient, Depends(get_client)],
-    model: str = "sentence-transformers/all-mpnet-base-v2",
+    model: str = "nomic-embed-text",
 ):
     try:
         terminology = client.get_terminology(terminology_name)

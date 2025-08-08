@@ -8,17 +8,14 @@ from datastew.process.ols import OLSTerminologyImportTask
 from app.models import OLLAMA_URL, ObjectSchema, WeaviateClient
 
 
-def import_snomed_ct_task(model: str = "sentence-transformers/all-mpnet-base-v2"):
+def import_snomed_ct_task(model: str = "nomic-embed-text"):
     with WeaviateClient() as client:
         embedding_model = Vectorizer(model, host=OLLAMA_URL)
         task = OLSTerminologyImportTask(embedding_model, "SNOMED CT", "snomed")
         task.process_to_weaviate(client)
 
 
-def import_ols_terminology_task(
-    terminology_id: str,
-    model: str = "sentence-transformers/all-mpnet-base-v2",
-):
+def import_ols_terminology_task(terminology_id: str, model: str = "nomic-embed-text"):
     with WeaviateClient() as client:
         embedding_model = Vectorizer(model, host=OLLAMA_URL)
         task = OLSTerminologyImportTask(embedding_model, terminology_id, terminology_id)
