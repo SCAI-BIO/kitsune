@@ -72,6 +72,7 @@ export class ChordDiagramComponent implements OnInit, OnDestroy {
       .subscribe({
         next: (v) => {
           this.currentIndex = 0;
+          this.chordService.setGlobalColorDomain(v);
           this.dataChunks = this.chordService.chunkData(v, 40);
 
           // Let Angular render the SVG first

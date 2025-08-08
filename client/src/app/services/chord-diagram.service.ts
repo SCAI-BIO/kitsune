@@ -36,25 +36,20 @@ export class ChordDiagramService {
 
   private colorScale: d3.ScaleOrdinal<string, string> = d3.scaleOrdinal();
 
-  /**
-   * Returns the D3 color scale used for group coloring.
-   */
-  getColorScale(): d3.ScaleOrdinal<string, string> {
-    return this.colorScale;
-  }
+  setGlobalColorDomain(input: ChordData | ChordData[]): void {
+    const datasets = Array.isArray(input) ? input : [input];
+    const allGroups = Array.from(
+      new Set(datasets.flatMap((d) => d.nodes.map((n) => n.group)))
+    ).sort(); // sort for deterministic mapping
 
-  /**
-   * Initializes the color scale with a given list of group names (e.g., study names).
-   * @param groupNames - List of unique group identifiers (e.g., ['ADNI', 'EPAD', ...]).
-   */
-  initializeColorScale(data: ChordData): void {
-    const allGroups = Array.from(new Set(data.nodes.map((node) => node.group)));
-
-    // If you have more groups than colors, D3 will cycle through
     this.colorScale = d3
       .scaleOrdinal<string, string>()
       .domain(allGroups)
       .range(this.colorPalette);
+  }
+
+  getColor(group: string): string {
+    return this.colorScale(group);
   }
 
   /**
@@ -195,8 +190,6 @@ export class ChordDiagramService {
    * @param data - The ChordData for the diagram.
    */
   private createChordDiagram(data: ChordData): void {
-    this.initializeColorScale(data);
-
     const svgElement = d3.selectAll('.chord-diagram').node();
     const svg = d3.select(svgElement).select<SVGSVGElement>('svg');
     svg.selectAll('*').remove();
@@ -340,7 +333,7 @@ export class ChordDiagramService {
           index: 0,
         } as d3.ChordGroup)!;
       })
-      .attr('fill', ([group]) => this.colorScale(group));
+      .attr('fill', ([group]) => this.getColor(group));
   }
 
   /**
