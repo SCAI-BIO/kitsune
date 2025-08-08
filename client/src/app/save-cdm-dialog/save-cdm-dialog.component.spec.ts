@@ -16,7 +16,7 @@ describe('SaveCdmDialogComponent', () => {
           useValue: {
             cdmName: '',
             cdmVersion: '',
-            cdmOptions: {},
+            cdmOptions: [],
           },
         },
         { provide: MatDialogRef, useValue: { close: jasmine.createSpy() } },
