@@ -1,8 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { inject } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { MatPaginator } from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 
 import { Subscription } from 'rxjs';
@@ -13,17 +11,24 @@ import { InfoKeys } from '../../enums/info-keys';
 import { InfoDialogComponent } from '../../info-dialog/info-dialog.component';
 import { ApiError } from '../../interfaces/api-error';
 import { CoreModel } from '../../interfaces/core-model';
+import { CdmApiService } from '../../services/cdm-api.service';
 import { ExternalLinkService } from '../../services/external-link.service';
 import { FileService } from '../../services/file.service';
 
-export class CoreModelBase {
+export abstract class CoreModelBase {
+  cdmOptions: { name: string; description: string; version: string }[] = [];
+  cdmVersions: string[] = [];
   dataSource = new MatTableDataSource<CoreModel>([]);
   displayedColumns: string[] = [];
   includeActions = false;
   readonly InfoKey = InfoKeys;
   loading = false;
+  selectedCdm = '';
+  selectedVersion = '';
   studyColumnNames: string[] = [];
   subscriptions: Subscription[] = [];
+  uniqueCdmNames: string[] = [];
+  protected cdmApiService = inject(CdmApiService);
   protected dialog = inject(MatDialog);
   protected dialogService = inject(CoreModelDialogService);
   protected externalLinkService = inject(ExternalLinkService);
@@ -69,12 +74,53 @@ export class CoreModelBase {
     );
   }
 
+  fetchCdms(): void {
+    this.loading = true;
+
+    const sub = this.cdmApiService.fetchCommonDataModels().subscribe({
+      next: (cdms) => {
+        this.cdmOptions = cdms.map((cdm) => ({
+          name: cdm.name,
+          description: cdm.description,
+          version: cdm.version,
+        }));
+        const uniqueNames = Array.from(
+          new Set(this.cdmOptions.map((opt) => opt.name))
+        );
+        this.uniqueCdmNames = uniqueNames;
+      },
+      error: (err: ApiError) => this.handleError(err),
+      complete: () => (this.loading = false),
+    });
+
+    this.subscriptions.push(sub);
+  }
+
+  fetchCoreModelData(): void {
+    this.loading = true;
+    const sub = this.cdmApiService
+      .fetchCoreModelData(this.selectedCdm, this.selectedVersion)
+      .subscribe({
+        next: (data) => this.initializeDataSource(data),
+        error: (err: ApiError) => this.handleError(err),
+        complete: () => (this.loading = false),
+      });
+
+    this.subscriptions.push(sub);
+  }
+
   getAthenaLink(termId: string): string {
     return this.externalLinkService.getAthenaLink(termId);
   }
 
   getOlsLink(termId: string): string {
     return this.externalLinkService.getOlsLink(termId);
+  }
+
+  getVersionForCdm(name: string): void {
+    this.cdmVersions = this.cdmOptions
+      .filter((option) => option.name === name)
+      .map((option) => option.version);
   }
 
   handleError(err: ApiError): void {
@@ -91,19 +137,11 @@ export class CoreModelBase {
     alert(`An error occurred while fetching data: ${errorMessage}`);
   }
 
-  init(sort: MatSort, paginator: MatPaginator): void {
-    const saved = localStorage.getItem('coreModel');
-    if (saved) {
-      this.initializeDataSource(JSON.parse(saved), sort, paginator);
-    }
-    this.loadCoreModelData(sort, paginator);
+  init(): void {
+    this.fetchCdms();
   }
 
-  initializeDataSource(
-    data: CoreModel[],
-    sort: MatSort,
-    paginator: MatPaginator
-  ): void {
+  initializeDataSource(data: CoreModel[]): void {
     this.studyColumnNames = this.tableService.getUniqueStudyNames(data);
     this.displayedColumns = this.tableService.getDisplayedColumns(
       this.studyColumnNames,
@@ -112,21 +150,13 @@ export class CoreModelBase {
     this.dataSource = this.tableService.setupDataSource(data);
 
     setTimeout(() => {
-      this.dataSource.paginator = paginator;
-      this.dataSource.sort = sort;
+      this.setPaginator();
+      this.setSort();
     });
   }
 
-  loadCoreModelData(sort: MatSort, paginator: MatPaginator): void {
-    this.loading = true;
-
-    const sub = this.http.get<CoreModel[]>('assets/core_model.json').subscribe({
-      next: (data) => this.initializeDataSource(data, sort, paginator),
-      error: (err: ApiError) => this.handleError(err),
-      complete: () => (this.loading = false),
-    });
-
-    this.subscriptions.push(sub);
+  onSubmit(): void {
+    this.fetchCoreModelData();
   }
 
   openInfo(key: InfoKeys): void {
@@ -135,4 +165,8 @@ export class CoreModelBase {
       width: '500px',
     });
   }
+
+  abstract setPaginator(): void;
+
+  abstract setSort(): void;
 }

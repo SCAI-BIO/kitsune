@@ -1,4 +1,4 @@
-<main class="main-container harmonize-component">
+<main class="main-container core-model-component">
   <!-- Description Section -->
   <div class="description-box">
     <section class="description">
@@ -52,7 +52,53 @@
     <mat-spinner diameter="40"></mat-spinner>
   </div>
   }
+  <div class="submit-form-container">
+    <div class="cdm-name-version-select-container">
+      <div class="cdm-name-selector">
+        <mat-form-field>
+          <mat-label>Common Data Models</mat-label>
+          <mat-select
+            [value]="selectedCdm"
+            (selectionChange)="
+              selectedCdm = $event.value; getVersionForCdm(selectedCdm)
+            "
+          >
+            @for (name of uniqueCdmNames; track name) {
+            <mat-option [value]="name">{{ name }}</mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="cdm-version-selector">
+        <mat-form-field>
+          <mat-label>Version</mat-label>
+          <mat-select
+            [value]="selectedVersion"
+            (selectionChange)="selectedVersion = $event.value"
+          >
+            @for (version of cdmVersions; track version) {
+            <mat-option [value]="version">{{ version }}</mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="submit-button-container">
+      <div class="submit-box">
+        <!-- Submit Button -->
+        <button
+          mat-raised-button
+          class="button-style"
+          color="primary"
+          (click)="onSubmit()"
+        >
+          Submit
+        </button>
+      </div>
+    </div>
+  </div>
 
+  @if (this.dataSource.data.length > 0) {
   <!-- Shared Wrapper -->
   <div class="table-wrapper mat-elevation-z8">
     <!-- Download Button Container -->
@@ -276,4 +322,5 @@
       </table>
     </div>
   </div>
+  }
 </main>

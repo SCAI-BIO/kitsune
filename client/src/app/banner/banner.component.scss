@@ -1,3 +1,7 @@
+.button-style {
+  min-width: 255px;
+}
+
 .banner {
   background-color: #171321;
   color: white;
@@ -28,7 +32,7 @@
 .routing-menu-box {
   display: flex;
   justify-content: center;
-  gap: 60px;
+  gap: 20px;
 
   .button-style {
     font-size: 18px;

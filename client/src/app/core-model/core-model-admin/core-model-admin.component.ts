@@ -5,11 +5,14 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatSelectModule } from '@angular/material/select';
 import { MatSort, MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 
 import { CoreModelBase } from '../base/core-model-base';
+import { ApiError } from '../../interfaces/api-error';
 import { CoreModel } from '../../interfaces/core-model';
+import { SaveCdmDialogComponent } from '../../save-cdm-dialog/save-cdm-dialog.component';
 
 @Component({
   selector: 'app-core-model-table',
@@ -20,6 +23,7 @@ import { CoreModel } from '../../interfaces/core-model';
     MatInputModule,
     MatPaginatorModule,
     MatProgressSpinnerModule,
+    MatSelectModule,
     MatSortModule,
     MatTableModule,
     UpperCasePipe,
@@ -91,13 +95,23 @@ export class CoreModelAdminComponent
     });
   }
 
+  importCommonDataModel(formData: FormData): void {
+    this.loading = true;
+    const sub = this.cdmApiService.importCommonDataModel(formData).subscribe({
+      error: (err: ApiError) => this.handleError(err),
+      complete: () => (this.loading = false),
+    });
+
+    this.subscriptions.push(sub);
+  }
+
   ngOnDestroy(): void {
     this.destroy();
   }
 
   ngOnInit(): void {
     setTimeout(() => {
-      this.init(this.sort, this.paginator);
+      this.init();
     });
   }
 
@@ -113,7 +127,7 @@ export class CoreModelAdminComponent
       try {
         const csvText = reader.result as string;
         const parsedData = this.fileService.transformCsvToJson(csvText);
-        this.initializeDataSource(parsedData, this.sort, this.paginator);
+        this.initializeDataSource(parsedData);
       } catch (err) {
         this.loading = false;
         alert('Error parsing CSV file.');
@@ -160,13 +174,47 @@ export class CoreModelAdminComponent
           }),
         };
 
-        this.initializeDataSource(
-          [...this.dataSource.data, newCoreModel],
-          this.sort,
-          this.paginator
-        );
+        this.initializeDataSource([...this.dataSource.data, newCoreModel]);
       }
     });
+  }
+
+  openSaveCdmDialog(): void {
+    const dialogRef = this.dialog.open(SaveCdmDialogComponent, {
+      data: {
+        cdmName: this.selectedCdm,
+        cdmVersion: this.selectedVersion,
+        cdmOptions: this.cdmOptions,
+      },
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (!result) return;
+
+      const { cdmName, cdmDescription, cdmVersion } = result;
+      const csv = this.tableService.convertCoreModelsToCsv(
+        this.dataSource.data
+      );
+
+      const blob = new Blob([csv], { type: 'text/csv' });
+      const formData = new FormData();
+      formData.append('file', blob, `${cdmName}_${cdmVersion}.csv`);
+      formData.append('cdm_name', cdmName);
+      formData.append('cdm_description', cdmDescription);
+      formData.append('cdm_version', cdmVersion);
+
+      this.importCommonDataModel(formData);
+
+      this.loading = true;
+    });
+  }
+
+  override setPaginator(): void {
+    this.dataSource.paginator = this.paginator;
+  }
+
+  override setSort(): void {
+    this.dataSource.sort = this.sort;
   }
 
   private deleteRow(row: CoreModel): void {

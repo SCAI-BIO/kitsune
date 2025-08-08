@@ -4,6 +4,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
+import { MatSelectModule } from '@angular/material/select';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSort, MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
@@ -20,6 +21,7 @@ import { CoreModelBase } from '../base/core-model-base';
     MatInputModule,
     MatPaginatorModule,
     MatProgressSpinnerModule,
+    MatSelectModule,
     MatSortModule,
     MatTableModule,
   ],
@@ -39,7 +41,15 @@ export class CoreModelComponent
 
   ngOnInit(): void {
     setTimeout(() => {
-      this.init(this.sort, this.paginator);
+      this.init();
     });
+  }
+
+  override setPaginator(): void {
+    this.dataSource.paginator = this.paginator;
+  }
+
+  override setSort(): void {
+    this.dataSource.sort = this.sort;
   }
 }
