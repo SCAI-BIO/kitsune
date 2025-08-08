@@ -1,11 +1,12 @@
-import { Injectable, inject } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { CommonDataModel } from '../interfaces/cdm';
+import { Injectable, inject } from '@angular/core';
 
-import { environment } from '../../environments/environment';
-import { CoreModel } from '../interfaces/core-model';
+import { Observable } from 'rxjs';
+
+import { CommonDataModel } from '../interfaces/cdm';
 import { ChordData } from '../interfaces/chord-diagram';
+import { CoreModel } from '../interfaces/core-model';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
