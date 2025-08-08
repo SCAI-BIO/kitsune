@@ -1,3 +1,16 @@
+// CDM Selection
+.submit-form-container {
+  justify-items: center;
+  margin-bottom: 20px;
+}
+
+.cdm-name-version-select-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 20px;
+}
+
 .navigation-buttons {
   display: flex;
   align-items: center;
