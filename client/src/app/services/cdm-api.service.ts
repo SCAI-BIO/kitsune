@@ -5,6 +5,7 @@ import { CommonDataModel } from '../interfaces/cdm';
 
 import { environment } from '../../environments/environment';
 import { CoreModel } from '../interfaces/core-model';
+import { ChordData } from '../interfaces/chord-diagram';
 
 @Injectable({
   providedIn: 'root',
@@ -12,6 +13,18 @@ import { CoreModel } from '../interfaces/core-model';
 export class CdmApiService {
   private API_URL = environment.cdmApiUrl;
   private http = inject(HttpClient);
+
+  fetchChordDiagramData(
+    cdm_name: string,
+    cdm_version: string
+  ): Observable<ChordData> {
+    const params = new HttpParams()
+      .set('cdm_name', cdm_name)
+      .set('cdm_version', cdm_version);
+    return this.http.get<ChordData>(`${this.API_URL}/chord-diagram/`, {
+      params,
+    });
+  }
 
   fetchCommonDataModels(): Observable<CommonDataModel[]> {
     return this.http.get<CommonDataModel[]>(`${this.API_URL}/cdms/`);
@@ -24,7 +37,7 @@ export class CdmApiService {
     const params = new HttpParams()
       .set('cdm_name', cdm_name)
       .set('cdm_version', cdm_version);
-    return this.http.get<CoreModel[]>(`${this.API_URL}/core-models`, {
+    return this.http.get<CoreModel[]>(`${this.API_URL}/core-models/`, {
       params,
     });
   }
