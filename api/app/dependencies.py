@@ -1,10 +1,10 @@
-from app.models import WeaviateClient
+from app.models import PostgresClient
 
 
 async def get_client():
-    with WeaviateClient() as client:
+    with PostgresClient() as client:
         yield client
 
 
-def get_client_instance() -> WeaviateClient:
-    return WeaviateClient()
+def get_client_instance() -> PostgresClient:
+    return PostgresClient()

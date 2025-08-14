@@ -16,22 +16,21 @@ from fastapi import (
     WebSocket,
     WebSocketDisconnect,
 )
+from sqlalchemy import func
 
 from app.dependencies import get_client, get_client_instance
-from app.models import OLLAMA_URL, WeaviateClient
+from app.models import OLLAMA_URL, PostgresClient
 
 router = APIRouter(prefix="/mappings", tags=["mappings"], dependencies=[Depends(get_client)])
 
 
 @router.get("/")
 async def get_all_mappings(
-    client: Annotated[WeaviateClient, Depends(get_client)],
+    client: Annotated[PostgresClient, Depends(get_client)],
     model: str = "nomic-embed-text",
     limit: int = 10,
     offset: int = 0,
 ):
-    if client.use_weaviate_vectorizer:
-        model = model.replace("-", "_").replace("/", "_")
     mappings = client.get_mappings(sentence_embedder=model, limit=limit, offset=offset)
     return mappings.items
 
@@ -40,18 +39,15 @@ async def get_all_mappings(
 async def create_mapping(
     concept_id: str,
     text: str,
-    client: Annotated[WeaviateClient, Depends(get_client)],
+    client: Annotated[PostgresClient, Depends(get_client)],
     model: str = "nomic-embed-text",
 ):
     try:
         concept = client.get_concept(concept_id)
-        if client.use_weaviate_vectorizer:
-            mapping = Mapping(concept, text)
-        else:
-            embedding_model = Vectorizer(model, host=OLLAMA_URL)
-            embedding = embedding_model.get_embedding(text)
-            model_name = embedding_model.model_name
-            mapping = Mapping(concept, text, list(embedding), model_name)
+        embedding_model = Vectorizer(model, host=OLLAMA_URL)
+        embedding = list(embedding_model.get_embedding(text))
+        model_name = embedding_model.model_name
+        mapping = Mapping(concept, text, embedding, model_name)
         client.store(mapping)
         return {"message": "Mapping created successfully"}
     except Exception as e:
@@ -60,7 +56,7 @@ async def create_mapping(
 
 @router.post("/")
 async def get_closest_mappings_for_text(
-    client: Annotated[WeaviateClient, Depends(get_client)],
+    client: Annotated[PostgresClient, Depends(get_client)],
     text: str = Form(...),
     terminology_name: str = Form("OHDSI"),
     model: str = Form("nomic-embed-text"),
@@ -69,8 +65,6 @@ async def get_closest_mappings_for_text(
     try:
         embedding_model = Vectorizer(model, host=OLLAMA_URL)
         embedding = embedding_model.get_embedding(text)
-        if client.use_weaviate_vectorizer:
-            model = model.replace("-", "_").replace("/", "_")
         closest_mappings = client.get_closest_mappings(embedding, True, terminology_name, model, limit)
         mappings = []
         for mapping_result in closest_mappings:
@@ -94,14 +88,13 @@ async def get_closest_mappings_for_text(
 
 
 @router.get("/total-number")
-async def get_total_number_of_mappings(client: Annotated[WeaviateClient, Depends(get_client)]):
-    mapping = client.client.collections.get("Mapping")
-    return mapping.aggregate.over_all(total_count=True).total_count
+async def get_total_number_of_mappings(client: Annotated[PostgresClient, Depends(get_client)]):
+    return client.session.query(func.count()).select_from(Mapping).scalar()
 
 
 @router.post("/dict", description="Get mappings for a data dictionary source.")
 async def get_closest_mappings_for_dictionary(
-    client: Annotated[WeaviateClient, Depends(get_client)],
+    client: Annotated[PostgresClient, Depends(get_client)],
     file: UploadFile = File(...),
     model: str = Form("nomic-embed-text"),
     terminology_name: str = Form("OHDSI"),
@@ -111,8 +104,6 @@ async def get_closest_mappings_for_dictionary(
 ):
     try:
         embedding_model = Vectorizer(model, host=OLLAMA_URL)
-        if client.use_weaviate_vectorizer:
-            model = model.replace("-", "_").replace("/", "_")
         if not file or not file.filename:
             raise HTTPException(status_code=400, detail="No file was provided. Please upload a valid file.")
 
@@ -211,9 +202,6 @@ async def websocket_closest_mappings_for_dictionary(websocket: WebSocket):
 
         # Get client (depends does not work directly in ws)
         client = get_client_instance()
-
-        if client.use_weaviate_vectorizer:
-            model = model.replace("-", "_").replace("/", "_")
 
         embedding_model = Vectorizer(model, host=OLLAMA_URL)
         embeddings = embedding_model.get_embeddings(descriptions)
