@@ -3,8 +3,8 @@ import os
 import tempfile
 from typing import Annotated
 
-from datastew import DataDictionarySource
 from datastew.embedding import Vectorizer
+from datastew.process.parsing import DataDictionarySource
 from datastew.repository.model import Mapping
 from fastapi import (
     APIRouter,
