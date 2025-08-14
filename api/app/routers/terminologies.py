@@ -1,21 +1,21 @@
 from typing import Annotated
 
-from app.dependencies import get_client
-from app.models import WeaviateClient
 from datastew.repository.model import Terminology
 from fastapi import APIRouter, Depends, HTTPException
+
+from app.dependencies import get_client
+from app.models import PostgresClient
 
 router = APIRouter(prefix="/terminologies", tags=["terminologies"], dependencies=[Depends(get_client)])
 
 
 @router.get("/")
-async def get_all_terminologies(client: Annotated[WeaviateClient, Depends(get_client)]):
-    terminologies = client.get_all_terminologies()
-    return terminologies
+async def get_all_terminologies(client: Annotated[PostgresClient, Depends(get_client)]):
+    return client.get_all_terminologies()
 
 
 @router.put("/{id}")
-async def create_terminology(id: str, name: str, client: Annotated[WeaviateClient, Depends(get_client)]):
+async def create_terminology(id: str, name: str, client: Annotated[PostgresClient, Depends(get_client)]):
     try:
         terminology = Terminology(name, id)
         client.store(terminology)

@@ -1,28 +1,23 @@
 import logging
 import os
 from enum import Enum
-from urllib.parse import urlparse
 
 from datastew.embedding import Vectorizer
-from datastew.repository import WeaviateRepository
+from datastew.repository import PostgreSQLRepository
 from dotenv import load_dotenv
 
 load_dotenv()
 
-WEAVIATE_URL = os.getenv("WEAVIATE_URL", "http://localhost:8080")
+POSTGRES_USER = os.getenv("POSTGRES_USER", "testuser")
+POSTGRES_PASSWORD = os.getenv("POSTGRES_PASSWORD", "testpass")
+POSTGRES_HOST = os.getenv("POSTGRES_HOST", "localhost")
+POSTGRES_PORT = os.getenv("POSTGRES_PORT", "5432")
+POSTGRES_DB = os.getenv("POSTGRES_DB", "testdb")
 MODEL_NAME = os.getenv("MODEL_NAME", "nomic-embed-text")
 HUGGING_FACE_API_KEY = os.getenv("HF_KEY", None)
 OLLAMA_URL = os.getenv("OLLAMA_URL", "http://localhost:11434")
 logger = logging.getLogger("uvicorn.info")
-
-parsed_weaviate_url = urlparse(WEAVIATE_URL)
-# If Weaviate is running inside a Docker container, pass the Ollama API URL with host.docker.internal:port.
-# Use http://localhost:port if WeaviateRepository `mode` is set to memory
-parsed_ollama_url = urlparse(OLLAMA_URL)
-if parsed_ollama_url.hostname == "localhost":
-    modified_ollama_url = f"http://host.docker.internal:{parsed_ollama_url.port}"
-else:
-    modified_ollama_url = OLLAMA_URL
+connection_string = f"postgresql://{POSTGRES_USER}:{POSTGRES_PASSWORD}@{POSTGRES_HOST}:{POSTGRES_PORT}/{POSTGRES_DB}"
 
 
 class ObjectSchema(Enum):
@@ -31,18 +26,15 @@ class ObjectSchema(Enum):
     MAPPING = "mapping"
 
 
-class WeaviateClient(WeaviateRepository):
+class PostgresClient(PostgreSQLRepository):
     def __init__(self):
         super().__init__(
-            mode="remote",
-            path=str(parsed_weaviate_url.hostname),
-            port=parsed_weaviate_url.port if parsed_weaviate_url.port else 80,
-            vectorizer=Vectorizer(MODEL_NAME, api_key=HUGGING_FACE_API_KEY, host=modified_ollama_url),
+            connection_string=connection_string,
+            vectorizer=Vectorizer(MODEL_NAME, api_key=HUGGING_FACE_API_KEY, host=OLLAMA_URL),
         )
 
     def __enter__(self):
         return self
 
     def __exit__(self, exc_type, exc_value, traceback):
-        if self.client:
-            self.client.close()
+        self.session.close()
