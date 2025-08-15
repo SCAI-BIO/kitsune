@@ -1,4 +1,4 @@
-# <img src="client/src/assets/logo_white.svg" alt="Logo" width="100"/> Kitsune ![GitHub Release](https://img.shields.io/github/v/release/SCAI-BIO/kitsune)
+# <img src="client/public/logo_white.svg" alt="Logo" width="100"/> Kitsune ![GitHub Release](https://img.shields.io/github/v/release/SCAI-BIO/kitsune)
 
 _Kitsune_ is a next-generation data steward and harmonization tool. Building on the legacy of systems like Usagi, Kitsune leverages LLM embeddings to intelligently map semantically similar terms even when their string representations differ substantially. This results in more robust data harmonization and improved performance in real-world scenarios.
 
