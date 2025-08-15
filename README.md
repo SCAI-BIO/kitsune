@@ -1,6 +1,6 @@
-# <img src="client/src/assets/logo_white.png" alt="Logo" width="100"/> Kitsune ![GitHub Release](https://img.shields.io/github/v/release/SCAI-BIO/kitsune)
+# <img src="client/src/assets/logo_white.svg" alt="Logo" width="100"/> Kitsune ![GitHub Release](https://img.shields.io/github/v/release/SCAI-BIO/kitsune)
 
-*Kitsune* is a next-generation data steward and harmonization tool. Building on the legacy of systems like Usagi, Kitsune leverages LLM embeddings to intelligently map semantically similar terms even when their string representations differ substentially. This results in more robust data harmonization and improved performance in real-world scenarios.
+_Kitsune_ is a next-generation data steward and harmonization tool. Building on the legacy of systems like Usagi, Kitsune leverages LLM embeddings to intelligently map semantically similar terms even when their string representations differ substantially. This results in more robust data harmonization and improved performance in real-world scenarios.
 
 (Formerly: INDEX – the Intelligent Data Steward Toolbox)
 
@@ -12,191 +12,128 @@
 
 ## Installation
 
-Run the frontend client, api, vector database and local embedding model using the local docker-compose file:
+Run the frontend client, API, vector database and local embedding model using the local `docker-compose` file:
 
 ```bash
 docker-compose -f docker-compose.local.yaml up
 ```
 
-You can access the frontend on [localhost:4200](localhost:4200)
+Once running, you can access the frontend on [localhost:4200](localhost:4200)
 
 ## Ontology Import via API
 
-The API supports multiple methods for importing ontology (terminology) data into the system. Depending on your source and needs, you can choose from the following options:
+The API supports multiple methods for importing ontology (terminology) data into the system. Depending on your source and requirements, you can choose from the following options:
 
 1. Importing from OLS (Pre-integrated):
 
-    This is the most straightforward method. The API is integrated with the [Ontology Lookup Service (OLS)](https://www.ebi.ac.uk/ols4/ontologies), allowing you to import any ontology available in their catalog.
+   The API is integrated with the [Ontology Lookup Service (OLS)](https://www.ebi.ac.uk/ols4/ontologies), allowing you to import any ontology from their catalog.
 
-    ```bash
-    curl -X 'PUT' \
-    '{api_url}/imports/terminology?terminology_id={terminology_id}&model={vectorizer_model}' \
-    -H 'accept: application/json'
-    ```
+   ```bash
+   curl -X 'PUT' \
+   '{api_url}/imports/terminology?terminology_id={terminology_id}&model={vectorizer_model}' \
+   -H 'accept: application/json'
+   ```
 
-    - `terminology_id` (required): The ID of the ontology you want to import (e.g., `hp`, `efo`, `chebi`, etc.).
-    - `vectorizer_model` (optional), vectorizer model to be used for generating embeddings.
-    - Example:
+   - `terminology_id` (**required**): The ID of the ontology you want to import (e.g., `hp`, `efo`, `chebi`).
+   - `vectorizer_model` (_optional_): The vectorizer model to use for generating embeddings.
 
-    ```bash
-    curl -X 'PUT' \
+   Example:
+
+   ```bash
+   curl -X 'PUT' \
     '{api_url}/imports/terminology?terminology_id=hp' \
     -H 'accept: application/json'
-    ```
+   ```
 
-2. Importing SNOMED CT:
+1. Importing SNOMED CT:
 
-    - SNOMED CT can be imported using a shortcut endpoint. This is equivalent to using the OLS integration with terminology_id=snomed, but provides a cleaner interface.
+   - SNOMED CT can be imported using a shortcut endpoint. This is equivalent to using the OLS integration with `terminology_id=snomed`, but provides a cleaner interface.
 
-    ```bash
-    curl -X 'PUT' \
+   ```bash
+   curl -X 'PUT' \
     '{api_url}/imports/terminology/snomed?model={vectorizer_model}' \
     -H 'accept: application/json'
-    ```
+   ```
 
-    - `vectorizer_model` (optional), vectorizer model to be used for generating embeddings.
+   Parameters:
 
-3. Importing Your Own Ontology (JSONL Files):
+   - `vectorizer_model` (_optional_): The vectorizer model to be used for generating embeddings.
 
-    For full flexibility, you can upload your own ontology using `.jsonl` (JSON Lines) files. This allows you to import:
-    - Terminologies (namespaces)
-    - Concepts (terms within the terminology)
-    - Mappings (links between embeddings and existing concepts)
+1. Importing Your Own Ontology (JSONL Files):
 
-    > ⚠️ The objects should be imported in the following order:
-    >
-    > 1. "Terminology"
-    > 2. "Concepts"
-    > 3. "Mappings"
+   For full flexibility, you can upload your own ontology using `.jsonl` (JSON Lines) files. This allows you to import:
 
-    ```bash
-    curl -X 'PUT' \
-    '{api_url}/imports/jsonl?object_type={object_type}' \
-    -H 'accept: application/json' \
-    -H 'Content-Type: multipart/form-data' \
-    -F 'file=@{your_file}.jsonl'
-    ```
+   - Terminologies (namespaces)
+   - Concepts (terms within the terminology)
+   - Mappings (links between embeddings and existing concepts)
 
-    - `object_type`(required): One of `terminology`, `concept`, or `mapping`
-    - `file` (required): The `.jsonl` file to be uploaded (multipart/from-data)
+   > ⚠️ The objects should be imported in the following order:
+   >
+   > 1. "Terminology"
+   > 2. "Concepts"
+   > 3. "Mappings"
+
+   ```bash
+   curl -X 'PUT' \
+   '{api_url}/imports/jsonl?object_type={object_type}' \
+   -H 'accept: application/json' \
+   -H 'Content-Type: multipart/form-data' \
+   -F 'file=@{your_file}.jsonl'
+   ```
+
+   - `object_type`(**required**): One of `terminology`, `concept`, or `mapping`
+   - `file` (**required**): The `.jsonl` file to be uploaded (multipart/from-data)
 
 ## JSONL File Structure
 
-Each line in your `.jsonl` file must represent a single object with the following structure
+Each line in your `.jsonl` file must represent a single object. The structures for Terminology, Concept, and Mapping are described below.
+
+### Terminology
+
+Represents an ontology namescape.
+
+Attributes:
+
+- `id`: Abbreviation of the terminology.
+- `name`: Full name of the terminology.
 
 ```json
 {
-  "class": "<Terminology | Concept | Mapping>",
-  "id": "<uuid>",
-  "properties": { ... },
-  "references": { ... },         // for Concept and Mapping
-  "vectors": { ... }             // optional, for Mapping only
+  "id": "OHDSI",
+  "name": "Observational Health Data Sciences and Informatics"
 }
 ```
 
-- `class`, referring to the corresponding Terminology, Concept, and Mapping collections.
-- `id`, a unique id per object generated by uuid.
-- `properties`, a dictionary containing the properties of the object.
+### Concept
 
-In addition, an object can contain the following if applicable:
+Represents an individual entry within a terminology.
 
-- `references`, a dictionary specifying a referencing between objects of different collections by their `id`. Not applicable for Terminology collection.
-- `vector`, a dictionary containing the sentence embedding. Only applicable to Mapping collection.
+Attributes:
 
-### Example JSONL Structures
-
-#### Terminology
-
-Terminology has one attribute in its properties called `name` referring to the name of the terminology being imported.
+- `concept_identifier`: Concept entry ID within the terminology.
+- `pref_label`: Preferred label for the entry.
+- `terminology_id`: Reference to the terminology it belongs to.
 
 ```json
 {
-    "class": "Terminology",
-    "id": "6c7b7146-5895-5097-a84e-df41b520c936",
-    "properties": {
-        "name": "OHDSI"
-    }
+  "concept_identifier": "OHDSI:45756805",
+  "pref_label": "Pediatric Cardiology",
+  "terminology_id": "OHDSI"
 }
 ```
 
-#### Concept
+### Mapping
 
-Concept has two attributes in its properties called `conceptID` and `prefLabel` referring to the concept entry ID within the terminology and preferred label for the entry, respectively.
+Links a textual description to a concept.
 
-A concept object also contain a reference attribute `hasTerminology` pointing to the terminology it belongs to.
+Attributes:
 
-```json
-{
-    "class": "Concept",
-    "id": "818fc18f-77ff-5889-9a23-51d1e85c368e",
-    "properties": {
-        "conceptID": "37523947",
-        "prefLabel": "Body Fat Percentage"
-    },
-    "references": {
-        "hasTerminology": "6c7b7146-5895-5097-a84e-df41b520c936"
-    }
-}
-```
-
-#### Mapping
-
-A mapping object may or may not contain the vectors and the structure of the JSONL file will change accordingly. The structure of the file also depends on whether you are utilizing Weaviate vectorizers or not.
-
-Regardless a mapping object will always contain a reference attribute `hasConcept` pointing to the concept it belongs to.
-
-##### Mapping Object without Utilizing Weaviate Vectorizers
-
-A mapping object without utilizing Weaviate vectorizers will have two attributes in its properties called `text` and `hasSentenceEmbedder` referring to the description of its corresponding concept and the vectorizer model used to embed the description, respectively.
-
-A pre-computed vector can be stored in `vectors` dictionary with the key `default`.
+- `text`: Description of the associated concept, or `pref_label` if the description is missing.
+- `concept_identifier`: Reference to the associated concept.
 
 ```json
 {
-    "class": "Mapping",
-    "id": "1b1b7a6e-9000-58ef-8f62-034b4795854a",
-    "properties": {
-        "text": "Body Fat Percentage",
-        "hasSentenceEmbedder": "nomic-embed-text"
-    },
-    "references": {
-        "hasConcept": "818fc18f-77ff-5889-9a23-51d1e85c368e"
-    },
-    "vectors": {
-        "default": [0.1, 0.2, 0.3]
-    }
-}
-```
-
-The vectors does not have to be pre-computed and if not supplied will be computed during the import process. You can find the structure of JSONL file without vectors below.
-
-```json
-{
-    "class": "Mapping",
-    "id": "1b1b7a6e-9000-58ef-8f62-034b4795854a",
-    "properties": {
-        "text": "Body Fat Percentage",
-        "hasSentenceEmbedder": "nomic-embed-text"
-    },
-    "references": {
-        "hasConcept": "818fc18f-77ff-5889-9a23-51d1e85c368e"
-    }
-}
-```
-
-##### Mapping Object Utilizing Weaviate Vectorizers
-
-Weaviate Vectorizers utilizes named vectors and computes the embeddings during the import process. Thus, eliminating the need for `hasSentenceEmbedder` and `vectors` attributes.
-
-```json
-{
-    "class": "Mapping",
-    "id": "1b1b7a6e-9000-58ef-8f62-034b4795854a",
-    "properties": {
-        "text": "Body Fat Percentage"
-    },
-    "references": {
-        "hasConcept": "818fc18f-77ff-5889-9a23-51d1e85c368e"
-    }
+  "text": "Pediatric Cardiology",
+  "concept_identifier": "OHDSI:45756805"
 }
 ```
