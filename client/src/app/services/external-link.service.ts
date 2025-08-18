@@ -13,7 +13,8 @@ export class ExternalLinkService {
 
   getAthenaLink(termId: string) {
     if (!termId) return '';
-    return `${this.athenaBaseLink}/${termId}`;
+    const cleanId = termId.replace(/^OHDSI:/, '');
+    return `${this.athenaBaseLink}/${cleanId}`;
   }
 
   getOlsLink(termId: string) {
