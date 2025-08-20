@@ -16,7 +16,6 @@ authors:
     affiliation: Fraunhofer Institute for Algorithms and Scientific Computing SCAI
     orcid: https://orcid.org/0000-0002-2823-0102
 repository-code: https://github.com/SCAI-BIO/kitsune
-repository-artifact: https://pypi.org/project/kitsune
 abstract: >
   Kitsune is a next-generation data steward and harmonization tool. Building on the legacy of 
   systems like Usagi, Kitsune leverages LLM embeddings to intelligently map semantically similar 
