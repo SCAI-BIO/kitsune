@@ -8,6 +8,7 @@ services:
       POSTGRES_USER: testuser
       POSTGRES_PASSWORD: testpass
       POSTGRES_DB: testdb
+      PGDATA: /var/lib/postgresql/17/docker/data/pgdata
     ports:
       - "5432:5432"
     healthcheck:
@@ -16,7 +17,4 @@ services:
       timeout: 5s
       retries: 5
     volumes:
-      - kitsune:/var/lib/postgresql/data
-
-volumes:
-  kitsune:
+      - postgres-data:/var/lib/postgresql/17/docker/data
