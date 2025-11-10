@@ -1,7 +1,7 @@
 httpx~=0.28.1
-uvicorn~=0.36.0
-fastapi~=0.117.1
-starlette~=0.48.0
+uvicorn~=0.38.0
+fastapi~=0.121.1
+starlette~=0.50.0
 datastew~=0.6.0
 python-multipart~=0.0.20
 websockets~=15.0.1
