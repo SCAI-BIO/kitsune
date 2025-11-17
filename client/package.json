@@ -11,16 +11,16 @@
   },
   "private": true,
   "dependencies": {
-    "@angular/animations": "^20.3.10",
-    "@angular/cdk": "^20.2.12",
-    "@angular/common": "^20.3.10",
-    "@angular/compiler": "^20.3.10",
-    "@angular/core": "^20.3.10",
-    "@angular/forms": "^20.3.10",
-    "@angular/material": "^20.2.12",
-    "@angular/platform-browser": "^20.3.10",
-    "@angular/platform-browser-dynamic": "^20.3.10",
-    "@angular/router": "^20.3.10",
+    "@angular/animations": "^20.3.12",
+    "@angular/cdk": "^20.2.13",
+    "@angular/common": "^20.3.12",
+    "@angular/compiler": "^20.3.12",
+    "@angular/core": "^20.3.12",
+    "@angular/forms": "^20.3.12",
+    "@angular/material": "^20.2.13",
+    "@angular/platform-browser": "^20.3.12",
+    "@angular/platform-browser-dynamic": "^20.3.12",
+    "@angular/router": "^20.3.12",
     "@types/d3": "^7.4.3",
     "d3": "^7.9.0",
     "keycloak-angular": "^20.0.0",
@@ -32,10 +32,10 @@
     "zone.js": "^0.15.1"
   },
   "devDependencies": {
-    "@angular/build": "^20.3.9",
-    "@angular/cli": "^20.3.9",
-    "@angular/compiler-cli": "^20.3.10",
-    "@types/jasmine": "~5.1.12",
+    "@angular/build": "^20.3.10",
+    "@angular/cli": "^20.3.10",
+    "@angular/compiler-cli": "^20.3.12",
+    "@types/jasmine": "~5.1.13",
     "@types/papaparse": "^5.5.0",
     "angular-eslint": "20.6.0",
     "eslint": "^9.39.1",
@@ -46,6 +46,6 @@
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
     "typescript": "~5.9.3",
-    "typescript-eslint": "^8.46.3"
+    "typescript-eslint": "^8.46.4"
   }
 }
