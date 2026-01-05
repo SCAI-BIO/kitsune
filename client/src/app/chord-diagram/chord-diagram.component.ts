@@ -1,10 +1,4 @@
-import {
-  Component,
-  OnInit,
-  OnDestroy,
-  inject,
-  ChangeDetectorRef,
-} from '@angular/core';
+import { Component, OnInit, OnDestroy, ChangeDetectorRef, inject, signal } from '@angular/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSelectModule } from '@angular/material/select';
@@ -27,7 +21,7 @@ export class ChordDiagramComponent implements OnInit, OnDestroy {
   cdmVersions: string[] = [];
   currentIndex = 0;
   dataChunks: ChordData[] = [];
-  loading = false;
+  isLoading = signal(false);
   selectedCdm = '';
   selectedVersion = '';
   uniqueCdmNames: string[] = [];
@@ -45,7 +39,7 @@ export class ChordDiagramComponent implements OnInit, OnDestroy {
   }
 
   fetchCdms(): void {
-    this.loading = true;
+    this.isLoading.set(true);
 
     const sub = this.cdmApiService.fetchCommonDataModels().subscribe({
       next: (cdms) => {
@@ -53,20 +47,18 @@ export class ChordDiagramComponent implements OnInit, OnDestroy {
           name: cdm.name,
           version: cdm.version,
         }));
-        const uniqueNames = Array.from(
-          new Set(this.cdmOptions.map((opt) => opt.name))
-        );
+        const uniqueNames = Array.from(new Set(this.cdmOptions.map((opt) => opt.name)));
         this.uniqueCdmNames = uniqueNames;
       },
       error: (err: ApiError) => this.handleError(err),
-      complete: () => (this.loading = false),
+      complete: () => this.isLoading.set(false),
     });
 
     this.subscriptions.push(sub);
   }
 
   fetchData(): void {
-    this.loading = true;
+    this.isLoading.set(true);
     const sub = this.cdmApiService
       .fetchChordDiagramData(this.selectedCdm, this.selectedVersion)
       .subscribe({
@@ -78,14 +70,11 @@ export class ChordDiagramComponent implements OnInit, OnDestroy {
           // Let Angular render the SVG first
           this.cdr.detectChanges();
           setTimeout(() => {
-            this.chordService.createChordDiagrams(
-              this.dataChunks,
-              this.currentIndex
-            );
+            this.chordService.createChordDiagrams(this.dataChunks, this.currentIndex);
           });
         },
         error: (err: ApiError) => this.handleError(err),
-        complete: () => (this.loading = false),
+        complete: () => this.isLoading.set(false),
       });
     this.subscriptions.push(sub);
   }
@@ -98,7 +87,7 @@ export class ChordDiagramComponent implements OnInit, OnDestroy {
 
   handleError(err: ApiError): void {
     console.error('Error fetching data:', err);
-    this.loading = false;
+    this.isLoading.set(false);
 
     const detail = err.error?.detail;
     const message = err.error?.message || err.message;

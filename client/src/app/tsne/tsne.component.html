@@ -3,7 +3,7 @@
     <div #tsneHost class="tsne-plot-container"></div>
   </div>
   <!-- Loading Spinner -->
-  @if (loading) {
+  @if (isLoading()) {
   <div class="loading-spinner">
     <mat-spinner diameter="40"></mat-spinner>
   </div>

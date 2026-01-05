@@ -1,13 +1,6 @@
 import { RouterModule } from '@angular/router';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import {
-  Component,
-  ElementRef,
-  inject,
-  OnDestroy,
-  OnInit,
-  ViewChild,
-} from '@angular/core';
+import { Component, ElementRef, OnDestroy, OnInit, ViewChild, inject, signal } from '@angular/core';
 
 import { Subscription } from 'rxjs';
 
@@ -20,24 +13,22 @@ import { ApiService } from '../services/api.service';
   styleUrl: './tsne.component.scss',
 })
 export class TsneComponent implements OnDestroy, OnInit {
-  loading = false;
+  isLoading = signal(false);
   @ViewChild('tsneHost', { static: true }) tsneHost!: ElementRef;
   private apiService = inject(ApiService);
   private subscriptions: Subscription[] = [];
 
   fetchTsneData(): void {
-    this.loading = true;
+    this.isLoading.set(true);
     const sub = this.apiService.fetchTSNE().subscribe({
       next: (html) => {
         this.insertHtmlAndRunScripts(html);
       },
       error: (err) => {
         console.error('Error fetching t-SNE data', err);
-        this.loading = false;
+        this.isLoading.set(false);
       },
-      complete: () => {
-        this.loading = false;
-      },
+      complete: () => this.isLoading.set(false),
     });
     this.subscriptions.push(sub);
   }

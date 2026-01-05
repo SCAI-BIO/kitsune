@@ -1,12 +1,7 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild, inject, signal } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import {
-  FormBuilder,
-  Validators,
-  FormGroup,
-  ReactiveFormsModule,
-} from '@angular/forms';
+import { FormBuilder, Validators, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
@@ -39,13 +34,17 @@ import { ExternalLinkService } from '../services/external-link.service';
   styleUrl: './query.component.scss',
 })
 export class QueryComponent implements OnDestroy, OnInit {
-  @ViewChild(MatPaginator) paginator!: MatPaginator;
   closestMappings: Mapping[] = [];
   dataSource = new MatTableDataSource<Mapping>([]);
   displayedColumns = ['similarity', 'conceptName', 'conceptID'];
   embeddingModels: string[] = [];
   formData = new FormData();
-  loading = false;
+  isLoading = signal(false);
+  @ViewChild(MatPaginator) set paginator(paginator: MatPaginator) {
+    if (paginator) {
+      this.dataSource.paginator = paginator;
+    }
+  }
   queryForm: FormGroup;
   terminologies: string[] = [];
   private apiService = inject(ApiService);
@@ -63,7 +62,7 @@ export class QueryComponent implements OnDestroy, OnInit {
   }
 
   clearCache(): void {
-    this.loading = true;
+    this.isLoading.set(true);
     this.apiService.clearCache();
     this.fetchEmbeddingModelsAndTerminologies();
   }
@@ -74,39 +73,38 @@ export class QueryComponent implements OnDestroy, OnInit {
       return;
     }
 
-    this.loading = true;
-    const sub = this.apiService
-      .fetchClosestMappingsQuery(this.formData)
-      .subscribe({
-        next: (mappings) => {
-          this.closestMappings = mappings;
-          this.dataSource.data = mappings;
-          setTimeout(() => {
-            this.dataSource.paginator = this.paginator;
-          });
-        },
-        error: (err) => {
-          console.error('Error fetching closest mappings', err);
-          this.loading = false;
-          const detail = err.error?.detail;
-          const message = err.error?.message || err.message;
+    this.isLoading.set(true);
+    const sub = this.apiService.fetchClosestMappingsQuery(this.formData).subscribe({
+      next: (mappings) => {
+        this.closestMappings = mappings;
+        this.dataSource.data = mappings;
 
-          let errorMessage = 'An unknown error occurred.';
-          if (detail && message) {
-            errorMessage = `${message} — ${detail}`;
-          } else if (detail || message) {
-            errorMessage = detail || message;
-          }
+        if (this.dataSource.paginator) {
+          this.dataSource.paginator.firstPage();
+        }
+      },
+      error: (err) => {
+        console.error('Error fetching closest mappings', err);
+        this.isLoading.set(false);
+        const detail = err.error?.detail;
+        const message = err.error?.message || err.message;
 
-          alert(`An error occurred while fetching mappings: ${errorMessage}`);
-        },
-        complete: () => (this.loading = false),
-      });
+        let errorMessage = 'An unknown error occurred.';
+        if (detail && message) {
+          errorMessage = `${message} — ${detail}`;
+        } else if (detail || message) {
+          errorMessage = detail || message;
+        }
+
+        alert(`An error occurred while fetching mappings: ${errorMessage}`);
+      },
+      complete: () => this.isLoading.set(false),
+    });
     this.subscriptions.push(sub);
   }
 
   fetchEmbeddingModelsAndTerminologies(): void {
-    this.loading = true;
+    this.isLoading.set(true);
     const sub = forkJoin({
       terminologies: this.apiService.fetchTerminologies(),
       models: this.apiService.fetchEmbeddingModels(),
@@ -117,9 +115,9 @@ export class QueryComponent implements OnDestroy, OnInit {
       },
       error: (err) => {
         console.error('Error fetching language models and terminologies', err);
-        this.loading = false;
+        this.isLoading.set(false);
       },
-      complete: () => (this.loading = false),
+      complete: () => this.isLoading.set(false),
     });
     this.subscriptions.push(sub);
   }
@@ -144,8 +142,7 @@ export class QueryComponent implements OnDestroy, OnInit {
 
   onSubmit(): void {
     if (this.queryForm.valid) {
-      const { text, selectedEmbeddingModel, selectedTerminology, limit } =
-        this.queryForm.value;
+      const { text, selectedEmbeddingModel, selectedTerminology, limit } = this.queryForm.value;
 
       this.formData.set('text', text);
       this.formData.set('terminology_name', selectedTerminology);

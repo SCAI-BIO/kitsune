@@ -4,28 +4,23 @@
     <section class="description">
       <!-- Overview of the Dictionary Harmonize Feature -->
       <p>
-        The <strong>Dictionary Search</strong> allows you to find the closest
-        semantic match for multiple variables by uploading a dictionary file.
-        Using embeddings from LLMs and PLMs, Kitsune efficiently maps your
-        dataset to relevant ontology concepts.
+        The <strong>Dictionary Search</strong> allows you to find the closest semantic match for
+        multiple variables by uploading a dictionary file. Using embeddings from LLMs and PLMs,
+        Kitsune efficiently maps your dataset to relevant ontology concepts.
       </p>
       <p>
-        To begin, upload your dictionary file (<strong
-          >supported formats:</strong
-        >
-        <code>.csv</code>, <code>.xls</code>, <code>.xlsx</code>) and specify
-        the column names for the <strong>variable</strong> and
-        <strong>description</strong> fields. Then, select a language model and a
-        terminology from the dropdown lists before submitting your request.
+        To begin, upload your dictionary file (<strong>supported formats:</strong>
+        <code>.csv</code>, <code>.xls</code>, <code>.xlsx</code>) and specify the column names for
+        the <strong>variable</strong> and <strong>description</strong> fields. Then, select a
+        language model and a terminology from the dropdown lists before submitting your request.
       </p>
       <p>
-        The system will retrieve the <strong>closest semantic match</strong> for
-        each variable in your dictionary.
+        The system will retrieve the <strong>closest semantic match</strong> for each variable in
+        your dictionary.
       </p>
       <p>
         Once the table is generated, you can
-        <strong>download the results as a CSV file</strong> for further
-        analysis.
+        <strong>download the results as a CSV file</strong> for further analysis.
       </p>
     </section>
   </div>
@@ -42,13 +37,8 @@
         #fileUpload
       />
       <div class="file-upload">
-        {{ fileName || "No file uploaded yet." }}
-        <button
-          mat-mini-fab
-          color="primary"
-          class="button-style"
-          (click)="fileUpload.click()"
-        >
+        {{ fileName || 'No file uploaded yet.' }}
+        <button mat-mini-fab color="primary" class="button-style" (click)="fileUpload.click()">
           <mat-icon>attach_file</mat-icon>
         </button>
       </div>
@@ -79,8 +69,7 @@
             }
           </mat-select>
 
-          @if
-          (harmonizeForm.get('selectedEmbeddingModel')?.hasError('required')) {
+          @if (harmonizeForm.get('selectedEmbeddingModel')?.hasError('required')) {
           <mat-error>Please <strong>select</strong> a language model</mat-error>
           }
         </mat-form-field>
@@ -115,24 +104,14 @@
   >
     <div class="submit-box">
       <!-- Submit Button -->
-      <button
-        mat-raised-button
-        class="button-style"
-        color="primary"
-        (click)="onSubmit()"
-      >
+      <button mat-raised-button class="button-style" color="primary" (click)="onSubmit()">
         Submit
       </button>
     </div>
     @if (closestMappings.length > 0) {
     <div class="download-box">
       <!-- Download Button -->
-      <button
-        mat-raised-button
-        class="button-style"
-        color="primary"
-        (click)="downloadTableAsCsv()"
-      >
+      <button mat-raised-button class="button-style" color="primary" (click)="downloadTableAsCsv()">
         Download
       </button>
     </div>
@@ -140,18 +119,15 @@
   </div>
 
   <!-- Loading Spinner -->
-  @if (loading) {
+  @if (isLoading()) {
   <div class="loading-spinner">
     <mat-spinner diameter="40"></mat-spinner>
   </div>
   }
 
   <!-- Show progress bar while streamin -->
-  @if (!loading && expectedTotal > 0 && progressPercent < 100) {
-  <mat-progress-bar
-    mode="determinate"
-    [value]="progressPercent"
-  ></mat-progress-bar>
+  @if (!isLoading() && expectedTotal > 0 && progressPercent < 100) {
+  <mat-progress-bar mode="determinate" [value]="progressPercent"></mat-progress-bar>
   <p>Processed {{ processedCount }} of {{ expectedTotal }} variables</p>
   }
 
@@ -159,16 +135,13 @@
   @if (closestMappings.length > 0 ) {
   <div class="mat-elevation-z8 table-container">
     <!-- Pagination Controls -->
-    <mat-paginator
-      [pageSizeOptions]="[10, 25, 50, 100]"
-      showFirstLastButtons
-    ></mat-paginator>
+    <mat-paginator [pageSizeOptions]="[10, 25, 50, 100]" showFirstLastButtons></mat-paginator>
     <table mat-table [dataSource]="dataSource" class="mat-table">
       <!-- Cosine Similarity Column (Displays Similarity Score) -->
       <ng-container matColumnDef="similarity">
         <th mat-header-cell *matHeaderCellDef>Cosine Similarity Score*</th>
         <td mat-cell *matCellDef="let element">
-          {{ element.mappings[0].similarity | number : "1.2-2" }}
+          {{ element.mappings[0].similarity | number : '1.2-2' }}
         </td>
       </ng-container>
 
@@ -195,9 +168,7 @@
             rel="noopener"
             class="external-link"
           >
-            <span class="external-link-text">{{
-              element.mappings[0].concept.id
-            }}</span>
+            <span class="external-link-text">{{ element.mappings[0].concept.id }}</span>
             <mat-icon inline class="external-link-icon">open_in_new</mat-icon>
           </a>
           }
@@ -223,7 +194,7 @@
             [disabled]="!element.mappings || progressPercent < 100"
             (click)="fetchTopMatches(element.description, element)"
           >
-            {{ progressPercent < 100 ? "Please wait" : "Show" }}
+            {{ progressPercent < 100 ? 'Please wait' : 'Show' }}
             @if (progressPercent < 100) {
             <mat-icon class="button-icon">hourglass_empty</mat-icon>
             } @if (progressPercent >= 100) {
@@ -235,15 +206,10 @@
 
       <!-- Table Footer -->
       <ng-container matColumnDef="footer">
-        <td
-          mat-footer-cell
-          *matFooterCellDef
-          [attr.colspan]="displayedColumns.length"
-        >
-          *The cosine similarity score is a metric that quantifies the
-          similarity between two non-zero vectors, with a range from 0 to 1. A
-          score of 0 signifies no similarity, while a score of 1 represents
-          identical vectors.
+        <td mat-footer-cell *matFooterCellDef [attr.colspan]="displayedColumns.length">
+          *The cosine similarity score is a metric that quantifies the similarity between two
+          non-zero vectors, with a range from 0 to 1. A score of 0 signifies no similarity, while a
+          score of 1 represents identical vectors.
         </td>
       </ng-container>
 

@@ -6,13 +6,9 @@ import {
   ViewChild,
   ChangeDetectorRef,
   inject,
+  signal,
 } from '@angular/core';
-import {
-  FormBuilder,
-  FormGroup,
-  ReactiveFormsModule,
-  Validators,
-} from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
@@ -51,7 +47,6 @@ import { ExternalLinkService } from '../services/external-link.service';
   styleUrl: './harmonize.component.scss',
 })
 export class HarmonizeComponent implements OnDestroy, OnInit {
-  @ViewChild(MatPaginator) paginator!: MatPaginator;
   closestMappings: Response[] = [];
   dataSource = new MatTableDataSource<Response>([]);
   displayedColumns: string[] = [
@@ -68,7 +63,12 @@ export class HarmonizeComponent implements OnDestroy, OnInit {
   fileToUpload: File | null = null;
   harmonizeFormData = new FormData();
   harmonizeForm: FormGroup;
-  loading = false;
+  isLoading = signal(false);
+  @ViewChild(MatPaginator) set paginator(paginator: MatPaginator) {
+    if (paginator) {
+      this.dataSource.paginator = paginator;
+    }
+  }
   processedCount = 0;
   progressPercent = 0;
   requiredFileType =
@@ -93,23 +93,19 @@ export class HarmonizeComponent implements OnDestroy, OnInit {
   }
 
   clearCache(): void {
-    this.loading = true;
+    this.isLoading.set(true);
     this.apiService.clearCache();
     this.fetchEmbeddingModelsAndTerminologies();
   }
 
   downloadTableAsCsv(): void {
-    this.fileService.downloadCsv(
-      this.closestMappings,
-      'kitsune-harmonization.csv',
-      (item) => ({
-        similarity: item.mappings[0]?.similarity ?? 0,
-        variable: item.variable,
-        description: item.description,
-        conceptId: item.mappings[0]?.concept.id ?? '',
-        conceptName: item.mappings[0]?.concept.name ?? '',
-      })
-    );
+    this.fileService.downloadCsv(this.closestMappings, 'kitsune-harmonization.csv', (item) => ({
+      similarity: item.mappings[0]?.similarity ?? 0,
+      variable: item.variable,
+      description: item.description,
+      conceptId: item.mappings[0]?.concept.id ?? '',
+      conceptName: item.mappings[0]?.concept.name ?? '',
+    }));
   }
 
   getExternalLink(termId: string): string {
@@ -124,32 +120,26 @@ export class HarmonizeComponent implements OnDestroy, OnInit {
 
   streamClosestMappings(): void {
     if (!this.harmonizeForm.valid || !this.fileToUpload) {
-      console.error(
-        'Form is invalid or no file selected:',
-        this.harmonizeForm.value
-      );
+      console.error('Form is invalid or no file selected:', this.harmonizeForm.value);
       return;
     }
 
     // Reset values
-    this.loading = true;
+    this.isLoading.set(true);
     this.expectedTotal = 0;
     this.processedCount = 0;
     this.progressPercent = 0;
     this.closestMappings = [];
     this.dataSource.data = [];
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
 
-    const {
-      variableField,
-      descriptionField,
-      selectedEmbeddingModel,
-      selectedTerminology,
-      limit,
-    } = this.harmonizeForm.value;
-
+    const { variableField, descriptionField, selectedEmbeddingModel, selectedTerminology, limit } =
+      this.harmonizeForm.value;
     const file = this.fileToUpload;
-
     let firstChunk = true;
+
     const sub = this.apiService
       .streamClosestMappingsDictionary(file, {
         model: selectedEmbeddingModel,
@@ -161,7 +151,7 @@ export class HarmonizeComponent implements OnDestroy, OnInit {
       .subscribe({
         next: (message: StreamingResponse) => {
           if (message.type === 'error') {
-            this.loading = false;
+            this.isLoading.set(false);
             alert(`An error occurred: ${message.message}`);
             this.progressPercent = 100;
             return;
@@ -180,7 +170,7 @@ export class HarmonizeComponent implements OnDestroy, OnInit {
             };
 
             if (firstChunk) {
-              this.loading = false;
+              this.isLoading.set(false);
               firstChunk = false;
             }
 
@@ -189,13 +179,7 @@ export class HarmonizeComponent implements OnDestroy, OnInit {
 
             this.processedCount++;
             if (this.expectedTotal > 0) {
-              this.progressPercent = Math.round(
-                (this.processedCount / this.expectedTotal) * 100
-              );
-            }
-
-            if (!this.dataSource.paginator && this.paginator) {
-              this.dataSource.paginator = this.paginator;
+              this.progressPercent = Math.round((this.processedCount / this.expectedTotal) * 100);
             }
 
             this.cdr.detectChanges();
@@ -219,7 +203,7 @@ export class HarmonizeComponent implements OnDestroy, OnInit {
   }
 
   fetchEmbeddingModelsAndTerminologies(): void {
-    this.loading = true;
+    this.isLoading.set(true);
     const sub = forkJoin({
       terminologies: this.apiService.fetchTerminologies(),
       models: this.apiService.fetchEmbeddingModels(),
@@ -230,61 +214,58 @@ export class HarmonizeComponent implements OnDestroy, OnInit {
       },
       error: (err) => {
         console.error('Error fetching language models and terminologies', err);
-        this.loading = false;
+        this.isLoading.set(false);
       },
-      complete: () => (this.loading = false),
+      complete: () => this.isLoading.set(false),
     });
     this.subscriptions.push(sub);
   }
 
   fetchTopMatches(description: string, row: Response): void {
-    const { selectedEmbeddingModel, selectedTerminology } =
-      this.harmonizeForm.value;
+    const { selectedEmbeddingModel, selectedTerminology } = this.harmonizeForm.value;
     const queryFormData = new FormData();
     queryFormData.set('text', description);
     queryFormData.set('model', selectedEmbeddingModel);
     queryFormData.set('terminology_name', selectedTerminology);
     queryFormData.set('limit', '10');
 
-    this.loading = true;
-    const sub = this.apiService
-      .fetchClosestMappingsQuery(queryFormData)
-      .subscribe({
-        next: (mappings) => {
-          const { selectedTerminology } = this.harmonizeForm.value;
-          const dialogRef = this.dialog.open(TopMatchesDialogComponent, {
-            width: '1000px',
-            data: {
-              matches: mappings,
-              terminology: selectedTerminology,
-              variable: row.variable,
-            },
-          });
+    this.isLoading.set(true);
+    const sub = this.apiService.fetchClosestMappingsQuery(queryFormData).subscribe({
+      next: (mappings) => {
+        const { selectedTerminology } = this.harmonizeForm.value;
+        const dialogRef = this.dialog.open(TopMatchesDialogComponent, {
+          width: '1000px',
+          data: {
+            matches: mappings,
+            terminology: selectedTerminology,
+            variable: row.variable,
+          },
+        });
 
-          dialogRef.afterClosed().subscribe((selectedMapping: Mapping) => {
-            if (selectedMapping) {
-              row.mappings[0] = selectedMapping;
-              this.dataSource.data = [...this.closestMappings];
-            }
-          });
-        },
-        error: (err) => {
-          console.error('Error fetching closest mappings', err);
-          this.loading = false;
-          const detail = err.error?.detail;
-          const message = err.error?.message || err.message;
-
-          let errorMessage = 'An unknown error occurred.';
-          if (detail && message) {
-            errorMessage = `${message} — ${detail}`;
-          } else if (detail || message) {
-            errorMessage = detail || message;
+        dialogRef.afterClosed().subscribe((selectedMapping: Mapping) => {
+          if (selectedMapping) {
+            row.mappings[0] = selectedMapping;
+            this.dataSource.data = [...this.closestMappings];
           }
+        });
+      },
+      error: (err) => {
+        console.error('Error fetching closest mappings', err);
+        this.isLoading.set(false);
+        const detail = err.error?.detail;
+        const message = err.error?.message || err.message;
 
-          alert(`An error occurred while fetching mappings: ${errorMessage}`);
-        },
-        complete: () => (this.loading = false),
-      });
+        let errorMessage = 'An unknown error occurred.';
+        if (detail && message) {
+          errorMessage = `${message} — ${detail}`;
+        } else if (detail || message) {
+          errorMessage = detail || message;
+        }
+
+        alert(`An error occurred while fetching mappings: ${errorMessage}`);
+      },
+      complete: () => this.isLoading.set(false),
+    });
     this.subscriptions.push(sub);
   }
 
@@ -307,12 +288,8 @@ export class HarmonizeComponent implements OnDestroy, OnInit {
 
   onSubmit(): void {
     if (this.harmonizeForm.valid) {
-      const {
-        variableField,
-        descriptionField,
-        selectedEmbeddingModel,
-        selectedTerminology,
-      } = this.harmonizeForm.value;
+      const { variableField, descriptionField, selectedEmbeddingModel, selectedTerminology } =
+        this.harmonizeForm.value;
 
       this.harmonizeFormData.set('variable_field', variableField);
       this.harmonizeFormData.set('description_field', descriptionField);

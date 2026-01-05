@@ -31,27 +31,20 @@ import { SaveCdmDialogComponent } from '../../save-cdm-dialog/save-cdm-dialog.co
   templateUrl: './core-model-admin.component.html',
   styleUrl: './core-model-admin.component.scss',
 })
-export class CoreModelAdminComponent
-  extends CoreModelBase
-  implements OnInit, OnDestroy
-{
+export class CoreModelAdminComponent extends CoreModelBase implements OnInit, OnDestroy {
   override includeActions = true;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
   confirmDeleteRow(row: CoreModel): void {
-    const confirmed = confirm(
-      `Are you sure you want to delete "${row.label}"?`
-    );
+    const confirmed = confirm(`Are you sure you want to delete "${row.label}"?`);
     if (confirmed) {
       this.deleteRow(row);
     }
   }
 
   editRow(row: CoreModel): void {
-    const existingLabels = this.dataSource.data
-      .filter((r) => r.id !== row.id)
-      .map((r) => r.label);
+    const existingLabels = this.dataSource.data.filter((r) => r.id !== row.id).map((r) => r.label);
 
     const dialogRef = this.dialogService.openExtendDialog(
       existingLabels,
@@ -96,10 +89,10 @@ export class CoreModelAdminComponent
   }
 
   importCommonDataModel(formData: FormData): void {
-    this.loading = true;
+    this.isLoading.set(true);
     const sub = this.cdmApiService.importCommonDataModel(formData).subscribe({
       error: (err: ApiError) => this.handleError(err),
-      complete: () => (this.loading = false),
+      complete: () => this.isLoading.set(false),
     });
 
     this.subscriptions.push(sub);
@@ -122,18 +115,18 @@ export class CoreModelAdminComponent
     const file = input.files[0];
     const reader = new FileReader();
 
-    this.loading = true;
+    this.isLoading.set(true);
     reader.onload = () => {
       try {
         const csvText = reader.result as string;
         const parsedData = this.fileService.transformCsvToJson(csvText);
         this.initializeDataSource(parsedData);
       } catch (err) {
-        this.loading = false;
+        this.isLoading.set(false);
         alert('Error parsing CSV file.');
         console.error(err);
       } finally {
-        this.loading = false;
+        this.isLoading.set(false);
       }
     };
 
@@ -192,9 +185,7 @@ export class CoreModelAdminComponent
       if (!result) return;
 
       const { cdmName, cdmDescription, cdmVersion } = result;
-      const csv = this.tableService.convertCoreModelsToCsv(
-        this.dataSource.data
-      );
+      const csv = this.tableService.convertCoreModelsToCsv(this.dataSource.data);
 
       const blob = new Blob([csv], { type: 'text/csv' });
       const formData = new FormData();
@@ -205,7 +196,7 @@ export class CoreModelAdminComponent
 
       this.importCommonDataModel(formData);
 
-      this.loading = true;
+      this.isLoading.set(true);
     });
   }
 
