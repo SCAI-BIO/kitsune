@@ -1,6 +1,6 @@
 export const environment = {
-  openApiUrl: 'https://api.kitsune.scai.fraunhofer.de',
-  cdmApiUrl: 'https://api.cdm.kitsune.scai.fraunhofer.de',
+  openApiUrl: 'http://localhost:5000',
+  cdmApiUrl: 'http://localhost:8000',
   keycloak: {
     url: 'https://auth.bio.scai.fraunhofer.de/auth',
     realm: 'scai',
