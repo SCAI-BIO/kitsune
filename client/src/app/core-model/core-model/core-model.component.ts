@@ -28,12 +28,17 @@ import { CoreModelBase } from '../base/core-model-base';
   templateUrl: './core-model.component.html',
   styleUrl: './core-model.component.scss',
 })
-export class CoreModelComponent
-  extends CoreModelBase
-  implements OnInit, OnDestroy
-{
-  @ViewChild(MatPaginator) paginator!: MatPaginator;
-  @ViewChild(MatSort) sort!: MatSort;
+export class CoreModelComponent extends CoreModelBase implements OnInit, OnDestroy {
+  @ViewChild(MatPaginator) set paginator(paginator: MatPaginator) {
+    if (paginator) {
+      this.dataSource.paginator = paginator;
+    }
+  }
+  @ViewChild(MatSort) set sort(sort: MatSort) {
+    if (sort) {
+      this.dataSource.sort = sort;
+    }
+  }
 
   ngOnDestroy(): void {
     this.destroy();

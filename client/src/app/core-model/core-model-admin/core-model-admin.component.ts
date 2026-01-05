@@ -33,8 +33,16 @@ import { SaveCdmDialogComponent } from '../../save-cdm-dialog/save-cdm-dialog.co
 })
 export class CoreModelAdminComponent extends CoreModelBase implements OnInit, OnDestroy {
   override includeActions = true;
-  @ViewChild(MatPaginator) paginator!: MatPaginator;
-  @ViewChild(MatSort) sort!: MatSort;
+  @ViewChild(MatPaginator) set paginator(paginator: MatPaginator) {
+    if (paginator) {
+      this.dataSource.paginator = paginator;
+    }
+  }
+  @ViewChild(MatSort) set sort(sort: MatSort) {
+    if (sort) {
+      this.dataSource.sort = sort;
+    }
+  }
 
   confirmDeleteRow(row: CoreModel): void {
     const confirmed = confirm(`Are you sure you want to delete "${row.label}"?`);
