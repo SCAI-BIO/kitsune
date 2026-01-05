@@ -16,7 +16,25 @@ authors = [
     { name = "Mehmet Can Ay", email = "mehmet.ay@scai.fraunhofer.de" },
     { name = "Tim Adams", email = "tim.adams@scai.fraunhofer.de" },
 ]
+keywords = [
+    "data harmonization",
+    "data stewardship",
+    "large language models",
+    "LLM",
+]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "Programming Language :: Python :: 3.14",
+]
+
 dependencies = ["datastew>=0.6.1", "fastapi[standard]>=0.128.0"]
 
 [dependency-groups]
 dev = ["flake8>=7.3.0"]
+
+[project.urls]
+Homepage = "https://github.com/SCAI-BIO/kitsune"
+Repository = "https://github.com/SCAI-BIO/kitsune"
+Documentation = "https://github.com/SCAI-BIO/kitsune#readme"
+Tracker = "https://github.com/SCAI-BIO/kitsune/issues"
