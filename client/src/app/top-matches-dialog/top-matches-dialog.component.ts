@@ -1,10 +1,6 @@
 import { DecimalPipe } from '@angular/common';
 import { Component, inject } from '@angular/core';
-import {
-  MatDialogModule,
-  MatDialogRef,
-  MAT_DIALOG_DATA,
-} from '@angular/material/dialog';
+import { MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTableModule } from '@angular/material/table';
@@ -14,13 +10,7 @@ import { ExternalLinkService } from '../services/external-link.service';
 
 @Component({
   selector: 'app-top-matches-dialog',
-  imports: [
-    DecimalPipe,
-    MatButtonModule,
-    MatDialogModule,
-    MatIconModule,
-    MatTableModule,
-  ],
+  imports: [DecimalPipe, MatButtonModule, MatDialogModule, MatIconModule, MatTableModule],
   templateUrl: './top-matches-dialog.component.html',
   styleUrl: './top-matches-dialog.component.scss',
 })

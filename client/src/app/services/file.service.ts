@@ -10,13 +10,7 @@ import { Response } from '../interfaces/mapping';
 })
 export class FileService {
   convertToCSV(data: Response[]): string {
-    const headers = [
-      'Similarity',
-      'Variable',
-      'Description',
-      'ConceptID',
-      'PrefLabel',
-    ];
+    const headers = ['Similarity', 'Variable', 'Description', 'ConceptID', 'PrefLabel'];
 
     const escapeCSV = (value: string) => `"${value.replace(/"/g, '""')}"`;
     const rows = data.map((item) =>
@@ -45,8 +39,7 @@ export class FileService {
     if (!items.length) return;
 
     const headers = Object.keys(items[0]);
-    const escapeCsv = (value: string | number) =>
-      `"${String(value).replace(/"/g, '""')}"`;
+    const escapeCsv = (value: string | number) => `"${String(value).replace(/"/g, '""')}"`;
 
     const rows = items.map((item) =>
       headers.map((header) => escapeCsv(item[header] ?? '')).join(',')

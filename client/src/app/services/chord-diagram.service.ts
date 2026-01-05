@@ -1,12 +1,7 @@
 import { Injectable } from '@angular/core';
 import * as d3 from 'd3';
 
-import {
-  ChordData,
-  ChordLink,
-  ChordNode,
-  LabeledChordGroup,
-} from '../interfaces/chord-diagram';
+import { ChordData, ChordLink, ChordNode, LabeledChordGroup } from '../interfaces/chord-diagram';
 
 @Injectable({ providedIn: 'root' })
 export class ChordDiagramService {
@@ -42,10 +37,7 @@ export class ChordDiagramService {
       new Set(datasets.flatMap((d) => d.nodes.map((n) => n.group)))
     ).sort(); // sort for deterministic mapping
 
-    this.colorScale = d3
-      .scaleOrdinal<string, string>()
-      .domain(allGroups)
-      .range(this.colorPalette);
+    this.colorScale = d3.scaleOrdinal<string, string>().domain(allGroups).range(this.colorPalette);
   }
 
   getColor(group: string): string {
@@ -132,16 +124,9 @@ export class ChordDiagramService {
 
       const nodeSet = new Set(nodes.map((n) => getKey(n)));
       const links = data.links.filter((link) => {
-        const sources = data.nodes
-          .filter((n) => n.name === link.source)
-          .map((n) => getKey(n));
-        const targets = data.nodes
-          .filter((n) => n.name === link.target)
-          .map((n) => getKey(n));
-        return (
-          sources.some((s) => nodeSet.has(s)) &&
-          targets.some((t) => nodeSet.has(t))
-        );
+        const sources = data.nodes.filter((n) => n.name === link.source).map((n) => getKey(n));
+        const targets = data.nodes.filter((n) => n.name === link.target).map((n) => getKey(n));
+        return sources.some((s) => nodeSet.has(s)) && targets.some((t) => nodeSet.has(t));
       });
 
       components.push({ nodes, links });
@@ -201,9 +186,7 @@ export class ChordDiagramService {
 
     const nodes = this.prepareNodes(data);
     const matrix = this.buildMatrix(nodes, data.links);
-    const chords = d3.chord().padAngle(0.06).sortSubgroups(d3.descending)(
-      matrix
-    );
+    const chords = d3.chord().padAngle(0.06).sortSubgroups(d3.descending)(matrix);
 
     const svgGroup = this.initSvgGroup(svg, width, height);
 
@@ -232,9 +215,7 @@ export class ChordDiagramService {
    * @returns 2D matrix of connection weights.
    */
   private buildMatrix(nodes: ChordNode[], links: ChordLink[]): number[][] {
-    const nodeIndex = new Map(
-      nodes.map((node: ChordNode, i: number) => [node.id, i])
-    );
+    const nodeIndex = new Map(nodes.map((node: ChordNode, i: number) => [node.id, i]));
     const matrix = Array(nodes.length)
       .fill(0)
       .map(() => Array(nodes.length).fill(0));
@@ -292,12 +273,7 @@ export class ChordDiagramService {
       .attr('viewBox', `0 0 ${width + extraPadding} ${height + extraPadding}`)
       .style('overflow', 'visible') // prevents clipping of filter effects
       .append('g')
-      .attr(
-        'transform',
-        `translate(${(width + extraPadding) / 2},${
-          (height + extraPadding) / 2
-        })`
-      );
+      .attr('transform', `translate(${(width + extraPadding) / 2},${(height + extraPadding) / 2})`);
   }
 
   /**
@@ -415,18 +391,9 @@ export class ChordDiagramService {
       .innerRadius(outerRadius - 0.1)
       .outerRadius(outerRadius);
 
-    const group = svgGroup
-      .append('g')
-      .selectAll('g')
-      .data(chords.groups)
-      .enter()
-      .append('g');
+    const group = svgGroup.append('g').selectAll('g').data(chords.groups).enter().append('g');
 
-    group
-      .append('path')
-      .style('fill', '#e0e0e0')
-      .style('stroke', '#bdbdbd')
-      .attr('d', arc);
+    group.append('path').style('fill', '#e0e0e0').style('stroke', '#bdbdbd').attr('d', arc);
 
     group
       .append('text')
@@ -441,9 +408,7 @@ export class ChordDiagramService {
         translate(${outerRadius + 50})
         ${d.angle! > Math.PI ? 'rotate(180)' : ''}`
       )
-      .style('text-anchor', (d: LabeledChordGroup) =>
-        d.angle! > Math.PI ? 'end' : null
-      )
+      .style('text-anchor', (d: LabeledChordGroup) => (d.angle! > Math.PI ? 'end' : null))
       .style('font-size', (d: d3.ChordGroup) => {
         const label = nodes[d.index].name;
         if (label.length > 60) return '10px';
@@ -458,10 +423,7 @@ export class ChordDiagramService {
         const index = d.index;
         svgGroup
           .selectAll<SVGPathElement, d3.Chord>('path.ribbon')
-          .filter(
-            (r: d3.Chord) =>
-              r.source.index === index || r.target.index === index
-          )
+          .filter((r: d3.Chord) => r.source.index === index || r.target.index === index)
           .transition()
           .duration(200)
           .style('fill', 'black')

@@ -9,11 +9,7 @@ import {
   ValidatorFn,
 } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
-import {
-  MAT_DIALOG_DATA,
-  MatDialogModule,
-  MatDialogRef,
-} from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 
@@ -44,8 +40,7 @@ export class SaveCdmDialogComponent {
     this.form = this.fb.group({
       cdmName: [this.data.cdmName || '', Validators.required],
       cdmDescription: [
-        this.data.cdmOptions.find((cdm) => cdm.name === this.data.cdmName)
-          ?.description || '',
+        this.data.cdmOptions.find((cdm) => cdm.name === this.data.cdmName)?.description || '',
         Validators.required,
       ],
       cdmVersion: [
@@ -69,9 +64,7 @@ export class SaveCdmDialogComponent {
 
   hasRequiredError(fieldKey: string): boolean {
     const control = this.form.get(fieldKey);
-    return (
-      !!control?.hasError('required') && (control.dirty || control.touched)
-    );
+    return !!control?.hasError('required') && (control.dirty || control.touched);
   }
 
   semanticVersionValidator(control: AbstractControl): ValidationErrors | null {
@@ -85,9 +78,7 @@ export class SaveCdmDialogComponent {
     this.dialogRef.close(this.form.getRawValue());
   }
 
-  uniqueVersionValidator(
-    cdmOptions: { name: string; version: string }[]
-  ): ValidatorFn {
+  uniqueVersionValidator(cdmOptions: { name: string; version: string }[]): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
       const cdmVersion = control.value?.trim();
       const parent = control.parent;
