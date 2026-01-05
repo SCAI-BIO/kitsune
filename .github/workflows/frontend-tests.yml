@@ -35,10 +35,10 @@ jobs:
 
       - name: Install Playwright browsers
         run: npx playwright install --with-deps
-        working-directory: frontend
+        working-directory: client
 
       - name: Run frontend tests
         run: ng test --watch=false
-        working-directory: frontend
+        working-directory: client
         env:
           CI: true
