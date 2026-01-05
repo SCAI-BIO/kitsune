@@ -4,12 +4,12 @@ on:
   release:
     types: [published]
 
-permissions:
-  contents: read
-  packages: write
-
 jobs:
   build_docker_image:
+    permissions:
+      contents: read
+      packages: write
+
     runs-on: ubuntu-latest
 
     steps:
