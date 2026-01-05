@@ -25,7 +25,7 @@
     "keycloak-angular": "^21.0.0",
     "keycloak-js": "^26.2.2",
     "papaparse": "^5.5.3",
-    "rxjs": "~7.8.2",
+    "rxjs": "^7.8.2",
     "tslib": "^2.8.1",
     "uuid": "^13.0.0",
     "zone.js": "^0.15.1"
