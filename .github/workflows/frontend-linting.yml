@@ -2,37 +2,37 @@ name: frontend-linting
 
 on:
   push:
-    branches: [ "main" ]
+    branches: ["main"]
   pull_request:
-    branches: [ "main" ]
+    branches: ["main"]
 
 jobs:
   lint:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
-    - name: Setup Node.js
-      uses: actions/setup-node@v4
-      with:
-        node-version: 20
-    
-    - name: Cache npm
-      uses: actions/cache@v4
-      with:
-        path: ~/.npm
-        key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-        restore-keys: |
-          ${{ runner.os }}-node-
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: 24
 
-    - name: Install frontend dependencies
-      run: npm ci
-      working-directory: client
+      - name: Cache npm
+        uses: actions/cache@v5
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
 
-    - name: Install Angular CLI
-      run: npm install -g @angular/cli
-    
-    - name: Run frontend linting
-      run: ng lint
-      working-directory: client
+      - name: Install frontend dependencies
+        run: npm ci
+        working-directory: client
+
+      - name: Install Angular CLI
+        run: npm install -g @angular/cli
+
+      - name: Run frontend linting
+        run: ng lint
+        working-directory: client
