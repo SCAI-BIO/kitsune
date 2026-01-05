@@ -35,7 +35,6 @@
     "@angular/cli": "^21.0.4",
     "@angular/compiler-cli": "^21.0.6",
     "@types/d3": "^7.4.3",
-    "@types/jasmine": "~5.1.12",
     "@types/papaparse": "^5.5.0",
     "@vitest/browser-playwright": "^4.0.16",
     "angular-eslint": "20.6.0",
