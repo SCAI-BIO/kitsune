@@ -4,53 +4,73 @@ on:
   release:
     types: [published]
 
-jobs:
+permissions:
+  contents: read
+  packages: write
 
+jobs:
   build_docker_image:
     runs-on: ubuntu-latest
+
     steps:
-    - name: Checkout
-      uses: actions/checkout@v4
-    - name: Get Version Tag
-      id: version
-      run: echo "VERSION=${GITHUB_REF/refs\/tags\/v/}" >> "$GITHUB_OUTPUT"
-    - name: Update API Version
-      run: |
-        sed -i "s/version=\"[^\"]*\"/version=\"${{ steps.version.outputs.VERSION }}\"/" api/app/main.py
-    - name: Update Angular App Version
-      run: |
-        cd client
-        npm --no-git-tag-version version from-git
-    - name: Docker Login
-      uses: docker/login-action@v3
-      with:
-        registry: ghcr.io
-        username: ${{ github.actor }}
-        password: ${{ secrets.GITHUB_TOKEN }}
-    - name: Build & push api
-      uses: docker/build-push-action@v6
-      with:
-        context: ./api
-        file: ./api/Dockerfile.prod
-        push: true
-        tags: |
-          ghcr.io/scai-bio/kitsune/api:latest
-          ghcr.io/scai-bio/kitsune/api:${{ steps.version.outputs.VERSION }}
-    - name: Build & push client
-      uses: docker/build-push-action@v6
-      with:
-        context: ./client
-        file: ./client/Dockerfile.prod
-        push: true
-        tags: |
-          ghcr.io/scai-bio/kitsune/client:latest
-          ghcr.io/scai-bio/kitsune/client:${{ steps.version.outputs.VERSION }}
-    - name: Build & push ollama
-      uses: docker/build-push-action@v6
-      with:
-        context: ./ollama
-        file: ./ollama/Dockerfile
-        push: true
-        tags: |
-          ghcr.io/scai-bio/kitsune/ollama:latest
-          ghcr.io/scai-bio/kitsune/ollama:${{ steps.version.outputs.VERSION }}
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Get Version Tag
+        id: version
+        run: echo "VERSION=${GITHUB_REF/refs\/tags\/v/}" >> "$GITHUB_OUTPUT"
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: 24
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v7
+
+      - name: Update API Version
+        working-directory: api
+        run: |
+          sed -i "s/version=\"[^\"]*\"/version=\"${{ steps.version.outputs.VERSION }}\"/" app/main.py
+          uv version "${{ steps.version.outputs.VERSION }}"
+
+      - name: Update Angular App Version
+        run: npm --no-git-tag-version version from-git
+        working-directory: client
+
+      - name: Docker Login
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build & push api
+        uses: docker/build-push-action@v6
+        with:
+          context: ./api
+          file: ./api/Dockerfile.prod
+          push: true
+          tags: |
+            ghcr.io/scai-bio/kitsune/api:latest
+            ghcr.io/scai-bio/kitsune/api:${{ steps.version.outputs.VERSION }}
+
+      - name: Build & push client
+        uses: docker/build-push-action@v6
+        with:
+          context: ./client
+          file: ./client/Dockerfile.prod
+          push: true
+          tags: |
+            ghcr.io/scai-bio/kitsune/client:latest
+            ghcr.io/scai-bio/kitsune/client:${{ steps.version.outputs.VERSION }}
+
+      - name: Build & push ollama
+        uses: docker/build-push-action@v6
+        with:
+          context: ./ollama
+          file: ./ollama/Dockerfile
+          push: true
+          tags: |
+            ghcr.io/scai-bio/kitsune/ollama:latest
+            ghcr.io/scai-bio/kitsune/ollama:${{ steps.version.outputs.VERSION }}

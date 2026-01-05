@@ -1,0 +1,22 @@
+[build-system]
+requires = ['uv_build>=0.9.10,<0.10.0']
+build-backend = "uv_build"
+
+[tool.uv.build-backend]
+module-name = ["app"]
+module-root = ""
+
+[project]
+name = "kitsune"
+version = "0.1.0"
+description = "Kitsune is a next-generation data steward and harmonization tool. Building on the legacy of systems like Usagi, Kitsune leverages LLM embeddings to intelligently map semantically similar terms even when their string representations differ substantially. This results in more robust data harmonization and improved performance in real-world scenarios."
+license = "Apache-2.0"
+requires-python = ">=3.14,<3.15"
+authors = [
+    { name = "Mehmet Can Ay", email = "mehmet.ay@scai.fraunhofer.de" },
+    { name = "Tim Adams", email = "tim.adams@scai.fraunhofer.de" },
+]
+dependencies = ["datastew>=0.6.1", "fastapi[standard]>=0.128.0"]
+
+[dependency-groups]
+dev = ["flake8>=7.3.0"]
