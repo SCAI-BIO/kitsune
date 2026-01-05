@@ -1,6 +1,9 @@
 import { provideHttpClient } from '@angular/common/http';
-import { ApplicationConfig } from '@angular/core';
-import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import {
+  ApplicationConfig,
+  provideBrowserGlobalErrorListeners,
+  provideZonelessChangeDetection,
+} from '@angular/core';
 import { provideRouter, withHashLocation } from '@angular/router';
 
 import {
@@ -43,9 +46,10 @@ export const provideKeycloakAngular = () => {
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideAnimationsAsync(),
     provideHttpClient(),
-    provideRouter(routes, withHashLocation()),
+    provideBrowserGlobalErrorListeners(),
     provideKeycloakAngular(),
+    provideRouter(routes, withHashLocation()),
+    provideZonelessChangeDetection(),
   ],
 };
