@@ -1,5 +1,5 @@
 import { TitleCasePipe, UpperCasePipe } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import {
   AbstractControl,
   FormBuilder,
@@ -42,10 +42,10 @@ export class ExtendCdmDialogComponent {
   existingLabels: string[] = [];
   fieldLabels: Record<string, string> = {};
   form: FormGroup;
+  isOhdsiLoading = signal(false);
+  isOlsLoading = signal(false);
   ohdsiError: string | null = null;
-  ohdsiLoading = false;
   olsError: string | null = null;
-  olsLoading = false;
   protected data = inject(MAT_DIALOG_DATA) as {
     existingLabels: string[];
     studyColumnNames?: string[];
@@ -104,12 +104,8 @@ export class ExtendCdmDialogComponent {
       .get('description')!
       .valueChanges.pipe(debounceTime(300))
       .subscribe(() => this.updateCdmId());
-    this.form
-      .get('ohdsiId')!
-      .valueChanges.subscribe(() => (this.ohdsiError = null));
-    this.form
-      .get('olsId')!
-      .valueChanges.subscribe(() => (this.olsError = null));
+    this.form.get('ohdsiId')!.valueChanges.subscribe(() => (this.ohdsiError = null));
+    this.form.get('olsId')!.valueChanges.subscribe(() => (this.olsError = null));
   }
 
   cancel(): void {
@@ -120,16 +116,12 @@ export class ExtendCdmDialogComponent {
     const id = this.form.get('ohdsiId')?.value?.trim();
     if (!id) return;
 
-    this.ohdsiLoading = true;
+    this.isOhdsiLoading.set(true);
     this.ohdsiError = null;
 
     this.ontologyApiService.getOhdsiConceptById(id).subscribe({
       next: (data) => {
-        if (
-          !data ||
-          data.label.toLowerCase() === 'no matching concept' ||
-          !data.label.trim()
-        ) {
+        if (!data || data.label.toLowerCase() === 'no matching concept' || !data.label.trim()) {
           this.ohdsiError = 'Concept not found';
           this.form.patchValue({
             ohdsiLabel: '',
@@ -144,10 +136,10 @@ export class ExtendCdmDialogComponent {
         });
       },
       error: () => {
-        this.ohdsiLoading = false;
+        this.isOhdsiLoading.set(false);
         this.ohdsiError = 'Error fetching concept';
       },
-      complete: () => (this.ohdsiLoading = false),
+      complete: () => this.isOhdsiLoading.set(false),
     });
   }
 
@@ -155,7 +147,7 @@ export class ExtendCdmDialogComponent {
     const id = this.form.get('olsId')?.value;
     if (!id) return;
 
-    this.olsLoading = true;
+    this.isOlsLoading.set(true);
     this.olsError = null;
 
     this.ontologyApiService.getOlsTermById(id).subscribe({
@@ -170,10 +162,10 @@ export class ExtendCdmDialogComponent {
         }
       },
       error: () => {
-        this.olsLoading = false;
+        this.isOlsLoading.set(false);
         this.olsError = 'Failed to fetch OLS data.';
       },
-      complete: () => (this.olsLoading = false),
+      complete: () => this.isOlsLoading.set(false),
     });
   }
 
@@ -183,9 +175,7 @@ export class ExtendCdmDialogComponent {
 
   hasRequiredError(fieldKey: string): boolean {
     const control = this.form.get(fieldKey);
-    return (
-      !!control?.hasError('required') && (control.dirty || control.touched)
-    );
+    return !!control?.hasError('required') && (control.dirty || control.touched);
   }
 
   submit(): void {
@@ -196,10 +186,7 @@ export class ExtendCdmDialogComponent {
   private labelUniquenessValidator(): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
       const label = control.value?.trim().toLowerCase();
-      if (
-        label &&
-        this.existingLabels.some((l) => l.trim().toLowerCase() === label)
-      ) {
+      if (label && this.existingLabels.some((l) => l.trim().toLowerCase() === label)) {
         return { labelExists: true };
       }
       return null;

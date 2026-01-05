@@ -1,8 +1,4 @@
-import {
-  ActivatedRouteSnapshot,
-  CanActivateFn,
-  RouterStateSnapshot,
-} from '@angular/router';
+import { ActivatedRouteSnapshot, CanActivateFn, RouterStateSnapshot } from '@angular/router';
 import { AuthGuardData, createAuthGuard } from 'keycloak-angular';
 
 const isAcessAllowed = async (
@@ -18,9 +14,7 @@ const isAcessAllowed = async (
   }
 
   const hasRequiredRole = (role: string): boolean =>
-    Object.values(grantedRoles.resourceRoles).some((roles) =>
-      roles.includes(role)
-    );
+    Object.values(grantedRoles.resourceRoles).some((roles) => roles.includes(role));
 
   if (authenticated && hasRequiredRole(requiredRole)) {
     return true;
@@ -30,5 +24,4 @@ const isAcessAllowed = async (
   return false;
 };
 
-export const canActivateAuthRole =
-  createAuthGuard<CanActivateFn>(isAcessAllowed);
+export const canActivateAuthRole = createAuthGuard<CanActivateFn>(isAcessAllowed);

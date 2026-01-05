@@ -3,51 +3,46 @@
   <div class="description-box">
     <section class="description">
       <p>
-        This table presents an overview of the semantic mappings established
-        between the Common Data Model (CDM) and external standardized
-        vocabularies, including the Ontology Lookup Service (OLS) and the
-        Observational Health Data Sciences and Informatics (OHDSI) vocabulary.
+        This table presents an overview of the semantic mappings established between the Common Data
+        Model (CDM) and external standardized vocabularies, including the Ontology Lookup Service
+        (OLS) and the Observational Health Data Sciences and Informatics (OHDSI) vocabulary.
       </p>
       <p>
-        Each row in the table corresponds to a concept or variable from the CDM
-        and shows how it has been semantically linked to equivalent terms from
-        OLS and OHDSI. These mappings enhance the interoperability and
-        reusability of study data by aligning heterogenous study-specific
+        Each row in the table corresponds to a concept or variable from the CDM and shows how it has
+        been semantically linked to equivalent terms from OLS and OHDSI. These mappings enhance the
+        interoperability and reusability of study data by aligning heterogenous study-specific
         variables with widely recognized ontologies.
       </p>
       <p>
-        The table also includes mappings to original variables from different
-        studies, higlighting how diverse source data has been unified under a
-        harmonized structure. This ensures that comparable concepts across
-        studies can be analyzed in a consistent and meaningful way.
+        The table also includes mappings to original variables from different studies, higlighting
+        how diverse source data has been unified under a harmonized structure. This ensures that
+        comparable concepts across studies can be analyzed in a consistent and meaningful way.
       </p>
       <p>Features of this component include:</p>
       <ul>
         <li>
-          <strong>Filtering:</strong> Quickly locate mappings by entering
-          relevant keywords (e.g., "age").
+          <strong>Filtering:</strong> Quickly locate mappings by entering relevant keywords (e.g.,
+          "age").
         </li>
         <li>
-          <strong>Sorting:</strong> Columns can be sorted to assist with
-          navigation and exploration.
+          <strong>Sorting:</strong> Columns can be sorted to assist with navigation and exploration.
         </li>
         <li>
-          <strong>External Links:</strong> OLS and OHDSI IDs link directly to
-          the respective online repositories for further reference.
+          <strong>External Links:</strong> OLS and OHDSI IDs link directly to the respective online
+          repositories for further reference.
         </li>
         <li>
-          <strong>Tooltips:</strong> Info buttons provide additional
-          explanations for ontologies.
+          <strong>Tooltips:</strong> Info buttons provide additional explanations for ontologies.
         </li>
       </ul>
       <p>
-        Use this table to explore how key study variables have been semantically
-        standardized to support downstream analysis and cross-study comparisons.
+        Use this table to explore how key study variables have been semantically standardized to
+        support downstream analysis and cross-study comparisons.
       </p>
     </section>
   </div>
   <!-- Loading Spinner -->
-  @if (loading) {
+  @if (isLoading()) {
   <div class="loading-spinner">
     <mat-spinner diameter="40"></mat-spinner>
   </div>
@@ -59,9 +54,7 @@
           <mat-label>Common Data Models</mat-label>
           <mat-select
             [value]="selectedCdm"
-            (selectionChange)="
-              selectedCdm = $event.value; getVersionForCdm(selectedCdm)
-            "
+            (selectionChange)="selectedCdm = $event.value; getVersionForCdm(selectedCdm)"
           >
             @for (name of uniqueCdmNames; track name) {
             <mat-option [value]="name">{{ name }}</mat-option>
@@ -72,10 +65,7 @@
       <div class="cdm-version-selector">
         <mat-form-field>
           <mat-label>Version</mat-label>
-          <mat-select
-            [value]="selectedVersion"
-            (selectionChange)="selectedVersion = $event.value"
-          >
+          <mat-select [value]="selectedVersion" (selectionChange)="selectedVersion = $event.value">
             @for (version of cdmVersions; track version) {
             <mat-option [value]="version">{{ version }}</mat-option>
             }
@@ -86,12 +76,7 @@
     <div class="submit-button-container">
       <div class="submit-box">
         <!-- Submit Button -->
-        <button
-          mat-raised-button
-          class="button-style"
-          color="primary"
-          (click)="onSubmit()"
-        >
+        <button mat-raised-button class="button-style" color="primary" (click)="onSubmit()">
           Submit
         </button>
       </div>
@@ -104,12 +89,7 @@
     <!-- Download Button Container -->
     <div class="download-button-container">
       <!-- Download Button -->
-      <button
-        mat-raised-button
-        class="button-style"
-        color="primary"
-        (click)="downloadTableAsCsv()"
-      >
+      <button mat-raised-button class="button-style" color="primary" (click)="downloadTableAsCsv()">
         Download
       </button>
     </div>
@@ -120,20 +100,12 @@
       <div class="filter-container">
         <mat-form-field>
           <mat-label>Filter</mat-label>
-          <input
-            matInput
-            (keyup)="applyFilter($event)"
-            placeholder="Ex. age"
-            #input
-          />
+          <input matInput (keyup)="applyFilter($event)" placeholder="Ex. age" #input />
         </mat-form-field>
       </div>
       <!-- Pagination Container -->
       <div class="pagination-container">
-        <mat-paginator
-          [pageSizeOptions]="[10, 25, 50, 100]"
-          showFirstLastButtons
-        ></mat-paginator>
+        <mat-paginator [pageSizeOptions]="[10, 25, 50, 100]" showFirstLastButtons></mat-paginator>
       </div>
     </div>
 
@@ -158,9 +130,7 @@
 
         <!-- Core Model Description -->
         <ng-container matColumnDef="description">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header>
-            CDM Description
-          </th>
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>CDM Description</th>
           <td mat-cell *matCellDef="let element" class="cell-bg-core-model">
             {{ element.description }}
           </td>
@@ -205,9 +175,7 @@
 
         <!-- OLS Description -->
         <ng-container matColumnDef="olsDescription">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header>
-            OLS Description
-          </th>
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>OLS Description</th>
           <td mat-cell *matCellDef="let element" class="cell-bg-ols">
             {{ element.ols.description }}
           </td>
@@ -252,9 +220,7 @@
 
         <!-- OHDSI Domain -->
         <ng-container matColumnDef="ohdsiDomain">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header>
-            OHDSI Domain
-          </th>
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>OHDSI Domain</th>
           <td mat-cell *matCellDef="let element" class="cell-bg-ohdsi">
             {{ element.ohdsi.domain }}
           </td>
@@ -262,9 +228,7 @@
 
         <!-- Dynamic Study Columns -->
         @for (studyName of studyColumnNames; track studyName) {
-        <ng-container
-          [matColumnDef]="this.tableService.toCamelCase(studyName) + 'Label'"
-        >
+        <ng-container [matColumnDef]="this.tableService.toCamelCase(studyName) + 'Label'">
           <th mat-header-cell *matHeaderCellDef mat-sort-header>
             {{ studyName | uppercase }} Label
           </th>
@@ -277,17 +241,13 @@
               this.tableService.getStudyField(
                 element,
                 this.tableService.toCamelCase(studyName),
-                "label"
+                'label'
               )
             }}
           </td>
         </ng-container>
         } @for (studyName of studyColumnNames; track studyName) {
-        <ng-container
-          [matColumnDef]="
-            this.tableService.toCamelCase(studyName) + 'Description'
-          "
-        >
+        <ng-container [matColumnDef]="this.tableService.toCamelCase(studyName) + 'Description'">
           <th mat-header-cell *matHeaderCellDef mat-sort-header>
             {{ studyName | uppercase }} Description
           </th>
@@ -300,24 +260,19 @@
               this.tableService.getStudyField(
                 element,
                 this.tableService.toCamelCase(studyName),
-                "description"
+                'description'
               )
             }}
           </td>
         </ng-container>
         }
 
-        <tr
-          mat-header-row
-          *matHeaderRowDef="displayedColumns; sticky: true"
-        ></tr>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
 
         <!-- Row shown when there is no matching data -->
         <tr class="mat-row" *matNoDataRow>
-          <td class="mat-cell" colspan="12">
-            No data mathcing the filter "{{ input.value }}"
-          </td>
+          <td class="mat-cell" colspan="12">No data mathcing the filter "{{ input.value }}"</td>
         </tr>
       </table>
     </div>

@@ -1,4 +1,4 @@
-@use "sass:color";
+@use 'sass:color';
 
 // Define global button variables
 $max-width: 90%;
@@ -18,7 +18,7 @@ $external-link-color: #1e88e5;
 
 // Typography
 body {
-  font-family: "Roboto", sans-serif;
+  font-family: 'Roboto', sans-serif;
   font-size: $font-size;
   line-height: 1.6;
   margin: 0;

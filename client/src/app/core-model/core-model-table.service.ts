@@ -37,9 +37,7 @@ export class CoreModelTableService {
     const headers = Object.keys(rows[0]);
     const escape = (val: string) => `"${val.replace(/"/g, '""')}"`;
 
-    const csvRows = rows.map((row) =>
-      headers.map((h) => escape(row[h] ?? '')).join(',')
-    );
+    const csvRows = rows.map((row) => headers.map((h) => escape(row[h] ?? '')).join(','));
 
     return [headers.join(','), ...csvRows].join('\n');
   }
@@ -90,13 +88,8 @@ export class CoreModelTableService {
       if (match) {
         const camelName = match[1];
         const field = match[2];
-        const study = item.studies?.find(
-          (s) => this.toCamelCase(s.name) === camelName
-        );
-        return (
-          study?.[field.toLowerCase() as 'label' | 'description'] ||
-          this.BLANK_SORT_VALUE
-        );
+        const study = item.studies?.find((s) => this.toCamelCase(s.name) === camelName);
+        return study?.[field.toLowerCase() as 'label' | 'description'] || this.BLANK_SORT_VALUE;
       }
 
       return this.BLANK_SORT_VALUE;
@@ -107,14 +100,8 @@ export class CoreModelTableService {
     return `cell-bg-${this.toCamelCase(studyName)}`;
   }
 
-  getStudyField(
-    row: CoreModel,
-    studyName: string,
-    field: 'label' | 'description'
-  ): string {
-    const study = row.studies?.find(
-      (s) => this.toCamelCase(s.name) === studyName
-    );
+  getStudyField(row: CoreModel, studyName: string, field: 'label' | 'description'): string {
+    const study = row.studies?.find((s) => this.toCamelCase(s.name) === studyName);
     return study?.[field] ?? '';
   }
 
@@ -148,10 +135,7 @@ export class CoreModelTableService {
         values.push(s.name ?? '', s.label ?? '', s.description ?? '');
       });
 
-      return values
-        .join(' ')
-        .toLowerCase()
-        .includes(filter.trim().toLowerCase());
+      return values.join(' ').toLowerCase().includes(filter.trim().toLowerCase());
     };
 
     dataSource.sortingDataAccessor = this.getSortingDataAccessor();
@@ -183,8 +167,6 @@ export class CoreModelTableService {
   }
 
   toCamelCase(name: string): string {
-    return name
-      .toLowerCase()
-      .replace(/[^a-zA-Z0-9]+(.)/g, (_, chr) => chr.toUpperCase());
+    return name.toLowerCase().replace(/[^a-zA-Z0-9]+(.)/g, (_, chr) => chr.toUpperCase());
   }
 }

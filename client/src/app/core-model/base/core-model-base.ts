@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { inject } from '@angular/core';
+import { inject, signal } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 
@@ -22,7 +22,7 @@ export abstract class CoreModelBase {
   displayedColumns: string[] = [];
   includeActions = false;
   readonly InfoKey = InfoKeys;
-  loading = false;
+  isLoading = signal(false);
   selectedCdm = '';
   selectedVersion = '';
   studyColumnNames: string[] = [];
@@ -46,36 +46,32 @@ export abstract class CoreModelBase {
   }
 
   downloadTableAsCsv(): void {
-    this.fileService.downloadCsv(
-      this.dataSource.data,
-      'core-model.csv',
-      (model) => {
-        const base = {
-          id: model.id,
-          label: model.label,
-          description: model.description,
-          olsId: model.ols?.id ?? '',
-          olsLabel: model.ols?.label ?? '',
-          olsDescription: model.ols?.description ?? '',
-          ohdsiId: model.ohdsi?.id ?? '',
-          ohdsiLabel: model.ohdsi?.label ?? '',
-          ohdsiDomain: model.ohdsi?.domain ?? '',
-        };
+    this.fileService.downloadCsv(this.dataSource.data, 'core-model.csv', (model) => {
+      const base = {
+        id: model.id,
+        label: model.label,
+        description: model.description,
+        olsId: model.ols?.id ?? '',
+        olsLabel: model.ols?.label ?? '',
+        olsDescription: model.ols?.description ?? '',
+        ohdsiId: model.ohdsi?.id ?? '',
+        ohdsiLabel: model.ohdsi?.label ?? '',
+        ohdsiDomain: model.ohdsi?.domain ?? '',
+      };
 
-        const studies = (model.studies ?? []).reduce((acc, study) => {
-          if (!study.name) return acc;
-          acc[`${study.name}Label`] = study.label ?? '';
-          acc[`${study.name}Description`] = study.description ?? '';
-          return acc;
-        }, {} as Record<string, string>);
+      const studies = (model.studies ?? []).reduce((acc, study) => {
+        if (!study.name) return acc;
+        acc[`${study.name}Label`] = study.label ?? '';
+        acc[`${study.name}Description`] = study.description ?? '';
+        return acc;
+      }, {} as Record<string, string>);
 
-        return { ...base, ...studies };
-      }
-    );
+      return { ...base, ...studies };
+    });
   }
 
   fetchCdms(): void {
-    this.loading = true;
+    this.isLoading.set(true);
 
     const sub = this.cdmApiService.fetchCommonDataModels().subscribe({
       next: (cdms) => {
@@ -84,26 +80,24 @@ export abstract class CoreModelBase {
           description: cdm.description,
           version: cdm.version,
         }));
-        const uniqueNames = Array.from(
-          new Set(this.cdmOptions.map((opt) => opt.name))
-        );
+        const uniqueNames = Array.from(new Set(this.cdmOptions.map((opt) => opt.name)));
         this.uniqueCdmNames = uniqueNames;
       },
       error: (err: ApiError) => this.handleError(err),
-      complete: () => (this.loading = false),
+      complete: () => this.isLoading.set(false),
     });
 
     this.subscriptions.push(sub);
   }
 
   fetchCoreModelData(): void {
-    this.loading = true;
+    this.isLoading.set(true);
     const sub = this.cdmApiService
       .fetchCoreModelData(this.selectedCdm, this.selectedVersion)
       .subscribe({
         next: (data) => this.initializeDataSource(data),
         error: (err: ApiError) => this.handleError(err),
-        complete: () => (this.loading = false),
+        complete: () => this.isLoading.set(false),
       });
 
     this.subscriptions.push(sub);
@@ -125,7 +119,7 @@ export abstract class CoreModelBase {
 
   handleError(err: ApiError): void {
     console.error('Error fetching data:', err);
-    this.loading = false;
+    this.isLoading.set(false);
 
     const detail = err.error?.detail;
     const message = err.error?.message || err.message;

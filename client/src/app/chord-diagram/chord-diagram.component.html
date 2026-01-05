@@ -3,37 +3,34 @@
   <div class="description-box">
     <section class="description">
       <p>
-        This chord diagram visualizes semantic equivalence across study-specific
-        variables by mapping connections between similar concepts from different
-        datasets.
+        This chord diagram visualizes semantic equivalence across study-specific variables by
+        mapping connections between similar concepts from different datasets.
       </p>
       <p>
-        Each node in the diagram represents a variable from one of the studies
-        included in the harmonization effort. Nodes are grouped and color-coded
-        by their study of origin, providing a clear visual structure to
-        distinguish data sources.
+        Each node in the diagram represents a variable from one of the studies included in the
+        harmonization effort. Nodes are grouped and color-coded by their study of origin, providing
+        a clear visual structure to distinguish data sources.
       </p>
       <p>
-        Ribbons connecting the nodes indicate semantic equivalence relationships
-        between variables — for instance, where different studies collected the
-        same type of information (e.g., blood pressure, age, or smoking status)
-        but labeled or structured it differently.
+        Ribbons connecting the nodes indicate semantic equivalence relationships between variables —
+        for instance, where different studies collected the same type of information (e.g., blood
+        pressure, age, or smoking status) but labeled or structured it differently.
       </p>
       <p>
-        This visualization allows viewers to quickly identify how variables from
-        various studies align with each other, supporting both cross-study
-        analyses and validation of the harmonization process.
+        This visualization allows viewers to quickly identify how variables from various studies
+        align with each other, supporting both cross-study analyses and validation of the
+        harmonization process.
       </p>
       <p>
-        Use the navigation buttons below the diagram to explore different
-        segments of the full dataset, especially when the number of variables
-        exceeds the optimal display capacity of a single view.
+        Use the navigation buttons below the diagram to explore different segments of the full
+        dataset, especially when the number of variables exceeds the optimal display capacity of a
+        single view.
       </p>
     </section>
   </div>
 
   <!-- Loading Spinner -->
-  @if (loading) {
+  @if (isLoading()) {
   <div class="loading-spinner">
     <mat-spinner diameter="40"></mat-spinner>
   </div>
@@ -46,9 +43,7 @@
           <mat-label>Common Data Models</mat-label>
           <mat-select
             [value]="selectedCdm"
-            (selectionChange)="
-              selectedCdm = $event.value; getVersionForCdm(selectedCdm)
-            "
+            (selectionChange)="selectedCdm = $event.value; getVersionForCdm(selectedCdm)"
           >
             @for (name of uniqueCdmNames; track name) {
             <mat-option [value]="name">{{ name }}</mat-option>
@@ -59,10 +54,7 @@
       <div class="cdm-version-selector">
         <mat-form-field>
           <mat-label>Version</mat-label>
-          <mat-select
-            [value]="selectedVersion"
-            (selectionChange)="selectedVersion = $event.value"
-          >
+          <mat-select [value]="selectedVersion" (selectionChange)="selectedVersion = $event.value">
             @for (version of cdmVersions; track version) {
             <mat-option [value]="version">{{ version }}</mat-option>
             }
@@ -73,12 +65,7 @@
     <div class="submit-button-container">
       <div class="submit-box">
         <!-- Submit Button -->
-        <button
-          mat-raised-button
-          class="button-style"
-          color="primary"
-          (click)="onSubmit()"
-        >
+        <button mat-raised-button class="button-style" color="primary" (click)="onSubmit()">
           Submit
         </button>
       </div>
@@ -87,11 +74,7 @@
 
   @if (dataChunks.length > 0 ) {
   <div class="navigation-buttons">
-    <button
-      (click)="previous()"
-      [disabled]="currentIndex === 0"
-      class="button-style"
-    >
+    <button (click)="previous()" [disabled]="currentIndex === 0" class="button-style">
       Previous
     </button>
     <span>{{ currentIndex + 1 }} / {{ dataChunks.length }}</span>

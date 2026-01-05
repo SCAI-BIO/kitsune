@@ -13,7 +13,7 @@ describe('TopMatchesDialogComponent', () => {
       providers: [
         {
           provide: MatDialogRef,
-          useValue: { close: jasmine.createSpy('close') },
+          useValue: { close: vi.fn() },
         },
         { provide: MAT_DIALOG_DATA, useValue: { matches: [] } },
       ],

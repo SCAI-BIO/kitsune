@@ -21,7 +21,7 @@ describe('ExtendCdmDialogComponent', () => {
             studyColumnNames: [],
           },
         },
-        { provide: MatDialogRef, useValue: { close: jasmine.createSpy() } },
+        { provide: MatDialogRef, useValue: { close: vi.fn() } },
         {
           provide: OntologyApiService,
           useValue: {

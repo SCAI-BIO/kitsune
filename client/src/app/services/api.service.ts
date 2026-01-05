@@ -3,12 +3,7 @@ import { inject, Injectable } from '@angular/core';
 
 import { Observable, shareReplay } from 'rxjs';
 
-import {
-  Mapping,
-  Response,
-  Terminology,
-  StreamingResponse,
-} from '../interfaces/mapping';
+import { Mapping, Response, Terminology, StreamingResponse } from '../interfaces/mapping';
 import { environment } from '../../environments/environment';
 
 @Injectable({
@@ -29,13 +24,9 @@ export class ApiService {
   }
 
   fetchClosestMappingsDictionary(formData: FormData): Observable<Response[]> {
-    return this.http.post<Response[]>(
-      `${this.API_URL}/mappings/dict`,
-      formData,
-      {
-        headers: new HttpHeaders({ Accept: 'application/json' }),
-      }
-    );
+    return this.http.post<Response[]>(`${this.API_URL}/mappings/dict`, formData, {
+      headers: new HttpHeaders({ Accept: 'application/json' }),
+    });
   }
 
   fetchClosestMappingsQuery(formData: FormData): Observable<Mapping[]> {
@@ -53,9 +44,7 @@ export class ApiService {
     }
 
     // Else: make API cal and cache the observable
-    this.embeddingModels$ = this.http
-      .get<string[]>(`${this.API_URL}/models/`)
-      .pipe(shareReplay(1));
+    this.embeddingModels$ = this.http.get<string[]>(`${this.API_URL}/models/`).pipe(shareReplay(1));
     this.lastFetched = now;
     return this.embeddingModels$;
   }

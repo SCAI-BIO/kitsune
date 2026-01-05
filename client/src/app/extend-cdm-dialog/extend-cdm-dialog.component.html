@@ -1,14 +1,13 @@
 <div class="dialog-container">
   <h1 mat-dialog-title>
     Extend CDM @if (form.get('id')?.value) {
-    <span> - {{ form.get("id")?.value }}</span>
+    <span> - {{ form.get('id')?.value }}</span>
     }
   </h1>
 
   <div mat-dialog-content [formGroup]="form" class="dialog-grid">
     <!-- Render fixed CDM fields first -->
-    @for (key of ['label', 'description', 'olsId', 'ohdsiId']; track key) { @if
-    ( form.get(key)) {
+    @for (key of ['label', 'description', 'olsId', 'ohdsiId']; track key) { @if ( form.get(key)) {
     <div class="field-wrapper" [class]="key">
       <mat-form-field appearance="fill" class="full-width">
         <mat-label>{{ fieldLabels[key] || (key | titlecase) }}</mat-label>
@@ -22,7 +21,7 @@
           (blur)="fetchOhdsiData()"
           placeholder="Enter OHDSI ID (e.g., 123456)"
         />
-        @if (ohdsiLoading) {
+        @if (isOhdsiLoading()) {
         <mat-progress-spinner
           diameter="20"
           mode="indeterminate"
@@ -38,7 +37,7 @@
           (blur)="fetchOlsData()"
           placeholder="Enter OLS ID (e.g., EFO:0000311)"
         />
-        @if (olsLoading) {
+        @if (isOlsLoading()) {
         <mat-progress-spinner
           diameter="20"
           mode="indeterminate"
@@ -66,19 +65,11 @@
           <div class="accordion-fields">
             <mat-form-field appearance="fill" class="full-width">
               <mat-label>OHDSI Label</mat-label>
-              <input
-                matInput
-                [formControl]="getControl('ohdsiLabel')"
-                readonly
-              />
+              <input matInput [formControl]="getControl('ohdsiLabel')" readonly />
             </mat-form-field>
             <mat-form-field appearance="fill" class="full-width">
               <mat-label>OHDSI Domain</mat-label>
-              <input
-                matInput
-                [formControl]="getControl('ohdsiDomain')"
-                readonly
-              />
+              <input matInput [formControl]="getControl('ohdsiDomain')" readonly />
             </mat-form-field>
           </div>
         </mat-expansion-panel>
@@ -99,11 +90,7 @@
             </mat-form-field>
             <mat-form-field appearance="fill" class="full-width">
               <mat-label>OLS Description</mat-label>
-              <textarea
-                matInput
-                [formControl]="getControl('olsDescription')"
-                readonly
-              ></textarea>
+              <textarea matInput [formControl]="getControl('olsDescription')" readonly></textarea>
             </mat-form-field>
           </div>
         </mat-expansion-panel>
@@ -116,21 +103,13 @@
     <div class="field-wrapper" [class]="studyName">
       <mat-form-field appearance="fill" class="full-width">
         <mat-label>{{ studyName | uppercase }} Label</mat-label>
-        <input
-          matInput
-          [formControlName]="tableService.toCamelCase(studyName) + 'Label'"
-        />
+        <input matInput [formControlName]="tableService.toCamelCase(studyName) + 'Label'" />
       </mat-form-field>
     </div>
     <div class="field-wrapper" [class]="studyName">
       <mat-form-field appearance="fill" class="full-width">
         <mat-label>{{ studyName | uppercase }} Description</mat-label>
-        <input
-          matInput
-          [formControlName]="
-            tableService.toCamelCase(studyName) + 'Description'
-          "
-        />
+        <input matInput [formControlName]="tableService.toCamelCase(studyName) + 'Description'" />
       </mat-form-field>
     </div>
     }
