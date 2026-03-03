@@ -142,4 +142,19 @@ export class FileExporter {
       };
     });
   }
+
+  generateCsvString(data: Record<string, unknown>[]): string {
+    if (!data.length) return '';
+
+    const headers = Object.keys(data[0]);
+
+    const escape = (val: unknown) => {
+      const str = val === null || val === undefined ? '' : String(val);
+      return `"${str.replace(/"/g, '""')}"`;
+    };
+
+    const csvRows = data.map((row) => headers.map((header) => escape(row[header])).join(','));
+
+    return [headers.join(','), ...csvRows].join('\r\n');
+  }
 }

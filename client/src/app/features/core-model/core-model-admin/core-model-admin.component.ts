@@ -57,7 +57,7 @@ export class CoreModelAdminComponent extends CoreModelBase implements OnInit, On
     const dialogRef = this.dialogService.openExtendDialog(
       existingLabels,
       row,
-      this.studyColumnNames
+      this.studyColumnNames,
     );
 
     dialogRef.afterClosed().subscribe((result) => {
@@ -77,7 +77,7 @@ export class CoreModelAdminComponent extends CoreModelBase implements OnInit, On
             domain: result.ohdsiDomain,
           },
           studies: this.studyColumnNames.map((studyName) => {
-            const camel = this.tableService.toCamelCase(studyName);
+            const camel = this.mappingTable.toCamelCase(studyName);
             return {
               name: studyName,
               label: result[`${camel}Label`] ?? '',
@@ -89,8 +89,9 @@ export class CoreModelAdminComponent extends CoreModelBase implements OnInit, On
         // Replace the existing row
         const index = this.dataSource.data.findIndex((r) => r.id === row.id);
         if (index > -1) {
-          this.dataSource.data[index] = updated;
-          this.dataSource._updateChangeSubscription(); // Refresh the table
+          const newData = [...this.dataSource.data];
+          newData[index] = updated;
+          this.dataSource.data = newData;
         }
       }
     });
@@ -146,7 +147,7 @@ export class CoreModelAdminComponent extends CoreModelBase implements OnInit, On
     const dialogRef = this.dialogService.openExtendDialog(
       existingLabels,
       undefined,
-      this.studyColumnNames
+      this.studyColumnNames,
     );
 
     dialogRef.afterClosed().subscribe((result) => {
@@ -166,7 +167,7 @@ export class CoreModelAdminComponent extends CoreModelBase implements OnInit, On
             domain: result.ohdsiDomain,
           },
           studies: this.studyColumnNames.map((studyName) => {
-            const camel = this.tableService.toCamelCase(studyName);
+            const camel = this.mappingTable.toCamelCase(studyName);
             return {
               name: studyName,
               label: result[`${camel}Label`] ?? '',
@@ -193,9 +194,12 @@ export class CoreModelAdminComponent extends CoreModelBase implements OnInit, On
       if (!result) return;
 
       const { cdmName, cdmDescription, cdmVersion } = result;
-      const csv = this.tableService.convertCoreModelsToCsv(this.dataSource.data);
+      const flattenedData = this.dataSource.data.map((row) =>
+        this.mappingTable.flattenCoreModel(row),
+      );
+      const csvContent = this.fileService.generateCsvString(flattenedData);
 
-      const blob = new Blob([csv], { type: 'text/csv' });
+      const blob = new Blob([csvContent], { type: 'text/csv' });
       const formData = new FormData();
       formData.append('file', blob, `${cdmName}_${cdmVersion}.csv`);
       formData.append('cdm_name', cdmName);

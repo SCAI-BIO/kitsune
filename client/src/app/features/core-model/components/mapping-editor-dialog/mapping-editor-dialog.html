@@ -114,7 +114,7 @@
     <hr class="divider" />
 
     @for (studyName of dialogData.studyColumnNames; track studyName) {
-      @let camelName = tableService.toCamelCase(studyName);
+      @let camelName = mappingTable.toCamelCase(studyName);
 
       <div class="study-row">
         <div class="field-wrapper">

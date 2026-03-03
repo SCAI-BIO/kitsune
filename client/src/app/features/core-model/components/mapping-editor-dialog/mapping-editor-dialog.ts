@@ -20,9 +20,9 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { debounceTime, finalize } from 'rxjs';
 import { v5 as uuidv5 } from 'uuid';
 
-import { OntologyApi } from './services/ontology-api';
+import { OntologyApi } from '../../services/ontology-api';
 import type { ExtendCdmDialogData } from '../../interfaces/mapping-editor-data';
-import { CoreModelTableService } from '../../services/core-model-table.service';
+import { MappingTable } from '../../services/mapping-table';
 import { ApiErrorHandler } from '../../../../core/services/api-error-handler';
 import type { CoreModel } from '../../../../shared/interfaces/core-model';
 
@@ -81,7 +81,7 @@ export class MappingEditorDialog implements OnInit {
   readonly olsError = signal<string | null>(null);
 
   protected readonly dialogData = inject<ExtendCdmDialogData>(MAT_DIALOG_DATA);
-  protected readonly tableService = inject(CoreModelTableService);
+  protected readonly mappingTable = inject(MappingTable);
   private readonly dialogRef = inject(MatDialogRef<MappingEditorDialog>);
   private readonly destroyRef = inject(DestroyRef);
   private readonly errorHandler = inject(ApiErrorHandler);
@@ -180,7 +180,7 @@ export class MappingEditorDialog implements OnInit {
     };
 
     for (const name of this.dialogData.studyColumnNames) {
-      const camel = this.tableService.toCamelCase(name);
+      const camel = this.mappingTable.toCamelCase(name);
       const studyMatch = data.studies?.find((s) => s.name === name);
       patchObj[`${camel}Label`] = studyMatch?.label ?? '';
       patchObj[`${camel}Description`] = studyMatch?.description ?? '';
@@ -193,7 +193,7 @@ export class MappingEditorDialog implements OnInit {
     const labels: Record<string, string> = {};
 
     for (const name of this.dialogData.studyColumnNames) {
-      const camel = this.tableService.toCamelCase(name);
+      const camel = this.mappingTable.toCamelCase(name);
       const labelKey = `${camel}Label`;
       const descKey = `${camel}Description`;
 

@@ -4,7 +4,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { of } from 'rxjs';
 
 import { MappingEditorDialog } from './mapping-editor-dialog';
-import { OntologyApi } from './services/ontology-api';
+import { OntologyApi } from '../../services/ontology-api';
 
 describe('MappingEditorDialog', () => {
   let component: MappingEditorDialog;

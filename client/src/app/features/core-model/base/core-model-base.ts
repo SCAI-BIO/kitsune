@@ -6,7 +6,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Subscription } from 'rxjs';
 
 import { MappingDialogs } from '../services/mapping-dialogs';
-import { CoreModelTableService } from '../services/core-model-table.service';
+import { MappingTable } from '../services/mapping-table';
 import { InfoKeys } from '../../../shared/enums/info-keys';
 import { InfoDialogComponent } from '../components/info-dialog/info-dialog.component';
 import { ApiError } from '../../../shared/interfaces/api-error';
@@ -34,7 +34,7 @@ export abstract class CoreModelBase {
   protected externalLinkService = inject(LinkBuilder);
   protected fileService = inject(FileExporter);
   protected http = inject(HttpClient);
-  protected tableService = inject(CoreModelTableService);
+  protected mappingTable = inject(MappingTable);
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
@@ -46,28 +46,9 @@ export abstract class CoreModelBase {
   }
 
   downloadTableAsCsv(): void {
-    this.fileService.downloadCsv(this.dataSource.data, 'core-model.csv', (model) => {
-      const base = {
-        id: model.id,
-        label: model.label,
-        description: model.description,
-        olsId: model.ols?.id ?? '',
-        olsLabel: model.ols?.label ?? '',
-        olsDescription: model.ols?.description ?? '',
-        ohdsiId: model.ohdsi?.id ?? '',
-        ohdsiLabel: model.ohdsi?.label ?? '',
-        ohdsiDomain: model.ohdsi?.domain ?? '',
-      };
-
-      const studies = (model.studies ?? []).reduce((acc, study) => {
-        if (!study.name) return acc;
-        acc[`${study.name}Label`] = study.label ?? '';
-        acc[`${study.name}Description`] = study.description ?? '';
-        return acc;
-      }, {} as Record<string, string>);
-
-      return { ...base, ...studies };
-    });
+    this.fileService.downloadCsv(this.dataSource.data, 'core-model.csv', (row) =>
+      this.mappingTable.flattenCoreModel(row),
+    );
   }
 
   fetchCdms(): void {
@@ -136,12 +117,12 @@ export abstract class CoreModelBase {
   }
 
   initializeDataSource(data: CoreModel[]): void {
-    this.studyColumnNames = this.tableService.getUniqueStudyNames(data);
-    this.displayedColumns = this.tableService.getDisplayedColumns(
+    this.studyColumnNames = this.mappingTable.getUniqueStudyNames(data);
+    this.displayedColumns = this.mappingTable.getDisplayedColumns(
       this.studyColumnNames,
-      this.includeActions
+      this.includeActions,
     );
-    this.dataSource = this.tableService.setupDataSource(data);
+    this.dataSource = this.mappingTable.setupDataSource(data);
 
     setTimeout(() => {
       this.setPaginator();
