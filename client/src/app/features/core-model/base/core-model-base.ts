@@ -8,7 +8,7 @@ import { Subscription } from 'rxjs';
 import { MappingDialogs } from '../services/mapping-dialogs';
 import { MappingTable } from '../services/mapping-table';
 import { InfoKeys } from '../../../shared/enums/info-keys';
-import { InfoDialogComponent } from '../components/info-dialog/info-dialog.component';
+import { GlossaryDialog } from '../components/glossary-dialog/glossary-dialog';
 import { ApiError } from '../../../shared/interfaces/api-error';
 import { CoreModel } from '../../../shared/interfaces/core-model';
 import { CdmApi } from '../../../core/services/cdm-api';
@@ -135,7 +135,7 @@ export abstract class CoreModelBase {
   }
 
   openInfo(key: InfoKeys): void {
-    this.dialog.open(InfoDialogComponent, {
+    this.dialog.open(GlossaryDialog, {
       data: { key },
       width: '500px',
     });
