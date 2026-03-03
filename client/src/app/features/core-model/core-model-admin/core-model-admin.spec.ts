@@ -1,19 +1,19 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CoreModelAdminComponent } from './core-model-admin.component';
+import { CoreModelAdmin } from './core-model-admin';
 import { provideHttpClient } from '@angular/common/http';
 
-describe('CoreModelTableComponent', () => {
-  let component: CoreModelAdminComponent;
-  let fixture: ComponentFixture<CoreModelAdminComponent>;
+describe('CoreModelAdmin', () => {
+  let component: CoreModelAdmin;
+  let fixture: ComponentFixture<CoreModelAdmin>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [CoreModelAdminComponent],
+      imports: [CoreModelAdmin],
       providers: [provideHttpClient()],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(CoreModelAdminComponent);
+    fixture = TestBed.createComponent(CoreModelAdmin);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

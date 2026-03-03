@@ -2,7 +2,7 @@ import { Routes } from '@angular/router';
 
 import { ChordDiagram } from './features/chord-diagram/chord-diagram';
 import { CoreModel } from './features/core-model/core-model/core-model';
-import { CoreModelAdminComponent } from './features/core-model/core-model-admin/core-model-admin.component';
+import { CoreModelAdmin } from './features/core-model/core-model-admin/core-model-admin';
 import { canActivateAuthRole } from './core/guards/auth-role.guard';
 import { Harmonization } from './features/harmonization/harmonization';
 import { Home } from './features/home/home';
@@ -33,7 +33,7 @@ export const routes: Routes = [
   },
   {
     path: 'core-model/admin',
-    component: CoreModelAdminComponent,
+    component: CoreModelAdmin,
     canActivate: [canActivateAuthRole],
     data: { role: 'admin' },
   },
