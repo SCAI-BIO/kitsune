@@ -1,11 +1,12 @@
 import { DecimalPipe } from '@angular/common';
 import { Component, inject } from '@angular/core';
-import { MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
+import { MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTableModule } from '@angular/material/table';
 
-import { Mapping } from '../interfaces/mapping';
+import type { Mapping } from '../interfaces/mapping';
+import type { TopMatchesDialogData } from '../interfaces/top-matches-dialog-data';
 import { LinkBuilder } from '../services/link-builder';
 
 @Component({
@@ -15,28 +16,22 @@ import { LinkBuilder } from '../services/link-builder';
   styleUrl: './top-matches-dialog.component.scss',
 })
 export class TopMatchesDialogComponent {
-  private dialogRef = inject(MatDialogRef<TopMatchesDialogComponent>);
-  private data = inject<{
-    matches: Mapping[];
-    terminology: string;
-    variable: string;
-  }>(MAT_DIALOG_DATA);
-  private externalLinkService = inject(LinkBuilder);
+  readonly displayedColumns = ['similarity', 'name', 'id', 'action'];
+  private readonly dialogRef = inject(MatDialogRef<TopMatchesDialogComponent>);
+  private readonly dialogData = inject<TopMatchesDialogData>(MAT_DIALOG_DATA);
+  private readonly linkBuilder = inject(LinkBuilder);
 
-  matches: Mapping[] = this.data.matches;
-  terminology: string = this.data.terminology;
-  variable: string = this.data.variable;
+  readonly matches: Mapping[] = this.dialogData.matches;
+  readonly terminology: string = this.dialogData.terminology;
+  readonly variable: string = this.dialogData.variable;
+
+  getExternalLink(termId: string): string {
+    return this.terminology === 'OHDSI'
+      ? this.linkBuilder.getAthenaLink(termId)
+      : this.linkBuilder.getOlsLink(termId);
+  }
 
   selectMapping(mapping: Mapping): void {
     this.dialogRef.close(mapping);
-  }
-
-  getExternalLink(termId: string): string {
-    switch (this.terminology) {
-      case 'OHDSI':
-        return this.externalLinkService.getAthenaLink(termId);
-      default:
-        return this.externalLinkService.getOlsLink(termId);
-    }
   }
 }
