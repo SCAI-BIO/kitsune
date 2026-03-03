@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 
-import { CoreModel } from '../interfaces/core-model';
+import { CoreModel } from '../shared/interfaces/core-model';
 
 @Injectable({ providedIn: 'root' })
 export class CoreModelTableService {

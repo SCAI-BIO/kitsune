@@ -4,7 +4,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { of } from 'rxjs';
 
 import { ExtendCdmDialogComponent } from './extend-cdm-dialog.component';
-import { OntologyApi } from '../services/ontology-api';
+import { OntologyApi } from './services/ontology-api';
 
 describe('ExtendCdmDialogComponent', () => {
   let component: ExtendCdmDialogComponent;

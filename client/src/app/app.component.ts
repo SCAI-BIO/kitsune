@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { BannerComponent } from './banner/banner.component';
-import { FooterComponent } from './footer/footer.component';
+import { Header } from './core/layout/header/header';
+import { FooterComponent } from './core/layout/footer/footer';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, BannerComponent, FooterComponent],
+  imports: [RouterOutlet, Header, FooterComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })

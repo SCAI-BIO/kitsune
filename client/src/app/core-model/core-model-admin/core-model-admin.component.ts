@@ -10,8 +10,8 @@ import { MatSort, MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 
 import { CoreModelBase } from '../base/core-model-base';
-import { ApiError } from '../../interfaces/api-error';
-import { CoreModel } from '../../interfaces/core-model';
+import { ApiError } from '../../shared/interfaces/api-error';
+import { CoreModel } from '../../shared/interfaces/core-model';
 import { SaveCdmDialogComponent } from '../../save-cdm-dialog/save-cdm-dialog.component';
 
 @Component({

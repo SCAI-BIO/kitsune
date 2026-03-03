@@ -7,13 +7,13 @@ import { Subscription } from 'rxjs';
 
 import { CoreModelDialogService } from '../core-model-dialog.service';
 import { CoreModelTableService } from '../core-model-table.service';
-import { InfoKeys } from '../../enums/info-keys';
+import { InfoKeys } from '../../shared/enums/info-keys';
 import { InfoDialogComponent } from '../../info-dialog/info-dialog.component';
-import { ApiError } from '../../interfaces/api-error';
-import { CoreModel } from '../../interfaces/core-model';
-import { CdmApi } from '../../services/cdm-api';
-import { LinkBuilder } from '../../services/link-builder';
-import { FileExporter } from '../../services/file-exporter';
+import { ApiError } from '../../shared/interfaces/api-error';
+import { CoreModel } from '../../shared/interfaces/core-model';
+import { CdmApi } from '../../core/services/cdm-api';
+import { LinkBuilder } from '../../core/services/link-builder';
+import { FileExporter } from '../../core/services/file-exporter';
 
 export abstract class CoreModelBase {
   cdmOptions: { name: string; description: string; version: string }[] = [];

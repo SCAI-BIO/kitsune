@@ -20,7 +20,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { debounceTime } from 'rxjs';
 import { v5 as uuidv5 } from 'uuid';
 
-import { OntologyApi } from '../services/ontology-api';
+import { OntologyApi } from './services/ontology-api';
 import { CoreModelTableService } from '../core-model/core-model-table.service';
 
 @Component({

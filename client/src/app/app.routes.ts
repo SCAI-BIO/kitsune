@@ -1,31 +1,31 @@
 import { Routes } from '@angular/router';
 
-import { ChordDiagramComponent } from './chord-diagram/chord-diagram.component';
+import { ChordDiagram } from './features/chord-diagram/chord-diagram';
 import { CoreModelComponent } from './core-model/core-model/core-model.component';
 import { CoreModelAdminComponent } from './core-model/core-model-admin/core-model-admin.component';
-import { canActivateAuthRole } from './guards/auth-role.guard';
-import { HarmonizeComponent } from './harmonize/harmonize.component';
-import { HomeComponent } from './home/home.component';
-import { QueryComponent } from './query/query.component';
-import { TsneComponent } from './tsne/tsne.component';
+import { canActivateAuthRole } from './core/guards/auth-role.guard';
+import { Harmonization } from './features/harmonization/harmonization';
+import { Home } from './features/home/home';
+import { SemanticSearch } from './features/semantic-search/semantic-search';
+import { TsneVisualization } from './features/tsne-visualization/tsne-visualization';
 
 export const routes: Routes = [
   {
     path: '',
-    component: HomeComponent,
+    component: Home,
     pathMatch: 'full',
   },
   {
     path: 'query',
-    component: QueryComponent,
+    component: SemanticSearch,
   },
   {
     path: 'harmonize',
-    component: HarmonizeComponent,
+    component: Harmonization,
   },
   {
     path: 't-sne',
-    component: TsneComponent,
+    component: TsneVisualization,
   },
   {
     path: 'core-model',
@@ -39,7 +39,7 @@ export const routes: Routes = [
   },
   {
     path: 'core-model-chord-diagram',
-    component: ChordDiagramComponent,
+    component: ChordDiagram,
   },
   {
     path: '**',
