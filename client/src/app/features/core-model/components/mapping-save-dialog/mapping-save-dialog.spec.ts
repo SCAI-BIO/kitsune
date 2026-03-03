@@ -1,15 +1,15 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SaveCdmDialogComponent } from './save-cdm-dialog.component';
+import { MappingSaveDialog } from './mapping-save-dialog';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
 describe('SaveCdmDialogComponent', () => {
-  let component: SaveCdmDialogComponent;
-  let fixture: ComponentFixture<SaveCdmDialogComponent>;
+  let component: MappingSaveDialog;
+  let fixture: ComponentFixture<MappingSaveDialog>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [SaveCdmDialogComponent],
+      imports: [MappingSaveDialog],
       providers: [
         {
           provide: MAT_DIALOG_DATA,
@@ -23,7 +23,7 @@ describe('SaveCdmDialogComponent', () => {
       ],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(SaveCdmDialogComponent);
+    fixture = TestBed.createComponent(MappingSaveDialog);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

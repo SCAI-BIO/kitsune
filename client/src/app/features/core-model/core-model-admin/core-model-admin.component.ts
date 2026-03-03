@@ -12,7 +12,7 @@ import { MatTableModule } from '@angular/material/table';
 import { CoreModelBase } from '../base/core-model-base';
 import { ApiError } from '../../../shared/interfaces/api-error';
 import { CoreModel } from '../../../shared/interfaces/core-model';
-import { SaveCdmDialogComponent } from '../components/save-cdm-dialog/save-cdm-dialog.component';
+import { MappingSaveDialog } from '../components/mapping-save-dialog/mapping-save-dialog';
 
 @Component({
   selector: 'app-core-model-table',
@@ -182,7 +182,7 @@ export class CoreModelAdminComponent extends CoreModelBase implements OnInit, On
   }
 
   openSaveCdmDialog(): void {
-    const dialogRef = this.dialog.open(SaveCdmDialogComponent, {
+    const dialogRef = this.dialog.open(MappingSaveDialog, {
       data: {
         cdmName: this.selectedCdm,
         cdmVersion: this.selectedVersion,

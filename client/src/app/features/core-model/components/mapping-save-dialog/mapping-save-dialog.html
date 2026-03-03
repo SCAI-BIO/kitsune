@@ -29,16 +29,16 @@
   <div mat-dialog-content [formGroup]="form" class="dialog-grid">
     <mat-form-field appearance="fill" class="full-width">
       <mat-label>CDM Name</mat-label>
-      @if(form.get('cdmName')?.hasError('required')) {
-      <mat-error>Name is <strong>required</strong>.</mat-error>
+      @if (form.get('cdmName')?.hasError('required')) {
+        <mat-error>Name is <strong>required</strong>.</mat-error>
       }
       <input matInput formControlName="cdmName" />
     </mat-form-field>
 
     <mat-form-field appearance="fill" class="full-width">
       <mat-label>CDM Description</mat-label>
-      @if(form.get('cdmDescription')?.hasError('required')) {
-      <mat-error>Description is <strong>required</strong>.</mat-error>
+      @if (form.get('cdmDescription')?.hasError('required')) {
+        <mat-error>Description is <strong>required</strong>.</mat-error>
       }
       <input matInput formControlName="cdmDescription" />
     </mat-form-field>
@@ -47,17 +47,19 @@
       <mat-label>Version</mat-label>
       <input matInput formControlName="cdmVersion" />
       @if (form.get('cdmVersion')?.hasError('required')) {
-      <mat-error>Version is <strong>required</strong>.</mat-error>
-      } @if (form.get('cdmVersion')?.hasError('invalidSemver')) {
-      <mat-error> Must follow semantic versioning (e.g., v1.2.3). </mat-error>
-      } @if (form.get('cdmVersion')?.hasError('versionExists')) {
-      <mat-error> This version already exists for the selected CDM. </mat-error>
+        <mat-error>Version is <strong>required</strong>.</mat-error>
+      }
+      @if (form.get('cdmVersion')?.hasError('invalidSemver')) {
+        <mat-error> Must follow semantic versioning (e.g., v1.2.3). </mat-error>
+      }
+      @if (form.get('cdmVersion')?.hasError('versionExists')) {
+        <mat-error> This version already exists for the selected CDM. </mat-error>
       }
     </mat-form-field>
   </div>
 
   <div mat-dialog-actions align="end">
-    <button mat-button (click)="cancel()">Cancel</button>
+    <button mat-button mat-dialog-close>Cancel</button>
     <button mat-button color="primary" [disabled]="form.invalid" (click)="save()">Save</button>
   </div>
 </div>
