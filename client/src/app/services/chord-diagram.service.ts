@@ -1,11 +1,15 @@
 import { Injectable } from '@angular/core';
 import * as d3 from 'd3';
 
-import { ChordData, ChordLink, ChordNode, LabeledChordGroup } from '../interfaces/chord-diagram';
+import type {
+  ChordData,
+  ChordLink,
+  ChordNode,
+  LabeledChordGroup,
+} from '../interfaces/chord-diagram';
 
 @Injectable({ providedIn: 'root' })
 export class ChordDiagramService {
-  dataChunks: ChordData[] = [];
   private readonly colorPalette: string[] = [
     '#d62728',
     '#1f77b4',
@@ -34,8 +38,8 @@ export class ChordDiagramService {
   setGlobalColorDomain(input: ChordData | ChordData[]): void {
     const datasets = Array.isArray(input) ? input : [input];
     const allGroups = Array.from(
-      new Set(datasets.flatMap((d) => d.nodes.map((n) => n.group)))
-    ).sort(); // sort for deterministic mapping
+      new Set(datasets.flatMap((d) => d.nodes.map((n) => n.group))),
+    ).sort();
 
     this.colorScale = d3.scaleOrdinal<string, string>().domain(allGroups).range(this.colorPalette);
   }
@@ -44,37 +48,13 @@ export class ChordDiagramService {
     return this.colorScale(group);
   }
 
-  /**
-   * Splits the full chord dataset into connected chunks of nodes and links,
-   * ensuring that semantically connected variables (across different study groups)
-   * are kept in the same chunk and not split across diagrams.
-   *
-   * Nodes are uniquely identified using both their `name` and `group` fields to
-   * prevent merging of distinct variables with the same label from different studies.
-   *
-   * The algorithm:
-   * 1. Builds an adjacency graph where each node is identified by `name|group`.
-   * 2. Traverses the graph to extract connected components (subgraphs).
-   * 3. Packs multiple components into chunks of up to `chunkSize` nodes.
-   *
-   * This avoids issues such as:
-   * - Singleton nodes with no visible links.
-   * - Variables being split across multiple diagrams.
-   * - Loss of connections due to duplicate `name` labels in different groups.
-   *
-   * @param data - The full chord data to be chunked.
-   * @param chunkSize - The maximum number of nodes per resulting diagram chunk.
-   * @returns An array of ChordData chunks, each containing connected and cohesive subsets of the full graph.
-   */
   chunkData(data: ChordData, chunkSize: number): ChordData[] {
-    // Define unique keys for each node (e.g., "Intracellular Water|Study1")
     const getKey = (node: ChordNode | { name: string; group: string }) =>
       `${node.name}|${node.group}`;
 
     const nodeMap = new Map<string, ChordNode>();
     data.nodes.forEach((node) => nodeMap.set(getKey(node), node));
 
-    // Build adjacency based on fully qualified node IDs (name + group)
     const adjacency = new Map<string, Set<string>>();
     data.links.forEach(({ source, target }) => {
       const sourceNodes = data.nodes.filter((n) => n.name === source);
@@ -94,7 +74,6 @@ export class ChordDiagramService {
       }
     });
 
-    // Traverse the graph to find connected components
     const visited = new Set<string>();
     const components: { nodes: ChordNode[]; links: ChordLink[] }[] = [];
 
@@ -132,7 +111,6 @@ export class ChordDiagramService {
       components.push({ nodes, links });
     }
 
-    // Pack components into chunks
     const chunks: ChordData[] = [];
     let currentNodes: ChordNode[] = [];
     let currentLinks: ChordLink[] = [];
@@ -156,27 +134,12 @@ export class ChordDiagramService {
       chunks.push({ nodes: currentNodes, links: currentLinks });
     }
 
-    this.dataChunks = chunks;
     return chunks;
   }
 
-  /**
-   * Entry point for creating a chord diagram for a specific data chunk.
-   * @param dataChunks - Array of ChordData chunks.
-   * @param index - Index of the chunk to visualize.
-   */
-  createChordDiagrams(dataChunks: ChordData[], index: number): void {
-    const chunk = dataChunks[index];
-    this.createChordDiagram(chunk);
-  }
-
-  /**
-   * Builds and renders the full chord diagram visualization.
-   * @param data - The ChordData for the diagram.
-   */
-  private createChordDiagram(data: ChordData): void {
-    const svgElement = d3.selectAll('.chord-diagram').node();
-    const svg = d3.select(svgElement).select<SVGSVGElement>('svg');
+  // Passing the container element directly resolves the DOM query anti-pattern
+  createChordDiagram(containerElement: HTMLElement, data: ChordData): void {
+    const svg = d3.select(containerElement).select<SVGSVGElement>('svg');
     svg.selectAll('*').remove();
 
     const width = 800;
@@ -197,23 +160,12 @@ export class ChordDiagramService {
     this.drawRibbons(svgGroup, chords, innerRadius);
   }
 
-  /**
-   * Preprares node data by assigning unique IDs and sorting by group.
-   * @param data - ChordData to extract and process nodes from.
-   * @returns Sorted and ID-augmented node array.
-   */
   private prepareNodes(data: ChordData): ChordNode[] {
     return data.nodes
       .map((node: ChordNode) => ({ ...node, id: `${node.name}_${node.group}` }))
       .sort((a, b) => a.group.localeCompare(b.group));
   }
 
-  /**
-   * Builds the adjacency matrix used for chord layout calculations.
-   * @param nodes - Array of nodes to include in the matrix.
-   * @param links - Array of links defining relationships between nodes.
-   * @returns 2D matrix of connection weights.
-   */
   private buildMatrix(nodes: ChordNode[], links: ChordLink[]): number[][] {
     const nodeIndex = new Map(nodes.map((node: ChordNode, i: number) => [node.id, i]));
     const matrix = Array(nodes.length)
@@ -241,51 +193,32 @@ export class ChordDiagramService {
     return matrix;
   }
 
-  /**
-   * Group chord diagram arcs by group name.
-   * @param groups - Array of chord group segments.
-   * @param nodes - Original node definitions used for group lookup.
-   * @returns Grouped chord segments keyed by group.
-   */
   private groupChordGroupsByName(
     groups: d3.ChordGroup[],
-    nodes: ChordNode[]
+    nodes: ChordNode[],
   ): [string, d3.ChordGroup[]][] {
     return d3.groups(groups, (d) => nodes[d.index].group);
   }
 
-  /**
-   * Initializes and returns the root <g> element for the chord diagram SVG.
-   * @param svg - D3 selection of the parent SVG element.
-   * @param width - Width of the viewBox.
-   * @param height - Height of the viewBox.
-   * @returns D3 selection of the translated <g> group.
-   */
   private initSvgGroup(
     svg: d3.Selection<SVGSVGElement, unknown, null, undefined>,
     width: number,
-    height: number
+    height: number,
   ) {
     const extraPadding = 200;
     return svg
       .attr('width', '100%')
       .attr('height', '100%')
       .attr('viewBox', `0 0 ${width + extraPadding} ${height + extraPadding}`)
-      .style('overflow', 'visible') // prevents clipping of filter effects
+      .style('overflow', 'visible')
       .append('g')
       .attr('transform', `translate(${(width + extraPadding) / 2},${(height + extraPadding) / 2})`);
   }
 
-  /**
-   * Draws outer arcs to visually group related node arcs.
-   * @param svgGroup - D3 selection of the root SVG group.
-   * @param grouped - Grouped chord segments.
-   * @param outerRadius - Readius for drawing the outer group arcs.
-   */
   private drawGroupArcs(
     svgGroup: d3.Selection<SVGGElement, unknown, null, undefined>,
     grouped: [string, d3.ChordGroup[]][],
-    outerRadius: number
+    outerRadius: number,
   ) {
     const arc = d3
       .arc<d3.ChordGroup>()
@@ -312,42 +245,29 @@ export class ChordDiagramService {
       .attr('fill', ([group]) => this.getColor(group));
   }
 
-  /**
-   * Draws curved group labels along the outer arcs of the chord diagram.
-   *
-   * For each group of chord segments, this method generates a hidden SVG arc path
-   * positioned just outside the outerRadius, and then renders the group name along
-   * that path using <textPath>. The labels follow the curvature of the arc and
-   * are centered within their respective group spans.
-   *
-   * @param svgGroup - The main SVG <g> container where the labels will be appended.
-   * @param grouped - An array of tuples where each tuple contains a group name and the
-   *                  corresponding chord group segments.
-   * @param outerRadius - The base radius of the chord diagram used to position labels
-   *                      slightly outside the outer arc.
-   */
   private drawGroupLabels(
     svgGroup: d3.Selection<SVGGElement, unknown, null, undefined>,
     grouped: [string, d3.ChordGroup[]][],
-    outerRadius: number
+    outerRadius: number,
   ) {
-    const groupLabels = svgGroup
+    // Fixed D3 structural bug by generating container nodes
+    const groupContainers = svgGroup
       .append('g')
       .attr('class', 'group-labels')
-      .selectAll('text')
+      .selectAll('g.group-label-container')
       .data(grouped)
-      .enter();
+      .enter()
+      .append('g')
+      .attr('class', 'group-label-container');
 
-    // Create curved text paths for each group
-    groupLabels
+    groupContainers
       .append('path')
       .attr('id', (d, i) => `groupLabelArc-${i}`)
       .attr('d', ([, groupChords]) => {
         const startAngle = d3.min(groupChords, (d) => d.startAngle)!;
         const endAngle = d3.max(groupChords, (d) => d.endAngle)!;
-        const radius = outerRadius + 17.5; // Position in the middle of the arc (5px + 30px) / 2 + 5px
+        const radius = outerRadius + 17.5;
 
-        // Generate an arc path for the text to follow
         const arcGenerator = d3
           .arc<null>()
           .innerRadius(radius)
@@ -357,15 +277,14 @@ export class ChordDiagramService {
 
         return arcGenerator(null)!;
       })
-      .style('fill', 'none'); // Path should be invisible
+      .style('fill', 'none');
 
-    // Add text that follows the created path
-    groupLabels
+    groupContainers
       .append('text')
       .attr('dy', '5px')
       .append('textPath')
       .attr('xlink:href', (d, i) => `#groupLabelArc-${i}`)
-      .attr('startOffset', '25%') // Start text at 25% along the path
+      .attr('startOffset', '25%')
       .style('text-anchor', 'middle')
       .style('font-size', '12px')
       .style('font-weight', 'bold')
@@ -373,18 +292,11 @@ export class ChordDiagramService {
       .text(([groupName]) => groupName);
   }
 
-  /**
-   * Draws node arc segments and their labels with hover interactivity.
-   * @param svgGroup - D3 selection of the root SVG group.
-   * @param chords - D3 chords containing groups and links.
-   * @param nodes - Original node definitions.
-   * @param outerRadius - Radius for drawing outer node arcs.
-   */
   private drawNodeLabels(
     svgGroup: d3.Selection<SVGGElement, unknown, null, undefined>,
     chords: d3.Chords,
     nodes: ChordNode[],
-    outerRadius: number
+    outerRadius: number,
   ) {
     const arc = d3
       .arc<d3.ChordGroup>()
@@ -406,7 +318,7 @@ export class ChordDiagramService {
         (d: LabeledChordGroup) => `
         rotate(${(d.angle! * 180) / Math.PI - 90})
         translate(${outerRadius + 50})
-        ${d.angle! > Math.PI ? 'rotate(180)' : ''}`
+        ${d.angle! > Math.PI ? 'rotate(180)' : ''}`,
       )
       .style('text-anchor', (d: LabeledChordGroup) => (d.angle! > Math.PI ? 'end' : null))
       .style('font-size', (d: d3.ChordGroup) => {
@@ -442,16 +354,10 @@ export class ChordDiagramService {
       });
   }
 
-  /**
-   * Draws the inner ribbons that represent connections between node arcs.
-   * @param svgGroup - D3 selection of the root SVG group.
-   * @param chords - D3 chords representing relationships.
-   * @param innerRadius - Radius used for the ribbon path.
-   */
   private drawRibbons(
     svgGroup: d3.Selection<SVGGElement, unknown, null, undefined>,
     chords: d3.Chords,
-    innerRadius: number
+    innerRadius: number,
   ) {
     const ribbon = d3.ribbon<unknown, d3.Chord>().radius(innerRadius);
 

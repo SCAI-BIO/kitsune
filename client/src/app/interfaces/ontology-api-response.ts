@@ -1,17 +1,17 @@
 export interface OhdsiApiResponse {
-  name?: string;
-  domainId?: string;
+  readonly name?: string;
+  readonly domainId?: string;
 }
 
 export interface OlsApiEmbeddedTerm {
-  label: string;
-  description: string | string[];
+  readonly label: string;
+  readonly description: string | string[];
 }
 
 export interface OlsApiEmbedded {
-  terms: OlsApiEmbeddedTerm[];
+  readonly terms: OlsApiEmbeddedTerm[];
 }
 
 export interface OlsApiResponse {
-  _embedded: OlsApiEmbedded;
+  readonly _embedded: OlsApiEmbedded;
 }

@@ -1,7 +1,7 @@
 export interface ApiError {
-  error?: {
-    message?: string;
-    detail?: string;
+  readonly error?: {
+    readonly message?: string;
+    readonly detail?: string;
   };
-  message?: string;
+  readonly message?: string;
 }

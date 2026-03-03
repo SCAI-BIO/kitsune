@@ -1,6 +1,6 @@
 export interface CommonDataModel {
-  name: string;
-  description: string;
-  version: string;
-  time_stamp: string;
+  readonly name: string;
+  readonly description: string;
+  readonly version: string;
+  readonly time_stamp: string;
 }

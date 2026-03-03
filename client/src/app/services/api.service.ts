@@ -1,9 +1,10 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { inject, Injectable } from '@angular/core';
+import { inject, Injectable, signal } from '@angular/core';
 
-import { Observable, shareReplay } from 'rxjs';
+import { Observable, of, tap } from 'rxjs';
 
-import { Mapping, Response, Terminology, StreamingResponse } from '../interfaces/mapping';
+import type { CacheItem } from '../interfaces/cache';
+import type { Mapping, Response, Terminology, StreamingResponse } from '../interfaces/mapping';
 import { environment } from '../../environments/environment';
 
 @Injectable({
@@ -11,16 +12,14 @@ import { environment } from '../../environments/environment';
 })
 export class ApiService {
   private readonly API_URL = environment.openApiUrl;
-  private CACHE_TTL = 24 * 60 * 60 * 1000; // 24 hours in ms
-  private embeddingModels$: Observable<string[]> | null = null;
-  private http = inject(HttpClient);
-  private lastFetched = 0;
-  private terminologies$: Observable<Terminology[]> | null = null;
+  private readonly CACHE_TTL = 24 * 60 * 60 * 1000; // 24 hours in ms
+  private readonly embeddingModelsCache = signal<CacheItem<string[]> | null>(null);
+  private readonly http = inject(HttpClient);
+  private readonly terminologiesCache = signal<CacheItem<Terminology[]> | null>(null);
 
   clearCache(): void {
-    this.embeddingModels$ = null;
-    this.terminologies$ = null;
-    this.lastFetched = 0;
+    this.embeddingModelsCache.set(null);
+    this.terminologiesCache.set(null);
   }
 
   fetchClosestMappingsDictionary(formData: FormData): Observable<Response[]> {
@@ -36,33 +35,27 @@ export class ApiService {
   }
 
   fetchEmbeddingModels(): Observable<string[]> {
-    const now = Date.now();
+    const cached = this.embeddingModelsCache();
 
-    // Return cached observable if available and not stale
-    if (this.embeddingModels$ && now - this.lastFetched <= this.CACHE_TTL) {
-      return this.embeddingModels$;
+    if (cached && Date.now() - cached.timestamp <= this.CACHE_TTL) {
+      return of(cached.data);
     }
 
-    // Else: make API cal and cache the observable
-    this.embeddingModels$ = this.http.get<string[]>(`${this.API_URL}/models/`).pipe(shareReplay(1));
-    this.lastFetched = now;
-    return this.embeddingModels$;
+    return this.http
+      .get<string[]>(`${this.API_URL}/models/`)
+      .pipe(tap((data) => this.embeddingModelsCache.set({ data, timestamp: Date.now() })));
   }
 
   fetchTerminologies(): Observable<Terminology[]> {
-    const now = Date.now();
+    const cached = this.terminologiesCache();
 
-    // Return cached observable if available and not stale
-    if (this.terminologies$ && now - this.lastFetched <= this.CACHE_TTL) {
-      return this.terminologies$;
+    if (cached && Date.now() - cached.timestamp <= this.CACHE_TTL) {
+      return of(cached.data);
     }
 
-    // Else: make API cal and cache the observable
-    this.terminologies$ = this.http
+    return this.http
       .get<Terminology[]>(`${this.API_URL}/terminologies/`)
-      .pipe(shareReplay(1));
-    this.lastFetched = now;
-    return this.terminologies$;
+      .pipe(tap((data) => this.terminologiesCache.set({ data, timestamp: Date.now() })));
   }
 
   fetchTSNE(): Observable<string> {
@@ -79,45 +72,35 @@ export class ApiService {
       variable_field: string;
       description_field: string;
       limit: number;
-    }
+    },
   ): Observable<StreamingResponse> {
-    const wsUrl = this.API_URL.replace(/^http/, 'ws') + '/mappings/dict/ws';
+    const url = new URL(`${this.API_URL}/mappings/dict/ws`);
+    url.protocol = url.protocol === 'https:' ? 'wss:' : 'ws:';
 
-    return new Observable((observer) => {
-      const socket = new WebSocket(wsUrl);
-
+    return new Observable<StreamingResponse>((observer) => {
+      const socket = new WebSocket(url.toString());
       socket.binaryType = 'arraybuffer';
 
       socket.onopen = () => {
-        // Send file binary
-        file.arrayBuffer().then((buffer) => {
-          socket.send(buffer);
+        file
+          .arrayBuffer()
+          .then((buffer) => {
+            socket.send(buffer);
 
-          // Send metadata JSON
-          const metadataPayload = {
-            ...metadata,
-            file_extension: '.' + file.name.split('.').pop(),
-          };
-          socket.send(JSON.stringify(metadataPayload));
-        });
+            const metadataPayload = {
+              ...metadata,
+              file_extension: `.${file.name.split('.').pop()}`,
+            };
+            socket.send(JSON.stringify(metadataPayload));
+          })
+          .catch((error) => observer.error(error));
       };
 
-      socket.onmessage = (event) => {
-        const data = JSON.parse(event.data);
-        observer.next(data);
-      };
+      socket.onmessage = (event) => observer.next(JSON.parse(event.data));
+      socket.onerror = (error) => observer.error(error);
+      socket.onclose = () => observer.complete();
 
-      socket.onerror = (error) => {
-        observer.error(error);
-      };
-
-      socket.onclose = () => {
-        observer.complete();
-      };
-
-      return () => {
-        socket.close();
-      };
+      return () => socket.close();
     });
   }
 }

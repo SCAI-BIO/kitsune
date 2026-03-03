@@ -31,9 +31,9 @@
 
   <!-- Loading Spinner -->
   @if (isLoading()) {
-  <div class="loading-spinner">
-    <mat-spinner diameter="40"></mat-spinner>
-  </div>
+    <div class="loading-spinner">
+      <mat-spinner diameter="40"></mat-spinner>
+    </div>
   }
 
   <div class="submit-form-container">
@@ -41,12 +41,9 @@
       <div class="cdm-name-selector">
         <mat-form-field>
           <mat-label>Common Data Models</mat-label>
-          <mat-select
-            [value]="selectedCdm"
-            (selectionChange)="selectedCdm = $event.value; getVersionForCdm(selectedCdm)"
-          >
-            @for (name of uniqueCdmNames; track name) {
-            <mat-option [value]="name">{{ name }}</mat-option>
+          <mat-select [value]="selectedCdm()" (selectionChange)="selectedCdm.set($event.value)">
+            @for (name of uniqueCdmNames(); track name) {
+              <mat-option [value]="name">{{ name }}</mat-option>
             }
           </mat-select>
         </mat-form-field>
@@ -54,9 +51,12 @@
       <div class="cdm-version-selector">
         <mat-form-field>
           <mat-label>Version</mat-label>
-          <mat-select [value]="selectedVersion" (selectionChange)="selectedVersion = $event.value">
-            @for (version of cdmVersions; track version) {
-            <mat-option [value]="version">{{ version }}</mat-option>
+          <mat-select
+            [value]="selectedVersion()"
+            (selectionChange)="selectedVersion.set($event.value)"
+          >
+            @for (version of cdmVersions(); track version) {
+              <mat-option [value]="version">{{ version }}</mat-option>
             }
           </mat-select>
         </mat-form-field>
@@ -72,26 +72,26 @@
     </div>
   </div>
 
-  @if (dataChunks.length > 0 ) {
-  <div class="navigation-buttons">
-    <button (click)="previous()" [disabled]="currentIndex === 0" class="button-style">
-      Previous
-    </button>
-    <span>{{ currentIndex + 1 }} / {{ dataChunks.length }}</span>
-    <button
-      (click)="next()"
-      [disabled]="currentIndex === dataChunks.length - 1"
-      class="button-style"
-    >
-      Next
-    </button>
-  </div>
-
-  <!-- Render one diagram per chunk -->
-  <div class="chord-diagram-container">
-    <div class="chord-diagram">
-      <svg></svg>
+  @if (dataChunks().length > 0) {
+    <div class="navigation-buttons">
+      <button (click)="previous()" [disabled]="currentIndex() === 0" class="button-style">
+        Previous
+      </button>
+      <span>{{ currentIndex() + 1 }} / {{ dataChunks().length }}</span>
+      <button
+        (click)="next()"
+        [disabled]="currentIndex() === dataChunks().length - 1"
+        class="button-style"
+      >
+        Next
+      </button>
     </div>
-  </div>
+
+    <!-- Render one diagram per chunk -->
+    <div class="chord-diagram-container">
+      <div class="chord-diagram" #chordContainer>
+        <svg></svg>
+      </div>
+    </div>
   }
 </main>
