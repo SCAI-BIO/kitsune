@@ -1,16 +1,16 @@
-import { provideHttpClient } from '@angular/common/http';
 import { TestBed } from '@angular/core/testing';
+import { provideHttpClient } from '@angular/common/http';
 
-import { ApiService } from './api.service';
+import { OntologyApi } from './ontology-api';
 
-describe('ApiService', () => {
-  let service: ApiService;
+describe('OntologyApi', () => {
+  let service: OntologyApi;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [provideHttpClient()],
     });
-    service = TestBed.inject(ApiService);
+    service = TestBed.inject(OntologyApi);
   });
 
   it('should be created', () => {

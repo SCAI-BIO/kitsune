@@ -6,7 +6,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatTableModule } from '@angular/material/table';
 
 import { Mapping } from '../interfaces/mapping';
-import { ExternalLinkService } from '../services/external-link.service';
+import { LinkBuilder } from '../services/link-builder';
 
 @Component({
   selector: 'app-top-matches-dialog',
@@ -21,7 +21,7 @@ export class TopMatchesDialogComponent {
     terminology: string;
     variable: string;
   }>(MAT_DIALOG_DATA);
-  private externalLinkService = inject(ExternalLinkService);
+  private externalLinkService = inject(LinkBuilder);
 
   matches: Mapping[] = this.data.matches;
   terminology: string = this.data.terminology;

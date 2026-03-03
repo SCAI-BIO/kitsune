@@ -4,7 +4,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { of } from 'rxjs';
 
 import { ExtendCdmDialogComponent } from './extend-cdm-dialog.component';
-import { OntologyApiService } from '../services/ontology-api.service';
+import { OntologyApi } from '../services/ontology-api';
 
 describe('ExtendCdmDialogComponent', () => {
   let component: ExtendCdmDialogComponent;
@@ -23,7 +23,7 @@ describe('ExtendCdmDialogComponent', () => {
         },
         { provide: MatDialogRef, useValue: { close: vi.fn() } },
         {
-          provide: OntologyApiService,
+          provide: OntologyApi,
           useValue: {
             getOhdsiConceptById: () => of(null),
             getOlsTermById: () => of(null),

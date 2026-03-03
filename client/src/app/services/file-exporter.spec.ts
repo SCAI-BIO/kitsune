@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { ExternalLinkService } from './external-link.service';
+import { FileExporter } from './file-exporter';
 
-describe('ExternalLinkServicesService', () => {
-  let service: ExternalLinkService;
+describe('FileExporter', () => {
+  let service: FileExporter;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(ExternalLinkService);
+    service = TestBed.inject(FileExporter);
   });
 
   it('should be created', () => {

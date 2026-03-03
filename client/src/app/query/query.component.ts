@@ -13,8 +13,8 @@ import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { forkJoin, Subscription } from 'rxjs';
 
 import { Mapping } from '../interfaces/mapping';
-import { ApiService } from '../services/api.service';
-import { ExternalLinkService } from '../services/external-link.service';
+import { MappingsApi } from '../services/mappings-api';
+import { LinkBuilder } from '../services/link-builder';
 
 @Component({
   selector: 'app-query',
@@ -47,8 +47,8 @@ export class QueryComponent implements OnDestroy, OnInit {
   }
   queryForm: FormGroup;
   terminologies: string[] = [];
-  private apiService = inject(ApiService);
-  private externalLinkService = inject(ExternalLinkService);
+  private apiService = inject(MappingsApi);
+  private externalLinkService = inject(LinkBuilder);
   private fb = inject(FormBuilder);
   private subscriptions: Subscription[] = [];
 

@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { ChordDiagramService } from './chord-diagram.service';
+import { ChordBuilder } from './chord-builder';
 
-describe('ChordDiagramService', () => {
-  let service: ChordDiagramService;
+describe('ChordBuilder', () => {
+  let service: ChordBuilder;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(ChordDiagramService);
+    service = TestBed.inject(ChordBuilder);
   });
 
   it('should be created', () => {

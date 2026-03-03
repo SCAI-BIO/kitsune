@@ -11,7 +11,7 @@ import { environment } from '../../environments/environment';
 @Injectable({
   providedIn: 'root',
 })
-export class CdmApiService {
+export class CdmApi {
   private readonly API_URL = environment.cdmApiUrl;
   private readonly http = inject(HttpClient);
 

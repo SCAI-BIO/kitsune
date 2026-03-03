@@ -1,16 +1,16 @@
-import { TestBed } from '@angular/core/testing';
 import { provideHttpClient } from '@angular/common/http';
+import { TestBed } from '@angular/core/testing';
 
-import { OntologyApiService } from './ontology-api.service';
+import { CdmApi } from './cdm-api';
 
-describe('OntologyApiService', () => {
-  let service: OntologyApiService;
+describe('CdmApi', () => {
+  let service: CdmApi;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [provideHttpClient()],
     });
-    service = TestBed.inject(OntologyApiService);
+    service = TestBed.inject(CdmApi);
   });
 
   it('should be created', () => {

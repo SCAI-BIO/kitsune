@@ -9,7 +9,7 @@ import type {
 } from '../interfaces/chord-diagram';
 
 @Injectable({ providedIn: 'root' })
-export class ChordDiagramService {
+export class ChordBuilder {
   private readonly colorPalette: string[] = [
     '#d62728',
     '#1f77b4',

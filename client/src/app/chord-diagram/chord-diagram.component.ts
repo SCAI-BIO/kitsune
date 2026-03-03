@@ -17,8 +17,8 @@ import { MatSelectModule } from '@angular/material/select';
 import { finalize } from 'rxjs';
 
 import type { ChordData } from '../interfaces/chord-diagram';
-import { CdmApiService } from '../services/cdm-api.service';
-import { ChordDiagramService } from '../services/chord-diagram.service';
+import { CdmApi } from '../services/cdm-api';
+import { ChordBuilder } from '../services/chord-builder';
 import { ApiErrorHandler } from '../services/api-error-handler';
 
 @Component({
@@ -43,8 +43,8 @@ export class ChordDiagramComponent implements OnInit {
   readonly uniqueCdmNames = computed(() =>
     Array.from(new Set(this.cdmOptions().map((opt) => opt.name))),
   );
-  private readonly cdmApiService = inject(CdmApiService);
-  private readonly chordService = inject(ChordDiagramService);
+  private readonly cdmApi = inject(CdmApi);
+  private readonly chordBuilder = inject(ChordBuilder);
   private readonly errorHandler = inject(ApiErrorHandler);
   private readonly destroyRef = inject(DestroyRef);
 
@@ -55,7 +55,7 @@ export class ChordDiagramComponent implements OnInit {
       const container = this.chordContainer()?.nativeElement;
 
       if (chunks.length > 0 && container) {
-        this.chordService.createChordDiagram(container, chunks[index]);
+        this.chordBuilder.createChordDiagram(container, chunks[index]);
       }
     });
   }
@@ -63,7 +63,7 @@ export class ChordDiagramComponent implements OnInit {
   fetchCdms(): void {
     this.isLoading.set(true);
 
-    this.cdmApiService
+    this.cdmApi
       .fetchCommonDataModels()
       .pipe(
         takeUntilDestroyed(this.destroyRef),
@@ -78,7 +78,7 @@ export class ChordDiagramComponent implements OnInit {
 
   fetchData(): void {
     this.isLoading.set(true);
-    this.cdmApiService
+    this.cdmApi
       .fetchChordDiagramData(this.selectedCdm(), this.selectedVersion())
       .pipe(
         takeUntilDestroyed(this.destroyRef),
@@ -86,8 +86,8 @@ export class ChordDiagramComponent implements OnInit {
       )
       .subscribe({
         next: (v) => {
-          this.chordService.setGlobalColorDomain(v);
-          this.dataChunks.set(this.chordService.chunkData(v, 40));
+          this.chordBuilder.setGlobalColorDomain(v);
+          this.dataChunks.set(this.chordBuilder.chunkData(v, 40));
           this.currentIndex.set(0);
         },
         error: (err) => this.errorHandler.handleError(err, 'fetching data'),

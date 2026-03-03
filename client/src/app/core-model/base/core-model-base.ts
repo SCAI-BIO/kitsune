@@ -11,9 +11,9 @@ import { InfoKeys } from '../../enums/info-keys';
 import { InfoDialogComponent } from '../../info-dialog/info-dialog.component';
 import { ApiError } from '../../interfaces/api-error';
 import { CoreModel } from '../../interfaces/core-model';
-import { CdmApiService } from '../../services/cdm-api.service';
-import { ExternalLinkService } from '../../services/external-link.service';
-import { FileService } from '../../services/file.service';
+import { CdmApi } from '../../services/cdm-api';
+import { LinkBuilder } from '../../services/link-builder';
+import { FileExporter } from '../../services/file-exporter';
 
 export abstract class CoreModelBase {
   cdmOptions: { name: string; description: string; version: string }[] = [];
@@ -28,11 +28,11 @@ export abstract class CoreModelBase {
   studyColumnNames: string[] = [];
   subscriptions: Subscription[] = [];
   uniqueCdmNames: string[] = [];
-  protected cdmApiService = inject(CdmApiService);
+  protected cdmApiService = inject(CdmApi);
   protected dialog = inject(MatDialog);
   protected dialogService = inject(CoreModelDialogService);
-  protected externalLinkService = inject(ExternalLinkService);
-  protected fileService = inject(FileService);
+  protected externalLinkService = inject(LinkBuilder);
+  protected fileService = inject(FileExporter);
   protected http = inject(HttpClient);
   protected tableService = inject(CoreModelTableService);
 

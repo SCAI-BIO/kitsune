@@ -1,16 +1,16 @@
+import { provideHttpClient } from '@angular/common/http';
 import { TestBed } from '@angular/core/testing';
 
-import { CdmApiService } from './cdm-api.service';
-import { provideHttpClient } from '@angular/common/http';
+import { MappingsApi } from './mappings-api';
 
-describe('CdmApiService', () => {
-  let service: CdmApiService;
+describe('MappingsApi', () => {
+  let service: MappingsApi;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [provideHttpClient()],
     });
-    service = TestBed.inject(CdmApiService);
+    service = TestBed.inject(MappingsApi);
   });
 
   it('should be created', () => {

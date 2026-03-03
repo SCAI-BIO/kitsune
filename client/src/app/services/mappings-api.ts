@@ -10,7 +10,7 @@ import { environment } from '../../environments/environment';
 @Injectable({
   providedIn: 'root',
 })
-export class ApiService {
+export class MappingsApi {
   private readonly API_URL = environment.openApiUrl;
   private readonly CACHE_TTL = 24 * 60 * 60 * 1000; // 24 hours in ms
   private readonly embeddingModelsCache = signal<CacheItem<string[]> | null>(null);

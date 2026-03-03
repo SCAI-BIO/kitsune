@@ -20,7 +20,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { debounceTime } from 'rxjs';
 import { v5 as uuidv5 } from 'uuid';
 
-import { OntologyApiService } from '../services/ontology-api.service';
+import { OntologyApi } from '../services/ontology-api';
 import { CoreModelTableService } from '../core-model/core-model-table.service';
 
 @Component({
@@ -53,7 +53,7 @@ export class ExtendCdmDialogComponent {
   protected tableService = inject(CoreModelTableService);
   private dialogRef = inject(MatDialogRef<ExtendCdmDialogComponent>);
   private fb = inject(FormBuilder);
-  private ontologyApiService = inject(OntologyApiService);
+  private ontologyApiService = inject(OntologyApi);
 
   constructor() {
     this.existingLabels = this.data.existingLabels;

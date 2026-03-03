@@ -9,7 +9,7 @@ import type { OhdsiApiResponse, OlsApiResponse } from '../interfaces/ontology-ap
 @Injectable({
   providedIn: 'root',
 })
-export class OntologyApiService {
+export class OntologyApi {
   private readonly ATHENA_API_BASE = 'https://athena.ohdsi.org/api/v1/concepts';
   private readonly OLS_API_BASE = 'https://www.ebi.ac.uk/ols4/api/ontologies';
   private readonly http = inject(HttpClient);

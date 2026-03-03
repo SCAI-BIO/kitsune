@@ -23,10 +23,10 @@ import { RouterModule } from '@angular/router';
 import { forkJoin, Subscription } from 'rxjs';
 
 import { Mapping, Response, StreamingResponse } from '../interfaces/mapping';
-import { ApiService } from '../services/api.service';
-import { FileService } from '../services/file.service';
+import { MappingsApi } from '../services/mappings-api';
+import { FileExporter } from '../services/file-exporter';
 import { TopMatchesDialogComponent } from '../top-matches-dialog/top-matches-dialog.component';
-import { ExternalLinkService } from '../services/external-link.service';
+import { LinkBuilder } from '../services/link-builder';
 
 @Component({
   selector: 'app-harmonize',
@@ -74,11 +74,11 @@ export class HarmonizeComponent implements OnDestroy, OnInit {
   requiredFileType =
     '.csv, application/vnd.ms-excel, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet';
   terminologies: string[] = [];
-  private apiService = inject(ApiService);
+  private apiService = inject(MappingsApi);
   private cdr = inject(ChangeDetectorRef);
   private dialog = inject(MatDialog);
-  private externalLinkService = inject(ExternalLinkService);
-  private fileService = inject(FileService);
+  private externalLinkService = inject(LinkBuilder);
+  private fileService = inject(FileExporter);
   private fb = inject(FormBuilder);
   private subscriptions: Subscription[] = [];
 

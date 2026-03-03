@@ -29,7 +29,7 @@ declare global {
 @Injectable({
   providedIn: 'root',
 })
-export class FileService {
+export class FileExporter {
   convertToCSV(data: Response[]): string {
     const rows = data.map((item) => {
       const firstMapping = item.mappings?.[0];

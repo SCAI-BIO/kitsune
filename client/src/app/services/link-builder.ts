@@ -5,7 +5,7 @@ type IriBuilder = (prefix: string, id: string) => string;
 @Injectable({
   providedIn: 'root',
 })
-export class ExternalLinkService {
+export class LinkBuilder {
   private readonly athenaBaseLink = 'https://athena.ohdsi.org/search-terms/terms';
   private readonly olsBaseLink = 'https://www.ebi.ac.uk/ols/ontologies';
   private readonly iriBuilders: Record<string, IriBuilder> = {

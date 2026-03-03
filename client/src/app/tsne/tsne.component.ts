@@ -4,7 +4,7 @@ import { Component, ElementRef, OnDestroy, OnInit, ViewChild, inject, signal } f
 
 import { Subscription } from 'rxjs';
 
-import { ApiService } from '../services/api.service';
+import { MappingsApi } from '../services/mappings-api';
 
 @Component({
   selector: 'app-tsne',
@@ -15,7 +15,7 @@ import { ApiService } from '../services/api.service';
 export class TsneComponent implements OnDestroy, OnInit {
   isLoading = signal(false);
   @ViewChild('tsneHost', { static: true }) tsneHost!: ElementRef;
-  private apiService = inject(ApiService);
+  private apiService = inject(MappingsApi);
   private subscriptions: Subscription[] = [];
 
   fetchTsneData(): void {
