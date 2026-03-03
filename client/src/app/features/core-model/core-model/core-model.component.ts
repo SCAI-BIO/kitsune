@@ -1,5 +1,5 @@
 import { UpperCasePipe } from '@angular/common';
-import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
@@ -28,7 +28,7 @@ import { CoreModelBase } from '../base/core-model-base';
   templateUrl: './core-model.component.html',
   styleUrl: './core-model.component.scss',
 })
-export class CoreModelComponent extends CoreModelBase implements OnInit, OnDestroy {
+export class CoreModelComponent extends CoreModelBase implements OnInit {
   @ViewChild(MatPaginator) set paginator(paginator: MatPaginator) {
     if (paginator) {
       this.dataSource.paginator = paginator;
@@ -38,10 +38,6 @@ export class CoreModelComponent extends CoreModelBase implements OnInit, OnDestr
     if (sort) {
       this.dataSource.sort = sort;
     }
-  }
-
-  ngOnDestroy(): void {
-    this.destroy();
   }
 
   ngOnInit(): void {

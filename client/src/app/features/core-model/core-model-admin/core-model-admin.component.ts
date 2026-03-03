@@ -1,5 +1,5 @@
 import { UpperCasePipe } from '@angular/common';
-import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
@@ -31,7 +31,7 @@ import { MappingSaveDialog } from '../components/mapping-save-dialog/mapping-sav
   templateUrl: './core-model-admin.component.html',
   styleUrl: './core-model-admin.component.scss',
 })
-export class CoreModelAdminComponent extends CoreModelBase implements OnInit, OnDestroy {
+export class CoreModelAdminComponent extends CoreModelBase implements OnInit {
   override includeActions = true;
   @ViewChild(MatPaginator) set paginator(paginator: MatPaginator) {
     if (paginator) {
@@ -54,7 +54,7 @@ export class CoreModelAdminComponent extends CoreModelBase implements OnInit, On
   editRow(row: CoreModel): void {
     const existingLabels = this.dataSource.data.filter((r) => r.id !== row.id).map((r) => r.label);
 
-    const dialogRef = this.dialogService.openExtendDialog(
+    const dialogRef = this.mappingDialogs.openExtendDialog(
       existingLabels,
       row,
       this.studyColumnNames,
@@ -99,16 +99,10 @@ export class CoreModelAdminComponent extends CoreModelBase implements OnInit, On
 
   importCommonDataModel(formData: FormData): void {
     this.isLoading.set(true);
-    const sub = this.cdmApiService.importCommonDataModel(formData).subscribe({
-      error: (err: ApiError) => this.handleError(err),
+    this.cdmApi.importCommonDataModel(formData).subscribe({
+      error: (err: ApiError) => this.errorHandler.handleError(err, 'importing common data model'),
       complete: () => this.isLoading.set(false),
     });
-
-    this.subscriptions.push(sub);
-  }
-
-  ngOnDestroy(): void {
-    this.destroy();
   }
 
   ngOnInit(): void {
@@ -128,7 +122,7 @@ export class CoreModelAdminComponent extends CoreModelBase implements OnInit, On
     reader.onload = () => {
       try {
         const csvText = reader.result as string;
-        const parsedData = this.fileService.transformCsvToJson(csvText);
+        const parsedData = this.fileExporter.transformCsvToJson(csvText);
         this.initializeDataSource(parsedData);
       } catch (err) {
         this.isLoading.set(false);
@@ -144,7 +138,7 @@ export class CoreModelAdminComponent extends CoreModelBase implements OnInit, On
 
   openExtendCdmDialog(): void {
     const existingLabels = this.dataSource.data.map((row) => row.label);
-    const dialogRef = this.dialogService.openExtendDialog(
+    const dialogRef = this.mappingDialogs.openExtendDialog(
       existingLabels,
       undefined,
       this.studyColumnNames,
@@ -197,7 +191,7 @@ export class CoreModelAdminComponent extends CoreModelBase implements OnInit, On
       const flattenedData = this.dataSource.data.map((row) =>
         this.mappingTable.flattenCoreModel(row),
       );
-      const csvContent = this.fileService.generateCsvString(flattenedData);
+      const csvContent = this.fileExporter.generateCsvString(flattenedData);
 
       const blob = new Blob([csvContent], { type: 'text/csv' });
       const formData = new FormData();
