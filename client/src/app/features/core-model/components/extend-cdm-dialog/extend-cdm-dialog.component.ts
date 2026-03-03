@@ -21,7 +21,7 @@ import { debounceTime } from 'rxjs';
 import { v5 as uuidv5 } from 'uuid';
 
 import { OntologyApi } from './services/ontology-api';
-import { CoreModelTableService } from '../core-model/core-model-table.service';
+import { CoreModelTableService } from '../../services/core-model-table.service';
 
 @Component({
   selector: 'app-extend-cdm-dialog',

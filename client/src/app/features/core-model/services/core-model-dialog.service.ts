@@ -2,8 +2,8 @@ import { inject, Injectable } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 
 import { CoreModelTableService } from './core-model-table.service';
-import { ExtendCdmDialogComponent } from '../extend-cdm-dialog/extend-cdm-dialog.component';
-import { CoreModel } from '../shared/interfaces/core-model';
+import { ExtendCdmDialogComponent } from '../components/extend-cdm-dialog/extend-cdm-dialog.component';
+import { CoreModel } from '../../../shared/interfaces/core-model';
 
 @Injectable({ providedIn: 'root' })
 export class CoreModelDialogService {
