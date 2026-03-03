@@ -12,7 +12,7 @@ import { MatTableModule } from '@angular/material/table';
 import { CoreModelBase } from '../base/core-model-base';
 
 @Component({
-  selector: 'app-core-model-table',
+  selector: 'app-core-model',
   standalone: true,
   imports: [
     UpperCasePipe,
