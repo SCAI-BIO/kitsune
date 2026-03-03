@@ -5,7 +5,7 @@ import { MatTableDataSource } from '@angular/material/table';
 
 import { Subscription } from 'rxjs';
 
-import { CoreModelDialogService } from '../services/core-model-dialog.service';
+import { MappingDialogs } from '../services/mapping-dialogs';
 import { CoreModelTableService } from '../services/core-model-table.service';
 import { InfoKeys } from '../../../shared/enums/info-keys';
 import { InfoDialogComponent } from '../components/info-dialog/info-dialog.component';
@@ -30,7 +30,7 @@ export abstract class CoreModelBase {
   uniqueCdmNames: string[] = [];
   protected cdmApiService = inject(CdmApi);
   protected dialog = inject(MatDialog);
-  protected dialogService = inject(CoreModelDialogService);
+  protected dialogService = inject(MappingDialogs);
   protected externalLinkService = inject(LinkBuilder);
   protected fileService = inject(FileExporter);
   protected http = inject(HttpClient);

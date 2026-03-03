@@ -1,0 +1,147 @@
+<div class="dialog-container">
+  <h1 mat-dialog-title>
+    Mapping Editor
+    @if (form.controls.id.value) {
+      <span class="id-subtitle"> - {{ form.controls.id.value }}</span>
+    }
+  </h1>
+
+  <div mat-dialog-content [formGroup]="form" class="dialog-grid">
+    @for (key of ['label', 'description', 'olsId', 'ohdsiId']; track key) {
+      <div class="field-wrapper" [class]="key">
+        <mat-form-field appearance="fill" class="full-width">
+          <mat-label>{{ fieldLabels[key] || (key | titlecase) }}</mat-label>
+
+          @switch (key) {
+            @case ('ohdsiId') {
+              <input
+                matInput
+                formControlName="ohdsiId"
+                (blur)="fetchOhdsiData()"
+                placeholder="Enter OHDSI ID (e.g., 123456)"
+              />
+              @if (isOhdsiLoading()) {
+                <mat-progress-spinner
+                  diameter="20"
+                  mode="indeterminate"
+                  matSuffix
+                ></mat-progress-spinner>
+              }
+              @if (ohdsiError()) {
+                <mat-error>{{ ohdsiError() }}</mat-error>
+              }
+            }
+            @case ('olsId') {
+              <input
+                matInput
+                formControlName="olsId"
+                (blur)="fetchOlsData()"
+                placeholder="Enter OLS ID (e.g., EFO:0000311)"
+              />
+              @if (isOlsLoading()) {
+                <mat-progress-spinner
+                  diameter="20"
+                  mode="indeterminate"
+                  matSuffix
+                ></mat-progress-spinner>
+              }
+              @if (olsError()) {
+                <mat-error>{{ olsError() }}</mat-error>
+              }
+            }
+            @default {
+              <input matInput [formControlName]="key" />
+
+              @if (form.get(key)?.hasError('required') && form.get(key)?.touched) {
+                <mat-error>{{ fieldLabels[key] || key }} is required.</mat-error>
+              }
+              @if (form.get(key)?.hasError('labelExists')) {
+                <mat-error>A variable with this label already exists.</mat-error>
+              }
+            }
+          }
+        </mat-form-field>
+
+        <!-- OHDSI Accordion right after OHDSI ID -->
+        @if (key === 'ohdsiId' && form.controls.ohdsiLabel.value) {
+          <mat-accordion class="info-accordion">
+            <mat-expansion-panel>
+              <mat-expansion-panel-header>
+                <mat-panel-title>Auto-filled OHDSI Information</mat-panel-title>
+              </mat-expansion-panel-header>
+              <div class="accordion-fields">
+                <mat-form-field appearance="fill" class="full-width">
+                  <mat-label>OHDSI Label</mat-label>
+                  <input matInput [formControl]="form.controls.ohdsiLabel" readonly />
+                </mat-form-field>
+                <mat-form-field appearance="fill" class="full-width">
+                  <mat-label>OHDSI Domain</mat-label>
+                  <input matInput [formControl]="form.controls.ohdsiDomain" readonly />
+                </mat-form-field>
+              </div>
+            </mat-expansion-panel>
+          </mat-accordion>
+        }
+
+        <!-- OLS Accordion right after OLS ID -->
+        @if (key === 'olsId' && form.controls.olsLabel.value) {
+          <mat-accordion class="info-accordion">
+            <mat-expansion-panel>
+              <mat-expansion-panel-header>
+                <mat-panel-title>Auto-filled OLS Information</mat-panel-title>
+              </mat-expansion-panel-header>
+              <div class="accordion-fields">
+                <mat-form-field appearance="fill" class="full-width">
+                  <mat-label>OLS Label</mat-label>
+                  <input matInput [formControl]="form.controls.olsLabel" readonly />
+                </mat-form-field>
+                <mat-form-field appearance="fill" class="full-width">
+                  <mat-label>OLS Description</mat-label>
+                  <textarea
+                    matInput
+                    [formControl]="form.controls.olsDescription"
+                    readonly
+                    rows="2"
+                  ></textarea>
+                </mat-form-field>
+              </div>
+            </mat-expansion-panel>
+          </mat-accordion>
+        }
+      </div>
+    }
+
+    <hr class="divider" />
+
+    @for (studyName of dialogData.studyColumnNames; track studyName) {
+      @let camelName = tableService.toCamelCase(studyName);
+
+      <div class="study-row">
+        <div class="field-wrapper">
+          <mat-form-field appearance="fill" class="full-width">
+            <mat-label>{{ studyName | uppercase }} Label</mat-label>
+            <input matInput [formControlName]="camelName + 'Label'" />
+          </mat-form-field>
+        </div>
+        <div class="field-wrapper">
+          <mat-form-field appearance="fill" class="full-width">
+            <mat-label>{{ studyName | uppercase }} Description</mat-label>
+            <input matInput [formControlName]="camelName + 'Description'" />
+          </mat-form-field>
+        </div>
+      </div>
+    }
+  </div>
+
+  <div mat-dialog-actions align="end">
+    <button mat-button (click)="cancel()">Cancel</button>
+    <button
+      mat-raised-button
+      color="primary"
+      [disabled]="form.invalid || ohdsiError() || olsError()"
+      (click)="submit()"
+    >
+      {{ dialogData.initialData ? 'Update' : 'Add' }}
+    </button>
+  </div>
+</div>

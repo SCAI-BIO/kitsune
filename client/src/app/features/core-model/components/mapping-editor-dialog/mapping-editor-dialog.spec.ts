@@ -3,16 +3,16 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
 import { of } from 'rxjs';
 
-import { ExtendCdmDialogComponent } from './extend-cdm-dialog.component';
+import { MappingEditorDialog } from './mapping-editor-dialog';
 import { OntologyApi } from './services/ontology-api';
 
-describe('ExtendCdmDialogComponent', () => {
-  let component: ExtendCdmDialogComponent;
-  let fixture: ComponentFixture<ExtendCdmDialogComponent>;
+describe('MappingEditorDialog', () => {
+  let component: MappingEditorDialog;
+  let fixture: ComponentFixture<MappingEditorDialog>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ExtendCdmDialogComponent],
+      imports: [MappingEditorDialog],
       providers: [
         {
           provide: MAT_DIALOG_DATA,
@@ -32,7 +32,7 @@ describe('ExtendCdmDialogComponent', () => {
       ],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(ExtendCdmDialogComponent);
+    fixture = TestBed.createComponent(MappingEditorDialog);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
