@@ -1,9 +1,19 @@
-import { RouterModule } from '@angular/router';
+import {
+  Component,
+  DestroyRef,
+  ElementRef,
+  OnInit,
+  inject,
+  signal,
+  viewChild,
+} from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { Component, ElementRef, OnDestroy, OnInit, ViewChild, inject, signal } from '@angular/core';
+import { RouterModule } from '@angular/router';
 
-import { Subscription } from 'rxjs';
+import { finalize } from 'rxjs';
 
+import { ApiErrorHandler } from '../services/api-error-handler';
 import { MappingsApi } from '../services/mappings-api';
 
 @Component({
@@ -12,29 +22,25 @@ import { MappingsApi } from '../services/mappings-api';
   templateUrl: './tsne.component.html',
   styleUrl: './tsne.component.scss',
 })
-export class TsneComponent implements OnDestroy, OnInit {
-  isLoading = signal(false);
-  @ViewChild('tsneHost', { static: true }) tsneHost!: ElementRef;
-  private apiService = inject(MappingsApi);
-  private subscriptions: Subscription[] = [];
+export class TsneComponent implements OnInit {
+  readonly isLoading = signal(false);
+  readonly tsneHost = viewChild.required<ElementRef<HTMLElement>>('tsneHost');
+  private readonly destroyRef = inject(DestroyRef);
+  private readonly errorHandler = inject(ApiErrorHandler);
+  private readonly mappingsApi = inject(MappingsApi);
 
   fetchTsneData(): void {
     this.isLoading.set(true);
-    const sub = this.apiService.fetchTSNE().subscribe({
-      next: (html) => {
-        this.insertHtmlAndRunScripts(html);
-      },
-      error: (err) => {
-        console.error('Error fetching t-SNE data', err);
-        this.isLoading.set(false);
-      },
-      complete: () => this.isLoading.set(false),
-    });
-    this.subscriptions.push(sub);
-  }
-
-  ngOnDestroy(): void {
-    this.subscriptions.forEach((sub) => sub.unsubscribe());
+    this.mappingsApi
+      .fetchTSNE()
+      .pipe(
+        takeUntilDestroyed(this.destroyRef),
+        finalize(() => this.isLoading.set(false)),
+      )
+      .subscribe({
+        next: (html) => this.insertHtmlAndRunScripts(html),
+        error: (err) => this.errorHandler.handleError(err, 'fetchins t-SNE data'),
+      });
   }
 
   ngOnInit(): void {
@@ -42,23 +48,22 @@ export class TsneComponent implements OnDestroy, OnInit {
   }
 
   private insertHtmlAndRunScripts(html: string): void {
-    const container = this.tsneHost.nativeElement as HTMLElement;
+    const container = this.tsneHost().nativeElement;
     container.innerHTML = html;
 
     // Extract and execute scripts manually
     const scripts = Array.from(container.querySelectorAll('script'));
-    scripts.forEach((oldScript) => {
+    for (const oldScript of scripts) {
       const newScript = document.createElement('script');
 
       if (oldScript.src) {
         newScript.src = oldScript.src;
-        newScript.async = false; // Preserve script order
+        newScript.async = false; // Preserve execution order
       } else {
         newScript.textContent = oldScript.textContent;
       }
 
-      // Replace the old script with the new one to execute it
       oldScript.parentNode?.replaceChild(newScript, oldScript);
-    });
+    }
   }
 }
