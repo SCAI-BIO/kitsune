@@ -1,5 +1,5 @@
 import { UpperCasePipe } from '@angular/common';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, viewChild } from '@angular/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
@@ -25,32 +25,24 @@ import { CoreModelBase } from '../base/core-model-base';
     MatSortModule,
     MatTableModule,
   ],
-  templateUrl: './core-model.component.html',
-  styleUrl: './core-model.component.scss',
+  templateUrl: './core-model.html',
+  styleUrl: './core-model.scss',
 })
-export class CoreModelComponent extends CoreModelBase implements OnInit {
-  @ViewChild(MatPaginator) set paginator(paginator: MatPaginator) {
-    if (paginator) {
-      this.dataSource.paginator = paginator;
-    }
-  }
-  @ViewChild(MatSort) set sort(sort: MatSort) {
-    if (sort) {
-      this.dataSource.sort = sort;
-    }
-  }
+export class CoreModel extends CoreModelBase implements OnInit {
+  private readonly _paginator = viewChild(MatPaginator);
+  private readonly _sort = viewChild(MatSort);
 
   ngOnInit(): void {
-    setTimeout(() => {
-      this.init();
-    });
+    this.init();
   }
 
   override setPaginator(): void {
-    this.dataSource.paginator = this.paginator;
+    const p = this._paginator();
+    if (p) this.dataSource.paginator = p;
   }
 
   override setSort(): void {
-    this.dataSource.sort = this.sort;
+    const s = this._sort();
+    if (s) this.dataSource.sort = s;
   }
 }

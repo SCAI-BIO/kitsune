@@ -1,7 +1,7 @@
 import { Routes } from '@angular/router';
 
 import { ChordDiagram } from './features/chord-diagram/chord-diagram';
-import { CoreModelComponent } from './features/core-model/core-model/core-model.component';
+import { CoreModel } from './features/core-model/core-model/core-model';
 import { CoreModelAdminComponent } from './features/core-model/core-model-admin/core-model-admin.component';
 import { canActivateAuthRole } from './core/guards/auth-role.guard';
 import { Harmonization } from './features/harmonization/harmonization';
@@ -29,7 +29,7 @@ export const routes: Routes = [
   },
   {
     path: 'core-model',
-    component: CoreModelComponent,
+    component: CoreModel,
   },
   {
     path: 'core-model/admin',
