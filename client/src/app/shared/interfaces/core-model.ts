@@ -1,26 +1,26 @@
 export interface Ols {
-  id: string;
-  label: string;
-  description?: string;
+  readonly id: string;
+  readonly label: string;
+  readonly description?: string;
 }
 
 export interface Ohdsi {
-  id: string;
-  label: string;
-  domain: string;
+  readonly id: string;
+  readonly label: string;
+  readonly domain: string;
 }
 
 export interface Study {
-  name: string;
+  readonly name: string;
   label: string;
   description?: string;
 }
 
 export interface CoreModel {
-  id: string;
-  label: string;
-  description: string;
-  ols: Ols;
-  ohdsi: Ohdsi;
-  studies: Study[];
+  readonly id: string;
+  readonly label: string;
+  readonly description: string;
+  readonly ols: Ols;
+  readonly ohdsi: Ohdsi;
+  readonly studies: Study[];
 }
