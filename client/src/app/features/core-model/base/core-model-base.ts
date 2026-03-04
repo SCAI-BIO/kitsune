@@ -12,7 +12,7 @@ import { ApiErrorHandler } from '../../../core/services/api-error-handler';
 import { CdmApi } from '../../../core/services/cdm-api';
 import { FileExporter } from '../../../core/services/file-exporter';
 import { LinkBuilder } from '../../../core/services/link-builder';
-import { InfoKeys } from '../../../shared/enums/info-keys';
+import { InfoKeys } from '../enums/info-keys';
 import { CoreModel } from '../../../shared/interfaces/core-model';
 
 export abstract class CoreModelBase {

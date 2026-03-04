@@ -2,7 +2,7 @@ import { Component, inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
-import { InfoKeys } from '../../../../shared/enums/info-keys';
+import { InfoKeys } from '../../enums/info-keys';
 
 interface GlossaryEntry {
   title: string;
