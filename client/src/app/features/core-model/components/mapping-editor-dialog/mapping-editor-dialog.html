@@ -24,7 +24,7 @@
                 <mat-progress-spinner
                   diameter="20"
                   mode="indeterminate"
-                  matSuffix
+                  class="spinner"
                 ></mat-progress-spinner>
               }
               @if (ohdsiError()) {
@@ -42,7 +42,7 @@
                 <mat-progress-spinner
                   diameter="20"
                   mode="indeterminate"
-                  matSuffix
+                  class="spinner"
                 ></mat-progress-spinner>
               }
               @if (olsError()) {
@@ -110,8 +110,6 @@
         }
       </div>
     }
-
-    <hr class="divider" />
 
     @for (studyName of dialogData.studyColumnNames; track studyName) {
       @let camelName = mappingTable.toCamelCase(studyName);

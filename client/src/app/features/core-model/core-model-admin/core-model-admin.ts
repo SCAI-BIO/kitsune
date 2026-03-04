@@ -9,7 +9,6 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatSort, MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { MatButtonModule } from '@angular/material/button';
 
 import { CoreModel } from '../../../shared/interfaces/core-model';
 import { MappingSaveDialog } from '../components/mapping-save-dialog/mapping-save-dialog';
@@ -32,7 +31,6 @@ export interface MappingDialogResult {
   selector: 'app-core-model-admin',
   standalone: true,
   imports: [
-    MatButtonModule,
     MatFormFieldModule,
     MatIconModule,
     MatInputModule,

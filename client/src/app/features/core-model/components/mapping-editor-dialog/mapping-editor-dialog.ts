@@ -11,7 +11,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -43,6 +43,7 @@ interface MappingFormControls {
   selector: 'app-mapping-editor-dialog',
   imports: [
     MatButtonModule,
+    MatDialogModule,
     MatExpansionModule,
     MatFormFieldModule,
     MatInputModule,
@@ -55,6 +56,13 @@ interface MappingFormControls {
   styleUrl: './mapping-editor-dialog.scss',
 })
 export class MappingEditorDialog implements OnInit {
+  protected readonly dialogData = inject<ExtendCdmDialogData>(MAT_DIALOG_DATA);
+  protected readonly mappingTable = inject(MappingTable);
+  private readonly dialogRef = inject(MatDialogRef<MappingEditorDialog>);
+  private readonly destroyRef = inject(DestroyRef);
+  private readonly errorHandler = inject(ApiErrorHandler);
+  private readonly ontologyApi = inject(OntologyApi);
+
   fieldLabels: Record<string, string> = {};
 
   readonly form = new FormGroup<MappingFormControls>({
@@ -79,13 +87,6 @@ export class MappingEditorDialog implements OnInit {
   readonly isOlsLoading = signal(false);
   readonly ohdsiError = signal<string | null>(null);
   readonly olsError = signal<string | null>(null);
-
-  protected readonly dialogData = inject<ExtendCdmDialogData>(MAT_DIALOG_DATA);
-  protected readonly mappingTable = inject(MappingTable);
-  private readonly dialogRef = inject(MatDialogRef<MappingEditorDialog>);
-  private readonly destroyRef = inject(DestroyRef);
-  private readonly errorHandler = inject(ApiErrorHandler);
-  private readonly ontologyApi = inject(OntologyApi);
 
   cancel(): void {
     this.dialogRef.close();
@@ -148,10 +149,11 @@ export class MappingEditorDialog implements OnInit {
 
   ngOnInit(): void {
     this.setupDynamicStudyFields();
-    this.setupIdAutoGeneration();
 
     if (this.dialogData.initialData) {
       this.patchExistingData(this.dialogData.initialData);
+    } else {
+      this.setupIdAutoGeneration();
     }
   }
 
