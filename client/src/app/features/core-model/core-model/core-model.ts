@@ -1,5 +1,5 @@
 import { UpperCasePipe } from '@angular/common';
-import { Component, OnInit, viewChild } from '@angular/core';
+import { Component, effect, OnInit, viewChild } from '@angular/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
@@ -32,17 +32,18 @@ export class CoreModel extends CoreModelBase implements OnInit {
   private readonly _paginator = viewChild(MatPaginator);
   private readonly _sort = viewChild(MatSort);
 
+  constructor() {
+    super();
+    effect(() => {
+      const paginator = this._paginator();
+      const sort = this._sort();
+
+      if (paginator) this.dataSource.paginator = paginator;
+      if (sort) this.dataSource.sort = sort;
+    });
+  }
+
   ngOnInit(): void {
     this.init();
-  }
-
-  override setPaginator(): void {
-    const p = this._paginator();
-    if (p) this.dataSource.paginator = p;
-  }
-
-  override setSort(): void {
-    const s = this._sort();
-    if (s) this.dataSource.sort = s;
   }
 }

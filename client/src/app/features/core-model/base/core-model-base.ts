@@ -48,7 +48,7 @@ export abstract class CoreModelBase {
   }
 
   downloadTableAsCsv(): void {
-    const filename = `${this.selectedCdm() || 'mappping'}_${this.selectedVersion() || 'export'}.csv`;
+    const filename = `${this.selectedCdm() || 'mapping'}_${this.selectedVersion() || 'export'}.csv`;
     this.fileExporter.downloadCsv(this.dataSource.data, filename, (row) =>
       this.mappingTable.flattenCoreModel(row),
     );
@@ -73,8 +73,6 @@ export abstract class CoreModelBase {
       this.includeActions,
     );
     this.dataSource = this.mappingTable.setupDataSource(data);
-    this.setPaginator();
-    this.setSort();
   }
 
   onSubmit(): void {
@@ -116,8 +114,4 @@ export abstract class CoreModelBase {
         error: (err) => this.errorHandler.handleError(err, 'fetching CDMs'),
       });
   }
-
-  abstract setPaginator(): void;
-
-  abstract setSort(): void;
 }

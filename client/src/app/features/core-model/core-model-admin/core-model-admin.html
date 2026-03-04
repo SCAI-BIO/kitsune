@@ -13,85 +13,91 @@
   </div>
 
   @if (isLoading()) {
-    <div class="loading-spinner-overlay">
-      <mat-spinner diameter="50"></mat-spinner>
+    <div class="loading-spinner">
+      <mat-spinner diameter="40"></mat-spinner>
     </div>
   }
 
   <div class="submit-form-container">
     <div class="cdm-name-version-select-container">
-      <mat-form-field class="cdm-name-selector">
-        <mat-label>Common Data Models</mat-label>
-        <mat-select
-          [value]="selectedCdm()"
-          (selectionChange)="selectedCdm.set($event.value); selectedVersion.set('')"
-        >
-          @for (name of uniqueCdmNames(); track name) {
-            <mat-option [value]="name">{{ name }}</mat-option>
-          }
-        </mat-select>
-      </mat-form-field>
-
-      <mat-form-field class="cdm-version-selector">
-        <mat-label>Version</mat-label>
-        <mat-select
-          [value]="selectedVersion()"
-          (selectionChange)="selectedVersion.set($event.value)"
-          [disabled]="!selectedCdm()"
-        >
-          @for (version of availableVersions(); track version) {
-            <mat-option [value]="version">{{ version }}</mat-option>
-          }
-        </mat-select>
-      </mat-form-field>
+      <div class="cdm-name-selector">
+        <mat-form-field>
+          <mat-label>Common Data Models</mat-label>
+          <mat-select
+            [value]="selectedCdm()"
+            (selectionChange)="selectedCdm.set($event.value); selectedVersion.set('')"
+          >
+            @for (name of uniqueCdmNames(); track name) {
+              <mat-option [value]="name">{{ name }}</mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="cdm-version-selector">
+        <mat-form-field>
+          <mat-label>Version</mat-label>
+          <mat-select
+            [value]="selectedVersion()"
+            (selectionChange)="selectedVersion.set($event.value)"
+            [disabled]="!selectedCdm()"
+          >
+            @for (version of availableVersions(); track version) {
+              <mat-option [value]="version">{{ version }}</mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+      </div>
     </div>
 
     <div class="submit-button-container">
-      <button mat-raised-button color="primary" class="button-style" (click)="onSubmit()">
-        Load Mapping
-      </button>
+      <div class="submit-box">
+        <button class="button-style" color="primary" (click)="onSubmit()">Submit</button>
+      </div>
     </div>
   </div>
 
   @if (dataSource.data.length > 0) {
     <div class="table-wrapper mat-elevation-z8">
       <div class="import-extend-download-save-container">
-        <button mat-flat-button color="primary" (click)="openExtendCdmDialog()">
-          <mat-icon>note_add</mat-icon> Extend CDM
-        </button>
+        <div class="extend-button-cotainer">
+          <button class="button-style menu" (click)="openExtendCdmDialog()">
+            <mat-icon>note_add</mat-icon> Extend CDM
+          </button>
+        </div>
 
-        <button mat-stroked-button color="primary" (click)="fileInput.click()">
-          <mat-icon>upload_file</mat-icon> Import CSV
-        </button>
-        <input #fileInput type="file" accept=".csv" (change)="onCsvUpload($event)" hidden />
+        <div class="import-button-container" style="margin: 16px 0">
+          <button class="button-style" (click)="fileInput.click()">
+            <mat-icon>upload_file</mat-icon> Import CSV
+          </button>
+          <input #fileInput type="file" accept=".csv" (change)="onCsvUpload($event)" hidden />
+        </div>
 
-        <button mat-stroked-button (click)="downloadTableAsCsv()">
-          <mat-icon>download</mat-icon> Download
-        </button>
+        <div class="download-button-container">
+          <button class="button-style" (click)="downloadTableAsCsv()">
+            <mat-icon>download</mat-icon> Download
+          </button>
+        </div>
 
-        <span class="toolbar-spacer"></span>
-
-        <button
-          mat-icon-button
-          color="primary"
-          matTooltip="Save and Versioning"
-          (click)="openSaveCdmDialog()"
-        >
-          <mat-icon>save</mat-icon>
-        </button>
+        <div class="save-button-container">
+          <button class="button-style" (click)="openSaveCdmDialog()">
+            <mat-icon>save</mat-icon> Save
+          </button>
+        </div>
       </div>
 
       <div class="filter-pagination-container">
-        <mat-form-field class="filter-container" appearance="outline">
-          <mat-label>Filter Mappings</mat-label>
-          <mat-icon matPrefix>search</mat-icon>
-          <input
-            matInput
-            (keyup)="applyFilter($event)"
-            placeholder="Search label, ID, or study..."
-            #input
-          />
-        </mat-form-field>
+        <div class="filter-container">
+          <mat-form-field appearance="outline">
+            <mat-label>Filter Mappings</mat-label>
+            <mat-icon matPrefix>search</mat-icon>
+            <input
+              matInput
+              (keyup)="applyFilter($event)"
+              placeholder="Search label, ID, or study..."
+              #input
+            />
+          </mat-form-field>
+        </div>
 
         <mat-paginator [pageSizeOptions]="[10, 25, 50, 100]" showFirstLastButtons></mat-paginator>
       </div>
@@ -102,17 +108,11 @@
             <th mat-header-cell *matHeaderCellDef>Actions</th>
             <td mat-cell *matCellDef="let row">
               <div class="action-buttons">
-                <button
-                  mat-icon-button
-                  color="primary"
-                  matTooltip="Edit Mapping"
-                  (click)="editRow(row)"
-                >
+                <button class="button-style first" matTooltip="Edit Mapping" (click)="editRow(row)">
                   <mat-icon>edit</mat-icon>
                 </button>
                 <button
-                  mat-icon-button
-                  color="warn"
+                  class="button-style"
                   matTooltip="Delete Mapping"
                   (click)="confirmDeleteRow(row)"
                 >
@@ -144,7 +144,7 @@
           <ng-container matColumnDef="olsId">
             <th mat-header-cell *matHeaderCellDef mat-sort-header>
               OLS ID
-              <button mat-icon-button (click)="openInfo(InfoKey.OLS); $event.stopPropagation()">
+              <button class="info-button" (click)="openInfo(InfoKey.OLS); $event.stopPropagation()">
                 <mat-icon class="info-icon">info_outline</mat-icon>
               </button>
             </th>
@@ -158,6 +158,13 @@
             </td>
           </ng-container>
 
+          <ng-container matColumnDef="olsDescription">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>OLS Description</th>
+            <td mat-cell *matCellDef="let element" class="cell-bg-ols">
+              {{ element.ols?.description }}
+            </td>
+          </ng-container>
+
           <ng-container matColumnDef="olsLabel">
             <th mat-header-cell *matHeaderCellDef mat-sort-header>OLS Label</th>
             <td mat-cell *matCellDef="let element" class="cell-bg-ols">{{ element.ols?.label }}</td>
@@ -166,7 +173,10 @@
           <ng-container matColumnDef="ohdsiId">
             <th mat-header-cell *matHeaderCellDef mat-sort-header>
               OHDSI ID
-              <button mat-icon-button (click)="openInfo(InfoKey.OHDSI); $event.stopPropagation()">
+              <button
+                class="info-button"
+                (click)="openInfo(InfoKey.OHDSI); $event.stopPropagation()"
+              >
                 <mat-icon class="info-icon">info_outline</mat-icon>
               </button>
             </th>
@@ -184,6 +194,13 @@
             <th mat-header-cell *matHeaderCellDef mat-sort-header>OHDSI Label</th>
             <td mat-cell *matCellDef="let element" class="cell-bg-ohdsi">
               {{ element.ohdsi?.label }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="ohdsiDomain">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>OHDSI Domain</th>
+            <td mat-cell *matCellDef="let element" class="cell-bg-ohdsi">
+              {{ element.ohdsi?.domain }}
             </td>
           </ng-container>
 
