@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 
-import type { CoreModel } from '../../../shared/interfaces/core-model';
+import type { CoreModel } from '@shared/interfaces/core-model';
 
 @Injectable({ providedIn: 'root' })
 export class MappingTable {

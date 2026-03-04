@@ -16,10 +16,10 @@ import { MatSelectModule } from '@angular/material/select';
 
 import { finalize } from 'rxjs';
 
-import type { ChordData } from '../../shared/interfaces/chord-diagram';
-import { CdmApi } from '../../core/services/cdm-api';
+import { ApiErrorHandler } from '@core/services/api-error-handler';
+import { CdmApi } from '@core/services/cdm-api';
+import type { ChordData } from '@shared/interfaces/chord-diagram';
 import { ChordBuilder } from './services/chord-builder';
-import { ApiErrorHandler } from '../../core/services/api-error-handler';
 
 @Component({
   selector: 'app-chord-diagram',

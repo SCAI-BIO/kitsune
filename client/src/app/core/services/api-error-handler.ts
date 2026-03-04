@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import type { ApiError } from '../../shared/interfaces/api-error';
+import type { ApiError } from '@shared/interfaces/api-error';
 
 @Injectable({
   providedIn: 'root',

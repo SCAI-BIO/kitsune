@@ -1,8 +1,8 @@
 import { inject, Injectable } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 
+import type { CoreModel } from '@shared/interfaces/core-model';
 import { MappingEditorDialog } from '../components/mapping-editor-dialog/mapping-editor-dialog';
-import { CoreModel } from '../../../shared/interfaces/core-model';
 
 @Injectable({ providedIn: 'root' })
 export class MappingDialogs {

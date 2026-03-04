@@ -13,10 +13,10 @@ import { RouterModule } from '@angular/router';
 
 import { finalize, forkJoin } from 'rxjs';
 
-import type { Mapping } from '../../shared/interfaces/mapping';
-import { ApiErrorHandler } from '../../core/services/api-error-handler';
-import { LinkBuilder } from '../../core/services/link-builder';
-import { MappingsApi } from '../../core/services/mappings-api';
+import { ApiErrorHandler } from '@core/services/api-error-handler';
+import { LinkBuilder } from '@core/services/link-builder';
+import { MappingsApi } from '@core/services/mappings-api';
+import type { Mapping } from '@shared/interfaces/mapping';
 
 @Component({
   selector: 'app-semantic-search',

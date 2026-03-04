@@ -13,8 +13,8 @@ import { RouterModule } from '@angular/router';
 
 import { finalize } from 'rxjs';
 
-import { ApiErrorHandler } from '../../core/services/api-error-handler';
-import { MappingsApi } from '../../core/services/mappings-api';
+import { ApiErrorHandler } from '@core/services/api-error-handler';
+import { MappingsApi } from '@core/services/mappings-api';
 
 @Component({
   selector: 'app-tsne-visualization',

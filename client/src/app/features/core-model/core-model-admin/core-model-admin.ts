@@ -10,7 +10,7 @@ import { MatSort, MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 import { MatTooltipModule } from '@angular/material/tooltip';
 
-import { CoreModel } from '../../../shared/interfaces/core-model';
+import type { CoreModel } from '@shared/interfaces/core-model';
 import { MappingSaveDialog } from '../components/mapping-save-dialog/mapping-save-dialog';
 import { CoreModelBase } from '../base/core-model-base';
 

@@ -8,4 +8,4 @@ import { MatListModule } from '@angular/material/list';
   templateUrl: './footer.html',
   styleUrl: './footer.scss',
 })
-export class FooterComponent {}
+export class Footer {}

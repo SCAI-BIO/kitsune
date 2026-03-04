@@ -20,11 +20,11 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { debounceTime, finalize } from 'rxjs';
 import { v5 as uuidv5 } from 'uuid';
 
+import { ApiErrorHandler } from '@core/services/api-error-handler';
+import type { CoreModel } from '@shared/interfaces/core-model';
 import { OntologyApi } from '../../services/ontology-api';
 import type { ExtendCdmDialogData } from '../../interfaces/mapping-editor-data';
 import { MappingTable } from '../../services/mapping-table';
-import { ApiErrorHandler } from '../../../../core/services/api-error-handler';
-import type { CoreModel } from '../../../../shared/interfaces/core-model';
 
 interface MappingFormControls {
   id: FormControl<string>;

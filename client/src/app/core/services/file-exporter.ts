@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 
 import * as Papa from 'papaparse';
 
-import type { CoreModel, Study } from '../../shared/interfaces/core-model';
-import type { Response } from '../../shared/interfaces/mapping';
+import type { CoreModel, Study } from '@shared/interfaces/core-model';
+import type { Response } from '@shared/interfaces/mapping';
 
 declare global {
   interface FileSystemWritableFileStream {

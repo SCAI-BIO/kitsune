@@ -5,9 +5,9 @@ import { MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from '@angular/materia
 import { MatIconModule } from '@angular/material/icon';
 import { MatTableModule } from '@angular/material/table';
 
-import type { Mapping } from '../../../../shared/interfaces/mapping';
-import type { TopMatchesDialogData } from '../../../../shared/interfaces/top-matches-dialog-data';
-import { LinkBuilder } from '../../../../core/services/link-builder';
+import { LinkBuilder } from '@core/services/link-builder';
+import type { Mapping } from '@shared/interfaces/mapping';
+import type { TopMatchesDialogData } from '@shared/interfaces/top-matches-dialog-data';
 
 @Component({
   selector: 'app-top-matches-dialog',

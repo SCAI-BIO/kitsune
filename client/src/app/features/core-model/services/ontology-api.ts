@@ -3,8 +3,8 @@ import { inject, Injectable } from '@angular/core';
 
 import { catchError, map, Observable, of, shareReplay } from 'rxjs';
 
-import type { Ohdsi, Ols } from '../../../shared/interfaces/core-model';
-import type { OhdsiApiResponse, OlsApiResponse } from '../../../shared/interfaces/ontology-api-response';
+import type { Ohdsi, Ols } from '@shared/interfaces/core-model';
+import type { OhdsiApiResponse, OlsApiResponse } from '@shared/interfaces/ontology-api-response';
 
 @Injectable({
   providedIn: 'root',

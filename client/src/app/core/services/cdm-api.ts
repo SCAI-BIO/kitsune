@@ -3,9 +3,9 @@ import { Injectable, inject } from '@angular/core';
 
 import { Observable } from 'rxjs';
 
-import type { ChordData } from '../../shared/interfaces/chord-diagram';
-import type { CoreModel } from '../../shared/interfaces/core-model';
-import { environment } from '../../../environments/environment';
+import { environment } from '@environments/environment';
+import type { ChordData } from '@shared/interfaces/chord-diagram';
+import type { CoreModel } from '@shared/interfaces/core-model';
 
 interface CommonDataModel {
   readonly name: string;

@@ -3,13 +3,8 @@ import { inject, Injectable, signal } from '@angular/core';
 
 import { Observable, of, tap } from 'rxjs';
 
-import type {
-  Mapping,
-  Response,
-  Terminology,
-  StreamingResponse,
-} from '../../shared/interfaces/mapping';
-import { environment } from '../../../environments/environment';
+import { environment } from '@environments/environment';
+import type { Mapping, Response, Terminology, StreamingResponse } from '@shared/interfaces/mapping';
 
 interface CacheItem<T> {
   readonly data: T;

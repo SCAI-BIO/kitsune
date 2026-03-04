@@ -15,12 +15,12 @@ import { RouterModule } from '@angular/router';
 
 import { forkJoin, finalize } from 'rxjs';
 
-import type { ApiError } from '../../shared/interfaces/api-error';
-import type { Mapping, Response, StreamingResponse } from '../../shared/interfaces/mapping';
-import { ApiErrorHandler } from '../../core/services/api-error-handler';
-import { LinkBuilder } from '../../core/services/link-builder';
-import { MappingsApi } from '../../core/services/mappings-api';
-import { FileExporter } from '../../core/services/file-exporter';
+import { ApiErrorHandler } from '@core/services/api-error-handler';
+import { FileExporter } from '@core/services/file-exporter';
+import { LinkBuilder } from '@core/services/link-builder';
+import { MappingsApi } from '@core/services/mappings-api';
+import type { ApiError } from '@shared/interfaces/api-error';
+import type { Mapping, Response, StreamingResponse } from '@shared/interfaces/mapping';
 import { TopMatchesDialog } from './components/top-matches-dialog/top-matches-dialog';
 
 @Component({

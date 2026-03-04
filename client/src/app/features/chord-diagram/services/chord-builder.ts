@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import * as d3 from 'd3';
 
-import type { ChordData, ChordLink, ChordNode } from '../../../shared/interfaces/chord-diagram';
+import type { ChordData, ChordLink, ChordNode } from '@shared/interfaces/chord-diagram';
 
 interface LabeledChordGroup extends d3.ChordGroup {
   angle?: number;
