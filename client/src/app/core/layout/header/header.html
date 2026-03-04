@@ -1,23 +1,22 @@
 <header class="banner">
-  <div class="logo-box">
-    <a [routerLink]="['/']">
-      <img src="logo_white.svg" alt="Website Logo" class="logo" />
+  <div class="brand-group">
+    <a [routerLink]="['/']" class="logo-link">
+      <img src="logo_white.svg" alt="Kitsune Logo" class="logo" />
     </a>
-  </div>
-  <div class="site-title-box">
     <h1 class="site-title">Kitsune</h1>
   </div>
+
   <div class="routing-menu-box">
     <!-- Dropdown Trigger Button -->
-    <button [matMenuTriggerFor]="harmonizeMenu" class="button-style">
+    <button [matMenuTriggerFor]="harmonizeMenu" class="button-style nav-button">
       Harmonize <mat-icon>arrow_drop_down</mat-icon>
     </button>
 
-    <button [matMenuTriggerFor]="coreModelMenu" class="button-style">
-      Common Data Models<mat-icon>arrow_drop_down</mat-icon>
+    <button [matMenuTriggerFor]="coreModelMenu" class="button-style nav-button">
+      Common Data Models <mat-icon>arrow_drop_down</mat-icon>
     </button>
 
-    <button [routerLink]="'/t-sne'" class="button-style">Visualize Embeddings</button>
+    <button [routerLink]="'/t-sne'" class="button-style nav-button">Visualize Embeddings</button>
 
     <!-- Harmonize Dropdown Menu -->
     <mat-menu #harmonizeMenu="matMenu">
@@ -43,9 +42,14 @@
       </button>
     </mat-menu>
   </div>
+
   <div class="github-logo-box">
-    <a href="https://github.com/SCAI-BIO/kitsune" target="_blank">
-      <img src="github-mark-white.svg" alt="GitHub" class="github-logo" />
+    <a
+      href="https://github.com/SCAI-BIO/kitsune"
+      target="_blank"
+      aria-label="Kitsune GitHub Repository"
+    >
+      <img src="github-mark-white.svg" alt="" class="github-logo" />
     </a>
   </div>
 </header>

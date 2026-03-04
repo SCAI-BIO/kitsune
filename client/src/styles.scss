@@ -2,13 +2,13 @@
 
 // Define global button variables
 $max-width: 90%;
-$font-size: 16px;
+$font-size: 1rem;
 $bold-font-weight: 600;
 
 // Button variables
 $button-primary: #171321;
-$button-padding: 10px 20px;
-$button-radius: 5px;
+$button-padding: 0.6rem 1.25rem;
+$button-radius: 0.3rem;
 
 // Info button variable
 $info-button-color: #1976d2;
@@ -48,11 +48,11 @@ b {
   border-radius: $button-radius;
   text-align: center;
   white-space: nowrap;
+  transition: background-color 0.3s ease-in-out;
 
   &:hover {
     cursor: pointer;
     background-color: color.adjust($button-primary, $lightness: 20%);
-    transition: background-color 0.3s ease-in-out;
   }
 }
 
@@ -66,7 +66,7 @@ b {
 }
 
 .button-icon {
-  margin-left: 6px;
+  margin-left: 0.4rem;
 }
 
 // Layout utilities
@@ -74,41 +74,37 @@ b {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 20px;
+  padding: 1.25rem;
   max-width: $max-width;
   margin: 0 auto;
 }
 
 // Description Box
 .description-box {
-  max-width: 60%;
-  margin-bottom: 20px;
+  width: 100%;
+  max-width: 800px;
+  margin-bottom: 1.25rem;
   text-align: center;
   align-self: center;
 
   ul {
-    padding: 0;
+    padding-left: 1.25rem;
     margin: 0;
-    display: inline-block;
-    text-align: left;
 
     li {
-      padding-left: 8px;
+      margin-bottom: 0.4rem;
       list-style: none;
-      margin-bottom: 6px;
-      text-align: center;
-      text-indent: -12px;
     }
   }
 }
 
 // Table Styles
 .table-container {
-  overflow: auto;
+  overflow-x: auto;
   max-height: 800px;
-  margin-top: 20px;
-  border-radius: 12px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+  margin-top: 1.25rem;
+  border-radius: 0.75rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
 
   table {
     width: 100%;
@@ -121,7 +117,7 @@ b {
 .mat-table th,
 .mat-table td {
   border-right: 1px solid #e0e0e0;
-  padding: 12px 16px;
+  padding: 0.75rem 1rem;
   line-height: 1.4;
 }
 
@@ -154,8 +150,8 @@ a.external-link {
   }
 
   .external-link-icon {
-    font-size: 16px;
-    margin-left: 4px;
+    font-size: 1rem;
+    margin-left: 0.25rem;
   }
 }
 
@@ -166,7 +162,7 @@ a.external-link {
   border: none;
   box-shadow: none;
   padding: 0;
-  margin-left: 4px;
+  margin-left: 0.25rem;
   width: auto;
   height: auto;
   min-width: unset;
@@ -174,6 +170,7 @@ a.external-link {
 
   &:hover {
     background: none;
+    cursor: pointer;
 
     .info-icon {
       color: color.adjust($info-button-color, $lightness: -10%);
@@ -181,7 +178,7 @@ a.external-link {
   }
 
   .info-icon {
-    font-size: 20px;
+    font-size: 1.25rem;
     color: $info-button-color;
     vertical-align: middle;
   }
