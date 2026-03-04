@@ -177,15 +177,13 @@
               mat-raised-button
               class="button-style"
               color="primary"
-              [disabled]="!element.mappings?.length || progressPercent() < 100"
+              [disabled]="progressPercent() < 100"
               (click)="fetchTopMatches(element.description, element)"
             >
-              {{ progressPercent() < 100 ? 'Please wait' : 'Show' }}
               @if (progressPercent() < 100) {
-                <mat-icon class="button-icon">hourglass_empty</mat-icon>
-              }
-              @if (progressPercent() >= 100) {
-                <mat-icon class="button-icon">search</mat-icon>
+                <mat-icon class="spinning-icon">sync</mat-icon> Processing...
+              } @else {
+                <mat-icon>search</mat-icon> Show
               }
             </button>
           </td>

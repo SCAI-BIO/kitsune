@@ -186,10 +186,7 @@ export class Harmonization implements OnInit {
   onSubmit(): void {
     const file = this.fileToUpload();
 
-    if (this.harmonizeForm.invalid || !file) {
-      console.error('Form is invalid or no file selected:', this.harmonizeForm.value);
-      return;
-    }
+    if (this.harmonizeForm.invalid || !file) return;
 
     this.isLoading.set(true);
     this.expectedTotal.set(0);
@@ -198,53 +195,50 @@ export class Harmonization implements OnInit {
     this.dataSource.data = [];
     this.dataSource.paginator?.firstPage();
 
-    const { variableField, descriptionField, selectedEmbeddingModel, selectedTerminology, limit } =
-      this.harmonizeForm.getRawValue();
+    const params = this.harmonizeForm.getRawValue();
 
     this.apiService
       .streamClosestMappingsDictionary(file, {
-        model: selectedEmbeddingModel,
-        terminology_name: selectedTerminology,
-        variable_field: variableField,
-        description_field: descriptionField,
-        limit,
+        model: params.selectedEmbeddingModel,
+        terminology_name: params.selectedTerminology,
+        variable_field: params.variableField,
+        description_field: params.descriptionField,
+        limit: params.limit,
       })
       .pipe(
         takeUntilDestroyed(this.destroyRef),
-        // Centralized teardown logic eliminates the need for a 'complete' block
         finalize(() => {
           this.isLoading.set(false);
-          this.progressPercent.set(100);
+          if (this.expectedTotal() > 0) this.progressPercent.set(100);
         }),
       )
       .subscribe({
         next: (message: StreamingResponse) => {
-          if (message.type === 'error') {
-            alert(`An error occurred: ${message.message}`);
-            return;
-          }
-
           if (message.type === 'metadata') {
             this.expectedTotal.set(message.expected_total);
-            return;
+            this.isLoading.set(false);
           }
 
           if (message.type === 'result') {
-            const resultChunk: Response = {
-              variable: message.variable,
-              description: message.description,
-              mappings: message.mappings,
-            };
+            this.dataSource.data = [
+              ...this.dataSource.data,
+              {
+                variable: message.variable,
+                description: message.description,
+                mappings: message.mappings,
+              },
+            ];
 
-            const currentData = this.dataSource.data;
-            this.dataSource.data = [...currentData, resultChunk];
-
-            this.processedCount.update((count) => count + 1);
+            this.processedCount.update((c) => c + 1);
 
             const total = this.expectedTotal();
             if (total > 0) {
               this.progressPercent.set(Math.round((this.processedCount() / total) * 100));
             }
+          }
+
+          if (message.type === 'error') {
+            this.errorHandler.handleError({ message: message.message } as ApiError, 'stream');
           }
         },
         error: (err: ApiError) => this.errorHandler.handleError(err, 'streaming mappings'),
