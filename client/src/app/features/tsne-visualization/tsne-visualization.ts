@@ -39,7 +39,7 @@ export class TsneVisualization implements OnInit {
       )
       .subscribe({
         next: (html) => this.insertHtmlAndRunScripts(html),
-        error: (err) => this.errorHandler.handleError(err, 'fetchins t-SNE data'),
+        error: (err) => this.errorHandler.handleError(err, 'fetching t-SNE data'),
       });
   }
 
