@@ -10,6 +10,7 @@ import {
   effect,
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSelectModule } from '@angular/material/select';
@@ -23,7 +24,7 @@ import { ChordBuilder } from './services/chord-builder';
 
 @Component({
   selector: 'app-chord-diagram',
-  imports: [MatFormFieldModule, MatProgressSpinnerModule, MatSelectModule],
+  imports: [MatButtonModule, MatFormFieldModule, MatProgressSpinnerModule, MatSelectModule],
   templateUrl: './chord-diagram.html',
   styleUrl: './chord-diagram.scss',
 })

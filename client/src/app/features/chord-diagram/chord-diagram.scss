@@ -1,37 +1,71 @@
-// CDM Selection
 .submit-form-container {
-  justify-items: center;
-  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 600px;
+  margin-bottom: 2rem;
+  gap: 1.5rem;
 }
 
 .cdm-name-version-select-container {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  align-items: center;
-  gap: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  gap: 1.25rem;
+
+  .flex-field {
+    flex: 1 1 calc(50% - 0.625rem);
+    min-width: 200px;
+  }
 }
 
+.submit-button-container {
+  display: flex;
+  justify-content: center;
+}
+
+.chord-diagram-container {
+  width: 100%;
+  max-width: 800px;
+  margin: 1.25rem auto;
+  background-color: #ffffff;
+  border-radius: 0.75rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  padding: 1.5rem;
+  overflow: hidden;
+}
+
+.chord-diagram {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  min-height: 400px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  svg {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+// Navigation
 .navigation-buttons {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 2rem;
-}
+  margin-top: 1rem;
 
-.button-style {
-  width: 110px; // To make the button sizes equal. Otherwise, looks off-center.
-}
+  .nav-btn {
+    width: 110px;
+  }
 
-.chord-diagram-container {
-  margin-top: 20px;
-  width: 60%;
-}
-
-.chord-diagram {
-  height: auto;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding-top: 20px;
+  .pagination-text {
+    font-weight: 600;
+    font-size: 1rem;
+    min-width: 3rem;
+    text-align: center;
+  }
 }

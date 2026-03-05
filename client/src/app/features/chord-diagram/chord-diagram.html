@@ -1,5 +1,4 @@
 <main class="main-container harmonize-component">
-  <!-- Description Section -->
   <div class="description-box">
     <section class="description">
       <p>
@@ -29,7 +28,6 @@
     </section>
   </div>
 
-  <!-- Loading Spinner -->
   @if (isLoading()) {
     <div class="loading-spinner">
       <mat-spinner diameter="40"></mat-spinner>
@@ -38,59 +36,61 @@
 
   <div class="submit-form-container">
     <div class="cdm-name-version-select-container">
-      <div class="cdm-name-selector">
-        <mat-form-field>
-          <mat-label>Common Data Models</mat-label>
-          <mat-select [value]="selectedCdm()" (selectionChange)="selectedCdm.set($event.value)">
-            @for (name of uniqueCdmNames(); track name) {
-              <mat-option [value]="name">{{ name }}</mat-option>
-            }
-          </mat-select>
-        </mat-form-field>
-      </div>
-      <div class="cdm-version-selector">
-        <mat-form-field>
-          <mat-label>Version</mat-label>
-          <mat-select
-            [value]="selectedVersion()"
-            (selectionChange)="selectedVersion.set($event.value)"
-          >
-            @for (version of cdmVersions(); track version) {
-              <mat-option [value]="version">{{ version }}</mat-option>
-            }
-          </mat-select>
-        </mat-form-field>
-      </div>
+      <mat-form-field class="flex-field">
+        <mat-label>Common Data Models</mat-label>
+        <mat-select [value]="selectedCdm()" (selectionChange)="selectedCdm.set($event.value)">
+          @for (name of uniqueCdmNames(); track name) {
+            <mat-option [value]="name">{{ name }}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field class="flex-field">
+        <mat-label>Version</mat-label>
+        <mat-select
+          [value]="selectedVersion()"
+          (selectionChange)="selectedVersion.set($event.value)"
+        >
+          @for (version of cdmVersions(); track version) {
+            <mat-option [value]="version">{{ version }}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
     </div>
+
     <div class="submit-button-container">
-      <div class="submit-box">
-        <!-- Submit Button -->
-        <button mat-raised-button class="button-style" color="primary" (click)="onSubmit()">
-          Submit
-        </button>
-      </div>
+      <button mat-raised-button color="primary" (click)="onSubmit()">Submit</button>
     </div>
   </div>
 
   @if (dataChunks().length > 0) {
     <div class="navigation-buttons">
-      <button (click)="previous()" [disabled]="currentIndex() === 0" class="button-style">
+      <button
+        mat-raised-button
+        color="primary"
+        (click)="previous()"
+        [disabled]="currentIndex() === 0"
+        class="nav-btn"
+      >
         Previous
       </button>
-      <span>{{ currentIndex() + 1 }} / {{ dataChunks().length }}</span>
+
+      <span class="pagination-text">{{ currentIndex() + 1 }} / {{ dataChunks().length }}</span>
+
       <button
+        mat-raised-button
+        color="primary"
         (click)="next()"
         [disabled]="currentIndex() === dataChunks().length - 1"
-        class="button-style"
+        class="nav-btn"
       >
         Next
       </button>
     </div>
 
-    <!-- Render one diagram per chunk -->
-    <div class="chord-diagram-container">
+    <div class="chord-diagram-container mat-elevation-z8">
       <div class="chord-diagram" #chordContainer>
-        <svg></svg>
+        <svg aria-label="Chord diagram showing semantic equivalence"></svg>
       </div>
     </div>
   }
