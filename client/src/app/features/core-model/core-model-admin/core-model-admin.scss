@@ -1,19 +1,27 @@
-.table-actions-container {
+:host {
+  display: block;
+  width: 100%;
+}
+
+.mapping-admin-component {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1rem;
-  background-color: #f5f5f5;
-  border-bottom: 1px solid #e0e0e0;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px;
+  box-sizing: border-box;
+}
 
-  .admin-controls-group {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 1rem;
-
-    input[type='file'] {
-      display: none;
-    }
+.description-box {
+  p {
+    margin: 0 0 10px 0;
+    line-height: 1.5;
+    color: #333;
   }
+}
+
+.admin-controls-group {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px;
 }

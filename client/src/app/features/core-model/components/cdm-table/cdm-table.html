@@ -1,4 +1,4 @@
-<div class="table-wrapper mat-elevation-z8">
+<div class="table-wrapper mat-elevation-z4">
   <div class="table-actions-container">
     <ng-content select="[admin-controls]"></ng-content>
 
@@ -10,17 +10,25 @@
   </div>
 
   <div class="filter-pagination-container">
-    <div class="filter-container">
-      <mat-form-field appearance="outline">
-        <mat-label>Filter Mappings</mat-label>
-        <mat-icon matPrefix>search</mat-icon>
-        <input
-          matInput
-          (keyup)="applyFilter($event)"
-          placeholder="Search label, ID, or study..."
-          #input
-        />
-      </mat-form-field>
+    <mat-form-field appearance="outline" subscriptSizing="dynamic" class="search-field">
+      <mat-label>Filter Mappings</mat-label>
+      <mat-icon matPrefix>search</mat-icon>
+      <input
+        matInput
+        (keyup)="applyFilter($event)"
+        placeholder="Search label, ID, or study..."
+        #input
+      />
+    </mat-form-field>
+
+    <div class="view-toggles">
+      <mat-checkbox
+        [checked]="showDescriptions()"
+        (change)="showDescriptions.set($event.checked)"
+        color="primary"
+      >
+        Show Descriptions
+      </mat-checkbox>
     </div>
 
     <div class="pagination-container">
@@ -158,11 +166,11 @@
         </ng-container>
       }
 
-      <tr mat-header-row *matHeaderRowDef="displayedColumns(); sticky: true"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns()"></tr>
+      <tr mat-header-row *matHeaderRowDef="computedColumns(); sticky: true"></tr>
+      <tr mat-row *matRowDef="let row; columns: computedColumns()"></tr>
 
       <tr class="mat-row" *matNoDataRow>
-        <td class="mat-cell" [attr.colspan]="displayedColumns().length">
+        <td class="mat-cell empty-state" [attr.colspan]="computedColumns().length">
           No results matching "{{ input.value }}"
         </td>
       </tr>

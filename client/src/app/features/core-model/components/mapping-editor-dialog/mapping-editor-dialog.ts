@@ -1,4 +1,4 @@
-import { TitleCasePipe, UpperCasePipe } from '@angular/common';
+import { UpperCasePipe } from '@angular/common';
 import { Component, DestroyRef, inject, OnInit, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import {
@@ -16,6 +16,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatStepperModule } from '@angular/material/stepper';
 
 import { debounceTime, finalize } from 'rxjs';
 import { v5 as uuidv5 } from 'uuid';
@@ -48,8 +49,8 @@ interface MappingFormControls {
     MatFormFieldModule,
     MatInputModule,
     MatProgressSpinnerModule,
+    MatStepperModule,
     ReactiveFormsModule,
-    TitleCasePipe,
     UpperCasePipe,
   ],
   templateUrl: './mapping-editor-dialog.html',

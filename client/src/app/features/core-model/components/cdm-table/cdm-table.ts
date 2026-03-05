@@ -1,6 +1,16 @@
 import { CommonModule } from '@angular/common';
-import { Component, effect, inject, input, output, viewChild } from '@angular/core';
+import {
+  Component,
+  computed,
+  effect,
+  inject,
+  input,
+  output,
+  signal,
+  viewChild,
+} from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
@@ -18,6 +28,7 @@ import type { CoreModel } from '@shared/interfaces/core-model';
   imports: [
     CommonModule,
     MatButtonModule,
+    MatCheckboxModule,
     MatFormFieldModule,
     MatIconModule,
     MatInputModule,
@@ -34,6 +45,14 @@ export class CdmTable {
   readonly displayedColumns = input.required<string[]>();
   readonly studyColumnNames = input.required<string[]>();
   readonly isAdminMode = input<boolean>(false);
+  readonly showDescriptions = signal(false);
+  readonly computedColumns = computed(() => {
+    const cols = this.displayedColumns();
+    if (this.showDescriptions()) {
+      return cols;
+    }
+    return cols.filter((col) => !col.toLowerCase().includes('description'));
+  });
   readonly downloadClicked = output<void>();
   readonly editClicked = output<CoreModel>();
   readonly deleteClicked = output<CoreModel>();
