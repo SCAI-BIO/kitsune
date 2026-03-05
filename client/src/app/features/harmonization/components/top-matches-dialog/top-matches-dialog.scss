@@ -1,0 +1,33 @@
+.dialog-title {
+  margin-bottom: 0;
+  font-size: 1.25rem;
+  line-height: 1.4;
+  word-break: break-word;
+}
+
+.dialog-content {
+  padding-top: 0.5rem;
+}
+
+.dialog-table-container {
+  overflow: auto;
+  max-height: 55vh;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+
+  table {
+    width: 100%;
+    min-width: 500px;
+  }
+}
+
+.close-button {
+  background-color: transparent !important;
+  color: #171321 !important;
+  border: 1px solid #171321;
+  padding: 0.5rem 1.25rem !important;
+
+  &:hover {
+    background-color: rgba(23, 19, 33, 0.05) !important;
+  }
+}
