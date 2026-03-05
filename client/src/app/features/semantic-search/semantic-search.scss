@@ -1,57 +1,62 @@
 .query-box {
   width: 100%;
-  display: grid;
-  grid-template-columns: 10fr 1fr;
-  align-items: center;
   max-width: 600px;
-  gap: 30px;
-
-  // Ensure form does not affect the layout
-  form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-  }
+  margin: 0 auto 2rem auto;
 }
 
-.query-form {
+.form-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
   width: 100%;
-  max-width: 600px;
-  margin-bottom: 20px;
+}
 
-  mat-form-field {
-    width: 100%;
-  }
+.full-width {
+  width: 100%;
 }
 
 .parameters-form {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+  display: flex;
+  flex-wrap: wrap;
   width: 100%;
-  gap: 20px;
-}
+  gap: 1.25rem;
 
-.refresh-button-box {
-  align-content: center;
-
-  .button-style {
-    padding: 0;
-    margin: 0;
-    height: 50px;
-    width: 50px;
-  }
-}
-
-.language-model-form,
-.terminology-form {
-  mat-form-field {
-    width: 100%;
+  .flex-field {
+    flex: 1 1 calc(50% - 0.625rem);
+    min-width: 200px;
   }
 }
 
 .submit-box {
   display: flex;
   justify-content: center;
-  margin: 20px 0;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 0.5rem;
+
+  .icon-button {
+    padding: 0;
+    width: 2.4rem;
+    height: 2.4rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+.table-container {
+  width: 100%;
+  overflow-x: auto;
+  border-radius: 0.5rem;
+
+  table {
+    min-width: 600px;
+  }
+}
+
+.footer-cell {
+  font-size: 0.75rem;
+  color: #666;
+  line-height: 1.4;
+  padding: 1rem;
 }

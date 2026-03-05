@@ -33,15 +33,21 @@
         #fileUpload
       />
       <div class="file-upload">
-        {{ fileName() || 'No file uploaded yet.' }}
-        <button mat-mini-fab color="primary" class="button-style" (click)="fileUpload.click()">
+        <span class="file-name">{{ fileName() || 'No file uploaded yet.' }}</span>
+        <button
+          mat-mini-fab
+          color="primary"
+          type="button"
+          (click)="fileUpload.click()"
+          matTooltip="Select dictionary file"
+        >
           <mat-icon>attach_file</mat-icon>
         </button>
       </div>
     </div>
 
     <div class="parameters-form-box">
-      <form [formGroup]="harmonizeForm">
+      <form [formGroup]="harmonizeForm" class="parameters-form">
         <mat-form-field>
           <mat-label>Variable Field</mat-label>
           <input matInput formControlName="variableField" />
@@ -49,6 +55,7 @@
             <mat-error>Variable field is <strong>required</strong></mat-error>
           }
         </mat-form-field>
+
         <mat-form-field>
           <mat-label>Description Field</mat-label>
           <input matInput formControlName="descriptionField" />
@@ -56,6 +63,7 @@
             <mat-error>Description field is <strong>required</strong></mat-error>
           }
         </mat-form-field>
+
         <mat-form-field>
           <mat-label>Language Model</mat-label>
           <mat-select formControlName="selectedEmbeddingModel">
@@ -63,11 +71,11 @@
               <mat-option [value]="model">{{ model }}</mat-option>
             }
           </mat-select>
-
           @if (harmonizeForm.controls.selectedEmbeddingModel.hasError('required')) {
             <mat-error>Please <strong>select</strong> a language model</mat-error>
           }
         </mat-form-field>
+
         <mat-form-field>
           <mat-label>Terminology</mat-label>
           <mat-select formControlName="selectedTerminology">
@@ -81,37 +89,25 @@
         </mat-form-field>
       </form>
     </div>
-    <div class="refresh-button-box">
-      <button class="button-style" (click)="clearCache()">
-        <mat-icon>refresh</mat-icon>
-      </button>
-    </div>
   </div>
 
-  <div
-    class="submit-download-box"
-    [ngClass]="{
-      'single-button': dataSource.data.length === 0,
-      'two-buttons': dataSource.data.length > 0,
-    }"
-  >
-    <div class="submit-box">
-      <button mat-raised-button class="button-style" color="primary" (click)="onSubmit()">
-        Submit
-      </button>
-    </div>
+  <div class="action-panel">
+    <button mat-raised-button color="primary" (click)="onSubmit()">Submit</button>
+
     @if (dataSource.data.length > 0) {
-      <div class="download-box">
-        <button
-          mat-raised-button
-          class="button-style"
-          color="primary"
-          (click)="downloadTableAsCsv()"
-        >
-          Download
-        </button>
-      </div>
+      <button mat-raised-button color="primary" (click)="downloadTableAsCsv()">Download</button>
     }
+
+    <button
+      mat-mini-fab
+      color="primary"
+      type="button"
+      (click)="clearCache()"
+      matTooltip="Refresh cached variables"
+      aria-label="Refresh cached variables"
+    >
+      <mat-icon>refresh</mat-icon>
+    </button>
   </div>
 
   @if (isLoading()) {
@@ -121,8 +117,10 @@
   }
 
   @if (!isLoading() && expectedTotal() > 0 && progressPercent() < 100) {
-    <mat-progress-bar mode="determinate" [value]="progressPercent()"></mat-progress-bar>
-    <p>Processed {{ processedCount() }} of {{ expectedTotal() }} variables</p>
+    <div class="progress-container">
+      <mat-progress-bar mode="determinate" [value]="progressPercent()"></mat-progress-bar>
+      <p>Processed {{ processedCount() }} of {{ expectedTotal() }} variables</p>
+    </div>
   }
 
   @if (dataSource.data.length > 0) {
@@ -175,22 +173,27 @@
           <td mat-cell *matCellDef="let element">
             <button
               mat-raised-button
-              class="button-style"
               color="primary"
               [disabled]="progressPercent() < 100"
               (click)="fetchTopMatches(element.description, element)"
             >
               @if (progressPercent() < 100) {
-                <mat-icon class="spinning-icon">sync</mat-icon> Processing...
+                <mat-icon class="spinning-icon">sync</mat-icon>
               } @else {
-                <mat-icon>search</mat-icon> Show
+                <mat-icon>search</mat-icon>
               }
+              {{ progressPercent() < 100 ? 'Processing...' : 'Show' }}
             </button>
           </td>
         </ng-container>
 
         <ng-container matColumnDef="footer">
-          <td mat-footer-cell *matFooterCellDef [attr.colspan]="displayedColumns.length">
+          <td
+            mat-footer-cell
+            *matFooterCellDef
+            [attr.colspan]="displayedColumns.length"
+            class="footer-cell"
+          >
             *The cosine similarity score is a metric that quantifies the similarity between two
             non-zero vectors, with a range from 0 to 1. A score of 0 signifies no similarity, while
             a score of 1 represents identical vectors.
