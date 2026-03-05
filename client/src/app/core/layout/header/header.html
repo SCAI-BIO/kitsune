@@ -7,18 +7,16 @@
   </div>
 
   <div class="routing-menu-box">
-    <!-- Dropdown Trigger Button -->
-    <button [matMenuTriggerFor]="harmonizeMenu" class="button-style nav-button">
-      Harmonize <mat-icon>arrow_drop_down</mat-icon>
+    <button mat-button [matMenuTriggerFor]="harmonizeMenu" class="nav-button">
+      Harmonize <mat-icon iconPositionEnd>arrow_drop_down</mat-icon>
     </button>
 
-    <button [matMenuTriggerFor]="coreModelMenu" class="button-style nav-button">
-      Common Data Models <mat-icon>arrow_drop_down</mat-icon>
+    <button mat-button [matMenuTriggerFor]="coreModelMenu" class="nav-button">
+      Common Data Models <mat-icon iconPositionEnd>arrow_drop_down</mat-icon>
     </button>
 
-    <button [routerLink]="'/t-sne'" class="button-style nav-button">Visualize Embeddings</button>
+    <button mat-button [routerLink]="'/t-sne'" class="nav-button">Visualize Embeddings</button>
 
-    <!-- Harmonize Dropdown Menu -->
     <mat-menu #harmonizeMenu="matMenu">
       <button mat-menu-item [routerLink]="'/query'">
         <mat-icon>search</mat-icon>
@@ -30,7 +28,6 @@
       </button>
     </mat-menu>
 
-    <!-- Core Model Dropdown Menu -->
     <mat-menu #coreModelMenu="matMenu">
       <button mat-menu-item [routerLink]="'/core-model'">
         <mat-icon>table_view</mat-icon>

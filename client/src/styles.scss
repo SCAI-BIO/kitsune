@@ -34,39 +34,47 @@ b {
   font-weight: $bold-font-weight;
 }
 
-// Reusable Button Styling
-.button-style {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: $button-padding;
-  font-size: $font-size;
-  font-weight: bold;
-  border: none;
-  background-color: $button-primary;
-  color: white;
-  border-radius: $button-radius;
-  text-align: center;
-  white-space: nowrap;
-  transition: background-color 0.3s ease-in-out;
+.mat-mdc-button,
+.mat-mdc-raised-button,
+.mat-mdc-unelevated-button {
+  padding: $button-padding !important;
+  font-size: $font-size !important;
+  font-weight: $bold-font-weight !important;
+  background-color: $button-primary !important;
+  color: white !important;
+  border-radius: $button-radius !important;
+  transition: background-color 0.3s ease-in-out !important;
 
-  &:hover {
-    cursor: pointer;
-    background-color: color.adjust($button-primary, $lightness: 20%);
+  &:hover:not(:disabled) {
+    background-color: color.adjust($button-primary, $lightness: 20%) !important;
+  }
+
+  &:disabled {
+    background-color: color.adjust($button-primary, $lightness: 30%) !important;
+    color: rgba(255, 255, 255, 0.6) !important;
+    opacity: 0.7 !important;
+  }
+
+  .mat-icon {
+    margin-left: 0.4rem;
   }
 }
 
-.button-style:disabled,
-.button-style[disabled] {
-  background-color: color.adjust($button-primary, $lightness: 30%);
-  color: rgba(255, 255, 255, 0.6);
-  cursor: not-allowed;
-  pointer-events: none;
-  opacity: 0.7;
-}
+.mat-mdc-fab,
+.mat-mdc-mini-fab {
+  background-color: $button-primary !important;
+  color: white !important;
+  transition: background-color 0.3s ease-in-out !important;
 
-.button-icon {
-  margin-left: 0.4rem;
+  &:hover:not(:disabled) {
+    background-color: color.adjust($button-primary, $lightness: 20%) !important;
+  }
+
+  &:disabled {
+    background-color: color.adjust($button-primary, $lightness: 30%) !important;
+    color: rgba(255, 255, 255, 0.6) !important;
+    opacity: 0.7 !important;
+  }
 }
 
 // Layout utilities
