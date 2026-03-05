@@ -8,17 +8,17 @@ import {
   viewChild,
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { RouterModule } from '@angular/router';
 
 import { finalize } from 'rxjs';
 
 import { ApiErrorHandler } from '@core/services/api-error-handler';
 import { MappingsApi } from '@core/services/mappings-api';
+import { LoadingSpinner } from '@shared/components/loading-spinner/loading-spinner';
 
 @Component({
   selector: 'app-tsne-visualization',
-  imports: [MatProgressSpinnerModule, RouterModule],
+  imports: [LoadingSpinner, RouterModule],
   templateUrl: './tsne-visualization.html',
   styleUrl: './tsne-visualization.scss',
 })

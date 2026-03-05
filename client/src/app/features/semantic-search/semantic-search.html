@@ -67,9 +67,7 @@
   </div>
 
   @if (isLoading()) {
-    <div class="loading-spinner">
-      <mat-spinner diameter="40"></mat-spinner>
-    </div>
+    <app-loading-spinner></app-loading-spinner>
   }
 
   @if (dataSource.data.length > 0) {

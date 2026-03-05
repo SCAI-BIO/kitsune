@@ -9,7 +9,6 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSelectModule } from '@angular/material/select';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatTooltipModule } from '@angular/material/tooltip';
@@ -21,6 +20,7 @@ import { ApiErrorHandler } from '@core/services/api-error-handler';
 import { FileExporter } from '@core/services/file-exporter';
 import { LinkBuilder } from '@core/services/link-builder';
 import { MappingsApi } from '@core/services/mappings-api';
+import { LoadingSpinner } from '@shared/components/loading-spinner/loading-spinner';
 import type { ApiError } from '@shared/interfaces/api-error';
 import type { Mapping, Response, StreamingResponse } from '@shared/interfaces/mapping';
 import { TopMatchesDialog } from './components/top-matches-dialog/top-matches-dialog';
@@ -29,13 +29,13 @@ import { TopMatchesDialog } from './components/top-matches-dialog/top-matches-di
   selector: 'app-harmonize',
   imports: [
     CommonModule,
+    LoadingSpinner,
     MatButtonModule,
     MatFormFieldModule,
     MatIconModule,
     MatInputModule,
     MatPaginatorModule,
     MatProgressBarModule,
-    MatProgressSpinnerModule,
     MatSelectModule,
     MatTableModule,
     MatTooltipModule,

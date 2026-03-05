@@ -7,7 +7,6 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSelectModule } from '@angular/material/select';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatTooltipModule } from '@angular/material/tooltip';
@@ -18,18 +17,19 @@ import { finalize, forkJoin } from 'rxjs';
 import { ApiErrorHandler } from '@core/services/api-error-handler';
 import { LinkBuilder } from '@core/services/link-builder';
 import { MappingsApi } from '@core/services/mappings-api';
+import { LoadingSpinner } from '@shared/components/loading-spinner/loading-spinner';
 import type { Mapping } from '@shared/interfaces/mapping';
 
 @Component({
   selector: 'app-semantic-search',
   imports: [
     CommonModule,
+    LoadingSpinner,
     MatButtonModule,
     MatFormFieldModule,
     MatIconModule,
     MatInputModule,
     MatPaginatorModule,
-    MatProgressSpinnerModule,
     MatSelectModule,
     MatTableModule,
     MatTooltipModule,

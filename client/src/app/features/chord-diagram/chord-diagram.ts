@@ -12,19 +12,19 @@ import {
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSelectModule } from '@angular/material/select';
 
 import { finalize } from 'rxjs';
 
 import { ApiErrorHandler } from '@core/services/api-error-handler';
 import { CdmApi } from '@core/services/cdm-api';
+import { LoadingSpinner } from '@shared/components/loading-spinner/loading-spinner';
 import type { ChordData } from '@shared/interfaces/chord-diagram';
 import { ChordBuilder } from './services/chord-builder';
 
 @Component({
   selector: 'app-chord-diagram',
-  imports: [MatButtonModule, MatFormFieldModule, MatProgressSpinnerModule, MatSelectModule],
+  imports: [LoadingSpinner, MatButtonModule, MatFormFieldModule, MatSelectModule],
   templateUrl: './chord-diagram.html',
   styleUrl: './chord-diagram.scss',
 })

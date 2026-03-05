@@ -1,20 +1,14 @@
-import { Component, effect, OnInit, viewChild } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
-import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
-import { MatInputModule } from '@angular/material/input';
-import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { MatSelectModule } from '@angular/material/select';
-import { MatSort, MatSortModule } from '@angular/material/sort';
-import { MatTableModule } from '@angular/material/table';
-import { MatTooltipModule } from '@angular/material/tooltip';
 
+import { LoadingSpinner } from '@shared/components/loading-spinner/loading-spinner';
 import type { CoreModel } from '@shared/interfaces/core-model';
 import { CoreModelBase } from '../base/core-model-base';
 import { MappingSaveDialog } from '../components/mapping-save-dialog/mapping-save-dialog';
 import { CdmSelector } from '../components/cdm-selector/cdm-selector';
 import { CdmTable } from '../components/cdm-table/cdm-table';
+import { MappingDialogs } from '../services/mapping-dialogs';
 
 export interface MappingDialogResult {
   id: string;
@@ -32,38 +26,13 @@ export interface MappingDialogResult {
 @Component({
   selector: 'app-core-model-admin',
   standalone: true,
-  imports: [
-    CdmSelector,
-    CdmTable,
-    MatButtonModule,
-    MatFormFieldModule,
-    MatIconModule,
-    MatInputModule,
-    MatPaginatorModule,
-    MatProgressSpinnerModule,
-    MatSelectModule,
-    MatSortModule,
-    MatTableModule,
-    MatTooltipModule,
-  ],
+  imports: [CdmSelector, CdmTable, LoadingSpinner, MatButtonModule, MatIconModule],
   templateUrl: './core-model-admin.html',
   styleUrl: './core-model-admin.scss',
 })
 export class CoreModelAdmin extends CoreModelBase implements OnInit {
   override includeActions = true;
-  private readonly _paginator = viewChild(MatPaginator);
-  private readonly _sort = viewChild(MatSort);
-
-  constructor() {
-    super();
-    effect(() => {
-      const paginator = this._paginator();
-      const sort = this._sort();
-
-      if (paginator) this.dataSource.paginator = paginator;
-      if (sort) this.dataSource.sort = sort;
-    });
-  }
+  protected readonly mappingDialogs = inject(MappingDialogs);
 
   ngOnInit(): void {
     this.init();

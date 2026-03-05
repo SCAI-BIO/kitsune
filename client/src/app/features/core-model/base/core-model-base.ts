@@ -9,7 +9,6 @@ import { ApiErrorHandler } from '@core/services/api-error-handler';
 import { CdmApi } from '@core/services/cdm-api';
 import { FileExporter } from '@core/services/file-exporter';
 import type { CoreModel } from '@shared/interfaces/core-model';
-import { MappingDialogs } from '../services/mapping-dialogs';
 import { MappingTable } from '../services/mapping-table';
 import { GlossaryDialog } from '../components/glossary-dialog/glossary-dialog';
 import { InfoKeys } from '../enums/info-keys';
@@ -24,7 +23,6 @@ export abstract class CoreModelBase {
   dataSource = new MatTableDataSource<CoreModel>([]);
   displayedColumns: string[] = [];
   includeActions = false;
-  readonly InfoKey = InfoKeys;
   readonly isLoading = signal(false);
   readonly selectedCdm = signal('');
   readonly selectedVersion = signal('');
@@ -36,7 +34,7 @@ export abstract class CoreModelBase {
   protected readonly dialog = inject(MatDialog);
   protected readonly errorHandler = inject(ApiErrorHandler);
   protected readonly fileExporter = inject(FileExporter);
-  protected readonly mappingDialogs = inject(MappingDialogs);
+
   protected readonly mappingTable = inject(MappingTable);
   private readonly destroyRef = inject(DestroyRef);
 
