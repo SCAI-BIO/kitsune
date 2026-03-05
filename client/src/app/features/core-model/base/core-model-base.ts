@@ -8,7 +8,6 @@ import { finalize } from 'rxjs';
 import { ApiErrorHandler } from '@core/services/api-error-handler';
 import { CdmApi } from '@core/services/cdm-api';
 import { FileExporter } from '@core/services/file-exporter';
-import { LinkBuilder } from '@core/services/link-builder';
 import type { CoreModel } from '@shared/interfaces/core-model';
 import { MappingDialogs } from '../services/mapping-dialogs';
 import { MappingTable } from '../services/mapping-table';
@@ -37,29 +36,15 @@ export abstract class CoreModelBase {
   protected readonly dialog = inject(MatDialog);
   protected readonly errorHandler = inject(ApiErrorHandler);
   protected readonly fileExporter = inject(FileExporter);
-  protected readonly linkBuilder = inject(LinkBuilder);
   protected readonly mappingDialogs = inject(MappingDialogs);
   protected readonly mappingTable = inject(MappingTable);
   private readonly destroyRef = inject(DestroyRef);
-
-  applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-  }
 
   downloadTableAsCsv(): void {
     const filename = `${this.selectedCdm() || 'mapping'}_${this.selectedVersion() || 'export'}.csv`;
     this.fileExporter.downloadCsv(this.dataSource.data, filename, (row) =>
       this.mappingTable.flattenCoreModel(row),
     );
-  }
-
-  getAthenaLink(id: string): string {
-    return this.linkBuilder.getAthenaLink(id);
-  }
-
-  getOlsLink(id: string): string {
-    return this.linkBuilder.getOlsLink(id);
   }
 
   init(): void {

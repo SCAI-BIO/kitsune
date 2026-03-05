@@ -1,4 +1,3 @@
-import { UpperCasePipe } from '@angular/common';
 import { Component, effect, OnInit, viewChild } from '@angular/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
@@ -10,12 +9,15 @@ import { MatSort, MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 
 import { CoreModelBase } from '../base/core-model-base';
+import { CdmSelector } from '../components/cdm-selector/cdm-selector';
+import { CdmTable } from '../components/cdm-table/cdm-table';
 
 @Component({
   selector: 'app-core-model',
   standalone: true,
   imports: [
-    UpperCasePipe,
+    CdmSelector,
+    CdmTable,
     MatFormFieldModule,
     MatIconModule,
     MatInputModule,

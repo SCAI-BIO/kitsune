@@ -1,19 +1,19 @@
-@use '../base/core-model-base.scss';
-
-// Import and Extend Container Styles
-.import-extend-download-save-container {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
+.table-actions-container {
+  display: flex;
+  justify-content: space-between;
   align-items: center;
-  gap: 20px;
+  padding: 1rem;
+  background-color: #f5f5f5;
+  border-bottom: 1px solid #e0e0e0;
 
-  .button-style {
-    height: 44px;
-    min-width: 165px;
-  }
+  .admin-controls-group {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1rem;
 
-  .mat-icon {
-    font-size: 22px;
-    margin-right: 2px;
+    input[type='file'] {
+      display: none;
+    }
   }
 }

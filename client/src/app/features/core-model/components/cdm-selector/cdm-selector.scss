@@ -1,0 +1,14 @@
+.submit-form-container {
+  display: grid;
+  justify-items: center;
+  margin-bottom: 20px;
+}
+
+.cdm-name-version-select-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 20px;
+  width: 100%;
+  max-width: 600px;
+}

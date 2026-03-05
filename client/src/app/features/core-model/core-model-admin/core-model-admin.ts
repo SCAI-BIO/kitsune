@@ -1,5 +1,5 @@
 import { Component, effect, OnInit, viewChild } from '@angular/core';
-import { UpperCasePipe } from '@angular/common';
+import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
@@ -11,8 +11,10 @@ import { MatTableModule } from '@angular/material/table';
 import { MatTooltipModule } from '@angular/material/tooltip';
 
 import type { CoreModel } from '@shared/interfaces/core-model';
-import { MappingSaveDialog } from '../components/mapping-save-dialog/mapping-save-dialog';
 import { CoreModelBase } from '../base/core-model-base';
+import { MappingSaveDialog } from '../components/mapping-save-dialog/mapping-save-dialog';
+import { CdmSelector } from '../components/cdm-selector/cdm-selector';
+import { CdmTable } from '../components/cdm-table/cdm-table';
 
 export interface MappingDialogResult {
   id: string;
@@ -31,6 +33,9 @@ export interface MappingDialogResult {
   selector: 'app-core-model-admin',
   standalone: true,
   imports: [
+    CdmSelector,
+    CdmTable,
+    MatButtonModule,
     MatFormFieldModule,
     MatIconModule,
     MatInputModule,
@@ -40,7 +45,6 @@ export interface MappingDialogResult {
     MatSortModule,
     MatTableModule,
     MatTooltipModule,
-    UpperCasePipe,
   ],
   templateUrl: './core-model-admin.html',
   styleUrl: './core-model-admin.scss',
