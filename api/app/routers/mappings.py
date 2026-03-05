@@ -197,8 +197,8 @@ async def websocket_closest_mappings_for_dictionary(websocket: WebSocket):
 
         await websocket.send_json({"type": "metadata", "expected_total": len(df)})
 
-        descriptions = df["variable"].to_list()
-        variables = df["description"].to_list()
+        variables = df["variable"].to_list()
+        descriptions = df["description"].to_list()
 
         # Get client (depends does not work directly in ws)
         client = get_client_instance()
