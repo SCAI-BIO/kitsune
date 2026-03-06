@@ -1,0 +1,78 @@
+.dialog-title {
+  margin-bottom: 0;
+  font-weight: 600;
+  color: #171321;
+  border-bottom: 1px solid #e0e0e0;
+  padding-bottom: 1rem;
+}
+
+.dialog-content {
+  padding-top: 1.5rem !important;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.info-banner {
+  background-color: #f5f7fa;
+  border-left: 4px solid #3f51b5;
+  padding: 1rem 1.25rem;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  color: #333;
+  line-height: 1.5;
+
+  p {
+    margin: 0 0 0.5rem 0;
+  }
+
+  .version-list {
+    margin: 0.5rem 0;
+    padding-left: 1.5rem;
+
+    li {
+      margin-bottom: 0.25rem;
+    }
+  }
+
+  .learn-more {
+    margin-bottom: 0;
+    font-size: 0.85rem;
+
+    a {
+      color: #3f51b5;
+      text-decoration: none;
+      font-weight: 500;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+}
+
+.dialog-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem 1.5rem;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.dialog-actions {
+  padding: 1rem 1.5rem;
+  border-top: 1px solid #e0e0e0;
+}
+
+.cancel-btn {
+  background-color: transparent !important;
+  color: #171321 !important;
+  border: 1px solid #171321;
+  padding: 0 1.25rem !important;
+
+  &:hover {
+    background-color: rgba(23, 19, 33, 0.05) !important;
+  }
+}

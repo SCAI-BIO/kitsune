@@ -1,0 +1,45 @@
+.footer {
+  background-color: #171321;
+  color: white;
+  padding: 1.9rem 2.5rem;
+
+  ::ng-deep .mat-mdc-list-item-unscoped-content {
+    color: white !important;
+  }
+}
+
+.main-headers {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  gap: 2rem;
+  margin-bottom: 1.5rem;
+
+  h4 {
+    font-size: 1.25rem;
+    margin: 0 0 0.5rem 0;
+    text-align: center;
+  }
+
+  mat-nav-list {
+    text-align: center;
+
+    a {
+      font-size: 1rem;
+    }
+  }
+}
+
+.copyright-container {
+  padding: 0 1.9rem;
+}
+
+.copyright {
+  text-align: center;
+  border-top: 1px solid rgba(250, 250, 250, 0.2);
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  letter-spacing: 0.88px;
+  padding-top: 0.6rem;
+  margin: 0;
+}

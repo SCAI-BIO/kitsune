@@ -13,8 +13,8 @@ import {
   withAutoRefreshToken,
 } from 'keycloak-angular';
 
+import { environment } from '@environments/environment';
 import { routes } from './app.routes';
-import { environment } from '../environments/environment';
 
 const keycloakConfig = {
   url: environment.keycloak.url,
@@ -28,7 +28,9 @@ export const provideKeycloakAngular = () => {
       config: keycloakConfig,
       initOptions: {
         onLoad: 'check-sso',
+        silentCheckSsoRedirectUri: window.location.origin + '/silent-check-sso.html',
         checkLoginIframe: false,
+        responseMode: 'query',
       },
       features: [
         withAutoRefreshToken({

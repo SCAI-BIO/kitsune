@@ -1,0 +1,27 @@
+:host {
+  display: block;
+  width: 100%;
+}
+
+.mapping-admin-component {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.description-box {
+  p {
+    margin: 0 0 10px 0;
+    line-height: 1.5;
+    color: #333;
+  }
+}
+
+.admin-controls-group {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px;
+}

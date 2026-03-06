@@ -1,0 +1,62 @@
+.query-box {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto 2rem auto;
+}
+
+.form-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  width: 100%;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.parameters-form {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  gap: 1.25rem;
+
+  .flex-field {
+    flex: 1 1 calc(50% - 0.625rem);
+    min-width: 200px;
+  }
+}
+
+.submit-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 0.5rem;
+
+  .icon-button {
+    padding: 0;
+    width: 2.4rem;
+    height: 2.4rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+.table-container {
+  width: 100%;
+  overflow-x: auto;
+  border-radius: 0.5rem;
+
+  table {
+    min-width: 600px;
+  }
+}
+
+.footer-cell {
+  font-size: 0.75rem;
+  color: #666;
+  line-height: 1.4;
+  padding: 1rem;
+}

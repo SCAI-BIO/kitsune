@@ -1,0 +1,59 @@
+<h1 mat-dialog-title class="dialog-title">Save CDM</h1>
+
+<mat-dialog-content class="dialog-content">
+  <div class="info-banner">
+    <p class="semantic-versioning-info">
+      Please use <strong>semantic versioning</strong> when specifying the version number to promote
+      clarity and traceability. Use the format <code>vMAJOR.MINOR.PATCH</code> (e.g.,
+      <code>v1.2.3</code>):
+    </p>
+    <ul class="version-list">
+      <li><strong>MAJOR:</strong> Structural changes, schema redesigns, or breaking changes.</li>
+      <li><strong>MINOR:</strong> New variables or mappings (backward-compatible).</li>
+      <li><strong>PATCH:</strong> Bug fixes, typo corrections, or label updates.</li>
+    </ul>
+    <p class="learn-more">
+      Learn more at
+      <a href="https://semver.org" target="_blank" rel="noopener noreferrer">semver.org</a>.
+    </p>
+  </div>
+
+  <form [formGroup]="form" class="dialog-grid">
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>CDM Name</mat-label>
+      <input matInput formControlName="cdmName" />
+      @if (form.get('cdmName')?.hasError('required') && form.get('cdmName')?.touched) {
+        <mat-error>Name is <strong>required</strong>.</mat-error>
+      }
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>CDM Description</mat-label>
+      <input matInput formControlName="cdmDescription" />
+      @if (
+        form.get('cdmDescription')?.hasError('required') && form.get('cdmDescription')?.touched
+      ) {
+        <mat-error>Description is <strong>required</strong>.</mat-error>
+      }
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Version</mat-label>
+      <input matInput formControlName="cdmVersion" placeholder="e.g., v1.2.3" />
+      @if (form.get('cdmVersion')?.hasError('required') && form.get('cdmVersion')?.touched) {
+        <mat-error>Version is <strong>required</strong>.</mat-error>
+      }
+      @if (form.get('cdmVersion')?.hasError('invalidSemver')) {
+        <mat-error>Must follow semantic versioning (e.g., v1.2.3).</mat-error>
+      }
+      @if (form.get('cdmVersion')?.hasError('versionExists')) {
+        <mat-error>This version already exists.</mat-error>
+      }
+    </mat-form-field>
+  </form>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end" class="dialog-actions">
+  <button mat-button mat-dialog-close class="cancel-btn">Cancel</button>
+  <button mat-raised-button color="primary" [disabled]="form.invalid" (click)="save()">Save</button>
+</mat-dialog-actions>

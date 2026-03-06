@@ -1,0 +1,98 @@
+.harmonize-box {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto 1.5rem auto;
+  align-items: stretch;
+}
+
+.file-upload-box {
+  flex: 1 1 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px dashed #171321;
+  border-radius: 0.5rem;
+  padding: 2rem;
+  background-color: rgba(23, 19, 33, 0.02);
+
+  .file-input {
+    display: none;
+  }
+
+  .file-upload {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 1rem;
+  }
+
+  .file-name {
+    word-break: break-all;
+    font-weight: 500;
+  }
+}
+
+.parameters-form-box {
+  flex: 1 1 300px;
+
+  .parameters-form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  mat-form-field {
+    width: 100%;
+  }
+}
+
+.action-panel {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.progress-container {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto 2rem auto;
+  text-align: center;
+
+  p {
+    margin-top: 0.5rem;
+    font-size: 0.875rem;
+  }
+}
+
+.table-container {
+  width: 100%;
+  overflow-x: auto;
+  border-radius: 0.5rem;
+
+  table {
+    min-width: 800px;
+  }
+}
+
+.footer-cell {
+  font-size: 0.75rem;
+  color: #666;
+  line-height: 1.4;
+  padding: 1rem;
+}
+
+.spinning-icon {
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  100% {
+    transform: rotate(360deg);
+  }
+}

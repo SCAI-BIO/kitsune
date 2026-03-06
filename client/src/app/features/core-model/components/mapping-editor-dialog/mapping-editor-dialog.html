@@ -1,0 +1,177 @@
+<h1 mat-dialog-title class="dialog-title">
+  Mapping Editor
+  @if (form.controls.id.value) {
+    <span class="id-subtitle"> - {{ form.controls.id.value }}</span>
+  }
+</h1>
+
+<mat-dialog-content class="dialog-content stepper-container">
+  <form [formGroup]="form">
+    <mat-stepper orientation="horizontal" [linear]="false" #stepper>
+      <mat-step>
+        <ng-template matStepLabel>Core Concept</ng-template>
+        <div class="dialog-grid step-body">
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Label</mat-label>
+            <input matInput formControlName="label" />
+            @if (form.get('label')?.hasError('required') && form.get('label')?.touched) {
+              <mat-error>Label is required.</mat-error>
+            }
+            @if (form.get('label')?.hasError('labelExists')) {
+              <mat-error>A variable with this label already exists.</mat-error>
+            }
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Description</mat-label>
+            <input matInput formControlName="description" />
+            @if (
+              form.get('description')?.hasError('required') && form.get('description')?.touched
+            ) {
+              <mat-error>Description is required.</mat-error>
+            }
+          </mat-form-field>
+        </div>
+        <div class="stepper-actions">
+          <button mat-button matStepperNext type="button" class="stepper-nav-btn">Next</button>
+        </div>
+      </mat-step>
+
+      <mat-step>
+        <ng-template matStepLabel>Vocabularies</ng-template>
+        <div class="dialog-grid step-body">
+          <div class="field-wrapper">
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>OHDSI ID</mat-label>
+              <input
+                matInput
+                formControlName="ohdsiId"
+                (blur)="fetchOhdsiData()"
+                placeholder="Enter OHDSI ID (e.g., 123456)"
+              />
+              @if (isOhdsiLoading()) {
+                <mat-progress-spinner
+                  matSuffix
+                  diameter="20"
+                  mode="indeterminate"
+                  class="input-spinner"
+                ></mat-progress-spinner>
+              }
+              @if (ohdsiError()) {
+                <mat-error>{{ ohdsiError() }}</mat-error>
+              }
+            </mat-form-field>
+
+            @if (form.controls.ohdsiLabel.value) {
+              <mat-accordion class="info-accordion full-width-span">
+                <mat-expansion-panel>
+                  <mat-expansion-panel-header>
+                    <mat-panel-title>Auto-filled OHDSI Information</mat-panel-title>
+                  </mat-expansion-panel-header>
+                  <div class="accordion-fields">
+                    <mat-form-field appearance="outline" class="full-width">
+                      <mat-label>OHDSI Label</mat-label>
+                      <input matInput [formControl]="form.controls.ohdsiLabel" readonly />
+                    </mat-form-field>
+                    <mat-form-field appearance="outline" class="full-width">
+                      <mat-label>OHDSI Domain</mat-label>
+                      <input matInput [formControl]="form.controls.ohdsiDomain" readonly />
+                    </mat-form-field>
+                  </div>
+                </mat-expansion-panel>
+              </mat-accordion>
+            }
+          </div>
+
+          <div class="field-wrapper">
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>OLS ID</mat-label>
+              <input
+                matInput
+                formControlName="olsId"
+                (blur)="fetchOlsData()"
+                placeholder="Enter OLS ID (e.g., EFO:0000311)"
+              />
+              @if (isOlsLoading()) {
+                <mat-progress-spinner
+                  matSuffix
+                  diameter="20"
+                  mode="indeterminate"
+                  class="input-spinner"
+                ></mat-progress-spinner>
+              }
+              @if (olsError()) {
+                <mat-error>{{ olsError() }}</mat-error>
+              }
+            </mat-form-field>
+
+            @if (form.controls.olsLabel.value) {
+              <mat-accordion class="info-accordion full-width-span">
+                <mat-expansion-panel>
+                  <mat-expansion-panel-header>
+                    <mat-panel-title>Auto-filled OLS Information</mat-panel-title>
+                  </mat-expansion-panel-header>
+                  <div class="accordion-fields">
+                    <mat-form-field appearance="outline" class="full-width">
+                      <mat-label>OLS Label</mat-label>
+                      <input matInput [formControl]="form.controls.olsLabel" readonly />
+                    </mat-form-field>
+                    <mat-form-field appearance="outline" class="full-width">
+                      <mat-label>OLS Description</mat-label>
+                      <textarea
+                        matInput
+                        [formControl]="form.controls.olsDescription"
+                        readonly
+                        rows="2"
+                      ></textarea>
+                    </mat-form-field>
+                  </div>
+                </mat-expansion-panel>
+              </mat-accordion>
+            }
+          </div>
+        </div>
+        <div class="stepper-actions">
+          <button mat-button matStepperPrevious type="button" class="stepper-nav-btn">Back</button>
+          <button mat-button matStepperNext type="button" class="stepper-nav-btn">Next</button>
+        </div>
+      </mat-step>
+
+      <mat-step>
+        <ng-template matStepLabel>Study Mappings</ng-template>
+        <div class="studies-container step-body">
+          @for (studyName of dialogData.studyColumnNames; track studyName) {
+            @let camelName = mappingTable.toCamelCase(studyName);
+
+            <div class="study-block">
+              <mat-form-field appearance="outline" class="full-width">
+                <mat-label>{{ studyName | uppercase }} Label</mat-label>
+                <input matInput [formControlName]="camelName + 'Label'" />
+              </mat-form-field>
+
+              <mat-form-field appearance="outline" class="full-width">
+                <mat-label>{{ studyName | uppercase }} Description</mat-label>
+                <input matInput [formControlName]="camelName + 'Description'" />
+              </mat-form-field>
+            </div>
+          }
+        </div>
+        <div class="stepper-actions">
+          <button mat-button matStepperPrevious type="button" class="stepper-nav-btn">Back</button>
+        </div>
+      </mat-step>
+    </mat-stepper>
+  </form>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end" class="dialog-actions">
+  <button mat-button class="cancel-btn" (click)="cancel()">Cancel</button>
+  <button
+    mat-raised-button
+    color="primary"
+    [disabled]="form.invalid || ohdsiError() || olsError()"
+    (click)="submit()"
+  >
+    {{ dialogData.initialData ? 'Update' : 'Add' }}
+  </button>
+</mat-dialog-actions>

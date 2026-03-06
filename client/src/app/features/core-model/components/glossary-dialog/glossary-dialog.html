@@ -1,0 +1,9 @@
+<h2 mat-dialog-title class="dialog-title">{{ info.title }}</h2>
+
+<mat-dialog-content class="dialog-content">
+  <div [innerHTML]="info.html" class="glossary-container"></div>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end" class="dialog-actions">
+  <button mat-button mat-dialog-close class="close-btn">Close</button>
+</mat-dialog-actions>

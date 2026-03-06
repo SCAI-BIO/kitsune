@@ -1,0 +1,56 @@
+<main class="main-container mapping-admin-component">
+  <div class="description-box">
+    <section class="description">
+      <p>
+        This administrative interface manages the semantic mappings between the Common Data Model
+        (CDM) and standardized vocabularies (OLS, OHDSI).
+      </p>
+      <p>
+        Use the controls below to extend the model with new concepts, import bulk data via CSV, or
+        save your current working draft to the central repository.
+      </p>
+    </section>
+  </div>
+
+  @if (isLoading()) {
+    <app-loading-spinner></app-loading-spinner>
+  }
+
+  <app-cdm-selector
+    [cdmNames]="uniqueCdmNames()"
+    [availableVersions]="availableVersions()"
+    [selectedCdm]="selectedCdm()"
+    [selectedVersion]="selectedVersion()"
+    (cdmChange)="selectedCdm.set($event); selectedVersion.set('')"
+    (versionChange)="selectedVersion.set($event)"
+    (submitClicked)="onSubmit()"
+  ></app-cdm-selector>
+
+  @if (dataSource.data.length > 0) {
+    <app-cdm-table
+      [dataSource]="dataSource"
+      [displayedColumns]="displayedColumns"
+      [studyColumnNames]="studyColumnNames"
+      [isAdminMode]="true"
+      (downloadClicked)="downloadTableAsCsv()"
+      (editClicked)="editRow($event)"
+      (deleteClicked)="confirmDeleteRow($event)"
+      (infoClicked)="openInfo($event)"
+    >
+      <div admin-controls class="admin-controls-group">
+        <button mat-raised-button color="primary" (click)="openExtendCdmDialog()">
+          <mat-icon>note_add</mat-icon> Extend CDM
+        </button>
+
+        <button mat-raised-button color="primary" (click)="fileInput.click()">
+          <mat-icon>upload_file</mat-icon> Import CSV
+        </button>
+        <input #fileInput type="file" accept=".csv" (change)="onCsvUpload($event)" hidden />
+
+        <button mat-raised-button color="accent" (click)="openSaveCdmDialog()">
+          <mat-icon>save</mat-icon> Save
+        </button>
+      </div>
+    </app-cdm-table>
+  }
+</main>

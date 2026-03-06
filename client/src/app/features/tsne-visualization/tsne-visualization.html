@@ -1,0 +1,9 @@
+<main class="main-container">
+  <div class="tsne-box mat-elevation-z8">
+    <div #tsneHost class="tsne-plot-container" aria-label="t-SNE Embedding Visualization"></div>
+  </div>
+  <!-- Loading Spinner -->
+  @if (isLoading()) {
+    <app-loading-spinner></app-loading-spinner>
+  }
+</main>

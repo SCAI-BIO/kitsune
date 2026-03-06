@@ -1,0 +1,70 @@
+.banner {
+  background-color: #171321;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem 1.25rem;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.brand-group {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+
+  .logo-link {
+    display: flex;
+  }
+
+  .logo {
+    height: 4rem;
+    width: auto;
+  }
+
+  .site-title {
+    margin: 0;
+    font-size: 1.5rem;
+    line-height: 1;
+  }
+}
+
+.routing-menu-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  flex: 1;
+
+  .nav-button {
+    font-size: 1rem;
+    padding: 0.5rem 1rem;
+    background-color: transparent !important;
+
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.1) !important;
+    }
+  }
+
+  mat-icon {
+    margin-left: 0.25rem;
+  }
+}
+
+.github-logo-box {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+
+  .github-logo {
+    height: 3.5rem;
+    width: auto;
+    cursor: pointer;
+    transition: opacity 0.2s ease;
+  }
+
+  &:hover {
+    opacity: 0.8;
+  }
+}

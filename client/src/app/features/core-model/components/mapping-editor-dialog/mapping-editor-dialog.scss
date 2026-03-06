@@ -1,0 +1,96 @@
+.dialog-title {
+  margin-bottom: 0;
+  font-weight: 600;
+  color: #171321;
+  border-bottom: 1px solid #e0e0e0;
+  padding-bottom: 1rem;
+}
+
+.id-subtitle {
+  font-weight: 400;
+  color: #666;
+  font-size: 1rem;
+}
+
+// Removes default dialog padding so the stepper header can span edge-to-edge
+.stepper-container {
+  padding: 0 !important;
+  overflow-x: hidden;
+}
+
+.step-body {
+  padding: 1.5rem 0; // Restores padding specifically for the input fields
+}
+
+.dialog-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1rem 1.5rem;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.full-width-span {
+  display: block;
+  grid-column: 1 / -1;
+  margin-bottom: 1rem;
+  margin-top: -0.5rem; // Tightens the gap between the ID field and the accordion
+}
+
+.accordion-fields {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1rem;
+  padding-top: 1rem;
+}
+
+.input-spinner {
+  margin-right: 0.5rem;
+}
+
+.stepper-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.stepper-nav-btn {
+  background-color: rgba(0, 0, 0, 0.04) !important;
+  color: #333 !important;
+
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.08) !important;
+  }
+}
+
+.studies-container {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem 2rem;
+}
+
+.study-block {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  align-items: start;
+}
+
+.dialog-actions {
+  padding: 1rem 1.5rem;
+  border-top: 1px solid #e0e0e0;
+}
+
+.cancel-btn {
+  background-color: transparent !important;
+  color: #171321 !important;
+  border: 1px solid #171321;
+  padding: 0 1.25rem !important;
+
+  &:hover {
+    background-color: rgba(23, 19, 33, 0.05) !important;
+  }
+}

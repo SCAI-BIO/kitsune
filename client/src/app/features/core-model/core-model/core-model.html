@@ -1,0 +1,42 @@
+<main class="main-container core-model-component">
+  <div class="description-box">
+    <section class="description">
+      <h2>Semantic Mappings Overview</h2>
+      <p>
+        This table presents an overview of the semantic mappings established between the Common Data
+        Model (CDM) and external standardized vocabularies, including the Ontology Lookup Service
+        (OLS) and the Observational Health Data Sciences and Informatics (OHDSI) vocabulary.
+      </p>
+      <p>
+        Each row corresponds to a CDM concept, semantically linked to equivalent terms. These
+        mappings enhance interoperability by aligning heterogenous study-specific variables with
+        widely recognized ontologies.
+      </p>
+    </section>
+  </div>
+
+  @if (isLoading()) {
+    <app-loading-spinner></app-loading-spinner>
+  }
+
+  <app-cdm-selector
+    [cdmNames]="uniqueCdmNames()"
+    [availableVersions]="availableVersions()"
+    [selectedCdm]="selectedCdm()"
+    [selectedVersion]="selectedVersion()"
+    (cdmChange)="selectedCdm.set($event); selectedVersion.set('')"
+    (versionChange)="selectedVersion.set($event)"
+    (submitClicked)="onSubmit()"
+  ></app-cdm-selector>
+
+  @if (dataSource.data.length > 0) {
+    <app-cdm-table
+      [dataSource]="dataSource"
+      [displayedColumns]="displayedColumns"
+      [studyColumnNames]="studyColumnNames"
+      [isAdminMode]="false"
+      (downloadClicked)="downloadTableAsCsv()"
+      (infoClicked)="openInfo($event)"
+    ></app-cdm-table>
+  }
+</main>
