@@ -106,23 +106,27 @@ export class FileExporter {
     const data = parsed.data as Record<string, string>[];
 
     return data.map((row): CoreModel => {
-      const studiesMap: Record<string, Partial<Study>> = {};
+      const studiesData = new Map<string, { label?: string; description?: string }>();
 
       for (const [key, value] of Object.entries(row)) {
         if (fixedKeys.has(key)) continue;
 
         const match = key.match(/^([a-zA-Z0-9]+)(Label|Description)$/);
-        if (match) {
-          const studyName = match[1];
-          const field = match[2].toLowerCase() as 'label' | 'description';
+        if (!match) continue;
 
-          if (!studiesMap[studyName]) {
-            studiesMap[studyName] = { name: studyName };
-          }
+        const studyName = match[1];
+        const field = match[2].toLowerCase() as 'label' | 'description';
 
-          studiesMap[studyName][field] = value;
-        }
+        const currentProps = studiesData.get(studyName) ?? {};
+        currentProps[field] = value;
+        studiesData.set(studyName, currentProps);
       }
+
+      const studies: Study[] = Array.from(studiesData.entries()).map(([name, props]) => ({
+        name,
+        label: props.label ?? '',
+        ...(props.description && { description: props.description }),
+      }));
 
       return {
         id: row['id'],
@@ -138,7 +142,7 @@ export class FileExporter {
           label: row['ohdsiLabel'],
           domain: row['ohdsiDomain'],
         },
-        studies: Object.values(studiesMap) as Study[],
+        studies,
       };
     });
   }
