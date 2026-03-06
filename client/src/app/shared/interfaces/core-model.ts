@@ -12,8 +12,8 @@ export interface Ohdsi {
 
 export interface Study {
   readonly name: string;
-  label: string;
-  description?: string;
+  readonly label: string;
+  readonly description?: string;
 }
 
 export interface CoreModel {
