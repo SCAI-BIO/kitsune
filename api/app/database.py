@@ -24,8 +24,13 @@ class PostgresClient(PostgreSQLRepository):
         return self
 
     def __exit__(self, exc_type, exc_value, traceback):
-        if exc_type is None:
-            self.db_session.commit()
-        else:
+        try:
+            if exc_type is not None:
+                self.db_session.rollback()
+            else:
+                self.db_session.commit()
+        except Exception:
             self.db_session.rollback()
-        self.db_session.close()
+            raise
+        finally:
+            self.db_session.close()
