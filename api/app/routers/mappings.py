@@ -17,11 +17,11 @@ def get_total_number_of_mappings(client: Annotated[PostgresClient, Depends(get_c
 @router.get("/")
 def get_all_mappings(
     client: Annotated[PostgresClient, Depends(get_client)],
-    model: str = "nomic-embed-text",
+    vectorizer: str = "nomic-embed-text",
     limit: int = 10,
     offset: int = 0,
 ):
-    page = client.get_mappings(vectorizer=model, limit=limit, offset=offset)
+    page = client.get_mappings(vectorizer=vectorizer, limit=limit, offset=offset)
     return page.items
 
 

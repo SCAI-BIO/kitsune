@@ -27,7 +27,7 @@ def get_closest_mappings_for_text(
     client: Annotated[PostgresClient, Depends(get_client)],
     text: str = Form(...),
     terminology_name: str = Form("OHDSI"),
-    model: str = Form("nomic-embed-text"),
+    vectorizer: str = Form("nomic-embed-text"),
     limit: int = Form(5),
     offset: int = Form(0),
 ):
@@ -37,7 +37,7 @@ def get_closest_mappings_for_text(
             embedding=embedding,
             similarities=True,
             terminology_name=terminology_name,
-            vectorizer=model,
+            vectorizer=vectorizer,
             limit=limit,
             offset=offset,
         )
@@ -51,7 +51,7 @@ def get_closest_mappings_for_text(
 def get_closest_mappings_for_dictionary(
     client: Annotated[PostgresClient, Depends(get_client)],
     file: UploadFile = File(...),
-    model: str = Form("nomic-embed-text"),
+    vectorizer: str = Form("nomic-embed-text"),
     terminology_name: str = Form("OHDSI"),
     variable_field: str = Form("variable"),
     description_field: str = Form("description"),
@@ -88,7 +88,7 @@ def get_closest_mappings_for_dictionary(
                 embedding=embedding,
                 similarities=True,
                 terminology_name=terminology_name,
-                vectorizer=model,
+                vectorizer=vectorizer,
                 limit=limit,
             )
             mappings_list = [result.to_dict() for result in page.items if isinstance(result, MappingResult)]
