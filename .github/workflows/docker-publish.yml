@@ -31,7 +31,7 @@ jobs:
       - name: Update API Version
         working-directory: api
         run: |
-          sed -i "s/version=\"[^\"]*\"/version=\"${{ steps.version.outputs.VERSION }}\"/" app/main.py
+          sed -i "s/VERSION = \"[^\"]*\"/VERSION = \"${{ steps.version.outputs.VERSION }}\"/" app/config.py
           uv version "${{ steps.version.outputs.VERSION }}"
 
       - name: Update Angular App Version
