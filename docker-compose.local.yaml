@@ -101,7 +101,7 @@ services:
           sleep 2;
         done;
         echo 'Trigger OLS import...';
-        curl -X PUT 'http://backend:80/imports/terminology?terminology_id=doid&model=nomic-embed-text'
+        curl -X PUT 'http://backend:80/imports/terminology?terminology_id=doid'
       "
     restart: "no"
 
