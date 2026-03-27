@@ -6,7 +6,7 @@ from pydantic import BaseModel
 class MappingCreate(BaseModel):
     text: str
     embedding: Optional[list[float]] = None
-    vectorizer: str
+    vectorizer: Optional[str] = None
     concept_id: int
 
 
