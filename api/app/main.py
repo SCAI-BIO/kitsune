@@ -5,6 +5,7 @@ from fastapi import FastAPI
 from starlette.middleware.cors import CORSMiddleware
 from starlette.responses import RedirectResponse
 
+from app.config import KEYCLOAK_CLIENT_ID
 from app.database import engine
 from app.routers import (
     concepts,
@@ -51,6 +52,11 @@ app = FastAPI(
                 "altText": "Your API Logo",
             }
         }
+    },
+    swagger_ui_init_oauth={
+        "clientId": KEYCLOAK_CLIENT_ID,
+        "appName": "KITSUNE API",
+        "usePkceWithAuthorizationCodeGrant": True,
     },
 )
 
