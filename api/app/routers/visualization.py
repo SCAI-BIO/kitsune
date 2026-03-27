@@ -4,10 +4,10 @@ from datastew.visualisation import get_plot_for_current_database_state
 from fastapi import APIRouter, Depends
 from fastapi.responses import HTMLResponse
 
+from app.database import PostgresClient
 from app.dependencies import get_client
-from app.models import PostgresClient
 
-router = APIRouter(prefix="/visualization", tags=["visualization"], dependencies=[Depends(get_client)])
+router = APIRouter(prefix="/visualization", tags=["visualization"])
 
 db_plot_html = None
 

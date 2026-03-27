@@ -1,17 +1,30 @@
-from app.routers import (
-    concepts,
-    imports,
-    mappings,
-    models,
-    terminologies,
-    visualization,
-)
+from contextlib import asynccontextmanager
+
+from datastew.repository import PostgreSQLRepository
 from fastapi import FastAPI
 from starlette.middleware.cors import CORSMiddleware
 from starlette.responses import RedirectResponse
 
+from app.database import engine
+from app.routers import (
+    concepts,
+    imports,
+    mappings,
+    terminologies,
+    vectorizers,
+    visualization,
+)
+
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    PostgreSQLRepository.setup_database(engine)
+    yield
+
+
 app = FastAPI(
     title="KITSUNE",
+    lifespan=lifespan,
     description="<div id=info-text><h1>Introduction</h1>"
     "KITSUNE uses vector embeddings from variable descriptions to suggest mappings for datasets based on "
     "their semantic similarity. Mappings are stored with their vector representations in a knowledge "
@@ -41,6 +54,14 @@ app = FastAPI(
     },
 )
 
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 
 @app.get("/version", tags=["info"])
 def get_current_version():
@@ -48,22 +69,11 @@ def get_current_version():
 
 
 app.include_router(visualization.router)
-app.include_router(models.router)
+app.include_router(vectorizers.router)
 app.include_router(terminologies.router)
 app.include_router(concepts.router)
 app.include_router(mappings.router)
 app.include_router(imports.router)
-
-origins = ["*"]
-
-
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=origins,
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
 
 
 @app.get("/", include_in_schema=False)

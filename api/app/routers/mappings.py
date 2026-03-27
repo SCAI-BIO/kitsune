@@ -3,9 +3,8 @@ import os
 import tempfile
 from typing import Annotated
 
-from datastew.embedding import Vectorizer
-from datastew.process.parsing import DataDictionarySource
-from datastew.repository.model import Mapping
+from datastew.io.source import DataDictionarySource
+from datastew.repository.model import MappingResult
 from fastapi import (
     APIRouter,
     Depends,
@@ -16,84 +15,66 @@ from fastapi import (
     WebSocket,
     WebSocketDisconnect,
 )
-from sqlalchemy import func
 
+from app.database import PostgresClient
 from app.dependencies import get_client, get_client_instance
-from app.models import OLLAMA_URL, PostgresClient
 
-router = APIRouter(prefix="/mappings", tags=["mappings"], dependencies=[Depends(get_client)])
+router = APIRouter(prefix="/mappings", tags=["mappings"])
 
 
 @router.get("/")
-async def get_all_mappings(
+def get_all_mappings(
     client: Annotated[PostgresClient, Depends(get_client)],
     model: str = "nomic-embed-text",
     limit: int = 10,
     offset: int = 0,
 ):
-    mappings = client.get_mappings(sentence_embedder=model, limit=limit, offset=offset)
-    return mappings.items
+    page = client.get_mappings(vectorizer=model, limit=limit, offset=offset)
+    return page.items
 
 
 @router.put("/")
-async def create_mapping(
-    concept_id: str,
-    text: str,
-    client: Annotated[PostgresClient, Depends(get_client)],
-    model: str = "nomic-embed-text",
-):
+def create_mapping(concept_id: str, text: str, client: Annotated[PostgresClient, Depends(get_client)]):
     try:
-        concept = client.get_concept(concept_id)
-        embedding_model = Vectorizer(model, host=OLLAMA_URL)
-        embedding = list(embedding_model.get_embedding(text))
-        model_name = embedding_model.model_name
-        mapping = Mapping(concept, text, embedding, model_name)
-        client.store(mapping)
+        concept = client.get_concept_by_identifier(concept_id)
+        client.add_mapping(concept_id=concept.id, text=text)
         return {"message": "Mapping created successfully"}
     except Exception as e:
         raise HTTPException(status_code=400, detail=f"Failed to create mapping: {str(e)}")
 
 
 @router.post("/")
-async def get_closest_mappings_for_text(
+def get_closest_mappings_for_text(
     client: Annotated[PostgresClient, Depends(get_client)],
     text: str = Form(...),
     terminology_name: str = Form("OHDSI"),
     model: str = Form("nomic-embed-text"),
     limit: int = Form(5),
+    offset: int = Form(0),
 ):
     try:
-        embedding_model = Vectorizer(model, host=OLLAMA_URL)
-        embedding = embedding_model.get_embedding(text)
-        closest_mappings = client.get_closest_mappings(embedding, True, terminology_name, model, limit)
-        mappings = []
-        for mapping_result in closest_mappings:
-            concept = mapping_result.mapping.concept
-            terminology = concept.terminology
-            mappings.append(
-                {
-                    "concept": {
-                        "id": concept.concept_identifier,
-                        "name": concept.pref_label,
-                        "terminology": {"id": terminology.id, "name": terminology.name},
-                    },
-                    "text": mapping_result.mapping.text,
-                    "similarity": mapping_result.similarity,
-                }
-            )
+        embedding = client.vectorizer.get_embedding(text)
+        page = client.get_closest_mappings(
+            embedding=embedding,
+            similarities=True,
+            terminology_name=terminology_name,
+            vectorizer=model,
+            limit=limit,
+            offset=offset,
+        )
 
-        return mappings
+        return [result.to_dict() for result in page.items if isinstance(result, MappingResult)]
     except Exception as e:
         raise HTTPException(status_code=400, detail=f"Failed to get closest mappings: {str(e)}")
 
 
 @router.get("/total-number")
-async def get_total_number_of_mappings(client: Annotated[PostgresClient, Depends(get_client)]):
-    return client.session.query(func.count()).select_from(Mapping).scalar()
+def get_total_number_of_mappings(client: Annotated[PostgresClient, Depends(get_client)]):
+    return client.get_mappings(limit=1).total_count
 
 
 @router.post("/dict", description="Get mappings for a data dictionary source.")
-async def get_closest_mappings_for_dictionary(
+def get_closest_mappings_for_dictionary(
     client: Annotated[PostgresClient, Depends(get_client)],
     file: UploadFile = File(...),
     model: str = Form("nomic-embed-text"),
@@ -103,7 +84,6 @@ async def get_closest_mappings_for_dictionary(
     limit: int = Form(1),
 ):
     try:
-        embedding_model = Vectorizer(model, host=OLLAMA_URL)
         if not file or not file.filename:
             raise HTTPException(status_code=400, detail="No file was provided. Please upload a valid file.")
 
@@ -113,7 +93,7 @@ async def get_closest_mappings_for_dictionary(
             raise HTTPException(status_code=400, detail="The uploaded file must have a valid extension.")
 
         with tempfile.NamedTemporaryFile(delete=False, suffix=file_extension) as tmp_file:
-            tmp_file.write(await file.read())
+            tmp_file.write(file.file.read())
             tmp_file_path = tmp_file.name
 
         # Initialize DataDictionarySource
@@ -125,33 +105,24 @@ async def get_closest_mappings_for_dictionary(
         variables = df["variable"].to_list()
 
         # Generate embeddings for all descriptions in batches
-        embeddings = embedding_model.get_embeddings(descriptions)
+        embeddings = client.vectorizer.get_embeddings(descriptions)
 
         # Process embeddings to get closest mappings
         response = []
         for variable, description, embedding in zip(variables, descriptions, embeddings):
-            closest_mappings = client.get_closest_mappings(embedding, True, terminology_name, model, limit)
-            mappings_list = [
-                {
-                    "concept": {
-                        "id": mapping_result.mapping.concept.concept_identifier,
-                        "name": mapping_result.mapping.concept.pref_label,
-                        "terminology": {
-                            "id": mapping_result.mapping.concept.terminology.id,
-                            "name": mapping_result.mapping.concept.terminology.name,
-                        },
-                    },
-                    "text": mapping_result.mapping.text,
-                    "similarity": mapping_result.similarity,
-                }
-                for mapping_result in closest_mappings
-            ]
+            page = client.get_closest_mappings(
+                embedding=embedding,
+                similarities=True,
+                terminology_name=terminology_name,
+                vectorizer=model,
+                limit=limit,
+            )
+            mappings_list = [result.to_dict() for result in page.items if isinstance(result, MappingResult)]
 
             response.append({"variable": variable, "description": description, "mappings": mappings_list})
 
         # Clean up temporary file
         os.remove(tmp_file_path)
-
         return response
     except ValueError:
         raise HTTPException(status_code=422, detail="Missing required column(s): 'description' and/or 'variable'.")
@@ -162,6 +133,8 @@ async def get_closest_mappings_for_dictionary(
 @router.websocket("/dict/ws")
 async def websocket_closest_mappings_for_dictionary(websocket: WebSocket):
     await websocket.accept()
+    tmp_file_path = None
+
     try:
         byte_file_data = await websocket.receive_bytes()
         meta = await websocket.receive_text()  # Metadata like model, terminology_name, etc.
@@ -201,38 +174,29 @@ async def websocket_closest_mappings_for_dictionary(websocket: WebSocket):
         descriptions = df["description"].to_list()
 
         # Get client (depends does not work directly in ws)
-        client = get_client_instance()
+        with get_client_instance() as client:
+            embeddings = client.vectorizer.get_embeddings(descriptions)
 
-        embedding_model = Vectorizer(model, host=OLLAMA_URL)
-        embeddings = embedding_model.get_embeddings(descriptions)
+            for variable, description, embedding in zip(variables, descriptions, embeddings):
+                page = client.get_closest_mappings(
+                    embedding=embedding,
+                    similarities=True,
+                    terminology_name=terminology_name,
+                    vectorizer=model,
+                    limit=limit,
+                )
 
-        for variable, description, embedding in zip(variables, descriptions, embeddings):
-            closest_mappings = client.get_closest_mappings(embedding, True, terminology_name, model, limit)
-            mappings_list = [
-                {
-                    "concept": {
-                        "id": mapping_result.mapping.concept.concept_identifier,
-                        "name": mapping_result.mapping.concept.pref_label,
-                        "terminology": {
-                            "id": mapping_result.mapping.concept.terminology.id,
-                            "name": mapping_result.mapping.concept.terminology.name,
-                        },
-                    },
-                    "text": mapping_result.mapping.text,
-                    "similarity": mapping_result.similarity,
-                }
-                for mapping_result in closest_mappings
-            ]
-            await websocket.send_json(
-                {
-                    "type": "result",
-                    "variable": variable,
-                    "description": description,
-                    "mappings": mappings_list,
-                }
-            )
+                mappings_list = [result.to_dict() for result in page.items if isinstance(result, MappingResult)]
 
-        os.remove(tmp_file_path)
+                await websocket.send_json(
+                    {
+                        "type": "result",
+                        "variable": variable,
+                        "description": description,
+                        "mappings": mappings_list,
+                    }
+                )
+
         await websocket.close()
 
     except WebSocketDisconnect:
