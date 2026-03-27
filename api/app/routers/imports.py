@@ -5,8 +5,11 @@ from starlette.background import BackgroundTasks
 
 from app.dependencies import get_current_user_payload
 from app.schemas import ObjectSchema
-from app.tasks.file_tasks import import_jsonl_task
-from app.tasks.ols_tasks import import_ols_terminology_task, import_snomed_ct_task
+from app.tasks import (
+    import_jsonl_task,
+    import_ols_terminology_task,
+    import_snomed_ct_task,
+)
 
 router = APIRouter(prefix="/imports", tags=["imports"])
 
