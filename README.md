@@ -31,31 +31,22 @@ The API supports multiple methods for importing ontology (terminology) data into
    The API is integrated with the [Ontology Lookup Service (OLS)](https://www.ebi.ac.uk/ols4/ontologies), allowing you to import any ontology from their catalog.
 
    ```bash
-   curl -X 'PUT' \
-   '{api_url}/imports/terminology?terminology_id={terminology_id}' \
+   curl -X 'POST' \
+   '{api_url}/imports/ols/{ontology_id}' \
    -H 'accept: application/json'
    ```
 
-   - `terminology_id` (**required**): The ID of the ontology you want to import (e.g., `hp`, `efo`, `chebi`).
+   - `ontology_id` (**required**): The ID of the ontology you want to import (e.g., `hp`, `efo`, `chebi`).
 
    Example:
 
    ```bash
-   curl -X 'PUT' \
-    '{api_url}/imports/terminology?terminology_id=hp' \
+   curl -X 'POST' \
+    '{api_url}/imports/ols/snomed' \
     -H 'accept: application/json'
    ```
 
-2. Importing SNOMED CT:
-   - SNOMED CT can be imported using a shortcut endpoint. This is equivalent to using the OLS integration with `terminology_id=snomed`, but provides a cleaner interface.
-
-   ```bash
-   curl -X 'PUT' \
-    '{api_url}/imports/terminology/snomed' \
-    -H 'accept: application/json'
-   ```
-
-3. Importing Your Own Ontology (JSONL Files):
+2. Importing Your Own Ontology (JSONL Files):
 
    For full flexibility, you can upload your own ontology using `.jsonl` (JSON Lines) files. This allows you to import:
    - Terminologies (namespaces)
@@ -69,14 +60,14 @@ The API supports multiple methods for importing ontology (terminology) data into
    > 3. "Mappings"
 
    ```bash
-   curl -X 'PUT' \
+   curl -X 'POST' \
    '{api_url}/imports/jsonl?object_type={object_type}' \
    -H 'accept: application/json' \
    -H 'Content-Type: multipart/form-data' \
    -F 'file=@{your_file}.jsonl'
    ```
 
-   - `object_type`(**required**): One of `terminology`, `concept`, or `mapping`
+   - `object_type` (**required**): One of `terminology`, `concept`, or `mapping`
    - `file` (**required**): The `.jsonl` file to be uploaded (multipart/from-data)
 
 ## JSONL File Structure
