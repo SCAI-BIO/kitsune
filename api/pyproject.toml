@@ -28,7 +28,10 @@ classifiers = [
     "Programming Language :: Python :: 3.14",
 ]
 
-dependencies = ["datastew>=0.6.1", "fastapi[standard]>=0.128.0"]
+dependencies = [
+    "datastew==1.0.1",
+    "fastapi[standard]>=0.128.0",
+]
 
 [dependency-groups]
 dev = ["flake8>=7.3.0"]
