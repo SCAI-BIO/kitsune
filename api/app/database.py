@@ -8,10 +8,8 @@ from sqlalchemy.orm import sessionmaker
 from app.config import CONNECTION_STRING, HUGGING_FACE_API_KEY, MODEL_NAME, OLLAMA_URL
 
 logger = logging.getLogger("uvicorn.info")
-
 engine = create_engine(CONNECTION_STRING)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
-
 global_vectorizer = Vectorizer(MODEL_NAME, api_key=HUGGING_FACE_API_KEY, host=OLLAMA_URL)
 
 
