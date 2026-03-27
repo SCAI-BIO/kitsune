@@ -18,3 +18,15 @@ class TerminologyCreate(BaseModel):
 class TerminologyUpdate(BaseModel):
     name: Optional[str] = None
     short_name: Optional[str] = None
+
+
+class ConceptCreate(BaseModel):
+    concept_identifier: str
+    pref_label: str
+    terminology_id: int
+
+
+class ConceptUpdate(BaseModel):
+    concept_identifier: Optional[str]
+    pref_label: Optional[str]
+    terminology_id: Optional[int]
