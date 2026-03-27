@@ -1,7 +1,7 @@
-from app.models import PostgresClient
+from app.database import PostgresClient
 
 
-async def get_client():
+def get_client():
     with PostgresClient() as client:
         yield client
 
