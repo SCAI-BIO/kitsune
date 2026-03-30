@@ -30,7 +30,7 @@ classifiers = [
 
 dependencies = [
     "cryptography>=46.0.6",
-    "datastew>=1.0.1",
+    "datastew>=1.0.2",
     "fastapi[standard]>=0.128.0",
     "pyjwt>=2.12.1",
 ]
