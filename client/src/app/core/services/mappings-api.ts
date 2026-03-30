@@ -17,37 +17,37 @@ interface CacheItem<T> {
 export class MappingsApi {
   private readonly API_URL = environment.openApiUrl;
   private readonly CACHE_TTL = 24 * 60 * 60 * 1000; // 24 hours in ms
-  private readonly embeddingModelsCache = signal<CacheItem<string[]> | null>(null);
+  private readonly vectorizersCache = signal<CacheItem<string[]> | null>(null);
   private readonly http = inject(HttpClient);
   private readonly terminologiesCache = signal<CacheItem<Terminology[]> | null>(null);
 
   clearCache(): void {
-    this.embeddingModelsCache.set(null);
+    this.vectorizersCache.set(null);
     this.terminologiesCache.set(null);
   }
 
   fetchClosestMappingsDictionary(formData: FormData): Observable<Response[]> {
-    return this.http.post<Response[]>(`${this.API_URL}/mappings/dict`, formData, {
+    return this.http.post<Response[]>(`${this.API_URL}/harmonization/dict`, formData, {
       headers: new HttpHeaders({ Accept: 'application/json' }),
     });
   }
 
   fetchClosestMappingsQuery(formData: FormData): Observable<Mapping[]> {
-    return this.http.post<Mapping[]>(`${this.API_URL}/mappings/`, formData, {
+    return this.http.post<Mapping[]>(`${this.API_URL}/harmonization/`, formData, {
       headers: new HttpHeaders({ Accept: 'application/json' }),
     });
   }
 
-  fetchEmbeddingModels(): Observable<string[]> {
-    const cached = this.embeddingModelsCache();
+  fetchVectorizers(): Observable<string[]> {
+    const cached = this.vectorizersCache();
 
     if (cached && Date.now() - cached.timestamp <= this.CACHE_TTL) {
       return of(cached.data);
     }
 
     return this.http
-      .get<string[]>(`${this.API_URL}/models/`)
-      .pipe(tap((data) => this.embeddingModelsCache.set({ data, timestamp: Date.now() })));
+      .get<string[]>(`${this.API_URL}/vectorizers/`)
+      .pipe(tap((data) => this.vectorizersCache.set({ data, timestamp: Date.now() })));
   }
 
   fetchTerminologies(): Observable<Terminology[]> {
@@ -71,14 +71,14 @@ export class MappingsApi {
   streamClosestMappingsDictionary(
     file: File,
     metadata: {
-      model: string;
+      vectorizer: string;
       terminology_name: string;
       variable_field: string;
       description_field: string;
       limit: number;
     },
   ): Observable<StreamingResponse> {
-    const url = new URL(`${this.API_URL}/mappings/dict/ws`);
+    const url = new URL(`${this.API_URL}/harmonization/dict/ws`);
     url.protocol = url.protocol === 'https:' ? 'wss:' : 'ws:';
 
     return new Observable<StreamingResponse>((observer) => {

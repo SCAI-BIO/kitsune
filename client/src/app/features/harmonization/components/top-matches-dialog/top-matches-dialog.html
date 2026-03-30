@@ -14,20 +14,20 @@
 
       <ng-container matColumnDef="name">
         <th mat-header-cell *matHeaderCellDef>Concept Name</th>
-        <td mat-cell *matCellDef="let element">{{ element.concept.name }}</td>
+        <td mat-cell *matCellDef="let element">{{ element.concept.pref_label }}</td>
       </ng-container>
 
       <ng-container matColumnDef="id">
         <th mat-header-cell *matHeaderCellDef>Concept ID</th>
         <td mat-cell *matCellDef="let element">
-          @if (element.concept.id) {
+          @if (element.concept.concept_identifier) {
             <a
-              [href]="getExternalLink(element.concept.id)"
+              [href]="getExternalLink(element.concept.concept_identifier)"
               target="_blank"
               rel="noopener"
               class="external-link"
             >
-              <span class="external-link-text">{{ element.concept.id }}</span>
+              <span class="external-link-text">{{ element.concept.concept_identifier }}</span>
               <mat-icon inline class="external-link-icon">open_in_new</mat-icon>
             </a>
           }

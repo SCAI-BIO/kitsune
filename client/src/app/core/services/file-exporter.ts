@@ -37,8 +37,8 @@ export class FileExporter {
         Similarity: firstMapping?.similarity ?? '',
         Variable: item.variable,
         Description: item.description,
-        ConceptID: firstMapping?.concept?.id ?? '',
-        PrefLabel: firstMapping?.concept?.name ?? '',
+        ConceptID: firstMapping?.concept?.concept_identifier ?? '',
+        PrefLabel: firstMapping?.concept?.pref_label ?? '',
       };
     });
 
