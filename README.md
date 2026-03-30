@@ -61,13 +61,14 @@ The API supports multiple methods for importing ontology (terminology) data into
 
    ```bash
    curl -X 'POST' \
-   '{api_url}/imports/jsonl?object_type={object_type}' \
+   '{api_url}/imports/jsonl?object_type={object_type}&generate_embedding=false' \
    -H 'accept: application/json' \
    -H 'Content-Type: multipart/form-data' \
    -F 'file=@{your_file}.jsonl'
    ```
 
    - `object_type` (**required**): One of `terminology`, `concept`, or `mapping`
+   - `generate_embeddings` (_optional_): Boolean flag (`true` or `false`). If `true`, the API will automatically compute embeddings for mappings on the fly using the configured vectorizer. Defaults to `false`.
    - `file` (**required**): The `.jsonl` file to be uploaded (multipart/from-data)
 
 ## JSONL File Structure
@@ -112,14 +113,20 @@ Attributes:
 
 Links a textual description to a concept.
 
+**Note on Embeddings**: If you call the import endpoint with `generate_embeddings=true`, the `embedding` and `vectorizer` fields can be omitted. If `generate_embeddings=false` (the default), both fields are strictly required.
+
 Attributes:
 
 - `text`: Description of the associated concept, or `pref_label` if the description is missing.
 - `concept_identifier`: Reference to the associated concept.
+- `embedding` (_conditionally required_): The pre-calculated vector array for the text.
+- `vectorizer` (_conditionally required_): The name of the model used to generate the embedding.
 
 ```json
 {
   "text": "Pediatric Cardiology",
-  "concept_identifier": "OHDSI:45756805"
+  "concept_identifier": "OHDSI:45756805",
+  "embedding": [0.012, -0.045, 0.887, ...],
+  "vectorizer": "nomic-embed-text"
 }
 ```
