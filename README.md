@@ -1,6 +1,6 @@
-# <img src="client/public/logo_white.svg" alt="Logo" width="100"/> Kitsune 
+# <img src="client/public/logo_white.svg" alt="Logo" width="100"/> Kitsune
 
-[![DOI](https://zenodo.org/badge/722907753.svg)](https://doi.org/10.5281/zenodo.16881095) ![tests](https://github.com/SCAI-BIO/kitsune/actions/workflows/python-tests.yml/badge.svg)  ![tests](https://github.com/SCAI-BIO/kitsune/actions/workflows/frontend-tests.yml/badge.svg)  ![GitHub Release](https://img.shields.io/github/v/release/SCAI-BIO/kitsune)
+[![DOI](https://zenodo.org/badge/722907753.svg)](https://doi.org/10.5281/zenodo.16881095) ![tests](https://github.com/SCAI-BIO/kitsune/actions/workflows/python-tests.yml/badge.svg) ![tests](https://github.com/SCAI-BIO/kitsune/actions/workflows/frontend-tests.yml/badge.svg) ![GitHub Release](https://img.shields.io/github/v/release/SCAI-BIO/kitsune)
 
 _Kitsune_ is a next-generation data steward and harmonization tool. Building on the legacy of systems like Usagi, Kitsune leverages LLM embeddings to intelligently map semantically similar terms even when their string representations differ substantially. This results in more robust data harmonization and improved performance in real-world scenarios.
 
@@ -31,40 +31,24 @@ The API supports multiple methods for importing ontology (terminology) data into
    The API is integrated with the [Ontology Lookup Service (OLS)](https://www.ebi.ac.uk/ols4/ontologies), allowing you to import any ontology from their catalog.
 
    ```bash
-   curl -X 'PUT' \
-   '{api_url}/imports/terminology?terminology_id={terminology_id}&model={vectorizer_model}' \
+   curl -X 'POST' \
+   '{api_url}/imports/ols/{ontology_id}' \
    -H 'accept: application/json'
    ```
 
-   - `terminology_id` (**required**): The ID of the ontology you want to import (e.g., `hp`, `efo`, `chebi`).
-   - `vectorizer_model` (_optional_): The vectorizer model to use for generating embeddings.
+   - `ontology_id` (**required**): The ID of the ontology you want to import (e.g., `hp`, `efo`, `chebi`).
 
    Example:
 
    ```bash
-   curl -X 'PUT' \
-    '{api_url}/imports/terminology?terminology_id=hp' \
+   curl -X 'POST' \
+    '{api_url}/imports/ols/snomed' \
     -H 'accept: application/json'
    ```
 
-1. Importing SNOMED CT:
-
-   - SNOMED CT can be imported using a shortcut endpoint. This is equivalent to using the OLS integration with `terminology_id=snomed`, but provides a cleaner interface.
-
-   ```bash
-   curl -X 'PUT' \
-    '{api_url}/imports/terminology/snomed?model={vectorizer_model}' \
-    -H 'accept: application/json'
-   ```
-
-   Parameters:
-
-   - `vectorizer_model` (_optional_): The vectorizer model to be used for generating embeddings.
-
-1. Importing Your Own Ontology (JSONL Files):
+2. Importing Your Own Ontology (JSONL Files):
 
    For full flexibility, you can upload your own ontology using `.jsonl` (JSON Lines) files. This allows you to import:
-
    - Terminologies (namespaces)
    - Concepts (terms within the terminology)
    - Mappings (links between embeddings and existing concepts)
@@ -76,14 +60,14 @@ The API supports multiple methods for importing ontology (terminology) data into
    > 3. "Mappings"
 
    ```bash
-   curl -X 'PUT' \
+   curl -X 'POST' \
    '{api_url}/imports/jsonl?object_type={object_type}' \
    -H 'accept: application/json' \
    -H 'Content-Type: multipart/form-data' \
    -F 'file=@{your_file}.jsonl'
    ```
 
-   - `object_type`(**required**): One of `terminology`, `concept`, or `mapping`
+   - `object_type` (**required**): One of `terminology`, `concept`, or `mapping`
    - `file` (**required**): The `.jsonl` file to be uploaded (multipart/from-data)
 
 ## JSONL File Structure
@@ -96,12 +80,12 @@ Represents an ontology namescape.
 
 Attributes:
 
-- `id`: Abbreviation of the terminology.
+- `short_name`: Abbreviation of the terminology.
 - `name`: Full name of the terminology.
 
 ```json
 {
-  "id": "OHDSI",
+  "short_name": "OHDSI",
   "name": "Observational Health Data Sciences and Informatics"
 }
 ```
@@ -114,13 +98,13 @@ Attributes:
 
 - `concept_identifier`: Concept entry ID within the terminology.
 - `pref_label`: Preferred label for the entry.
-- `terminology_id`: Reference to the terminology it belongs to.
+- `terminology_short_name`: Reference to the terminology it belongs to.
 
 ```json
 {
   "concept_identifier": "OHDSI:45756805",
   "pref_label": "Pediatric Cardiology",
-  "terminology_id": "OHDSI"
+  "terminology_short_name": "OHDSI"
 }
 ```
 
