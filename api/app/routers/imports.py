@@ -22,14 +22,15 @@ def import_terminology(
 
 @router.post("/jsonl", description="Import a JSONL file following the Weaviate schema")
 def import_jsonl(
-    background_tasks: BackgroundTasks,
-    object_type: ObjectSchema,
     file: UploadFile,
+    object_type: ObjectSchema,
     user: Annotated[dict, Depends(get_current_user_payload)],
+    background_tasks: BackgroundTasks,
+    generate_embeddings: bool = False,
 ):
     if not file.filename or not file.filename.endswith(".jsonl"):
         raise HTTPException(status_code=400, detail="Invalid file type. Only JSONL files are accepted.")
 
     file_content = file.file.read()
-    background_tasks.add_task(import_jsonl_task, file_content, object_type)
+    background_tasks.add_task(import_jsonl_task, file_content, object_type, generate_embeddings)
     return {"message": "JSONL import started in the background"}
