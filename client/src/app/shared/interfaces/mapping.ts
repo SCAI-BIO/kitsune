@@ -1,11 +1,11 @@
 export interface Terminology {
-  readonly id: string;
+  readonly short_name: string;
   readonly name: string;
 }
 
 export interface Concept {
-  readonly id: string;
-  readonly name: string;
+  readonly concept_identifier: string;
+  readonly pref_label: string;
   readonly terminology: Terminology;
 }
 

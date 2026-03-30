@@ -42,74 +42,75 @@ import type { Mapping } from '@shared/interfaces/mapping';
 export class SemanticSearch implements OnInit {
   readonly dataSource = new MatTableDataSource<Mapping>([]);
   readonly displayedColumns = ['similarity', 'conceptName', 'conceptID'];
-  readonly embeddingModels = signal<string[]>([]);
+  readonly vectorizers = signal<string[]>([]);
   readonly isLoading = signal(false);
   readonly paginator = viewChild(MatPaginator);
+
   readonly queryForm = new FormGroup({
     text: new FormControl('', { nonNullable: true, validators: [Validators.required] }),
     selectedTerminology: new FormControl('', {
       nonNullable: true,
       validators: [Validators.required],
     }),
-    selectedEmbeddingModel: new FormControl('', {
+    selectedVectorizer: new FormControl('', {
       nonNullable: true,
       validators: [Validators.required],
     }),
-    limit: new FormControl(100, { nonNullable: true }),
+    limit: new FormControl(10, { nonNullable: true }),
   });
   readonly terminologies = signal<string[]>([]);
   private readonly destroyRef = inject(DestroyRef);
   private readonly errorHandler = inject(ApiErrorHandler);
+  private readonly hasInitializedPaginator = signal(false);
+  private readonly isLastPage = signal(false);
   private readonly linkBuilder = inject(LinkBuilder);
+  private readonly loadedMappings = signal<Mapping[]>([]);
   private readonly mappingsApi = inject(MappingsApi);
 
   constructor() {
-    effect(() => {
-      const p = this.paginator();
-      if (p) this.dataSource.paginator = p;
-    });
+    effect(
+      () => {
+        const p = this.paginator();
+        if (p && !this.hasInitializedPaginator()) {
+          this.hasInitializedPaginator.set(true);
+
+          p.page.pipe(takeUntilDestroyed(this.destroyRef)).subscribe((event) => {
+            if (event.pageSize !== this.queryForm.controls.limit.value) {
+              this.queryForm.controls.limit.setValue(event.pageSize);
+              this.onSubmit();
+            } else {
+              this.loadPage(event.pageIndex);
+            }
+          });
+        }
+      },
+      { allowSignalWrites: true },
+    );
   }
 
   clearCache(): void {
     this.isLoading.set(true);
     this.mappingsApi.clearCache();
-    this.fetchEmbeddingModelsAndTerminologies();
+    this.fetchVectorizersAndTerminologies();
   }
 
-  fetchClosestMappings(formData: FormData): void {
-    this.isLoading.set(true);
-    this.mappingsApi
-      .fetchClosestMappingsQuery(formData)
-      .pipe(
-        takeUntilDestroyed(this.destroyRef),
-        finalize(() => this.isLoading.set(false)),
-      )
-      .subscribe({
-        next: (mappings) => {
-          this.dataSource.data = mappings;
-          this.dataSource.paginator?.firstPage();
-        },
-        error: (err) => this.errorHandler.handleError(err, 'fetching closest mappings'),
-      });
-  }
-
-  fetchEmbeddingModelsAndTerminologies(): void {
+  fetchVectorizersAndTerminologies(): void {
     this.isLoading.set(true);
     forkJoin({
       terminologies: this.mappingsApi.fetchTerminologies(),
-      models: this.mappingsApi.fetchEmbeddingModels(),
+      vectorizers: this.mappingsApi.fetchVectorizers(),
     })
       .pipe(
         takeUntilDestroyed(this.destroyRef),
         finalize(() => this.isLoading.set(false)),
       )
       .subscribe({
-        next: ({ terminologies, models }) => {
+        next: ({ terminologies, vectorizers }) => {
           this.terminologies.set(terminologies.map((t) => t.name));
-          this.embeddingModels.set(models);
+          this.vectorizers.set(vectorizers);
         },
         error: (err) =>
-          this.errorHandler.handleError(err, 'fetching embedding models and terminologies'),
+          this.errorHandler.handleError(err, 'fetching vectorizers and terminologies'),
       });
   }
 
@@ -121,7 +122,7 @@ export class SemanticSearch implements OnInit {
   }
 
   ngOnInit(): void {
-    this.fetchEmbeddingModelsAndTerminologies();
+    this.fetchVectorizersAndTerminologies();
   }
 
   onSubmit(): void {
@@ -130,15 +131,65 @@ export class SemanticSearch implements OnInit {
       return;
     }
 
-    const { text, selectedEmbeddingModel, selectedTerminology, limit } =
-      this.queryForm.getRawValue();
+    this.loadedMappings.set([]);
+    this.isLastPage.set(false);
+
+    const p = this.paginator();
+    if (p) {
+      p.pageIndex = 0;
+      p.pageSize = this.queryForm.controls.limit.value;
+    }
+
+    this.loadPage(0);
+  }
+
+  private loadPage(pageIndex: number): void {
+    const limit = this.queryForm.controls.limit.value;
+    const offset = pageIndex * limit;
+
+    if (this.loadedMappings().length >= offset + limit || this.isLastPage()) {
+      this.updateTable(pageIndex, limit);
+      return;
+    }
+
+    const { text, selectedVectorizer, selectedTerminology } = this.queryForm.getRawValue();
 
     const formData = new FormData();
     formData.set('text', text);
     formData.set('terminology_name', selectedTerminology);
-    formData.set('model', selectedEmbeddingModel);
+    formData.set('vectorizer', selectedVectorizer);
     formData.set('limit', limit.toString());
+    formData.set('offset', offset.toString());
 
-    this.fetchClosestMappings(formData);
+    this.isLoading.set(true);
+    this.mappingsApi
+      .fetchClosestMappingsQuery(formData)
+      .pipe(
+        takeUntilDestroyed(this.destroyRef),
+        finalize(() => this.isLoading.set(false)),
+      )
+      .subscribe({
+        next: (mappings) => {
+          this.loadedMappings.update((current) => [...current, ...mappings]);
+
+          if (mappings.length < limit) {
+            this.isLastPage.set(true);
+          }
+
+          this.updateTable(pageIndex, limit);
+        },
+        error: (err) => this.errorHandler.handleError(err, 'fetching closest mappings'),
+      });
+  }
+
+  private updateTable(pageIndex: number, limit: number): void {
+    const startIndex = pageIndex * limit;
+    this.dataSource.data = this.loadedMappings().slice(startIndex, startIndex + limit);
+
+    const p = this.paginator();
+    if (p) {
+      p.length = this.loadedMappings().length + (this.isLastPage() ? 0 : 1);
+      p.pageIndex = pageIndex;
+    }
   }
 }

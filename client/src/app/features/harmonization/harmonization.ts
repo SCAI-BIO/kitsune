@@ -55,7 +55,7 @@ export class Harmonization implements OnInit {
     'prefLabel',
     'actions',
   ];
-  readonly embeddingModels = signal<string[]>([]);
+  readonly vectorizers = signal<string[]>([]);
   readonly expectedTotal = signal(0);
   readonly fileName = signal('');
   readonly fileToUpload = signal<File | null>(null);
@@ -64,7 +64,7 @@ export class Harmonization implements OnInit {
       nonNullable: true,
       validators: [Validators.required],
     }),
-    selectedEmbeddingModel: new FormControl('', {
+    selectedVectorizer: new FormControl('', {
       nonNullable: true,
       validators: [Validators.required],
     }),
@@ -96,7 +96,7 @@ export class Harmonization implements OnInit {
   clearCache(): void {
     this.isLoading.set(true);
     this.apiService.clearCache();
-    this.fetchEmbeddingModelsAndTerminologies();
+    this.fetchVectorizersAndTerminologies();
   }
 
   downloadTableAsCsv(): void {
@@ -104,8 +104,8 @@ export class Harmonization implements OnInit {
       similarity: item.mappings[0]?.similarity ?? 0,
       variable: item.variable,
       description: item.description,
-      conceptId: item.mappings[0]?.concept?.id ?? '',
-      conceptName: item.mappings[0]?.concept?.name ?? '',
+      conceptId: item.mappings[0]?.concept?.concept_identifier ?? '',
+      conceptName: item.mappings[0]?.concept?.pref_label ?? '',
     }));
   }
 
@@ -116,32 +116,32 @@ export class Harmonization implements OnInit {
       : this.externalLinkService.getOlsLink(termId);
   }
 
-  fetchEmbeddingModelsAndTerminologies(): void {
+  fetchVectorizersAndTerminologies(): void {
     this.isLoading.set(true);
 
     forkJoin({
       terminologies: this.apiService.fetchTerminologies(),
-      models: this.apiService.fetchEmbeddingModels(),
+      vectorizers: this.apiService.fetchVectorizers(),
     })
       .pipe(
         takeUntilDestroyed(this.destroyRef),
         finalize(() => this.isLoading.set(false)),
       )
       .subscribe({
-        next: ({ terminologies, models }) => {
+        next: ({ terminologies, vectorizers }) => {
           this.terminologies.set(terminologies.map((t) => t.name));
-          this.embeddingModels.set(models);
+          this.vectorizers.set(vectorizers);
         },
         error: (err: ApiError) =>
-          this.errorHandler.handleError(err, 'fetching embedding models and terminologies'),
+          this.errorHandler.handleError(err, 'fetching vectorizers and terminologies'),
       });
   }
 
   fetchTopMatches(description: string, row: Response): void {
-    const { selectedEmbeddingModel, selectedTerminology } = this.harmonizeForm.getRawValue();
+    const { selectedVectorizer, selectedTerminology } = this.harmonizeForm.getRawValue();
     const queryFormData = new FormData();
     queryFormData.set('text', description);
-    queryFormData.set('model', selectedEmbeddingModel);
+    queryFormData.set('vectorizer', selectedVectorizer);
     queryFormData.set('terminology_name', selectedTerminology);
     queryFormData.set('limit', '10');
 
@@ -175,7 +175,7 @@ export class Harmonization implements OnInit {
   }
 
   ngOnInit(): void {
-    this.fetchEmbeddingModelsAndTerminologies();
+    this.fetchVectorizersAndTerminologies();
   }
 
   onFileSelect(event: Event): void {
@@ -203,7 +203,7 @@ export class Harmonization implements OnInit {
 
     this.apiService
       .streamClosestMappingsDictionary(file, {
-        model: params.selectedEmbeddingModel,
+        vectorizer: params.selectedVectorizer,
         terminology_name: params.selectedTerminology,
         variable_field: params.variableField,
         description_field: params.descriptionField,

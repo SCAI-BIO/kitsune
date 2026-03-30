@@ -66,12 +66,12 @@
 
         <mat-form-field>
           <mat-label>Language Model</mat-label>
-          <mat-select formControlName="selectedEmbeddingModel">
-            @for (model of embeddingModels(); track model) {
-              <mat-option [value]="model">{{ model }}</mat-option>
+          <mat-select formControlName="selectedVectorizer">
+            @for (vectorizer of vectorizers(); track vectorizer) {
+              <mat-option [value]="vectorizer">{{ vectorizer }}</mat-option>
             }
           </mat-select>
-          @if (harmonizeForm.controls.selectedEmbeddingModel.hasError('required')) {
+          @if (harmonizeForm.controls.selectedVectorizer.hasError('required')) {
             <mat-error>Please <strong>select</strong> a language model</mat-error>
           }
         </mat-form-field>
@@ -145,14 +145,16 @@
         <ng-container matColumnDef="conceptID">
           <th mat-header-cell *matHeaderCellDef>Concept ID</th>
           <td mat-cell *matCellDef="let element">
-            @if (element.mappings?.[0]?.concept?.id) {
+            @if (element.mappings?.[0]?.concept?.concept_identifier) {
               <a
-                [href]="getExternalLink(element.mappings[0].concept.id)"
+                [href]="getExternalLink(element.mappings[0].concept.concept_identifier)"
                 target="_blank"
                 rel="noopener"
                 class="external-link"
               >
-                <span class="external-link-text">{{ element.mappings[0].concept.id }}</span>
+                <span class="external-link-text">{{
+                  element.mappings[0].concept.concept_identifier
+                }}</span>
                 <mat-icon inline class="external-link-icon">open_in_new</mat-icon>
               </a>
             }
@@ -162,7 +164,7 @@
         <ng-container matColumnDef="prefLabel">
           <th mat-header-cell *matHeaderCellDef>Concept Name</th>
           <td mat-cell *matCellDef="let element">
-            {{ element.mappings?.[0]?.concept?.name }}
+            {{ element.mappings?.[0]?.concept?.pref_label }}
           </td>
         </ng-container>
 
