@@ -14,6 +14,7 @@ from app.config import (
     SWAGGER_UI_OAUTH_CONFIG,
 )
 from app.database import engine
+from app.mcp import setup_mcp
 from app.routers import (
     concepts_router,
     harmonization_router,
@@ -64,3 +65,6 @@ app.include_router(imports_router)
 @app.get("/", include_in_schema=False)
 def root_redirect():
     return RedirectResponse(url="/docs")
+
+
+setup_mcp(app)
