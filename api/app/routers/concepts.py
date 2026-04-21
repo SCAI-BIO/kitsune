@@ -9,12 +9,12 @@ from app.schemas import ConceptCreate, ConceptUpdate
 router = APIRouter(prefix="/concepts", tags=["concepts"])
 
 
-@router.get("/total-number")
+@router.get("/total-number", operation_id="get_total_number_of_concepts")
 def get_total_number_of_concepts(client: Annotated[PostgresClient, Depends(get_client)]):
     return client.get_concepts(limit=1).total_count
 
 
-@router.get("/")
+@router.get("/", operation_id="get_all_concepts")
 def get_all_concepts(client: Annotated[PostgresClient, Depends(get_client)], limit: int = 10, offset: int = 0):
     return client.get_concepts(limit=limit, offset=offset).items
 
@@ -36,7 +36,7 @@ def create_concept(
         raise HTTPException(status_code=400, detail=f"Failed to create concept: {str(e)}")
 
 
-@router.get("/{id}")
+@router.get("/{id}", operation_id="get_concept")
 def get_concept(id: int, client: Annotated[PostgresClient, Depends(get_client)]):
     try:
         return client.get_concept(id)

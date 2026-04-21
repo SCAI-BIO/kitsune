@@ -12,7 +12,7 @@ router = APIRouter(prefix="/visualization", tags=["visualization"])
 db_plot_html = None
 
 
-@router.get("/", response_class=HTMLResponse)
+@router.get("/", response_class=HTMLResponse, operation_id="serve_visualization")
 def serve_visualization(client: Annotated[PostgresClient, Depends(get_client)]):
     global db_plot_html
     if not db_plot_html:
