@@ -23,5 +23,5 @@ def setup_mcp(app: FastAPI) -> FastApiMCP:
             "serve_visualization",
         ],
     )
-    mcp.mount_http()
+    mcp.mount_sse()
     return mcp
