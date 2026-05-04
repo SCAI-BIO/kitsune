@@ -9,7 +9,7 @@ from app.schemas import TerminologyCreate, TerminologyUpdate
 router = APIRouter(prefix="/terminologies", tags=["terminologies"])
 
 
-@router.get("/", operation_id="get_all_terminologies")
+@router.get("/")
 def get_all_terminologies(client: Annotated[PostgresClient, Depends(get_client)]):
     return client.get_all_terminologies()
 
@@ -27,7 +27,7 @@ def create_terminology(
         raise HTTPException(status_code=400, detail=f"Failed to create terminology: {str(e)}")
 
 
-@router.get("/{id}", operation_id="get_terminology")
+@router.get("/{id}")
 def get_terminology(id: int, client: Annotated[PostgresClient, Depends(get_client)]):
     term = client.get_terminology(id)
     if not term:

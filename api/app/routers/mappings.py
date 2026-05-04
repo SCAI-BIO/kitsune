@@ -10,12 +10,12 @@ from app.schemas.maping import MappingRead
 router = APIRouter(prefix="/mappings", tags=["mappings"])
 
 
-@router.get("/total-number", operation_id="get_total_number_of_mappings")
+@router.get("/total-number")
 def get_total_number_of_mappings(client: Annotated[PostgresClient, Depends(get_client)]):
     return client.get_mappings(limit=1).total_count
 
 
-@router.get("/", response_model=list[MappingRead], operation_id="get_all_mappings")
+@router.get("/", response_model=list[MappingRead])
 def get_all_mappings(
     client: Annotated[PostgresClient, Depends(get_client)],
     vectorizer: str = "nomic-embed-text",
@@ -44,7 +44,7 @@ def create_mapping(
         raise HTTPException(status_code=400, detail=f"Failed to create mapping: {str(e)}")
 
 
-@router.get("/{id}", response_model=MappingRead, operation_id="get_mapping")
+@router.get("/{id}", response_model=MappingRead)
 def get_mapping(id: int, client: Annotated[PostgresClient, Depends(get_client)]):
     mapping = client.get_mapping(id)
     if not mapping:
