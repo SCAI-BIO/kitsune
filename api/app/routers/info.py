@@ -9,14 +9,14 @@ from app.dependencies import get_client
 router = APIRouter(prefix="", tags=["info"])
 
 
-@router.get("/version", operation_id="get_current_version")
+@router.get("/version")
 def get_current_version():
     from app.config import APP_VERSION
 
     return APP_VERSION
 
 
-@router.get("/health", operation_id="health_check")
+@router.get("/health")
 def health_check(client: Annotated[PostgresClient, Depends(get_client)]):
     health_status = {"status": "healthy", "database": "unreachable", "vectorizer": "offline"}
     try:

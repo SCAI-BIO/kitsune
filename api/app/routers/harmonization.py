@@ -22,7 +22,7 @@ from app.dependencies import get_client, get_client_instance
 router = APIRouter(prefix="/harmonization", tags=["harmonization"])
 
 
-@router.post("/", operation_id="get_closest_mappings_for_text")
+@router.post("/")
 def get_closest_mappings_for_text(
     client: Annotated[PostgresClient, Depends(get_client)],
     text: str = Form(...),
@@ -47,11 +47,7 @@ def get_closest_mappings_for_text(
         raise HTTPException(status_code=400, detail=f"Failed to get closest mappings: {str(e)}")
 
 
-@router.post(
-    "/dict",
-    description="Get mappings for a data dictionary source.",
-    operation_id="get_closest_mappings_for_dictionary",
-)
+@router.post("/dict", description="Get mappings for a data dictionary source.")
 def get_closest_mappings_for_dictionary(
     client: Annotated[PostgresClient, Depends(get_client)],
     file: UploadFile = File(...),

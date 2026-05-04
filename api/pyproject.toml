@@ -31,7 +31,6 @@ classifiers = [
 dependencies = [
     "cryptography>=47.0.0",
     "datastew>=1.0.3",
-    "fastapi-mcp>=0.4.0",
     "fastapi[standard]>=0.136.1",
     "pyjwt>=2.12.1",
 ]
