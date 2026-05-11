@@ -1,5 +1,5 @@
 [build-system]
-requires = ['uv_build>=0.11.8,<0.12.0']
+requires = ['uv_build>=0.11.11,<0.12.0']
 build-backend = "uv_build"
 
 [tool.uv.build-backend]
@@ -29,7 +29,7 @@ classifiers = [
 ]
 
 dependencies = [
-    "cryptography>=47.0.0",
+    "cryptography>=48.0.0",
     "datastew>=1.0.3",
     "fastapi[standard]>=0.136.1",
     "pyjwt>=2.12.1",
