@@ -7,12 +7,12 @@
     {
       "name": "Ay, Mehmet Can",
       "affiliation": "Fraunhofer Institute for Algorithms and Scientific Computing SCAI",
-      "orcid": "https://orcid.org/0000-0002-2977-7695"
+      "orcid": "0000-0002-2977-7695"
     },
     {
       "name": "Adams, Tim",
       "affiliation": "Fraunhofer Institute for Algorithms and Scientific Computing SCAI",
-      "orcid": "https://orcid.org/0000-0002-2823-0102"
+      "orcid": "0000-0002-2823-0102"
     }
   ],
   "keywords": [
@@ -30,7 +30,7 @@
     {
       "identifier": "10.24406/publica-4577",
       "relation": "isSupplementTo",
-      "resource_type": "conference-paper"
+      "resource_type": "publication-conferencepaper"
     },
     {
       "identifier": "10.4126/FRL01-006472846",
@@ -39,5 +39,5 @@
     }
   ],
   "access_right": "open",
-  "language": "en"
+  "language": "eng"
 }
