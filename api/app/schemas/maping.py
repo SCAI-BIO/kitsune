@@ -1,20 +1,18 @@
-from typing import Optional
-
 from pydantic import BaseModel, ConfigDict
 
 
 class MappingCreate(BaseModel):
     text: str
-    embedding: Optional[list[float]] = None
-    vectorizer: Optional[str] = None
+    embedding: list[float] | None = None
+    vectorizer: str | None = None
     concept_id: int
 
 
 class MappingUpdate(BaseModel):
-    text: Optional[str] = None
-    embedding: Optional[list[float]] = None
-    vectorizer: Optional[str] = None
-    concept_id: Optional[int] = None
+    text: str | None = None
+    embedding: list[float] | None = None
+    vectorizer: str | None = None
+    concept_id: int | None = None
 
 
 class MappingRead(BaseModel):

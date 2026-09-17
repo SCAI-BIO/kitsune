@@ -25,11 +25,11 @@ router = APIRouter(prefix="/harmonization", tags=["harmonization"])
 @router.post("/")
 def get_closest_mappings_for_text(
     client: Annotated[PostgresClient, Depends(get_client)],
-    text: str = Form(...),
-    terminology_name: str = Form("OHDSI"),
-    vectorizer: str = Form("nomic-embed-text"),
-    limit: int = Form(5),
-    offset: int = Form(0),
+    text: Annotated[str, Form()],
+    terminology_name: Annotated[str, Form()] = "OHDSI",
+    vectorizer: Annotated[str, Form()] = "nomic-embed-text",
+    limit: Annotated[int, Form()] = 5,
+    offset: Annotated[int, Form()] = 0,
 ):
     try:
         embedding = client.vectorizer.get_embedding(text)
@@ -44,46 +44,43 @@ def get_closest_mappings_for_text(
 
         return [result.to_dict() for result in page.items if isinstance(result, MappingResult)]
     except Exception as e:
-        raise HTTPException(status_code=400, detail=f"Failed to get closest mappings: {str(e)}")
+        raise HTTPException(status_code=400, detail=f"Failed to get closest mappings: {e}") from e
 
 
 @router.post("/dict", description="Get mappings for a data dictionary source.")
 def get_closest_mappings_for_dictionary(
     client: Annotated[PostgresClient, Depends(get_client)],
-    file: UploadFile = File(...),
-    vectorizer: str = Form("nomic-embed-text"),
-    terminology_name: str = Form("OHDSI"),
-    variable_field: str = Form("variable"),
-    description_field: str = Form("description"),
-    limit: int = Form(1),
+    file: Annotated[UploadFile, File()],
+    vectorizer: Annotated[str, Form()] = "nomic-embed-text",
+    terminology_name: Annotated[str, Form()] = "OHDSI",
+    variable_field: Annotated[str, Form()] = "variable",
+    description_field: Annotated[str, Form()] = "description",
+    limit: Annotated[int, Form()] = 1,
 ):
+    if not file or not file.filename:
+        raise HTTPException(status_code=400, detail="No file was provided. Please upload a valid file.")
+
+    file_extension = os.path.splitext(file.filename)[1].lower()
+    if not file_extension:
+        raise HTTPException(status_code=400, detail="The uploaded file must have a valid extension.")
+
+    tmp_file_path = None
+
     try:
-        if not file or not file.filename:
-            raise HTTPException(status_code=400, detail="No file was provided. Please upload a valid file.")
-
-        # Check for a valid file extension
-        file_extension = os.path.splitext(file.filename)[1].lower()
-        if not file_extension:
-            raise HTTPException(status_code=400, detail="The uploaded file must have a valid extension.")
-
         with tempfile.NamedTemporaryFile(delete=False, suffix=file_extension) as tmp_file:
-            tmp_file.write(file.file.read())
             tmp_file_path = tmp_file.name
+            tmp_file.write(file.file.read())
 
-        # Initialize DataDictionarySource
         data_dict_source = DataDictionarySource(tmp_file_path, variable_field, description_field)
         df = data_dict_source.to_dataframe()
 
-        # Collect descriptions and their corresponding variables
         descriptions = df["description"].to_list()
         variables = df["variable"].to_list()
 
-        # Generate embeddings for all descriptions in batches
         embeddings = client.vectorizer.get_embeddings(descriptions)
 
-        # Process embeddings to get closest mappings
         response = []
-        for variable, description, embedding in zip(variables, descriptions, embeddings):
+        for variable, description, embedding in zip(variables, descriptions, embeddings, strict=True):
             page = client.get_closest_mappings(
                 embedding=embedding,
                 similarities=True,
@@ -95,13 +92,17 @@ def get_closest_mappings_for_dictionary(
 
             response.append({"variable": variable, "description": description, "mappings": mappings_list})
 
-        # Clean up temporary file
-        os.remove(tmp_file_path)
         return response
-    except ValueError:
-        raise HTTPException(status_code=422, detail="Missing required column(s): 'description' and/or 'variable'.")
+
+    except HTTPException:
+        raise
+    except ValueError as e:
+        raise HTTPException(status_code=422, detail=f"Failed to process dictionary: {e}") from e
     except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
+        raise HTTPException(status_code=500, detail=str(e)) from e
+    finally:
+        if tmp_file_path and os.path.exists(tmp_file_path):
+            os.remove(tmp_file_path)
 
 
 @router.websocket("/dict/ws")
@@ -111,7 +112,7 @@ async def websocket_closest_mappings_for_dictionary(websocket: WebSocket):
 
     try:
         byte_file_data = await websocket.receive_bytes()
-        meta = await websocket.receive_text()  # Metadata like model, terminology_name, etc.
+        meta = await websocket.receive_text()
 
         metadata = json.loads(meta)
         model = metadata.get("model", "nomic-embed-text")
@@ -121,24 +122,18 @@ async def websocket_closest_mappings_for_dictionary(websocket: WebSocket):
         limit = metadata.get("limit", 1)
         file_extension = metadata.get("file_extension", "").lower()
 
-        # Break CodeQL taint chain
-        extension_map = {
-            ".csv": ".csv",
-            ".tsv": ".tsv",
-            ".xlsx": ".xlsx",
-        }
+        # Map supported extensions to fixed suffixes.
+        extension_map = {".csv": ".csv", ".tsv": ".tsv", ".xlsx": ".xlsx"}
 
         if file_extension not in extension_map:
             raise ValueError(f"Unsupported file extension: {file_extension}")
 
         safe_suffix = extension_map[file_extension]
 
-        # Write file to temp
         with tempfile.NamedTemporaryFile(delete=False, suffix=safe_suffix) as tmp_file:
-            tmp_file.write(byte_file_data)
             tmp_file_path = tmp_file.name
+            tmp_file.write(byte_file_data)
 
-        # Load data and process
         data_dict_source = DataDictionarySource(tmp_file_path, variable_field, description_field)
         df = data_dict_source.to_dataframe()
 
@@ -147,11 +142,10 @@ async def websocket_closest_mappings_for_dictionary(websocket: WebSocket):
         variables = df["variable"].to_list()
         descriptions = df["description"].to_list()
 
-        # Get client (depends does not work directly in ws)
         with get_client_instance() as client:
             embeddings = client.vectorizer.get_embeddings(descriptions)
 
-            for variable, description, embedding in zip(variables, descriptions, embeddings):
+            for variable, description, embedding in zip(variables, descriptions, embeddings, strict=True):
                 page = client.get_closest_mappings(
                     embedding=embedding,
                     similarities=True,
@@ -163,22 +157,15 @@ async def websocket_closest_mappings_for_dictionary(websocket: WebSocket):
                 mappings_list = [result.to_dict() for result in page.items if isinstance(result, MappingResult)]
 
                 await websocket.send_json(
-                    {
-                        "type": "result",
-                        "variable": variable,
-                        "description": description,
-                        "mappings": mappings_list,
-                    }
+                    {"type": "result", "variable": variable, "description": description, "mappings": mappings_list}
                 )
 
         await websocket.close()
 
     except WebSocketDisconnect:
         print("WebSocket disconnected")
-    except ValueError:
-        await websocket.send_json(
-            {"type": "error", "message": "Missing required column(s): 'description' and/or 'variable'."}
-        )
+    except ValueError as e:
+        await websocket.send_json({"type": "error", "message": str(e)})
         await websocket.close()
     except Exception as e:
         await websocket.send_json({"type": "error", "message": str(e)})

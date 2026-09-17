@@ -39,9 +39,10 @@ def create_mapping(
             embedding=payload.embedding,
             vectorizer=payload.vectorizer,
         )
-        return {"message": f"Mapping {payload.text} created successfully"}
     except Exception as e:
-        raise HTTPException(status_code=400, detail=f"Failed to create mapping: {str(e)}")
+        raise HTTPException(status_code=400, detail=f"Failed to create mapping: {e}") from e
+
+    return {"message": f"Mapping {payload.text} created successfully"}
 
 
 @router.get("/{id}", response_model=MappingRead)
@@ -66,11 +67,13 @@ def update_mapping(
 
     try:
         updated = client.edit_mapping(id=id, **update_data)
-        if not updated:
-            raise HTTPException(status_code=404, detail="Mapping not found")
-        return {"message": f"Mapping '{id}' updated succesffully"}
     except Exception as e:
-        raise HTTPException(status_code=400, detail=f"Update failed: {str(e)}")
+        raise HTTPException(status_code=400, detail=f"Update failed: {e}") from e
+
+    if not updated:
+        raise HTTPException(status_code=404, detail="Mapping not found")
+
+    return {"message": f"Mapping '{id}' updated successfully"}
 
 
 @router.delete("/{id}")
@@ -85,6 +88,7 @@ def delete_mapping(
 
     try:
         client.delete_mapping(id)
-        return {"meesage": f"Mapping {id} deleted successfully"}
     except Exception as e:
-        raise HTTPException(status_code=400, detail=f"Delete failed: {str(e)}")
+        raise HTTPException(status_code=400, detail=f"Delete failed: {e}") from e
+
+    return {"message": f"Mapping {id} deleted successfully"}
