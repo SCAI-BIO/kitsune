@@ -1,0 +1,49 @@
+name: Api linting
+
+on:
+  push:
+    branches: ["main"]
+    paths:
+      - "api/**"
+      - ".github/workflows/api-linting.yml"
+  pull_request:
+    branches: ["main"]
+    paths:
+      - "api/**"
+      - ".github/workflows/api-linting.yml"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: api-linting-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: api
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v10.1.0
+        with:
+          enable-cache: true
+          cache-dependency-glob: |
+            api/pyproject.tmol
+            api/uv.lock
+
+      - name: Install dependencies
+        run: uv sync --locked
+
+      - name: Run Ruff
+        run: |
+          uv run ruff check . \
+          --output-format=github \
+          --statistics
