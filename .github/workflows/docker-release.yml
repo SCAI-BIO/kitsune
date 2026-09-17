@@ -56,11 +56,11 @@ jobs:
         run: |
           sed -i \
             "s/APP_VERSION = \"[^\"]*\"/APP_VERSION = \"$VERSION\"/" \
-            app/config.py
+            src/kitsune/app/config.py
 
           grep -Fq \
             "APP_VERSION = \"$VERSION\"" \
-            app/config.py
+            src/kitsune/app/config.py
 
           uv version "$VERSION"
 
@@ -113,7 +113,7 @@ jobs:
         uses: docker/build-push-action@v7
         with:
           context: ./api
-          file: ./api/Dockerfile.prod
+          file: ./api/Dockerfile
           push: true
           tags: ${{ steps.api-meta.outputs.tags }}
           labels: ${{ steps.api-meta.outputs.labels }}
