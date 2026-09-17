@@ -5,7 +5,8 @@ from fastapi import FastAPI
 from starlette.middleware.cors import CORSMiddleware
 from starlette.responses import RedirectResponse
 
-from app.config import (
+from kitsune.app.config import (
+    ALLOWED_ORIGINS,
     APP_DESCRIPTION,
     APP_TITLE,
     APP_VERSION,
@@ -13,8 +14,8 @@ from app.config import (
     LICENSE_INFO,
     SWAGGER_UI_OAUTH_CONFIG,
 )
-from app.database import engine
-from app.routers import (
+from kitsune.app.database import engine
+from kitsune.app.routers import (
     concepts_router,
     harmonization_router,
     imports_router,
@@ -45,7 +46,7 @@ app = FastAPI(
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=ALLOWED_ORIGINS,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -61,6 +62,7 @@ app.include_router(harmonization_router)
 app.include_router(imports_router)
 
 
-@app.get("/", include_in_schema=False)
-def root_redirect():
+@app.get("/", include_in_schema=False, response_class=RedirectResponse)
+def root_redirect() -> RedirectResponse:
+    """Redirect the application root to the Swagger documentation"""
     return RedirectResponse(url="/docs")

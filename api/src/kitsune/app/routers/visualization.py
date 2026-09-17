@@ -4,8 +4,8 @@ from datastew.visualisation import get_plot_for_current_database_state
 from fastapi import APIRouter, Depends, Request
 from fastapi.responses import HTMLResponse
 
-from app.database import PostgresClient
-from app.dependencies import get_client
+from kitsune.app.database import PostgresClient
+from kitsune.app.dependencies import get_client
 
 router = APIRouter(prefix="/visualization", tags=["visualization"])
 

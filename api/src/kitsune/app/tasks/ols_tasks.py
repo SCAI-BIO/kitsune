@@ -1,6 +1,6 @@
 from datastew.integrations.ols import OlsClient
 
-from app.database import PostgresClient
+from kitsune.app.database import PostgresClient
 
 
 def import_ols_ontology_task(ontology_id: str):

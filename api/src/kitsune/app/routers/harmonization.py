@@ -16,8 +16,8 @@ from fastapi import (
     WebSocketDisconnect,
 )
 
-from app.database import PostgresClient
-from app.dependencies import get_client, get_client_instance
+from kitsune.app.database import PostgresClient
+from kitsune.app.dependencies import get_client, get_client_instance
 
 router = APIRouter(prefix="/harmonization", tags=["harmonization"])
 

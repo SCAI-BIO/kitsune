@@ -2,10 +2,6 @@
 requires = ['uv_build>=0.12.1,<0.13.0']
 build-backend = "uv_build"
 
-[tool.uv.build-backend]
-module-name = ["app"]
-module-root = ""
-
 [project]
 name = "kitsune"
 version = "0.1.0"
@@ -31,6 +27,7 @@ classifiers = [
 dependencies = [
     "datastew>=1.0.3",
     "fastapi[standard]>=0.141.1",
+    "pydantic-settings>=2.15.0",
     "pyjwt[crypto]>=2.14.0",
 ]
 

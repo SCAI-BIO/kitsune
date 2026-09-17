@@ -3,9 +3,9 @@ from typing import Annotated
 from fastapi import APIRouter, Depends
 from sqlalchemy import text
 
-from app.config import APP_VERSION
-from app.database import PostgresClient
-from app.dependencies import get_client
+from kitsune.app.config import APP_VERSION
+from kitsune.app.database import PostgresClient
+from kitsune.app.dependencies import get_client
 
 router = APIRouter(prefix="", tags=["info"])
 

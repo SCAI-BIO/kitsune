@@ -3,8 +3,8 @@ import tempfile
 
 from datastew.io.importer import Importer
 
-from app.database import PostgresClient
-from app.schemas import ObjectSchema
+from kitsune.app.database import PostgresClient
+from kitsune.app.schemas import ObjectSchema
 
 
 def import_jsonl_task(file: bytes, object_type: ObjectSchema, generate_embeddings: bool = False):

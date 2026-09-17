@@ -3,9 +3,9 @@ from typing import Annotated
 from fastapi import APIRouter, Depends, HTTPException, UploadFile
 from starlette.background import BackgroundTasks
 
-from app.dependencies import get_current_user_payload
-from app.schemas import ObjectSchema
-from app.tasks import import_jsonl_task, import_ols_ontology_task
+from kitsune.app.dependencies import get_current_user_payload
+from kitsune.app.schemas import ObjectSchema
+from kitsune.app.tasks import import_jsonl_task, import_ols_ontology_task
 
 router = APIRouter(prefix="/imports", tags=["imports"])
 
