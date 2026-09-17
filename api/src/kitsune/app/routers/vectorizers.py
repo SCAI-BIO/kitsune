@@ -2,8 +2,8 @@ from typing import Annotated
 
 from fastapi import APIRouter, Depends
 
-from app.database import PostgresClient
-from app.dependencies import get_client
+from kitsune.app.database import PostgresClient
+from kitsune.app.dependencies import get_client
 
 router = APIRouter(prefix="/vectorizers", tags=["vectorizers"])
 

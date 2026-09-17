@@ -2,9 +2,9 @@ from typing import Annotated
 
 from fastapi import APIRouter, Depends, HTTPException
 
-from app.database import PostgresClient
-from app.dependencies import get_client, get_current_user_payload
-from app.schemas import TerminologyCreate, TerminologyUpdate
+from kitsune.app.database import PostgresClient
+from kitsune.app.dependencies import get_client, get_current_user_payload
+from kitsune.app.schemas import TerminologyCreate, TerminologyUpdate
 
 router = APIRouter(prefix="/terminologies", tags=["terminologies"])
 

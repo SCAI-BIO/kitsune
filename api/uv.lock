@@ -719,6 +719,7 @@ source = { editable = "." }
 dependencies = [
     { name = "datastew" },
     { name = "fastapi", extra = ["standard"] },
+    { name = "pydantic-settings" },
     { name = "pyjwt", extra = ["crypto"] },
 ]
 
@@ -731,6 +732,7 @@ dev = [
 requires-dist = [
     { name = "datastew", specifier = ">=1.0.3" },
     { name = "fastapi", extras = ["standard"], specifier = ">=0.141.1" },
+    { name = "pydantic-settings", specifier = ">=2.15.0" },
     { name = "pyjwt", extras = ["crypto"], specifier = ">=2.14.0" },
 ]
 

@@ -2,9 +2,9 @@ from typing import Annotated
 
 from fastapi import APIRouter, Depends, HTTPException
 
-from app.database import PostgresClient
-from app.dependencies import get_client, get_current_user_payload
-from app.schemas import ConceptCreate, ConceptUpdate
+from kitsune.app.database import PostgresClient
+from kitsune.app.dependencies import get_client, get_current_user_payload
+from kitsune.app.schemas import ConceptCreate, ConceptUpdate
 
 router = APIRouter(prefix="/concepts", tags=["concepts"])
 

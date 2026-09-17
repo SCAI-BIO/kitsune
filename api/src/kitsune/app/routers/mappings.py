@@ -2,10 +2,10 @@ from typing import Annotated
 
 from fastapi import APIRouter, Depends, HTTPException
 
-from app.database import PostgresClient
-from app.dependencies import get_client, get_current_user_payload
-from app.schemas import MappingCreate, MappingUpdate
-from app.schemas.maping import MappingRead
+from kitsune.app.database import PostgresClient
+from kitsune.app.dependencies import get_client, get_current_user_payload
+from kitsune.app.schemas import MappingCreate, MappingUpdate
+from kitsune.app.schemas.maping import MappingRead
 
 router = APIRouter(prefix="/mappings", tags=["mappings"])
 

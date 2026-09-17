@@ -5,7 +5,7 @@ from datastew.repository import PostgreSQLRepository
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
-from app.config import CONNECTION_STRING, HUGGING_FACE_API_KEY, MODEL_NAME, OLLAMA_URL
+from kitsune.app.config import CONNECTION_STRING, HUGGING_FACE_API_KEY, MODEL_NAME, OLLAMA_URL
 
 logger = logging.getLogger("uvicorn.info")
 engine = create_engine(CONNECTION_STRING)
