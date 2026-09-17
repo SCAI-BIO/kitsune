@@ -1,5 +1,3 @@
-from typing import Optional
-
 from pydantic import BaseModel
 
 
@@ -10,6 +8,6 @@ class ConceptCreate(BaseModel):
 
 
 class ConceptUpdate(BaseModel):
-    concept_identifier: Optional[str] = None
-    pref_label: Optional[str] = None
-    terminology_id: Optional[int] = None
+    concept_identifier: str | None = None
+    pref_label: str | None = None
+    terminology_id: int | None = None

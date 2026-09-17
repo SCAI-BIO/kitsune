@@ -22,9 +22,10 @@ def create_terminology(
 ):
     try:
         client.add_terminology(name=payload.name, short_name=payload.short_name)
-        return {"message": f"Terminology {payload.short_name} created successfully"}
     except Exception as e:
-        raise HTTPException(status_code=400, detail=f"Failed to create terminology: {str(e)}")
+        raise HTTPException(status_code=400, detail=f"Failed to create terminology: {e}") from e
+
+    return {"message": f"Terminology {payload.short_name} created successfully"}
 
 
 @router.get("/{id}")
@@ -49,11 +50,13 @@ def update_terminology(
 
     try:
         updated = client.edit_terminology(id=id, **update_data)
-        if not updated:
-            raise HTTPException(status_code=404, detail="Terminology not found")
-        return {"message": f"Terminology '{id}' updated successfully"}
     except Exception as e:
-        raise HTTPException(status_code=400, detail=f"Update failed: {str(e)}")
+        raise HTTPException(status_code=400, detail=f"Update failed: {e}") from e
+
+    if not updated:
+        raise HTTPException(status_code=404, detail="Terminology not found")
+
+    return {"message": f"Terminology '{id}' updated successfully"}
 
 
 @router.delete("/{id}")
@@ -68,6 +71,7 @@ def delete_terminology(
 
     try:
         client.delete_terminology(id)
-        return {"message": f"Terminology {id} deleted successfully"}
     except Exception as e:
-        raise HTTPException(status_code=400, detail=f"Delete failed: {str(e)}")
+        raise HTTPException(status_code=400, detail=f"Delete failed: {e}") from e
+
+    return {"message": f"Terminology {id} deleted successfully"}

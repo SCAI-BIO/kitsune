@@ -33,15 +33,20 @@ def create_concept(
         )
         return {"message": f"Concept {payload.concept_identifier} created successfully"}
     except Exception as e:
-        raise HTTPException(status_code=400, detail=f"Failed to create concept: {str(e)}")
+        raise HTTPException(status_code=400, detail=f"Failed to create concept: {e}") from e
 
 
 @router.get("/{id}")
 def get_concept(id: int, client: Annotated[PostgresClient, Depends(get_client)]):
     try:
-        return client.get_concept(id)
+        concept = client.get_concept(id)
     except Exception as e:
-        raise HTTPException(status_code=400, detail=f"Failed to get concept with id {id}: {str(e)}")
+        raise HTTPException(status_code=400, detail=f"Failed to get concept with id {id}: {e}") from e
+
+    if concept is None:
+        raise HTTPException(status_code=404, detail="Concept not found")
+
+    return concept
 
 
 @router.patch("/{id}")
@@ -58,11 +63,13 @@ def update_concept(
 
     try:
         updated = client.edit_concept(id=id, **update_data)
-        if not updated:
-            raise HTTPException(status_code=404, detail="Concept not found")
-        return {"message": f"Concept '{id}' updated succesfully"}
     except Exception as e:
-        raise HTTPException(status_code=400, detail=f"Update failed: {str(e)}")
+        raise HTTPException(status_code=400, detail=f"Update failed: {e}") from e
+
+    if not updated:
+        raise HTTPException(status_code=404, detail="Concept not found")
+
+    return {"message": f"Concept '{id}' updated succesfully"}
 
 
 @router.delete("/{id}")
@@ -77,6 +84,7 @@ def delete_concept(
 
     try:
         client.delete_concept(id)
-        return {"message": f"Concept {id} deleted succesfully"}
     except Exception as e:
-        raise HTTPException(status_code=400, detail=f"Delete failed: {str(e)}")
+        raise HTTPException(status_code=400, detail=f"Delete failed: {e}") from e
+
+    return {"message": f"Concept {id} deleted succesfully"}

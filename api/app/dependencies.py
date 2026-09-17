@@ -24,8 +24,8 @@ def get_current_user_payload(token: str = Depends(oauth2_scheme)) -> dict:
             token, signing_key.key, algorithms=["RS256"], audience=KEYCLOAK_CLIENT_ID, options={"verify_iss": False}
         )
         return payload
-    except jwt.exceptions.PyJWTError:
-        raise credentials_exception
+    except jwt.exceptions.PyJWTError as err:
+        raise credentials_exception from err
 
 
 def get_client():
