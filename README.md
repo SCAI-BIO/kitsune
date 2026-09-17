@@ -26,7 +26,7 @@ _Kitsune_ is a next-generation data steward and harmonization tool. Building on 
 Run the frontend client, API, vector database and local embedding model using the local `docker-compose` file:
 
 ```bash
-docker-compose -f docker-compose.local.yaml up
+docker compose up
 ```
 
 Once running, you can access the frontend on [localhost:4200](localhost:4200)
