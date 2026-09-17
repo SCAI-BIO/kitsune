@@ -46,20 +46,17 @@ services:
     image: kitsune-api
     build:
       context: ./api
-      dockerfile: Dockerfile.dev
+      dockerfile: Dockerfile
     ports:
       - "5000:80"
     depends_on:
       - postgres
       - ollama
+    env_file:
+      - ./api/.env
     environment:
-      POSTGRES_USER: testuser
-      POSTGRES_PASSWORD: testpass
-      POSTGRES_PORT: 5432
       POSTGRES_HOST: postgres
-      POSTGRES_DB: testdb
       OLLAMA_URL: http://ollama:11434
-      MODEL_NAME: "nomic-embed-text"
 
   postgres:
     image: pgvector/pgvector:pg17
@@ -85,25 +82,6 @@ services:
       dockerfile: Dockerfile
     ports:
       - "11434:11434"
-
-  importer:
-    image: alpine:latest
-    depends_on:
-      - backend
-      - ollama
-      - postgres
-    entrypoint: >
-      sh -c "
-        apk add --no-cache curl >/dev/null;
-        echo 'Waiting for backend to be ready...';
-        until curl -s http://backend:80/docs > dev/null; do
-          echo 'Still waiting...';
-          sleep 2;
-        done;
-        echo 'Trigger OLS import...';
-        curl -X PUT 'http://backend:80/imports/terminology?terminology_id=doid'
-      "
-    restart: "no"
 
 volumes:
   postgres-data:
