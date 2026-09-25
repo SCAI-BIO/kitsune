@@ -1,5 +1,5 @@
 [build-system]
-requires = ['uv_build>=0.12.15,<0.13.0']
+requires = ['uv_build>=0.12.17,<0.13.0']
 build-backend = "uv_build"
 
 [project]
@@ -25,7 +25,7 @@ classifiers = [
 ]
 
 dependencies = [
-    "datastew>=1.0.3",
+    "datastew>=1.0.4",
     "fastapi[standard]>=0.141.1",
     "pydantic-settings>=2.15.0",
     "pyjwt[crypto]>=2.14.0",

@@ -355,7 +355,7 @@ wheels = [
 
 [[package]]
 name = "datastew"
-version = "1.0.3"
+version = "1.0.4"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "cachetools" },
@@ -376,9 +376,9 @@ dependencies = [
     { name = "sqlalchemy" },
     { name = "torch" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/91/ee/6a600ef15d9c8750f3b130bd1586f359693b58ba53312eb51ad8b5fa42c2/datastew-1.0.3.tar.gz", hash = "sha256:f680d47cabb9dd3fdbb0c891ce36d47bfe9b871cbd827dc1fb0a5afc4cdc86aa", size = 32220, upload-time = "2026-04-02T09:49:29.591Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/ce/52/7162cc77cf97834e3a47acf03d92a79825d8f50d92de581fbd808eaf0049/datastew-1.0.4.tar.gz", hash = "sha256:77796babb570b83693ec3f80f2ceb440b06f9674a4573e8cada50b69895700f5", size = 32674, upload-time = "2026-09-18T08:13:32.42Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/4b/1c/99fb792c7b84d82b5261d62552144a28c2f77dcc70bbd002603371dc1577/datastew-1.0.3-py3-none-any.whl", hash = "sha256:73fc0ecfb99095febc9b0ba185dc0b2838917b405005d58d144793341b70915a", size = 43884, upload-time = "2026-04-02T09:49:30.719Z" },
+    { url = "https://files.pythonhosted.org/packages/fa/27/7fa8ed33a2071f9f99632e71080f979bf6108e8000988b8fd838a5f5d1b9/datastew-1.0.4-py3-none-any.whl", hash = "sha256:de7945f9a4d299abb266a5293727ada9200a8b0f7db91422b9910b456d0786e3", size = 44481, upload-time = "2026-09-18T08:13:31.163Z" },
 ]
 
 [[package]]
@@ -825,7 +825,7 @@ dev = [
 
 [package.metadata]
 requires-dist = [
-    { name = "datastew", specifier = ">=1.0.3" },
+    { name = "datastew", specifier = ">=1.0.4" },
     { name = "fastapi", extras = ["standard"], specifier = ">=0.141.1" },
     { name = "pydantic-settings", specifier = ">=2.15.0" },
     { name = "pyjwt", extras = ["crypto"], specifier = ">=2.14.0" },
