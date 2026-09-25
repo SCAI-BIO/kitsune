@@ -24,8 +24,8 @@ def health_check(client: Annotated[PostgresClient, Depends(get_client)]):
 
         if client.vectorizer:
             health_status["vectorizer"] = "online"
-    except Exception as e:
+    except Exception as _:
         health_status["status"] = "unhealthy"
-        health_status["error"] = str(e)
+        health_status["error"] = "Internal error"
 
     return health_status
