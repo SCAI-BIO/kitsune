@@ -26,13 +26,13 @@ classifiers = [
 
 dependencies = [
     "datastew>=1.0.4",
-    "fastapi[standard]>=0.163.1",
+    "fastapi[standard]>=0.165.0",
     "pydantic-settings>=2.16.3",
     "pyjwt[crypto]>=2.15.1",
 ]
 
 [dependency-groups]
-dev = ["ruff>=0.17.5"]
+dev = ["ruff>=0.17.6"]
 
 [project.urls]
 Homepage = "https://github.com/SCAI-BIO/kitsune"
